@@ -155,6 +155,7 @@ Route::group(['middware' => 'teacher'], function () {
 
     Route::get('teacher/my_class_subject', [AssignClassTeacherController::class, 'myClassSubject']);
     Route::get('teacher/my_student', [StudentController::class, 'teacherStudent']);
+    Route::get('teacher/my_class_subject/timeable/{subject_id}/{class_id}', [ClassTimeableController::class, 'teacherClassSubjectTimeable']);
 });
 
 Route::group(['middware' => 'student'], function () {
@@ -167,6 +168,7 @@ Route::group(['middware' => 'student'], function () {
     Route::post('student/account', [UserController::class, 'UpdateMyAccountStudent']);
 
     Route::get('student/my_subject', [SubjectController::class, 'myStudentSubject']);
+    Route::get('student/my_timeable', [ClassTimeableController::class, 'studentTimeable']);
 });
 
 Route::group(['middware' => 'parent'], function () {
@@ -179,4 +181,5 @@ Route::group(['middware' => 'parent'], function () {
     Route::post('parent/account', [UserController::class, 'UpdateMyAccountParent']);
     Route::get('parent/my_student/subject/{student_id}', [SubjectController::class, 'parentStudentSubject']);
     Route::get('parent/my_student', [ParentController::class, 'myStudentParent']);
+    Route::get('parent/my_student/class_subject_timeable/{subject_id}/{class_id}/{student_id}', [ClassTimeableController::class, 'parentClassSubjectTimeable']);
 });

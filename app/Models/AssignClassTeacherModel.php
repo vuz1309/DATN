@@ -65,7 +65,7 @@ class AssignClassTeacherModel extends Model
 
     static public function getMyClassSubject($teacher_id)
     {
-        $return = self::select('class.name as class_name', 'subject.name as subject_name', 'subject.type as subject_type')
+        $return = self::select('class.name as class_name', 'subject.name as subject_name', 'subject.type as subject_type', 'class.id as class_id', 'subject.id as subject_id')
 
             ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
             ->join('class_subject', 'class_subject.class_id', '=', 'assign_class_teacher.class_id')
@@ -87,7 +87,28 @@ class AssignClassTeacherModel extends Model
 
         $return = $return->orderBy('assign_class_teacher.id', 'desc')
             ->paginate(20);
+        foreach ($return as $item) {
+            $class_id = $item->class_id;
+            $subject_id = $item->subject_id;
+            $timeable = $item->getClassSubjectTimeable($class_id, $subject_id);
+            // Thêm thông tin lịch vào từng bản ghi
+            $item->timeable = $timeable;
+        }
+        return $return;
+    }
 
+    // Lấy ra lịch của môn học trong ngày hiện tại
+    public function getClassSubjectTimeable($class_id, $subject_id)
+    {
+        // Id ngày hiện tại trong tuần
+        $weekId = date('N');
+
+        $return = self::select('class_subject_timeable.*')
+            ->join('class_subject_timeable', 'class_subject_timeable.class_id', '=', 'assign_class_teacher.class_id')
+            ->where('assign_class_teacher.class_id', '=', $class_id)
+            ->where('class_subject_timeable.subject_id', '=', $subject_id)
+            ->where('class_subject_timeable.week_id', '=', $weekId + 1)
+            ->first();
         return $return;
     }
 }

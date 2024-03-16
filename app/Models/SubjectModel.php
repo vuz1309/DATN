@@ -55,4 +55,15 @@ class SubjectModel extends Model
 
         return $return;
     }
+
+    static public function getStudentSubject($student_id)
+    {
+        $return = self::select('subject.*')
+            ->join('class_subject', 'class_subject.subject_id', '=', 'subject.id')
+            ->join('users', 'users.class_id', '=', 'class_subject.class_id')
+            ->where('users.id', '=', $student_id)
+            ->where('subject.status', '=', 0)
+            ->where('subject.is_delete', '=', 0);
+        return $return->get();
+    }
 }

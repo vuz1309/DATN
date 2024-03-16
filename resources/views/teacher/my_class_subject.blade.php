@@ -23,7 +23,7 @@
        <div class="col-md-12">
          @include('_message')
          <!-- /.card -->
-
+          <div class="card-header">Tìm kiếm</div>
          <div class="card card-primary">
           
            <!-- form start -->
@@ -45,10 +45,7 @@
                    <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm kiếm</button>
                    <a href="{{url("teacher/my_class_subject")}}" class="btn btn-success" style="margin-top:30px;">Làm mới</a>
                  </div>
-
              </div>
-               
-               
              </div>
 
            </form>
@@ -56,7 +53,7 @@
       
 
          <div class="card">
-          
+          <div class="card-header">Lớp học - môn học</div>
            <!-- /.card-header -->
            <div class="card-body p-0">
              <table class="table table-striped">
@@ -64,16 +61,28 @@
                  <tr>
                    <th>Lớp học</th>
                    <th>Môn học</th>
+                   <th>Lịch hôm nay</th>
                    <th>Thể loại</th>
+                   <th></th>
                  </tr>
                </thead>
                <tbody>
                  @foreach ($getRecord as $value)
                    <tr>
-                     
                      <td>{{$value->class_name}}</td>
                      <td>{{$value->subject_name}}</td>
+                     
+                     <td>
+                     
+                      @if(!empty($value->timeable))
+                      <div>{{date('H:i A', strtotime($value->timeable->start_time)) }} - {{date('H:i A', strtotime($value->timeable->end_time))}}</div>
+                      <div>Phòng: {{$value->timeable->room_number}}</div>
+                      @endif
+                     </td>
                      <td>{{$value->subject_type}}</td>
+                     <td> 
+                        <a class="btn btn-primary" href="{{url('teacher/my_class_subject/timeable/' .$value->subject_id . '/' .$value->class_id )}}">Thời khóa biểu</a>
+                     </td>
                    </tr>
                  @endforeach
                    

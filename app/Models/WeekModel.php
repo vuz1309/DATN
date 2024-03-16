@@ -14,4 +14,8 @@ class WeekModel extends Model
     {
         return WeekModel::get();
     }
+    static public function getSingle($id)
+    {
+        return self::find($id);
+    }
 }

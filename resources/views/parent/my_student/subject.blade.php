@@ -71,7 +71,7 @@
                    <th style="width: 10px">#</th>
                    <th>Môn học</th>
                    <th>Thể loại</th>
-                  
+                  <th></th>
                  </tr>
                </thead>
                <tbody>
@@ -81,6 +81,9 @@
                     <td>{{$value->id}}</td>
                     <td>{{$value->subject_name}}</td>
                     <td>{{$value->subject_type}}</td>
+                    <td>
+                      <a class="btn btn-primary" href="{{url('parent/my_student/class_subject_timeable/'.$value->subject_id .'/'.$student->class_id .'/'.$student->id)}}">Thời khóa biểu</a>
+                    </td>
                     </tr>
                     @endforeach
                 @endif

@@ -11,9 +11,6 @@
          <h1>Thời khóa biểu</h1>
        </div>
      </div>
-     <div class="col-sm-6" style="text-align: right;">
-        <a class="btn btn-primary" href="{{ url('admin/class_timeable/add') }}">Thêm mới</a>
-      </div>
    </div><!-- /.container-fluid -->
  </section>
 
@@ -27,56 +24,11 @@
         @include('_message')
          <!-- /.card -->
 
-         <div class="card card-primary">
-          
-           <!-- form start -->
-           <form method="get" action="">
-            <div class="card-header">Tìm kiếm</div>
-           
-             <div class="card-body">
-             <div class="row">
-                 <div class="form-group col-md-3">
-                   <label for="class_id">Lớp</label>
-                   <select class="form-control getClass" required name="class_id">
-                     <option value="">Chọn lớp học</option>
-                     @foreach ($getClass as $class)
-                     <option {{ Request::get('class_id') == $class->id ? 'selected' : '' }} value="{{$class->id}}">{{$class->name}}</option>
-                     @endforeach
-                     </select>
-
-                 </div>
-
-                 <div class="form-group col-md-3">
-                    <label for="subject_id">Môn học</label>
-                    <select class="form-control getSubject" required name="subject_id">
-                      <option value="">Chọn lớp học</option>
-                      @if(!empty($getSubject))
-                        @foreach ($getSubject as $subject)
-                        <option {{ Request::get('subject_id') == $subject->subject_id ? 'selected' : '' }} value="{{$subject->subject_id}}">{{$subject->subject_name}}</option>
-                        @endforeach
-                      @endif
-                      </select>
- 
-                  </div>
-
-
-                 <div class="form-group col-md-3">
-                   <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm kiếm</button>
-                   <a href="{{url("admin/student/list")}}" class="btn btn-success" style="margin-top:30px;">Làm mới</a>
-                 </div>
-
-             </div> 
-             </div>
-           </form>
-         </div>
-         @if(!empty(Request::get('class_id')) && !empty(Request::get('subject_id')))
-         <form action="{{url('admin/class_timeable/add')}}" method="POST" >
-          {{ csrf_field() }}
-          <input hidden type="text" name="subject_id" value="{{Request::get('subject_id')}}"/>
-          <input  hidden type="text" name="class_id" value="{{Request::get('class_id')}}"/>
-         <div class="card">
+        @if (!empty($getSubject))
+            @foreach ($getSubject as $subject )
+            <div class="card">
                 
-                <div class="card-header"><h3>Thời khóa biểu</h3></div>
+                <div class="card-header"><h3>{{$subject->name}}</h3></div>
                 <div class="card-body p-0">
                 <table class="table table-striped">
                     <thead>
@@ -93,10 +45,9 @@
                         $i = 1;
                       @endphp
 
-                    @foreach ($week as $value)
+                    @foreach ($getSubjectTimeable[$subject->id] as $value)
                       <tr>
                         <td> 
-                      <input hidden type="text" name="timeable[{{$i}}][week_id]" value="{{$value['week_id']}}"/>
 
                           <span style="font-weight: bold;">{{$value['week_name']}}</span> 
                         </td>
@@ -119,13 +70,15 @@
                     
                     </tbody>
                 </table>
-                <div style="text-align: center; padding: 10px;"><button  class="btn btn-primary"> Lưu </button></div>
                 
                 </div>
                 <!-- /.card-body -->
-              </form>   
+ 
             </div>
+            @endforeach
         @endif
+         
+
        </div>
        <!-- /.col -->
      </div>
@@ -144,6 +97,7 @@
 <script type="text/javascript">
     $('.getClass').change(function(){
         var class_id = $(this).val();
+        console.log('ntvu log', class_id);
         $.ajax({
             url: "{{ url('admin/class_timeable/get_subject') }}",
             type: "POST",
