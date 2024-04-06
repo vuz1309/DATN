@@ -47,8 +47,6 @@ class ClassModel extends Model
             ->where('class.is_delete', '=', 0)
             ->where('class.status', '=', 0);
 
-
-
         $return = $return->orderBy('class.id', 'desc')
             ->get();
         return $return;

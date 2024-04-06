@@ -13,6 +13,7 @@ use App\Http\Controllers\ParentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AssignClassTeacherController;
 use App\Http\Controllers\ClassTimeableController;
+use App\Http\Controllers\ExaminationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -141,6 +142,22 @@ Route::group(['middware' => 'admin'], function () {
     Route::get('admin/class_timeable/add', [ClassTimeableController::class, 'add']);
     Route::post('admin/class_timeable/get_subject', [ClassTimeableController::class, 'getSubject']);
     Route::post('admin/class_timeable/add', [ClassTimeableController::class, 'PostAdd']);
+
+    // exam
+    Route::get('admin/examinations/exam/list', [ExaminationsController::class, 'exam_list']);
+    Route::get('admin/examinations/exam/add', [ExaminationsController::class, 'exam_add']);
+
+    Route::post('admin/examinations/exam/add', [ExaminationsController::class, 'PostExaxmAdd']);
+
+    Route::get('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'exam_edit']);
+
+    Route::post('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'PostEditExam']);
+    Route::get('admin/examinations/exam/delete/{id}', [ExaminationsController::class, 'exam_delete']);
+
+    // lich
+    // admin/examinations/exam_schedule/list
+    Route::get('admin/examinations/exam_schedule', [ExaminationsController::class, 'exam_schedule']);
+    Route::post('admin/examinaions/schedule/add', [ExaminationsController::class, 'PostAddExamSchedule']);
 });
 
 Route::group(['middware' => 'teacher'], function () {
@@ -156,6 +173,8 @@ Route::group(['middware' => 'teacher'], function () {
     Route::get('teacher/my_class_subject', [AssignClassTeacherController::class, 'myClassSubject']);
     Route::get('teacher/my_student', [StudentController::class, 'teacherStudent']);
     Route::get('teacher/my_class_subject/timeable/{subject_id}/{class_id}', [ClassTimeableController::class, 'teacherClassSubjectTimeable']);
+
+    Route::get('teacher/my_timeable', [ClassTimeableController::class, 'teacherTimeable']);
 });
 
 Route::group(['middware' => 'student'], function () {

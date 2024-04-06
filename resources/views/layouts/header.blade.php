@@ -231,6 +231,36 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item @if(Request::segment(2) == 'examinations') menu-is-opening menu-open @endif">
+            <a href="#" class="nav-link @if(Request::segment(2) == 'examinations') active @endif">
+              <i class="nav-icon fas fa-table"></i>
+              <p> 
+                Thi cử
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: block;">
+              <li class="nav-item">
+                <a href="{{url('admin/examinations/exam/list')}}" class="nav-link @if(Request::segment(2) == 'exam') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Bài thi
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{url('admin/examinations/exam_schedule')}}" class="nav-link @if(Request::segment(2) == 'exam_schedule') active @endif">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Lịch trình
+                  </p>
+                </a>
+              </li>
+    
+              
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="{{url('admin/account')}}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
               <i class="nav-icon far fa-user"></i>
@@ -307,7 +337,7 @@
             </a>
           </li> 
           <li class="nav-item">
-            <a href="{{url('student/my_timeable')}}" class="nav-link @if(Request::segment(2) == 'class_timeable') active @endif">
+            <a href="{{url('student/my_timeable')}}" class="nav-link @if(Request::segment(2) == 'my_timeable') active @endif">
               <i class="far fa-circle nav-icon"></i>
               <p>
                 Thời khóa biểu
