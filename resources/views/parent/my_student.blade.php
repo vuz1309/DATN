@@ -49,6 +49,8 @@
                     <th>Cân nặng (kg)</th>
                     <th>Trạng thái</th>
                     <th></th>
+                    <th></th>
+                    <th></th>
                    
                   </tr>
                 </thead>
@@ -94,6 +96,12 @@
                       </td>
                       <td>
                         <a class="btn btn-primary" href="{{url('parent/my_student/subject/' .$value->id)}}">Môn học</a>
+                      </td>
+                      <td>
+                        <a class="btn btn-warning" href="{{url('parent/my_student/exam_schedule/' .$value->id)}}">Lịch thi</a>
+                      </td>
+                      <td>
+                        <a class="btn btn-success" href="{{url('parent/my_student/calendar/' .$value->id)}}">Lịch học</a>
                       </td>
                     </tr>
                   @endforeach

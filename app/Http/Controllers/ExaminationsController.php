@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssignClassTeacherModel;
 use App\Models\ClassModel;
 use Illuminate\Http\Request;
 
 use App\Models\ExamModel;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
+use App\Models\User;
 use Auth;
 
 class ExaminationsController extends Controller
@@ -149,5 +151,123 @@ class ExaminationsController extends Controller
         }
 
         return redirect()->back()->with('sucess', 'Cập nhật lịch thi thành công!');
+    }
+
+    public function student_exam_schedule(Request $request)
+    {
+        $class_id = Auth::user()->class_id;
+
+        $getExam  = ExamScheduleModel::getExam($class_id);
+        $result = array();
+        foreach ($getExam as $value) {
+            $E = array();
+            $E['name'] = $value->exam_name;
+            $getExamSchedule = ExamScheduleModel::getExamSchedule($value->exam_id, $class_id);
+            $resultS = [];
+            foreach ($getExamSchedule as $valueS) {
+                $dataS = array();
+                $dataS['subject_name'] = $valueS->subject_name;
+                $dataS['exam_date'] = $valueS->exam_date;
+                $dataS['start_time'] = $valueS->start_time;
+                $dataS['end_time'] = $valueS->end_time;
+                $dataS['room_number'] = $valueS->room_number;
+                $dataS['full_marks'] = $valueS->full_marks;
+                $dataS['passing_mark'] = $valueS->passing_mark;
+
+                $resultS[] = $dataS;
+            }
+            $E['exam'] = $resultS;
+
+            $result[] = $E;
+        }
+
+        $data['header_title'] = 'Lịch thi';
+        $data['getRecord'] = $result;
+
+        return view('student.my_exam_schedule', $data);
+    }
+
+
+    public function teacher_exam_schedule()
+    {
+        $id = Auth::user()->id;
+
+        $getClass = AssignClassTeacherModel::getMyClassSubjectGroup($id);
+
+        $result = array();
+        foreach ($getClass as $class) {
+            $dataC = array();
+            $dataC['class_name'] = $class->class_name;
+
+            $getExam  = ExamScheduleModel::getExam($class->class_id);
+            $examArray = array();
+            foreach ($getExam as $exam) {
+                $E = array();
+                $E['exam_name'] = $exam->exam_name;
+                $getExamSchedule = ExamScheduleModel::getExamSchedule($exam->exam_id, $class->class_id);
+                $subjectArray = [];
+                foreach ($getExamSchedule as $valueS) {
+                    $dataS = array();
+                    $dataS['subject_name'] = $valueS->subject_name;
+                    $dataS['exam_date'] = $valueS->exam_date;
+                    $dataS['start_time'] = $valueS->start_time;
+                    $dataS['end_time'] = $valueS->end_time;
+                    $dataS['room_number'] = $valueS->room_number;
+                    $dataS['full_marks'] = $valueS->full_marks;
+                    $dataS['passing_mark'] = $valueS->passing_mark;
+
+                    $subjectArray[] = $dataS;
+                }
+                $E['subject'] = $subjectArray;
+
+                $examArray[] = $E;
+            }
+            $dataC['exam'] = $examArray;
+            $result[] = $dataC;
+        }
+
+        $data['header_title'] = 'Lịch thi';
+
+        $data['getRecord'] = $result;
+
+        return view('teacher.my_exam_schedule', $data);
+    }
+
+    public function parentStudentExamSchedule($student_id)
+    {
+        $getStudent = User::getSingle($student_id);
+
+        $class_id = $getStudent->class_id;
+        if (!empty($class_id)) {
+            $getExam  = ExamScheduleModel::getExam($class_id);
+            $result = array();
+            foreach ($getExam as $value) {
+                $E = array();
+                $E['name'] = $value->exam_name;
+                $getExamSchedule = ExamScheduleModel::getExamSchedule($value->exam_id, $class_id);
+                $resultS = [];
+                foreach ($getExamSchedule as $valueS) {
+                    $dataS = array();
+                    $dataS['subject_name'] = $valueS->subject_name;
+                    $dataS['exam_date'] = $valueS->exam_date;
+                    $dataS['start_time'] = $valueS->start_time;
+                    $dataS['end_time'] = $valueS->end_time;
+                    $dataS['room_number'] = $valueS->room_number;
+                    $dataS['full_marks'] = $valueS->full_marks;
+                    $dataS['passing_mark'] = $valueS->passing_mark;
+
+                    $resultS[] = $dataS;
+                }
+                $E['exam'] = $resultS;
+
+                $result[] = $E;
+            }
+            $data['header_title'] = 'Lịch thi';
+            $data['getRecord'] = $result;
+            $data['getStudent'] = $getStudent;
+
+
+            return view('parent.my_student_exam_schedule', $data);
+        }
     }
 }

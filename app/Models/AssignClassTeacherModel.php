@@ -46,6 +46,20 @@ class AssignClassTeacherModel extends Model
         return $return;
     }
 
+    static public function getCalendarTeacher($teacher_id)
+    {
+        return self::select('assign_class_teacher.*', 'class.name as class_name', 'subject.name as subject_name', 'week.name as week_name', 'week.fullcalendar_day as fullcalendar_day')
+            ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
+            ->join('class_subject', 'class_subject.class_id', '=', 'assign_class_teacher.class_id')
+            ->join('class_subject_timeable', 'class_subject_timeable.subject_id', '=', 'class_subject.subject_id')
+            ->join('subject', 'subject.id', '=', 'class_subject_timeable.subject_id')
+            ->join('week', 'week.id', '=', 'class_subject_timeable.week_id')
+            ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
+            ->where('assign_class_teacher.status', '=', 0)
+            ->where('assign_class_teacher.is_delete', '=', 0)
+            ->get();
+    }
+
     static public function getSingle($id)
     {
         return self::find($id);
@@ -95,6 +109,24 @@ class AssignClassTeacherModel extends Model
             $item->timeable = $timeable;
         }
         return $return;
+    }
+
+    static public function getMyClassSubjectGroup($teacher_id)
+    {
+        $return = self::select('class.name as class_name', 'class.id as class_id')
+
+            ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
+
+            ->where('class.is_delete', '=', 0)
+
+
+            ->where('assign_class_teacher.is_delete', '=', 0)
+            ->where('assign_class_teacher.status', '=', 0)
+
+            ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
+            ->groupBy('assign_class_teacher.class_id');
+
+        return $return->get();
     }
 
     // Lấy ra lịch của môn học trong ngày hiện tại

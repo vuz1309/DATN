@@ -33,7 +33,7 @@
                 {{ csrf_field()}}
                 <div class="card-body">
                 <div class="form-group">
-                    <label for="old_password">Mật khẩu cũ</label>
+                    <label for="old_password">Mật khẩu cũ </label>
                     <input name="old_password"  type="password" required class="form-control" id="old_password" placeholder="">
                   </div>
                   

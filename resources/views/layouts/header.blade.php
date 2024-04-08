@@ -292,7 +292,22 @@
               </p>
             </a>
           </li>
-
+          <li class="nav-item">
+            <a href="{{url('teacher/my_exam_schedule')}}" class="nav-link @if(Request::segment(2) == 'my_exam_schedule') active @endif">
+              <i class="nav-icon far fa-tachometer-alt"></i>
+              <p>
+                Lịch thi
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('teacher/calendar')}}" class="nav-link @if(Request::segment(2) == 'calendar') active @endif">
+              <i class="nav-icon far fa-tachometer-alt"></i>
+              <p>
+                Lịch dạy
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{{url('teacher/my_class_subject')}}" class="nav-link @if(Request::segment(2) == 'my_class_subject') active @endif">
               <i class="nav-icon far fa-tachometer-alt"></i>
@@ -345,6 +360,22 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{url('student/my_exam_schedule')}}" class="nav-link @if(Request::segment(2) == 'my_exam_schedule') active @endif">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Lịch thi
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('student/my_calendar')}}" class="nav-link @if(Request::segment(2) == 'my_calendar') active @endif">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Lịch học
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{url('student/my_subject')}}" class="nav-link @if(Request::segment(2) == 'my_subject') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
@@ -352,6 +383,7 @@
               </p>
             </a>
           </li>
+
           <li class="nav-item">
             <a href="{{url('student/account')}}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
               <i class="nav-icon far fa-user"></i>
@@ -379,7 +411,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('parent/my_student')}}" class="nav-link @if(Request::segment(2) == 'account') active @endif">
+            <a href="{{url('parent/my_student')}}" class="nav-link @if(Request::segment(2) == 'my_student') active @endif">
               <i class="nav-icon far fa-user"></i>
               <p>
                 Con cái

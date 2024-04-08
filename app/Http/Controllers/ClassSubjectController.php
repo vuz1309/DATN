@@ -72,7 +72,7 @@ class ClassSubjectController extends Controller
     public function PostEdit(Request $request)
     {
         ClassSubjectModel::deleteSubject(($request->class_id));
-        if (!empty($request->subject_id)) {
+        if (!empty($request->ww)) {
 
 
             foreach ($request->subject_id as $subject_id) {

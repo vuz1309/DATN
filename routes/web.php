@@ -12,8 +12,10 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AssignClassTeacherController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClassTimeableController;
 use App\Http\Controllers\ExaminationsController;
+use App\Models\ExamScheduleModel;
 
 /*
 |--------------------------------------------------------------------------
@@ -175,6 +177,9 @@ Route::group(['middware' => 'teacher'], function () {
     Route::get('teacher/my_class_subject/timeable/{subject_id}/{class_id}', [ClassTimeableController::class, 'teacherClassSubjectTimeable']);
 
     Route::get('teacher/my_timeable', [ClassTimeableController::class, 'teacherTimeable']);
+
+    Route::get('teacher/my_exam_schedule', [ExaminationsController::class, 'teacher_exam_schedule']);
+    Route::get('teacher/calendar', [CalendarController::class, 'teacher_calendar']);
 });
 
 Route::group(['middware' => 'student'], function () {
@@ -188,6 +193,9 @@ Route::group(['middware' => 'student'], function () {
 
     Route::get('student/my_subject', [SubjectController::class, 'myStudentSubject']);
     Route::get('student/my_timeable', [ClassTimeableController::class, 'studentTimeable']);
+
+    Route::get('student/my_exam_schedule', [ExaminationsController::class, 'student_exam_schedule']);
+    Route::get('student/my_calendar', [CalendarController::class, 'student_my_calendar']);
 });
 
 Route::group(['middware' => 'parent'], function () {
@@ -201,4 +209,6 @@ Route::group(['middware' => 'parent'], function () {
     Route::get('parent/my_student/subject/{student_id}', [SubjectController::class, 'parentStudentSubject']);
     Route::get('parent/my_student', [ParentController::class, 'myStudentParent']);
     Route::get('parent/my_student/class_subject_timeable/{subject_id}/{class_id}/{student_id}', [ClassTimeableController::class, 'parentClassSubjectTimeable']);
+    Route::get('parent/my_student/exam_schedule/{student_id}', [ExaminationsController::class, 'parentStudentExamSchedule']);
+    Route::get('parent/my_student/calendar/{student_id}', [CalendarController::class, 'parent_student_calendar']);
 });
