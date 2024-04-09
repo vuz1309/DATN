@@ -60,4 +60,18 @@ class ExamScheduleModel extends Model
             ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
             ->get();
     }
+
+    static public function getSubject($exam_id, $class_id)
+    {
+        return ExamScheduleModel::select('exam_schedule.*', 'subject.name as subject_name', 'subject.type as subject_type')
+            ->join('subject', 'subject.id', '=', 'exam_schedule.subject_id')
+            ->where('exam_schedule.exam_id', '=', $exam_id)
+            ->where('exam_schedule.class_id', '=', $class_id)
+            ->get();
+    }
+
+    static public function getmark($student_id, $exam_id,  $class_id, $subject_id)
+    {
+        return MarkRegisterModel::getSingleByWork($student_id, $exam_id,  $class_id, $subject_id);
+    }
 }

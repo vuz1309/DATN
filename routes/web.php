@@ -160,6 +160,9 @@ Route::group(['middware' => 'admin'], function () {
     // admin/examinations/exam_schedule/list
     Route::get('admin/examinations/exam_schedule', [ExaminationsController::class, 'exam_schedule']);
     Route::post('admin/examinaions/schedule/add', [ExaminationsController::class, 'PostAddExamSchedule']);
+
+    Route::get('admin/examinations/marks_register', [ExaminationsController::class, 'marks_register']);
+    Route::post('admin/examinations/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
 });
 
 Route::group(['middware' => 'teacher'], function () {
