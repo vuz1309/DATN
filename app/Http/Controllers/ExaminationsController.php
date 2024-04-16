@@ -201,38 +201,59 @@ class ExaminationsController extends Controller
 
         return view('admin.examinations.marks_register', $data);
     }
+    public function marks_register_teacher(Request $request)
+    {
+        $data['header_title'] = 'Điểm';
+        $data['getClass'] = AssignClassTeacherModel::getMyClassSubjectGroup(Auth::user()->id);
+        $data['getExam'] = ExamScheduleModel::getExamTeacher(Auth::user()->id);
+
+        if (!empty($request->get('exam_id')) && !empty($request->get('class_id'))) {
+            $data['getSubject'] = ExamScheduleModel::getSubject($request->get('exam_id'), $request->get('class_id'));
+            $data['getStudent'] = User::getStudentClass($request->get('class_id'));
+        }
+
+        return view('teacher.marks_register', $data);
+    }
+
 
     public function submit_marks_register(Request $request)
     {
+        $validation = 0;
         if (!empty($request->mark)) {
             foreach ($request->mark as $mark) {
+                $getExamSchedule = ExamScheduleModel::getSingle($mark['id']);
                 $class_work = !empty($mark['class_work']) ? $mark['class_work'] : 0;
                 $home_work =  !empty($mark['home_work']) ? $mark['home_work'] : 0;
                 $test_work = !empty($mark['test_work']) ? $mark['test_work'] : 0;
                 $exam = !empty($mark['exam']) ? $mark['exam'] : 0;
+                $full_marks = $getExamSchedule->full_marks;
+                $total_mark = $class_work + $home_work + $test_work + $exam;
+                if ($full_marks >= $total_mark) {
+                    $getMark = MarkRegisterModel::getSingleByWork($request->student_id, $request->exam_id, $request->class_id, $mark['subject_id']);
+                    if (!empty($getMark)) {
+                        $save = $getMark;
+                    } else {
+                        $save = new MarkRegisterModel;
+                        $save->created_by = Auth::user()->id;
+                    }
 
-                $getMark = MarkRegisterModel::getSingleByWork($request->student_id, $request->exam_id, $request->class_id, $mark['subject_id']);
-                if (!empty($getMark)) {
-                    $save = $getMark;
+                    $save->student_id   = $request->student_id;
+                    $save->exam_id      = $request->exam_id;
+                    $save->class_id      = $request->class_id;
+                    $save->subject_id = $mark['subject_id'];
+                    $save->class_work = $class_work;
+                    $save->home_work = $home_work;
+                    $save->test_work = $test_work;
+                    $save->exam = $exam;
+
+                    $save->save();
                 } else {
-                    $save = new MarkRegisterModel;
-                    $save->created_by = Auth::user()->id;
+                    $validation = 1;
                 }
-
-                $save->student_id   = $request->student_id;
-                $save->exam_id      = $request->exam_id;
-                $save->class_id      = $request->class_id;
-                $save->subject_id = $mark['subject_id'];
-                $save->class_work = $class_work;
-                $save->home_work = $home_work;
-                $save->test_work = $test_work;
-                $save->exam = $exam;
-
-                $save->save();
             }
         }
 
-        $json['message'] = 'Điểm đã được cập nhật thành công!';
+        $json['message'] = $validation == 0 ? 'Điểm đã được cập nhật thành công!' : 'Lưu thành công, nhưng tồn tại môn học có tổng điểm lớn hơn điểm tối đa!';
         echo json_encode($json);
     }
 
@@ -317,5 +338,74 @@ class ExaminationsController extends Controller
 
             return view('parent.my_student_exam_schedule', $data);
         }
+    }
+
+    public function single_submit_marks_register(Request $request)
+    {
+        $id = $request->id;
+
+        if (!empty($request->student_id)) {
+            $getExamSchedule = ExamScheduleModel::getSingle($id);
+            $class_work = !empty($request->class_work) ? $request->class_work : 0;
+            $home_work =  !empty($request->home_work) ? $request->home_work : 0;
+            $test_work = !empty($request->test_work) ? $request->test_work : 0;
+            $exam = !empty($request->exam) ? $request->exam : 0;
+            $full_marks = $getExamSchedule->full_marks;
+
+            $total_mark = $class_work + $home_work + $test_work + $exam;
+
+            if ($full_marks >= $total_mark) {
+                $getMark = MarkRegisterModel::getSingleByWork($request->student_id, $request->exam_id, $request->class_id, $request->subject_id);
+                if (!empty($getMark)) {
+                    $save = $getMark;
+                } else {
+                    $save = new MarkRegisterModel;
+                    $save->created_by = Auth::user()->id;
+                }
+                $save->class_work = $class_work;
+                $save->home_work = $home_work;
+                $save->test_work = $test_work;
+                $save->exam = $exam;
+
+                $save->save();
+
+                $json['message'] = 'Điểm đã được cập nhật thành công!';
+            } else {
+                $json['message'] = 'Tổng điểm lớn hơn điểm tối đa của môn học!';
+            }
+
+            echo json_encode($json);
+        }
+    }
+
+
+    public function my_exam_result()
+    {
+        $getExam = MarkRegisterModel::getExam(Auth::user()->id);
+        $data['header_title'] = 'Điểm';
+        $result = array();
+
+        foreach ($getExam as $value) {
+            $dataE = array();
+            $dataE['exam_name'] = $value->exam_name;
+            $getExamSubject = MarkRegisterModel::getExamSubject($value->exam_id, Auth::user()->id);
+            $dataSubject = array();
+            foreach ($getExamSubject as $exam) {
+                $dataS = array();
+                $dataS['subject_name'] = $exam['subject_name'];
+                $dataS['class_work'] = $exam['class_work'];
+                $dataS['home_work'] = $exam['home_work'];
+                $dataS['test_work'] = $exam['test_work'];
+                $dataS['exam'] = $exam['exam'];
+                $dataS['full_marks'] = $exam['full_marks'];
+                $dataS['passing_mark'] = $exam['passing_mark'];
+                $dataS['total'] = $exam['class_work'] + $exam['home_work'] + $exam['test_work'] + $exam['exam'];
+                $dataSubject[] = $dataS;
+            }
+            $dataE['subject'] = $dataSubject;
+            $result[] = $dataE;
+        }
+        $data['getRecord'] = $result;
+        return view('student.my_exam_result', $data);
     }
 }
