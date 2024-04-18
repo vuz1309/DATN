@@ -10,6 +10,7 @@ use App\Models\ExamModel;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
 use App\Models\MarkRegisterModel;
+use App\Models\MarksGradeModel;
 use App\Models\User;
 use Auth;
 
@@ -400,6 +401,7 @@ class ExaminationsController extends Controller
                 $dataS['full_marks'] = $exam['full_marks'];
                 $dataS['passing_mark'] = $exam['passing_mark'];
                 $dataS['total'] = $exam['class_work'] + $exam['home_work'] + $exam['test_work'] + $exam['exam'];
+                $dataS['grade'] = MarksGradeModel::getGrade($dataS['total'] * 10 / $dataS['full_marks']);
                 $dataSubject[] = $dataS;
             }
             $dataE['subject'] = $dataSubject;
@@ -407,5 +409,88 @@ class ExaminationsController extends Controller
         }
         $data['getRecord'] = $result;
         return view('student.my_exam_result', $data);
+    }
+    public function parent_student_exam_result($student_id)
+    {
+        $data['getStudent'] = User::getSingle($student_id);
+        $getExam = MarkRegisterModel::getExam($student_id);
+        $data['header_title'] = 'Điểm';
+        $result = array();
+
+        foreach ($getExam as $value) {
+            $dataE = array();
+            $dataE['exam_name'] = $value->exam_name;
+            $getExamSubject = MarkRegisterModel::getExamSubject($value->exam_id, $student_id);
+            $dataSubject = array();
+            foreach ($getExamSubject as $exam) {
+                $dataS = array();
+                $dataS['subject_name'] = $exam['subject_name'];
+                $dataS['class_work'] = $exam['class_work'];
+                $dataS['home_work'] = $exam['home_work'];
+                $dataS['test_work'] = $exam['test_work'];
+                $dataS['exam'] = $exam['exam'];
+                $dataS['full_marks'] = $exam['full_marks'];
+                $dataS['passing_mark'] = $exam['passing_mark'];
+                $dataS['total'] = $exam['class_work'] + $exam['home_work'] + $exam['test_work'] + $exam['exam'];
+                $dataS['grade'] = MarksGradeModel::getGrade($dataS['total'] * 10 / $dataS['full_marks']);
+                $dataSubject[] = $dataS;
+            }
+            $dataE['subject'] = $dataSubject;
+            $result[] = $dataE;
+        }
+        $data['getRecord'] = $result;
+        return view('parent.my_student.exam_result', $data);
+    }
+
+    public function marks_grade_list()
+    {
+        $data['header_title'] = 'Thang điểm';
+        $data['getRecord'] = MarksGradeModel::getRecord();
+        return view('admin.examinations.marks_grade.list', $data);
+    }
+    public function marks_grade_add()
+    {
+        $data['header_title'] = 'Thang điểm';
+        return view('admin.examinations.marks_grade.add', $data);
+    }
+    public function PostMarkAdd(Request $request)
+    {
+        $mark = new MarksGradeModel;
+        $mark->name = trim($request->name);
+        $mark->percent_from = ($request->percent_from);
+        $mark->percent_to = ($request->percent_to);
+        $mark->created_by = Auth::user()->id;
+        $mark->save();
+        return redirect()->back()->with('sucess', 'Thêm mới thành công!');
+    }
+    public function marks_grade_edit($id)
+    {
+        $data['header_title'] = 'Thang điểm';
+        $data['getRecord'] = MarksGradeModel::getSingle($id);
+        return view('admin.examinations.marks_grade.edit', $data);
+    }
+    public function PostMarksGradEdit($id, Request $request)
+    {
+        $mark = MarksGradeModel::getSingle($id);
+        if (!empty($mark)) {
+            $mark->name = trim($request->name);
+            $mark->percent_from = ($request->percent_from);
+            $mark->percent_to = ($request->percent_to);
+
+            $mark->save();
+            return redirect()->back()->with('sucess', 'Thêm mới thành công!');
+        } else {
+            abort(404);
+        }
+    }
+    public function marks_grade_delete($id)
+    {
+        $mark = MarksGradeModel::getSingle($id);
+        if (!empty($mark)) {
+            $mark->delete();
+            return redirect()->back()->with('sucess', 'Thêm mới thành công!');
+        } else {
+            abort(404);
+        }
     }
 }

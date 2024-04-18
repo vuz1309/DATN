@@ -7,10 +7,10 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Danh sách môn học các lớp (Tổng: {{ $getRecord->total() }})</h1>
+                          <h1>Thang điểm</h1>
                       </div>
                       <div class="col-sm-6" style="text-align: right;">
-                          <a class="btn btn-primary" href="{{ url('admin/assign_subject/add') }}">Thêm mới</a>
+                          <a class="btn btn-primary" href="{{ url('admin/examinations/marks_grade/add') }}">Thêm mới</a>
                       </div>
                   </div>
               </div><!-- /.container-fluid -->
@@ -26,39 +26,28 @@
                           @include('_message')
                           <!-- /.card -->
 
-                          <div class="card card-primary">
-
+                          <div class="card">
+                              <div class="card-header">Tìm kiếm</div>
                               <!-- form start -->
                               <form method="get" action="">
 
                                   <div class="card-body">
                                       <div class="row">
                                           <div class="form-group col-md-3">
-                                              <label for="subject_name">Tên môn học</label>
-                                              <input name="subject_name" value="{{ Request::get('subject_name') }}"
-                                                  type="text" class="form-control" id="subject_name" placeholder="">
+                                              <label for="name">Tên</label>
+                                              <input name="name" value="{{ Request::get('name') }}" type="text"
+                                                  class="form-control" id="name" placeholder="">
                                           </div>
 
-                                          <div class="form-group col-md-3">
-                                              <label for="class_name">Tên lớp học</label>
-                                              <input name="class_name" value="{{ Request::get('class_name') }}"
-                                                  type="text" class="form-control" id="class_name" placeholder="">
-                                          </div>
-                                          <div class="form-group col-md-3">
-                                              <label for="teacher_name">Tên giáo viên</label>
-                                              <input name="teacher_name" value="{{ Request::get('teacher_name') }}"
-                                                  type="text" class="form-control" id="teacher_name" placeholder="">
-                                          </div>
                                           <div class="form-group col-md-3">
                                               <label for="date">Ngày tạo</label>
                                               <input name="date" type="date" value="{{ Request::get('date') }}"
                                                   class="form-control" id="date" placeholder="">
-
                                           </div>
                                           <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('admin/assign_subject/list') }}" class="btn btn-success"
+                                              <a href="{{ url('admin/examinations/exam/list') }}" class="btn btn-success"
                                                   style="margin-top:30px;">Làm mới</a>
                                           </div>
 
@@ -72,18 +61,17 @@
 
 
                           <div class="card">
-
+                              <div class="card-header">Thang điểm</div>
                               <!-- /.card-header -->
                               <div class="card-body p-0">
                                   <table class="table table-striped">
                                       <thead>
                                           <tr>
                                               <th style="width: 10px">#</th>
-                                              <th>Lớp học</th>
-                                              <th>Môn học</th>
-                                              <th>Giáo viên dạy</th>
-                                              <th>Trạng thái</th>
-                                              <th>Tạo bởi</th>
+                                              <th>Tên</th>
+                                              <th>Điểm từ</th>
+                                              <th>Điểm đến</th>
+                                              <th>Người tạo</th>
                                               <th>Ngày tạo</th>
                                               <th></th>
                                           </tr>
@@ -92,33 +80,21 @@
                                           @foreach ($getRecord as $value)
                                               <tr>
                                                   <td>{{ $value->id }}</td>
-                                                  <td>{{ $value->class_name }}</td>
-                                                  <td>{{ $value->subject_name }}</td>
-                                                  <td>{{ $value->teacher_name }} {{ $value->teacher_last_name }}</td>
-                                                  <td>
-                                                      @if ($value->status == 0)
-                                                          Đang hoạt động
-                                                      @else
-                                                          Ngưng hoạt động
-                                                      @endif
-
-                                                  </td>
-                                                  <td>{{ $value->created_by_name }}</td>
+                                                  <td>{{ $value->name }}</td>
+                                                  <td>{{ $value->percent_from }}</td>
+                                                  <td>{{ $value->percent_to }}</td>
+                                                  <td>{{ $value->created_by_name }} {{ $value->created_by_last_name }}</td>
                                                   <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td>
                                                   <td>
-                                                      <a href="{{ url('admin/assign_subject/edit_single/' . $value->id) }}"
-                                                          class="btn btn-primary">Sửa 1</a>
-                                                      <a href="{{ url('admin/assign_subject/edit/' . $value->id) }}"
-                                                          class="btn btn-primary">Sửa nhiều</a>
-                                                      <a href="{{ url('admin/assign_subject/delete/' . $value->id) }}"
+                                                      <a href="{{ url('admin/examinations/marks_grade/edit/' . $value->id) }}"
+                                                          class="btn btn-primary">Sửa</a>
+                                                      <a href="{{ url('admin/examinations/marks_grade/delete/' . $value->id) }}"
                                                           class="btn btn-danger">Xóa</a>
                                                   </td>
                                               </tr>
                                           @endforeach
                                       </tbody>
                                   </table>
-
-                                  <div style="padding: 10px; float: right;">{!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}</div>
                               </div>
                               <!-- /.card-body -->
                           </div>

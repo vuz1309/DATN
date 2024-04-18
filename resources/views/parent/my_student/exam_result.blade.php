@@ -7,7 +7,8 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Điểm của bạn</h1>
+                          <h1>Điểm (<span style="color: blue">{{ $getStudent->name }} {{ $getStudent->last_name }}</span>)
+                          </h1>
                       </div>
 
                   </div>
@@ -37,7 +38,6 @@
                                                   <th>Điểm bài thi</th>
                                                   <th>Điểm đạt</th>
                                                   <th>Tổng điểm</th>
-                                                  <th>Tổng kết</th>
 
                                               </tr>
                                           </thead>
@@ -52,7 +52,6 @@
                                                       <td style="text-align: center;">{{ $exam['passing_mark'] }} /
                                                           {{ $exam['full_marks'] }}</td>
                                                       <td style="text-align: center;">{{ $exam['total'] }}</td>
-                                                      <td style="text-align: center;">{{ $exam['grade'] }}</td>
 
                                                   </tr>
                                               @endforeach

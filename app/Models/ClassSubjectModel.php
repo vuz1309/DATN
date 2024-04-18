@@ -13,9 +13,10 @@ class ClassSubjectModel extends Model
 
     static public function getRecord()
     {
-        $return = self::select('class_subject.*', 'class.name as class_name', 'subject.name as subject_name', 'users.name as created_by_name')
+        $return = self::select('class_subject.*', 'class.name as class_name', 'subject.name as subject_name', 'users.name as created_by_name', 'teacher.name as teacher_name', 'teacher.last_name as teacher_last_name')
             ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
             ->join('class', 'class.id', '=', 'class_subject.class_id')
+            ->join('users as teacher', 'teacher.id', '=', 'class_subject.teacher_id', 'left')
             ->join('users', 'users.id', '=', 'class_subject.created_by')
             ->where('class_subject.is_delete', '=', 0);
 
@@ -25,6 +26,12 @@ class ClassSubjectModel extends Model
 
         if (!empty(Request::get('subject_name'))) {
             $return = $return->where('subject.name', 'LIKE', '%' . Request::get('subject_name') . '%');
+        }
+        if (!empty(Request::get('teacher_name'))) {
+            $return = $return->where(function ($query) {
+                $query->where('teacher.name', 'like', '%' . Request::get('teacher_name') . '%')
+                    ->orWhere('teacher.last_name', 'like', '%' . Request::get('teacher_name') . '%');
+            });
         }
 
         if (!empty(Request::get('date'))) {
@@ -73,6 +80,21 @@ class ClassSubjectModel extends Model
         if (!empty(Request::get('name'))) {
             $return = $return->where('subject.name', 'LIKE', '%' . Request::get('name') . '%');
         }
+        $return = $return->orderBy('class_subject.id', 'desc')->get();
+
+        return $return;
+    }
+
+    static public function teacherClassSubject($class_id, $teacher_id)
+    {
+        $return = self::select('class_subject.*', 'subject.name as subject_name', 'subject.type as subject_type', 'subject.id as subject_id')
+            ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
+            ->join('class', 'class.id', '=', 'class_subject.class_id')
+            ->where('class_subject.class_id', '=', $class_id)
+            ->where('class_subject.teacher_id', '=', $teacher_id)
+            ->where('subject.status', '=', 0)
+            ->where('class_subject.is_delete', '=', 0);
+
         $return = $return->orderBy('class_subject.id', 'desc')->get();
 
         return $return;

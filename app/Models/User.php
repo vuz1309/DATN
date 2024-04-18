@@ -179,6 +179,7 @@ class User extends Authenticatable
             ->where('users.user_type', '=', 3)
             ->where('users.class_id', '=', $class_id)
             ->where('users.is_delete', '=', 0)
+            ->orderBy('users.id', 'desc')
             ->get();
 
         return $return;
@@ -289,5 +290,13 @@ class User extends Authenticatable
             ->paginate(20);
 
         return $return;
+    }
+
+    public static function getAttendance($student_id, $class_id, $subject_id, $attendance_date)
+    {
+        return StudentAttendanceModel::where('student_id', '=', $student_id)
+            ->where('class_id', '=', $class_id)
+            ->where('subject_id', '=', $subject_id)
+            ->where('attendance_date', '=', $attendance_date)->first();
     }
 }

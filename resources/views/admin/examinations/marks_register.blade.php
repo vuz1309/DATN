@@ -134,6 +134,12 @@
                                                                               $getMark->exam;
                                                                           $totalStudentMark += $totalMark;
                                                                       }
+
+                                                                      $percent =
+                                                                          ($totalMark / $subject->full_marks) * 10;
+                                                                      $getGrade = App\Models\MarksGradeModel::getGrade(
+                                                                          $percent,
+                                                                      );
                                                                   @endphp
                                                                   <td>
                                                                       <div style="margin-bottom: 10px;">
@@ -190,11 +196,20 @@
 
                                                                           </div>
                                                                           <div style="margin-bottom: 10px;">
-                                                                              <b>Tổng điểm: </b> {{ $totalMark }}
+                                                                              <b>Tổng điểm: {{ $totalMark }}</b>
                                                                               <br />
-                                                                              <b>Điểm đạt: </b>
-                                                                              {{ $subject->passing_mark }}
+                                                                              <b>Điểm đạt:
+                                                                                  {{ $subject->passing_mark }} </b>
                                                                               <br />
+
+                                                                              @if ($totalMark > 0)
+                                                                                  <b>Tổng kết: {{ $getGrade }}
+                                                                                  </b>
+                                                                                  <br />
+                                                                              @endif
+
+
+
                                                                               @if ($subject->passing_mark <= $totalMark)
                                                                                   <b style="color: green">Đạt</b>
                                                                                   @php
@@ -294,6 +309,7 @@
                   dataType: 'json',
                   success: function(data) {
                       alert(data.message);
+                      window.location.reload();
                   },
 
               })

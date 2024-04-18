@@ -12,6 +12,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AssignClassTeacherController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClassTimeableController;
 use App\Http\Controllers\ExaminationsController;
@@ -156,6 +157,18 @@ Route::group(['middware' => 'admin'], function () {
     Route::post('admin/examinations/exam/edit/{id}', [ExaminationsController::class, 'PostEditExam']);
     Route::get('admin/examinations/exam/delete/{id}', [ExaminationsController::class, 'exam_delete']);
 
+    // mark_grade
+    // exam
+    Route::get('admin/examinations/marks_grade', [ExaminationsController::class, 'marks_grade_list']);
+    Route::get('admin/examinations/marks_grade/add', [ExaminationsController::class, 'marks_grade_add']);
+
+    Route::post('admin/examinations/marks_grade/add', [ExaminationsController::class, 'PostMarkAdd']);
+
+    Route::get('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'marks_grade_edit']);
+
+    Route::post('admin/examinations/marks_grade/edit/{id}', [ExaminationsController::class, 'PostMarksGradEdit']);
+    Route::get('admin/examinations/marks_grade/delete/{id}', [ExaminationsController::class, 'marks_grade_delete']);
+
     // lich
     // admin/examinations/exam_schedule/list
     Route::get('admin/examinations/exam_schedule', [ExaminationsController::class, 'exam_schedule']);
@@ -164,6 +177,11 @@ Route::group(['middware' => 'admin'], function () {
     Route::get('admin/examinations/marks_register', [ExaminationsController::class, 'marks_register']);
     Route::post('admin/examinations/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
     Route::post('admin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
+
+
+    Route::get('admin/attendance/student', [AttendanceController::class, 'attendance_student']);
+    Route::post('admin/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
+    Route::get('admin/attendance/report', [AttendanceController::class, 'attendance_report']);
 });
 
 Route::group(['middware' => 'teacher'], function () {
@@ -188,6 +206,10 @@ Route::group(['middware' => 'teacher'], function () {
     Route::get('teacher/marks_register', [ExaminationsController::class, 'marks_register_teacher']);
     Route::post('admin/examinations/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
     Route::post('admin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
+
+    Route::get('teacher/attendance/student', [AttendanceController::class, 'teacher_attendance_student']);
+    Route::post('teacher/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
+    // Route::get('teacher/attendance/report', [AttendanceController::class, 'attendance_report']);
 });
 
 Route::group(['middware' => 'student'], function () {
@@ -220,4 +242,5 @@ Route::group(['middware' => 'parent'], function () {
     Route::get('parent/my_student/class_subject_timeable/{subject_id}/{class_id}/{student_id}', [ClassTimeableController::class, 'parentClassSubjectTimeable']);
     Route::get('parent/my_student/exam_schedule/{student_id}', [ExaminationsController::class, 'parentStudentExamSchedule']);
     Route::get('parent/my_student/calendar/{student_id}', [CalendarController::class, 'parent_student_calendar']);
+    Route::get('parent/my_student/exam_result/{student_id}', [ExaminationsController::class, 'parent_student_exam_result']);
 });

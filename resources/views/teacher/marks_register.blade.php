@@ -133,6 +133,10 @@
                                                                             $getMark->exam;
                                                                         $totalStudentMark += $totalMark;
                                                                     }
+                                                                    $percent = ($totalMark / $subject->full_marks) * 10;
+                                                                    $getGrade = App\Models\MarksGradeModel::getGrade(
+                                                                        $percent,
+                                                                    );
                                                                 @endphp
                                                                 <td>
                                                                     <div style="margin-bottom: 10px;">
@@ -193,6 +197,11 @@
                                                                             <br />
                                                                             <b>Điểm đạt: </b>
                                                                             {{ $subject->passing_mark }}
+                                                                            <br />
+                                                                            @if ($totalMark > 0)
+                                                                                <b>Tổng kết: {{ $getGrade }}
+                                                                                </b>
+                                                                            @endif
                                                                             <br />
                                                                             @if ($subject->passing_mark <= $totalMark)
                                                                                 <b style="color: green">Đạt</b>
@@ -263,7 +272,7 @@
         });
 
         $('.SaveSingleSubject').click(function(e) {
-            console.log('ntvu log');
+
             e.preventDefault();
             const student_id = $(this).attr('id');
             const subject_id = $(this).attr('data-val');
