@@ -51,7 +51,7 @@
                                         <div class="form-group col-md-3">
                                             <label for="subject_id">Môn học</label>
                                             <select id="getSubject" class="form-control getSubject" name="subject_id">
-                                                <option value="">Chọn lớp trước</option>
+                                                <option value="">----Chọn----</option>
                                                 @if (!empty($getSubject))
                                                     @foreach ($getSubject as $subject)
                                                         <option
@@ -153,6 +153,16 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
+                                        @else
+                                            <tr>
+                                                <td rowspan="10">Không có học sinh <br /> <span
+                                                        style="font-style: italic">(Vui lòng chọn đầy đủ lớp, môn học, ngày
+                                                        điểm danh)</span> </td>
+                                                <td>
+
+                                                </td>
+                                                <td></td>
+                                            </tr>
                                         @endif
 
                                     </tbody>
@@ -176,49 +186,45 @@
 
 @section('script')
     <script type="text/javascript">
-        $(function() {
-            $('input[type="date"]').inputmask('dd/mm/yyyy', {
-                'placeholder': 'dd/mm/yyyy'
-            });
-            $('.getClass').change(function() {
-                const class_id = $(this).val();
-                $.ajax({
-                    url: "{{ url('admin/class_timeable/get_subject') }}",
-                    type: "POST",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        class_id: class_id,
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        $('.getSubject').html(response.html);
-                    }
-                })
-            });
+        $('.getClass').change(function() {
+            const class_id = $(this).val();
+            $.ajax({
+                url: "{{ url('admin/class_timeable/get_subject') }}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    class_id: class_id,
+                },
+                dataType: "json",
+                success: function(response) {
+                    console.log('ntvu:', response.html);
+                    $('.getSubject').html(response.html);
+                }
+            })
+        });
 
-            $('.SaveAttendance').change(function() {
-                const class_id = $('#getClass').val();
-                const subject_id = $('#getSubject').val();
-                const attendance_date = $('#getAttendanceDate').val();
-                const student_id = $(this).attr('id');
-                const attendance_type = $(this).val();
-                $.ajax({
-                    url: "{{ url('admin/attendance/student') }}",
-                    type: "POST",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        class_id,
-                        subject_id,
-                        attendance_date,
-                        student_id,
-                        attendance_type
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        console.log(response);
-                    }
-                })
-            });
+        $('.SaveAttendance').change(function() {
+            const class_id = $('#getClass').val();
+            const subject_id = $('#getSubject').val();
+            const attendance_date = $('#getAttendanceDate').val();
+            const student_id = $(this).attr('id');
+            const attendance_type = $(this).val();
+            $.ajax({
+                url: "{{ url('admin/attendance/student') }}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    class_id,
+                    subject_id,
+                    attendance_date,
+                    student_id,
+                    attendance_type
+                },
+                dataType: "json",
+                success: function(response) {
+                    console.log(response);
+                }
+            })
         });
     </script>
 @endsection

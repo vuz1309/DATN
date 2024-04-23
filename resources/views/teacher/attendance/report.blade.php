@@ -90,7 +90,7 @@
                                         <div class="form-group col-md-3">
                                             <label for="attendance_date">Ngày điểm danh</label>
                                             <input id="getAttendanceDate" value="{{ Request::get('attendance_date') }}"
-                                                type="date" name="attendance_date" class="form-control" required />
+                                                type="date" name="attendance_date" class="form-control" />
 
                                         </div>
                                         <div class="form-group col-md-3">
@@ -171,4 +171,49 @@
         </section>
         <!-- /.content -->
     </div>
+@endsection
+
+
+@section('script')
+    <script type="text/javascript">
+        $('.getClass').change(function() {
+            const class_id = $(this).val();
+            $.ajax({
+                url: "{{ url('teacher/class_timeable/get_teacher_subject_class') }}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    class_id: class_id,
+                },
+                dataType: "json",
+                success: function(response) {
+                    $('.getSubject').html(response.html);
+                }
+            })
+        });
+
+        $('.SaveAttendance').change(function() {
+            const class_id = $('#getClass').val();
+            const subject_id = $('#getSubject').val();
+            const attendance_date = $('#getAttendanceDate').val();
+            const student_id = $(this).attr('id');
+            const attendance_type = $(this).val();
+            $.ajax({
+                url: "{{ url('admin/attendance/student') }}",
+                type: "POST",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    class_id,
+                    subject_id,
+                    attendance_date,
+                    student_id,
+                    attendance_type
+                },
+                dataType: "json",
+                success: function(response) {
+                    console.log(response);
+                }
+            })
+        });
+    </script>
 @endsection

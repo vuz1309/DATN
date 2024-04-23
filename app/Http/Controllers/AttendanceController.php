@@ -29,10 +29,11 @@ class AttendanceController extends Controller
         $data['header_title'] = 'Điểm danh';
         return view('admin.attendance.student', $data);
     }
-    function teacher_attendance_student()
+    function teacher_attendance_student(Request $request)
     {
         $teacher_id = Auth::user()->id;
-        $data['getClass'] = AssignClassTeacherModel::getMyClassSubjectGroup($teacher_id);
+        $data['getClass'] = AssignClassTeacherModel::getClassOfTeacher($teacher_id);
+
         if (!empty($request->get('class_id')) && !empty($request->get('attendance_date'))) {
             $data['getStudent'] = User::getStudentClass($request->get('class_id'));
         }
@@ -44,7 +45,7 @@ class AttendanceController extends Controller
         }
 
         $data['header_title'] = 'Điểm danh';
-        return view('admin.attendance.student', $data);
+        return view('teacher.attendance.student', $data);
     }
     public function PostAttendaceStudent(Request $request)
     {
@@ -69,14 +70,21 @@ class AttendanceController extends Controller
     public function attendance_report(Request $request)
     {
         $data['getClass'] = ClassModel::getClass();
-        if (!empty($request->get('class_id')) && !empty($request->get('attendance_date'))) {
-            $data['getStudent'] = User::getStudentClass($request->get('class_id'));
-        }
-        if (!empty($request->get('class_id'))) {
-            $data['getSubject'] = ClassSubjectModel::mySubject($request->get('class_id'));
-        }
+
+        $data['getSubject'] = SubjectModel::getSubject();
         $data['getRecord'] = StudentAttendanceModel::getRecord();
         $data['header_title'] = 'Điểm danh';
         return view('admin.attendance.report', $data);
+    }
+
+    public function teacher_attendance_report(Request $request)
+    {
+
+        $data['getClass'] = ClassModel::getClass();
+
+        $data['getSubject'] = SubjectModel::getSubject();
+        $data['getRecord'] = StudentAttendanceModel::getRecord();
+        $data['header_title'] = 'Điểm danh';
+        return view('teacher.attendance.report', $data);
     }
 }

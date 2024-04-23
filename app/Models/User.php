@@ -299,4 +299,37 @@ class User extends Authenticatable
             ->where('subject_id', '=', $subject_id)
             ->where('attendance_date', '=', $attendance_date)->first();
     }
+
+    public static function SearchUser($search)
+    {
+        $return = self::select('users.*')
+            ->where(function ($query) use ($search) {
+                $query->where('users.last_name', 'like', '%' . $search . '%')
+                    ->orWhere('users.name', 'like', '%' . $search . '%');
+            })
+            ->where('is_delete', '=', 0)
+            ->limit(10)
+            ->get();
+
+        return $return;
+    }
+
+    static public function getUser($user_type)
+    {
+        $return = self::select('users.*')
+            ->where('user_type', '=', $user_type)
+            ->where('is_delete', '=', 0)
+
+            ->get();
+
+        return $return;
+    }
+    static public function getAllUser()
+    {
+        $return = self::select('users.*')
+            ->where('is_delete', '=', 0)
+            ->get();
+
+        return $return;
+    }
 }

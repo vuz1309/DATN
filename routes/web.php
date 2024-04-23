@@ -15,7 +15,9 @@ use App\Http\Controllers\AssignClassTeacherController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClassTimeableController;
+use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\ExaminationsController;
+use App\Http\Controllers\HomeworkController;
 use App\Models\ExamScheduleModel;
 
 /*
@@ -182,6 +184,18 @@ Route::group(['middware' => 'admin'], function () {
     Route::get('admin/attendance/student', [AttendanceController::class, 'attendance_student']);
     Route::post('admin/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
     Route::get('admin/attendance/report', [AttendanceController::class, 'attendance_report']);
+
+    Route::get('admin/comunicate/send_email', [CommunicateController::class, 'send_email']);
+    Route::post('admin/comunicate/send_email', [CommunicateController::class, 'PostSendEmail']);
+    Route::get('admin/communicate/search_user', [CommunicateController::class, 'search_user']);
+    Route::get('admin/homework/homework', [HomeworkController::class, 'list']);
+    Route::get('admin/homework/homework/add', [HomeworkController::class, 'add']);
+    Route::post('admin/homework/homework/add', [HomeworkController::class, 'PostAdd']);
+
+    Route::get('admin/homework/homework/edit/{id}', [HomeworkController::class, 'edit']);
+
+    Route::post('admin/homework/homework/edit/{id}', [HomeworkController::class, 'PostEdit']);
+    Route::get('admin/homework/homework/delete/{id}', [HomeworkController::class, 'delete']);
 });
 
 Route::group(['middware' => 'teacher'], function () {
@@ -209,7 +223,21 @@ Route::group(['middware' => 'teacher'], function () {
 
     Route::get('teacher/attendance/student', [AttendanceController::class, 'teacher_attendance_student']);
     Route::post('teacher/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
-    // Route::get('teacher/attendance/report', [AttendanceController::class, 'attendance_report']);
+    Route::get('teacher/attendance/report', [AttendanceController::class, 'teacher_attendance_report']);
+
+    Route::post('admin/class_timeable/get_subject', [ClassTimeableController::class, 'getSubject']);
+    Route::post('admin/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
+
+    Route::get('teacher/homework/homework', [HomeworkController::class, 'list_teacher']);
+    Route::get('teacher/homework/homework/add', [HomeworkController::class, 'add_teacher']);
+    Route::post('teacher/homework/homework/add', [HomeworkController::class, 'PostAdd']);
+
+    Route::get('teacher/homework/homework/edit/{id}', [HomeworkController::class, 'edit_teacher']);
+
+    Route::post('teacher/homework/homework/edit/{id}', [HomeworkController::class, 'PostEdit']);
+    Route::get('teacher/homework/homework/delete/{id}', [HomeworkController::class, 'delete']);
+
+    Route::post('teacher/class_timeable/get_teacher_subject_class', [ClassTimeableController::class, 'getTeacherClassSubject']);
 });
 
 Route::group(['middware' => 'student'], function () {
@@ -227,6 +255,7 @@ Route::group(['middware' => 'student'], function () {
     Route::get('student/my_exam_schedule', [ExaminationsController::class, 'student_exam_schedule']);
     Route::get('student/my_calendar', [CalendarController::class, 'student_my_calendar']);
     Route::get('student/my_exam_result', [ExaminationsController::class, 'my_exam_result']);
+    Route::get('student/my_attendance_report', [AttendanceController::class, 'attendance_report']);
 });
 
 Route::group(['middware' => 'parent'], function () {
@@ -243,4 +272,5 @@ Route::group(['middware' => 'parent'], function () {
     Route::get('parent/my_student/exam_schedule/{student_id}', [ExaminationsController::class, 'parentStudentExamSchedule']);
     Route::get('parent/my_student/calendar/{student_id}', [CalendarController::class, 'parent_student_calendar']);
     Route::get('parent/my_student/exam_result/{student_id}', [ExaminationsController::class, 'parent_student_exam_result']);
+    Route::get('parent/my_attendance_report', [AttendanceController::class, 'attendance_report']);
 });

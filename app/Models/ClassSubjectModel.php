@@ -99,4 +99,22 @@ class ClassSubjectModel extends Model
 
         return $return;
     }
+
+    static public function getClassGroup($teacher_id)
+    {
+        $return = self::select('class.name as class_name', 'class.id as class_id')
+            ->join('class', 'class.id', '=', 'class_subject.class_id')
+            ->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'class_subject.class_id', 'left')
+            ->where('class.is_delete', '=', 0)
+            ->where('class_subject.is_delete', '=', 0)
+            ->where('class_subject.status', '=', 0)
+
+            ->where(function ($query) use ($teacher_id) {
+                $query->where('class_subject.teacher_id', '=', $teacher_id)
+                    ->orWhere('assign_class_teacher.teacher_id', '=', $teacher_id);
+            })
+            ->groupBy('class_subject.class_id');
+
+        return $return->get();
+    }
 }

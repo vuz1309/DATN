@@ -282,11 +282,20 @@
                          <a href="#" class="nav-link @if (Request::segment(2) == 'examinations') active @endif">
                              <i class="nav-icon fas fa-table"></i>
                              <p>
-                                 Thi cử
+                                 Học tập
                                  <i class="fas fa-angle-left right"></i>
                              </p>
                          </a>
                          <ul class="nav nav-treeview" style="display: block;">
+                             <li class="nav-item">
+                                 <a href="{{ url('admin/homework/homework') }}"
+                                     class="nav-link @if (Request::segment(2) == 'homework') active @endif">
+                                     <i class="far fa-circle nav-icon"></i>
+                                     <p>
+                                         Bài tập
+                                     </p>
+                                 </a>
+                             </li>
                              <li class="nav-item">
                                  <a href="{{ url('admin/examinations/exam/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'exam') active @endif">
@@ -329,6 +338,15 @@
                          </ul>
                      </li>
 
+                     <li class="nav-item">
+                         <a href="{{ url('admin/comunicate/send_email') }}"
+                             class="nav-link @if (Request::segment(3) == 'send_email') active @endif">
+                             <i class="nav-icon far fa-user"></i>
+                             <p>
+                                 Gửi thông báo
+                             </p>
+                         </a>
+                     </li>
                      <li class="nav-item">
                          <a href="{{ url('admin/account') }}"
                              class="nav-link @if (Request::segment(2) == 'account') active @endif">
@@ -377,6 +395,15 @@
                          </a>
                      </li>
                      <li class="nav-item">
+                         <a href="{{ url('teacher/homework/homework') }}"
+                             class="nav-link @if (Request::segment(2) == 'homework') active @endif">
+                             <i class="far fa-circle nav-icon"></i>
+                             <p>
+                                 Bài tập
+                             </p>
+                         </a>
+                     </li>
+                     <li class="nav-item">
                          <a href="{{ url('teacher/marks_register') }}"
                              class="nav-link @if (Request::segment(2) == 'marks_register') active @endif">
                              <i class="far fa-circle nav-icon"></i>
@@ -403,7 +430,7 @@
                                      </p>
                                  </a>
                              </li>
-                             {{-- <li class="nav-item">
+                             <li class="nav-item">
                                  <a href="{{ url('teacher/attendance/report') }}"
                                      class="nav-link @if (Request::segment(3) == 'report') active @endif">
                                      <i class="far fa-circle nav-icon"></i>
@@ -411,7 +438,7 @@
                                          Báo cáo
                                      </p>
                                  </a>
-                             </li> --}}
+                             </li>
                          </ul>
                      </li>
                      <li class="nav-item">
@@ -481,6 +508,15 @@
                          </a>
                      </li>
                      <li class="nav-item">
+                         <a href="{{ url('student/my_attendance_report') }}"
+                             class="nav-link @if (Request::segment(2) == 'my_attendance_report') active @endif">
+                             <i class="far fa-circle nav-icon"></i>
+                             <p>
+                                 Điểm danh
+                             </p>
+                         </a>
+                     </li>
+                     <li class="nav-item">
                          <a href="{{ url('student/my_calendar') }}"
                              class="nav-link @if (Request::segment(2) == 'my_calendar') active @endif">
                              <i class="nav-icon far fa-user"></i>
@@ -546,6 +582,16 @@
                              </p>
                          </a>
                      </li>
+                     <li class="nav-item">
+                         <a href="{{ url('parent/my_attendance_report') }}"
+                             class="nav-link @if (Request::segment(2) == 'my_attendance_report') active @endif">
+                             <i class="nav-icon far fa-user"></i>
+                             <p>
+                                 Thông tin điểm danh
+                             </p>
+                         </a>
+                     </li>
+
                      <li class="nav-item">
                          <a href="{{ url('parent/account') }}"
                              class="nav-link @if (Request::segment(2) == 'account') active @endif">

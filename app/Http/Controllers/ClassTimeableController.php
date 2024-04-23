@@ -48,10 +48,33 @@ class ClassTimeableController extends Controller
     public function getSubject(Request $request)
     {
         $getSubject = ClassSubjectModel::mySubject($request->class_id);
-        $html = "<option value = ''>Chọn môn học</option>";
-        foreach ($getSubject as $subject) {
-            $html .= "<option value = '" . $subject->subject_id . "'>" . $subject->subject_name . "</option>";
+        if ($getSubject->count() < 1) {
+            $html = "<option value = ''>Không có môn học</option>";
+        } else {
+            $html = "<option value = ''>Chọn môn học</option>";
+            foreach ($getSubject as $subject) {
+                $html .= "<option value = '" . $subject->subject_id . "'>" . $subject->subject_name . "</option>";
+            }
         }
+
+
+        $json['html'] = $html;
+        echo json_encode($json);
+    }
+
+    public function getTeacherClassSubject(Request $request)
+    {
+        $getSubject = ClassSubjectModel::teacherClassSubject($request->class_id, Auth::user()->id);
+        if ($getSubject->count() < 1) {
+            $html = "<option value = ''>Không có môn học</option>";
+        } else {
+            $html = "<option value = ''>Chọn môn học</option>";
+            foreach ($getSubject as $subject) {
+                $html .= "<option value = '" . $subject->subject_id . "'>" . $subject->subject_name . "</option>";
+            }
+        }
+
+
         $json['html'] = $html;
         echo json_encode($json);
     }

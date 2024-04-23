@@ -129,6 +129,33 @@ class AssignClassTeacherModel extends Model
         return $return->get();
     }
 
+    static public function getClassOfTeacher($teacher_id)
+    {
+        $return = self::select('class.name as name', 'class.id as id')
+
+            ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
+
+            ->where('class.is_delete', '=', 0)
+
+
+            ->where('assign_class_teacher.is_delete', '=', 0)
+            ->where('assign_class_teacher.status', '=', 0)
+
+            ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
+            ->groupBy('assign_class_teacher.class_id');
+
+        $return2 = ClassSubjectModel::select('class.name as class_name', 'class.id as class_id')
+            ->join('class', 'class.id', '=', 'class_subject.class_id')
+            ->where('class_subject.teacher_id', '=', $teacher_id)
+            ->where('class.is_delete', '=', 0)
+            ->where('class_subject.is_delete', '=', 0)
+            ->where('class_subject.status', '=', 0)
+            ->groupBy('class_subject.class_id');
+
+        $result = $return->union($return2)->get();
+        return $result;
+    }
+
     // Lấy ra lịch của môn học trong ngày hiện tại
     public function getClassSubjectTimeable($class_id, $subject_id)
     {
