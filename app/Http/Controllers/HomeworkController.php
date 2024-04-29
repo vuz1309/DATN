@@ -6,6 +6,7 @@ use App\Models\AssignClassTeacherModel;
 use App\Models\ClassModel;
 use App\Models\ClassSubjectModel;
 use App\Models\HomeworkModel;
+use App\Models\HomeworkSubmitModel;
 use App\Models\SubjectModel;
 use Illuminate\Http\Request;
 use Auth;
@@ -133,5 +134,110 @@ class HomeworkController extends Controller
         } else {
             abort(404);
         }
+    }
+    public function student_submit_homework($id)
+    {
+        $homework = HomeworkModel::getSingle($id);
+
+        if (!empty($homework)) {
+            $data['header_title'] = 'Nộp bài tập';
+            $data['getRecord'] = $homework;
+            return view('student.homework.submit', $data);
+        } else {
+            abort(404);
+        }
+    }
+
+    public function submitted($id)
+    {
+
+        if (!empty($id)) {
+            $data['getRecord'] = HomeworkSubmitModel::getSubmitted($id);
+        }
+        $data['header_title'] = 'Bài tập';
+        return view('admin.homework_submit.list', $data);
+    }
+    public function student_my_homework()
+    {
+        $class_id = Auth::user()->class_id;
+        if (!empty($class_id)) {
+            $data['getRecord'] = HomeworkModel::getStudentHomework($class_id, Auth::user()->id);
+        }
+        $data['header_title'] = 'Bài tập';
+        return view('student.homework.list', $data);
+    }
+    public function PostSubmitHomework($id, Request $request)
+    {
+
+        $submit = new HomeworkSubmitModel;
+        if (!empty($request->file('document_file'))) {
+
+            $ext = $request->file('document_file')->getClientOriginalExtension();
+            $file = $request->file('document_file');
+            $randomStr = date('Ymdhis') . Str::random(20);
+            $filename = strtolower($randomStr) . '.' . $ext;
+            $file->move('upload/homework_submit/', $filename);
+            $submit->document_file = $filename;
+        }
+        $submit->homework_id = $id;
+        $submit->student_id = Auth::user()->id;
+        $submit->description = $request->description;
+
+        $submit->save();
+
+        return redirect('student/homework')->with('success', 'Nộp bài tập thành công!');
+    }
+
+    public function edit_homework_submitted($id)
+    {
+        $data['header_title'] = 'Bài tập đã nộp';
+        $data['getRecord'] = HomeworkSubmitModel::getSingle($id);
+
+
+        return view('student.homework_submit.edit', $data);
+    }
+    public function PostEditSubmitHomework($id, Request $request)
+    {
+
+        $submit = HomeworkSubmitModel::getSingle($id);
+        if (!empty($request->file('document_file'))) {
+            if (!empty($submit->getDocument())) {
+                unlink('upload/homework_submit/' . $submit->document_file);
+            }
+            $ext = $request->file('document_file')->getClientOriginalExtension();
+            $file = $request->file('document_file');
+            $randomStr = date('Ymdhis') . Str::random(20);
+            $filename = strtolower($randomStr) . '.' . $ext;
+            $file->move('upload/homework_submit/', $filename);
+            $submit->document_file = $filename;
+        }
+        $submit->description = $request->description;
+        $submit->save();
+
+        return redirect('student/homework/submitted')->with('success', 'Sửa thành công!');
+    }
+    public function student_my_submited_homework()
+    {
+        $student_id = Auth::user()->id;
+
+        $data['getRecord'] = HomeworkSubmitModel::getMySumited($student_id);
+
+        $data['header_title'] = 'Bài tập';
+        return view('student.homework_submit.list', $data);
+    }
+
+    public function view_submitted($id)
+    {
+        $data['header_title'] = 'Bài tập đã nộp';
+        $data['getRecord'] = HomeworkSubmitModel::getSingle($id);
+        return view('admin.homework_submit.detail', $data);
+    }
+
+    public function homework_report()
+    {
+        $data['header_title'] = 'Báo cáo';
+        $data['getRecord'] = HomeworkSubmitModel::getHomeworkReport();
+
+        return view('admin.homework.report', $data);
     }
 }

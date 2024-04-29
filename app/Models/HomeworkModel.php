@@ -75,4 +75,29 @@ class HomeworkModel extends Model
     {
         return self::find($id);
     }
+    public static function getStudentHomework($id, $student_id)
+    {
+        $return =  self::select('homework.*', 'class.name as class_name', 'subject.name as subject_name')
+            ->join('class', 'class.id', '=', 'homework.class_id')
+            ->join('subject', 'subject.id', '=', 'homework.subject_id')
+            ->where('homework.is_delete', '=', '0')
+            ->where('homework.class_id', '=', $id)
+            ->whereNotIn('homework.id', function ($query) use ($student_id) {
+                $query->select('submit_homework.homework_id')
+                    ->from('submit_homework')
+                    ->where('submit_homework.student_id', '=', $student_id);
+            })
+            ->orderBy('homework.id', 'desc');
+
+        if (!empty(Request::get('class_name'))) {
+            $return = $return->where('class.name', 'like', '%' . Request::get('class_name') . '%');
+        }
+        if (!empty(Request::get('subject_name'))) {
+            $return = $return->where('subject.name', 'like', '%' . Request::get('subject_name') . '%');
+        }
+        if (!empty(Request::get('date'))) {
+            $return = $return->whereDate('homework.created_at', '>=', Request::get('date'));
+        }
+        return $return->paginate(20);
+    }
 }

@@ -250,6 +250,27 @@
                          </ul>
                      </li>
                      <li class="nav-item  menu-is-opening menu-open ">
+                         <a href="#" class="nav-link @if (Request::segment(2) == 'fee') active @endif">
+                             <i class="nav-icon fas fa-table"></i>
+                             <p>
+                                 Học phí
+                                 <i class="fas fa-angle-left right"></i>
+                             </p>
+                         </a>
+                         <ul class="nav nav-treeview" style="display: block;">
+                             <li class="nav-item">
+                                 <a href="{{ url('admin/fee/fee_collect') }}"
+                                     class="nav-link @if (Request::segment(3) == 'fee_collect') active @endif">
+                                     <i class="far fa-circle nav-icon"></i>
+                                     <p>
+                                         Nộp học phí
+                                     </p>
+                                 </a>
+                             </li>
+
+                         </ul>
+                     </li>
+                     <li class="nav-item  menu-is-opening menu-open ">
                          <a href="#" class="nav-link @if (Request::segment(2) == 'attendance') active @endif">
                              <i class="nav-icon fas fa-table"></i>
                              <p>
@@ -269,7 +290,7 @@
                              </li>
                              <li class="nav-item">
                                  <a href="{{ url('admin/attendance/report') }}"
-                                     class="nav-link @if (Request::segment(3) == 'report') active @endif">
+                                     class="nav-link @if (Request::segment(3) == 'report' && Request::segment(2) == 'attendance') active @endif">
                                      <i class="far fa-circle nav-icon"></i>
                                      <p>
                                          Báo cáo
@@ -289,13 +310,24 @@
                          <ul class="nav nav-treeview" style="display: block;">
                              <li class="nav-item">
                                  <a href="{{ url('admin/homework/homework') }}"
-                                     class="nav-link @if (Request::segment(2) == 'homework') active @endif">
+                                     class="nav-link @if (Request::segment(3) == 'homework') active @endif">
                                      <i class="far fa-circle nav-icon"></i>
                                      <p>
                                          Bài tập
                                      </p>
                                  </a>
                              </li>
+                             <li class="nav-item">
+                                 <a href="{{ url('admin/homework/report') }}"
+                                     class="nav-link @if (Request::segment(3) == 'report' && Request::segment(2) == 'homework') active @endif">
+                                     <i class="far fa-circle nav-icon"></i>
+                                     <p>
+                                         Báo cáo bài tập
+                                     </p>
+                                 </a>
+                             </li>
+
+
                              <li class="nav-item">
                                  <a href="{{ url('admin/examinations/exam/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'exam') active @endif">
@@ -362,6 +394,15 @@
                              <i class="nav-icon far fa-user"></i>
                              <p>
                                  Đổi mật khẩu
+                             </p>
+                         </a>
+                     </li>
+                     <li class="nav-item">
+                         <a href="{{ url('admin/settings') }}"
+                             class="nav-link @if (Request::segment(2) == 'settings') active @endif">
+                             <i class="nav-icon far fa-user"></i>
+                             <p>
+                                 Cài đặt
                              </p>
                          </a>
                      </li>
@@ -499,6 +540,25 @@
                          </a>
                      </li>
                      <li class="nav-item">
+                         <a href="{{ url('student/my_homework') }}"
+                             class="nav-link @if (Request::segment(2) == 'my_homework') active @endif">
+                             <i class="far fa-circle nav-icon"></i>
+                             <p>
+                                 Bài tập
+                             </p>
+                         </a>
+                     </li>
+                     <li class="nav-item">
+                         <a href="{{ url('student/homework/submitted') }}"
+                             class="nav-link @if (Request::segment(3) == 'submitted') active @endif">
+                             <i class="far fa-circle nav-icon"></i>
+                             <p>
+                                 Bài tập đã nộp
+                             </p>
+                         </a>
+                     </li>
+
+                     <li class="nav-item">
                          <a href="{{ url('student/my_exam_schedule') }}"
                              class="nav-link @if (Request::segment(2) == 'my_exam_schedule') active @endif">
                              <i class="far fa-circle nav-icon"></i>
@@ -516,6 +576,7 @@
                              </p>
                          </a>
                      </li>
+
                      <li class="nav-item">
                          <a href="{{ url('student/my_calendar') }}"
                              class="nav-link @if (Request::segment(2) == 'my_calendar') active @endif">
@@ -543,7 +604,15 @@
                              </p>
                          </a>
                      </li>
-
+                     <li class="nav-item">
+                         <a href="{{ url('student/fee_collect') }}"
+                             class="nav-link @if (Request::segment(2) == 'fee_collect') active @endif">
+                             <i class="far fa-circle nav-icon"></i>
+                             <p>
+                                 Nộp học phí
+                             </p>
+                         </a>
+                     </li>
                      <li class="nav-item">
                          <a href="{{ url('student/account') }}"
                              class="nav-link @if (Request::segment(2) == 'account') active @endif">

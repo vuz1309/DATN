@@ -28,12 +28,52 @@
     <link rel="stylesheet" href="{{ url('public/plugins/daterangepicker/daterangepicker.css') }} ">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ url('public/plugins/summernote/summernote-bs4.min.css') }} ">
+    <style>
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.5);
+            transition: opacity 0.75s, visibility 0.75s;
+            z-index: 99999;
+        }
+
+        .loader--hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader::after {
+            content: "";
+            width: 75px;
+            height: 75px;
+            border: 8px solid #dddddd;
+            border-top-color: #1975d7;
+            border-radius: 50%;
+            animation: loading 0.75s ease infinite;
+        }
+
+        @keyframes loading {
+            from {
+                transform: rotate(0turn);
+            }
+
+            to {
+                transform: rotate(1turn);
+            }
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-
+        <div class="loader"></div>
 
         @include('layouts.header')
         @yield('content')
@@ -49,6 +89,15 @@
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
+        window.addEventListener("load", () => {
+            const loader = document.querySelector(".loader");
+
+            loader.classList.add("loader--hidden");
+
+            loader.addEventListener("transitionend", () => {
+                document.body.removeChild(loader);
+            });
+        });
     </script>
 
     <!-- Bootstrap 4 -->

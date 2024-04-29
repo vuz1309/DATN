@@ -25,6 +25,7 @@ class ClassController extends Controller
     {
         $save = new ClassModel;
         $save->name = $request->name;
+        $save->fee = $request->fee;
         $save->status = $request->status;
         $save->created_by = Auth::user()->id;
         $save->save();
@@ -49,6 +50,7 @@ class ClassController extends Controller
         $record = ClassModel::single($id);
         if (!empty($record)) {
             $record->name = $request->name;
+            $record->fee = $request->fee;
             $record->status = $request->status;
             $record->save();
             return redirect('admin/class/list')->with('success', 'Sửa thông tin lớp học thành công');

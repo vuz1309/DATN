@@ -190,7 +190,13 @@ class User extends Authenticatable
     {
         return self::find($id);
     }
-
+    static public function getSingleClass($id)
+    {
+        return self::select('users.*', 'class.fee as amount')
+            ->join('class', 'class.id', 'users.class_id')
+            ->where('users.id', '=', $id)
+            ->first();
+    }
     public function getProfile()
     {
         if (!empty($this->profile_pic) && file_exists('upload/profile/' . $this->profile_pic)) {
@@ -331,5 +337,40 @@ class User extends Authenticatable
             ->get();
 
         return $return;
+    }
+    static public function getCollectFeeStudent()
+    {
+        $return = self::select('users.*', 'class.name as class_name', 'class.fee as amount')
+            ->join('class', 'class.id', '=', 'users.class_id')
+            ->where('users.user_type', '=', 3)
+            ->where('users.is_delete', '=', 0)
+            ->orderBy('users.name', 'desc');
+
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
+        }
+
+        if (!empty(Request::get('name'))) {
+            $name = '%' . Request::get('name') . '%';
+            $return = $return->where(function ($query) use ($name) {
+                $query->where('users.name', 'like', $name)
+                    ->orWhere('users.last_name', 'like', $name);
+            });
+        }
+        if (!empty(Request::get('class_id'))) {
+            $return = $return->where('users.class_id', '=',  Request::get('class_id'));
+        }
+        if (!empty(Request::get('caste'))) {
+            $return = $return->where('users.caste', '=',  Request::get('caste'));
+        }
+        if (!empty(Request::get('gender'))) {
+            $return = $return->where('users.gender', '=',  Request::get('gender'));
+        }
+        if (!empty(Request::get('admission_date'))) {
+            $return = $return->where('users.admission_date', '=', Request::get('admission_date'));
+        }
+
+
+        return $return->paginate(20);
     }
 }

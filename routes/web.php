@@ -17,6 +17,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ClassTimeableController;
 use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\ExaminationsController;
+use App\Http\Controllers\FeeCollectitonController;
 use App\Http\Controllers\HomeworkController;
 use App\Models\ExamScheduleModel;
 
@@ -41,7 +42,8 @@ Route::get('forgot-password', [AuthController::class, 'forgotpassword']);
 Route::post('forgot-password', [AuthController::class, 'PostForgotpassword']);
 Route::get('reset/{token}', [AuthController::class, 'reset']);
 Route::post('reset/{token}', [AuthController::class, 'PostReset']);
-
+Route::get('student/paypal/payment_cancel', [FeeCollectitonController::class, 'payment_cancel']);
+Route::get('student/paypal/payment_success', [FeeCollectitonController::class, 'payment_success']);
 
 Route::group(['middware' => 'admin'], function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
@@ -196,6 +198,14 @@ Route::group(['middware' => 'admin'], function () {
 
     Route::post('admin/homework/homework/edit/{id}', [HomeworkController::class, 'PostEdit']);
     Route::get('admin/homework/homework/delete/{id}', [HomeworkController::class, 'delete']);
+    Route::get('admin/homework/submitted/{id}', [HomeworkController::class, 'submitted']);
+    Route::get('admin/homework/view_submit/{id}', [HomeworkController::class, 'view_submitted']);
+    Route::get('admin/homework/report', [HomeworkController::class, 'homework_report']);
+    Route::get('admin/fee/fee_collect', [FeeCollectitonController::class, 'collect_fees']);
+    Route::get('admin/fee/add_fees/{id}', [FeeCollectitonController::class, 'add_fees']);
+    Route::post('admin/fee/add_fees/{id}', [FeeCollectitonController::class, 'PostAddFee']);
+    Route::get('admin/settings', [UserController::class, 'settings']);
+    Route::post('admin/settings', [UserController::class, 'PostSetting']);
 });
 
 Route::group(['middware' => 'teacher'], function () {
@@ -256,6 +266,14 @@ Route::group(['middware' => 'student'], function () {
     Route::get('student/my_calendar', [CalendarController::class, 'student_my_calendar']);
     Route::get('student/my_exam_result', [ExaminationsController::class, 'my_exam_result']);
     Route::get('student/my_attendance_report', [AttendanceController::class, 'attendance_report']);
+    Route::get('student/my_homework', [HomeworkController::class, 'student_my_homework']);
+    Route::get('student/homework/submit/{id}', [HomeworkController::class, 'student_submit_homework']);
+    Route::get('student/homework/submitted', [HomeworkController::class, 'student_my_submited_homework']);
+    Route::post('student/homework/submit/{id}', [HomeworkController::class, 'PostSubmitHomework']);
+    Route::get('student/homework_submit/edit/{id}', [HomeworkController::class, 'edit_homework_submitted']);
+    Route::post('student/homework_submit/edit/{id}', [HomeworkController::class, 'PostEditSubmitHomework']);
+    Route::get('student/fee_collect', [FeeCollectitonController::class, 'student_fee_collection']);
+    Route::post('student/fee_collect', [FeeCollectitonController::class, 'PostAddFeeStudent']);
 });
 
 Route::group(['middware' => 'parent'], function () {

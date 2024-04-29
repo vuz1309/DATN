@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ClassModel;
+use App\Models\SettingModel;
 use Auth;
 use Hash;
 use Str;
@@ -249,5 +250,30 @@ class UserController extends Controller
 
         $user->save();
         return redirect(url('admin/account'))->with('success', 'Cập nhật thông tin thành công');
+    }
+
+    public function settings()
+    {
+        $data['header_title'] = 'Cài đặt';
+        $data['getRecord'] = SettingModel::getSetting();
+        return view('admin.setting', $data);
+    }
+    public function PostSetting(Request $request)
+    {
+        request()->validate([
+            'paypal_email' => 'required|email|',
+        ]);
+        $user = SettingModel::getSetting();
+        if (!empty($user)) {
+
+            $user->paypal_email = trim($request->paypal_email);
+            $user->save();
+        } else {
+            $user = new SettingModel;
+            $user->paypal_email = trim($request->paypal_email);
+            $user->save();
+        }
+
+        return redirect('admin/settings')->with('success', 'Cập nhật thông tin thành công');
     }
 }

@@ -7,11 +7,9 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Thêm mới lớp học</h1>
+                          <h1>Cài đặt</h1>
                       </div>
-                      <!-- <div class="col-sm-6" style="text-align: right;">
-                            <a href="{{ url('admin/dashboard') }}"></a>
-                          </div> -->
+
                   </div>
               </div><!-- /.container-fluid -->
           </section>
@@ -23,6 +21,7 @@
 
                       <!-- /.col -->
                       <div class="col-md-12">
+                          @include('_message')
 
                           <div class="card card-primary">
 
@@ -31,28 +30,15 @@
                                   {{ csrf_field() }}
                                   <div class="card-body">
                                       <div class="form-group">
-                                          <label for="name">Tên lớp</label>
-                                          <input name="name" type="text" required class="form-control" id="name"
-                                              placeholder="">
+                                          <label for="paypal_email">Paypal email</label>
+                                          <input name="paypal_email" value="{{ $getRecord->paypal_email }}" type="text"
+                                              required class="form-control" id="paypal_email" placeholder="">
                                       </div>
-                                      <div class="form-group">
-                                          <label for="fee">Học phí</label>
-                                          <input name="fee" type="number" required class="form-control" id="fee"
-                                              placeholder="">
-                                      </div>
-                                      <div class="form-group">
-                                          <label>Trạng thái</label>
-                                          <select name="status" class="form-control">
-                                              <option value="0">Đang hoạt động</option>
-                                              <option value="1">Ngừng hoạt động</option>
-                                          </select>
-                                      </div>
-
 
                                   </div>
 
                                   <div class="card-footer">
-                                      <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                      <button type="submit" class="btn btn-primary">Cập nhật</button>
                                   </div>
                               </form>
                           </div>

@@ -113,13 +113,16 @@
                                                               xuống</a>
                                                       @endif
                                                   </td>
-                                                  <td>{{ $value->description }}</td>
+                                                  <td>{!! $value->description !!}</td>
                                                   <td>{{ date('H:i d/m/Y', strtotime($value->created_at)) }}</td>
                                                   <td>
                                                       <a class="btn btn-warning"
                                                           href="{{ url('admin/homework/homework/edit/' . $value->id) }}">Sửa</a>
                                                       <a class="btn btn-danger"
                                                           href="{{ url('admin/homework/homework/delete/' . $value->id) }}">Xóa</a>
+                                                      <a class="btn btn-success"
+                                                          href="{{ url('admin/homework/submitted/' . $value->id) }}">Đã
+                                                          nộp</a>
                                                   </td>
                                               </tr>
                                           @endforeach
