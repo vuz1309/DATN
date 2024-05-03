@@ -37,12 +37,12 @@
                                     <div class="form-group">
                                         <label for="percent_from">Điểm từ<span style="color: red;">*</span></label>
                                         <input value="{{ $getRecord->percent_from }}" name="percent_from" type="number"
-                                            required class="form-control" id="percent_from" placeholder="">
+                                            required step="0.01" class="form-control" id="percent_from" placeholder="">
                                     </div>
                                     <div class="form-group">
                                         <label for="percent_to">Điểm đến<span style="color: red;">*</span></label>
-                                        <input value="{{ $getRecord->percent_to }}" name="percent_to" type="number"
-                                            required class="form-control" id="percent_to" placeholder="">
+                                        <input value="{{ $getRecord->percent_to }}" name="percent_to" step="0.01"
+                                            type="number" required class="form-control" id="percent_to" placeholder="">
                                     </div>
                                 </div>
 

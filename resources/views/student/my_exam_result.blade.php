@@ -23,6 +23,7 @@
                           <!-- /.col -->
                           <div class="col-md-12">
                               <div class="card">
+
                                   <div class="card-header">{{ $value['exam_name'] }}</div>
                                   <!-- /.card-header -->
                                   <div class="card-body p-0">
@@ -59,6 +60,13 @@
                                           </tbody>
                                       </table>
 
+                                  </div>
+                                  <div class="card-footer">
+                                      <div class="col-sm-6 right">
+                                          <a target="_" class="btn btn-primary"
+                                              href="{{ url('student/my_exam_result_print/' . $value['exam_id']) }}">In
+                                              kết quả</a>
+                                      </div>
                                   </div>
                                   <!-- /.card-body -->
                               </div>

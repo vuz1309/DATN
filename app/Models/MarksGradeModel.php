@@ -36,8 +36,8 @@ class MarksGradeModel extends Model
             $percentTemp = $percent;
         }
         $return =  self::select('marks_grade.*')
-            ->where('percent_from', '>=', $percent)
-            ->where('percent_to', '<', $percentTemp)
+            ->where('percent_from', '<=', $percent)
+            ->where('percent_to', '>', $percentTemp)
             ->first();
         if (!empty($return)) {
             return $return->name;

@@ -100,4 +100,21 @@ class HomeworkModel extends Model
         }
         return $return->paginate(20);
     }
+    public static function getTotal($id, $student_id)
+    {
+        $return =  self::select('homework.*', 'class.name as class_name', 'subject.name as subject_name')
+            ->join('class', 'class.id', '=', 'homework.class_id')
+            ->join('subject', 'subject.id', '=', 'homework.subject_id')
+            ->where('homework.is_delete', '=', '0')
+            ->where('homework.class_id', '=', $id)
+            ->whereNotIn('homework.id', function ($query) use ($student_id) {
+                $query->select('submit_homework.homework_id')
+                    ->from('submit_homework')
+                    ->where('submit_homework.student_id', '=', $student_id);
+            })
+            ->orderBy('homework.id', 'desc');
+
+
+        return $return->count();
+    }
 }

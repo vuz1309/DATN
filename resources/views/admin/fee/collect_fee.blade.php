@@ -109,7 +109,7 @@
                                               <th>Mã học sinh</th>
                                               <th>Họ và tên</th>
                                               <th>Lớp</th>
-                                              <th>Số tiền nộp</th>
+                                              <th>Đã nộp</th>
                                               <th>Tổng học phí</th>
                                               {{-- <th>Ngày tạo</th> --}}
                                               <th style="min-width: 160px"></th>
@@ -122,7 +122,7 @@
                                                   <td>{{ $value->admission_number }}</td>
                                                   <td>{{ $value->name }} {{ $value->last_name }}</td>
                                                   <td>{{ $value->class_name }}</td>
-                                                  <td>{{ number_format($value->amount) }} đ</td>
+                                                  <td>{{ number_format($value->paid_amount) }} đ</td>
                                                   <td>{{ number_format($value->amount) }} đ</td>
                                                   {{-- <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td> --}}
                                                   <td>

@@ -13,6 +13,12 @@ class ClassModel extends Model
     use HasFactory;
     protected $table = "class";
 
+    static public function getTotal()
+    {
+        $return = self::where('class.is_delete', '=', 0)->count();
+
+        return $return;
+    }
     static public function getRecord()
     {
         $return = self::select('class.*', 'users.name as created_by_name')

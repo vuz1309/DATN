@@ -93,6 +93,14 @@ class User extends Authenticatable
         return $return;
     }
 
+    static public function getTotalUsers($user_type)
+    {
+        return self::select('users.id')
+            ->where('user_type', '=', $user_type)
+            ->where('is_delete', '=', 0)
+            ->count();
+    }
+
     static public function getTeacherClass()
     {
         $return = self::select('users.*')
@@ -296,6 +304,23 @@ class User extends Authenticatable
             ->paginate(20);
 
         return $return;
+    }
+    static public function getTeacherStudentCount($teacher_id)
+    {
+
+        $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
+            ->join('class', 'class.id', '=', 'users.class_id', 'left')
+            ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
+            ->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'users.class_id')
+            ->where('users.user_type', '=', 3)
+            ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
+            ->where('assign_class_teacher.status', '=', '0')
+            ->where('assign_class_teacher.is_delete', '=', '0')
+            ->where('users.is_delete', '=', 0);
+
+
+
+        return $return->count();
     }
 
     public static function getAttendance($student_id, $class_id, $subject_id, $attendance_date)

@@ -43,7 +43,7 @@ Route::post('forgot-password', [AuthController::class, 'PostForgotpassword']);
 Route::get('reset/{token}', [AuthController::class, 'reset']);
 Route::post('reset/{token}', [AuthController::class, 'PostReset']);
 Route::get('student/paypal/payment_cancel', [FeeCollectitonController::class, 'payment_cancel']);
-Route::get('student/paypal/payment_success', [FeeCollectitonController::class, 'payment_success']);
+
 
 Route::group(['middware' => 'admin'], function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
@@ -206,6 +206,8 @@ Route::group(['middware' => 'admin'], function () {
     Route::post('admin/fee/add_fees/{id}', [FeeCollectitonController::class, 'PostAddFee']);
     Route::get('admin/settings', [UserController::class, 'settings']);
     Route::post('admin/settings', [UserController::class, 'PostSetting']);
+    Route::get('admin/fee/fee_collect_report', [FeeCollectitonController::class, 'fee_collect_report']);
+    Route::post('admin/fee/fee_collection_report_export', [FeeCollectitonController::class, 'ExportFeeCollection']);
 });
 
 Route::group(['middware' => 'teacher'], function () {
@@ -251,6 +253,7 @@ Route::group(['middware' => 'teacher'], function () {
 });
 
 Route::group(['middware' => 'student'], function () {
+    Route::get('student/paypal/payment_success', [FeeCollectitonController::class, 'payment_success']);
     Route::get('student/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('student/change_password', [UserController::class, 'changePassword']);
     Route::post('student/change_password', [UserController::class, 'PostChangePassword']);
@@ -265,6 +268,7 @@ Route::group(['middware' => 'student'], function () {
     Route::get('student/my_exam_schedule', [ExaminationsController::class, 'student_exam_schedule']);
     Route::get('student/my_calendar', [CalendarController::class, 'student_my_calendar']);
     Route::get('student/my_exam_result', [ExaminationsController::class, 'my_exam_result']);
+    Route::get('student/my_exam_result_print/{id}', [ExaminationsController::class, 'my_exam_result_print']);
     Route::get('student/my_attendance_report', [AttendanceController::class, 'attendance_report']);
     Route::get('student/my_homework', [HomeworkController::class, 'student_my_homework']);
     Route::get('student/homework/submit/{id}', [HomeworkController::class, 'student_submit_homework']);

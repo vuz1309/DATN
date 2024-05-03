@@ -30,16 +30,20 @@ class StudentController extends Controller
     public function PostAdd(Request $request)
     {
 
-        request()->validate([
+        $request->validate([
             'email' => 'required|email|unique:users',
-            'weight' => 'max:10',
-            'height' => 'max:10',
             'password' => 'required',
             'mobile_number' => 'max:15|min:8|nullable',
-            'caste' => 'max:50',
-            'religion' => 'max:50',
-            'admission_number' => 'max:50',
-            'roll_number' => 'max:50',
+            'admission_number' => 'max:50|unique:users',
+        ], [
+            'email.required' => 'Email không được bỏ trống.',
+            'email.email' => 'Email không hợp lệ.',
+            'email.unique' => 'Email đã tồn tại trong hệ thống.',
+            'password.required' => 'Mật khẩu không được bỏ trống.',
+            'mobile_number.max' => 'Số điện thoại không được quá 15 ký tự.',
+            'mobile_number.min' => 'Số điện thoại phải có ít nhất 8 ký tự.',
+            'admission_number.max' => 'Mã học sinh không được quá 50 ký tự.',
+            'admission_number.unique' => 'Mã học sinh đã tồn tại trong hệ thống.',
         ]);
 
 
@@ -106,13 +110,20 @@ class StudentController extends Controller
 
         request()->validate([
             'email' => 'required|email|unique:users,email,' . $id,
-            'weight' => 'max:10',
-            'height' => 'max:10',
+
             'mobile_number' => 'max:15|min:8|nullable',
-            'caste' => 'max:50',
-            'religion' => 'max:50',
+
             'admission_number' => 'max:50',
-            'roll_number' => 'max:50',
+
+        ], [
+            'email.required' => 'Email không được bỏ trống.',
+            'email.email' => 'Email không hợp lệ.',
+            'email.unique' => 'Email đã tồn tại trong hệ thống.',
+            'password.required' => 'Mật khẩu không được bỏ trống.',
+            'mobile_number.max' => 'Số điện thoại không được quá 15 ký tự.',
+            'mobile_number.min' => 'Số điện thoại phải có ít nhất 8 ký tự.',
+            'admission_number.max' => 'Mã học sinh không được quá 50 ký tự.',
+            'admission_number.unique' => 'Mã học sinh đã tồn tại trong hệ thống.',
         ]);
 
 

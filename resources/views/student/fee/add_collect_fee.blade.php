@@ -40,8 +40,8 @@
                                             <th>Tổng học phí</th>
                                             <th>Ghi chú</th>
                                             <th>Người tạo</th>
-                                            {{-- <th>Ngày tạo</th> --}}
-                                            <th style="min-width: 160px"></th>
+                                            <th>Ngày nộp</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -55,11 +55,7 @@
                                                 <td>{{ number_format($value->fee) }} đ</td>
                                                 <td>{{ $value->remark }}</td>
                                                 <td>{{ $value->created_name }}</td>
-                                                {{-- <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td> --}}
-                                                <td>
-                                                    <button class="btn btn-warning">Sửa</button>
-
-                                                </td>
+                                                <td>{{ date('H:i d/m/Y', strtotime($value->created_at)) }}</td>
                                             </tr>
                                         @empty
                                             <td colspan="100%">Không có bản ghi</td>
@@ -124,8 +120,7 @@
                         </div>
                         <div class=" form-group">
                             <label for="remark" class="col-form-label">Ghi chú</label>
-                            <textarea class="form-control" id="remark">
-                            </textarea>
+                            <textarea class="form-control" id="remark"></textarea>
                         </div>
 
                     </div>

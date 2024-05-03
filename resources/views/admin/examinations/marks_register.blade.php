@@ -203,7 +203,8 @@
                                                                               <br />
 
                                                                               @if ($totalMark > 0)
-                                                                                  <b>Tổng kết: {{ $getGrade }}
+                                                                                  <b>Tổng kết: <span style="color: red">
+                                                                                          {{ $getGrade }}</span>
                                                                                   </b>
                                                                                   <br />
                                                                               @endif
@@ -230,7 +231,8 @@
                                                               <td>
                                                                   <button class="btn btn-success">Lưu</button>
                                                                   <div>
-                                                                      <b style="color: green">Đạt: </b> {{ $totalPass }}
+                                                                      <b style="color: green">Đạt: </b>
+                                                                      {{ $totalPass }}
                                                                       <br />
                                                                       <b style="color: red">Trượt: </b>
                                                                       {{ $totalFail }}

@@ -25,10 +25,11 @@ class ExamScheduleModel extends Model
 
     static public function deleteRecord($exam_id, $class_id, $subject_id)
     {
-        self::where('exam_id', '=', $exam_id)
-            ->where('class_id', '=', $class_id)
-            ->where('subject_id', '=', $subject_id)
-            ->delete();
+        self::where([
+            ['exam_id', '=', $exam_id],
+            ['class_id', '=', $class_id],
+            ['subject_id', '=', $subject_id],
+        ])->delete();
     }
 
     static public function getExam($class_id)

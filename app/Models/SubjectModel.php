@@ -35,6 +35,14 @@ class SubjectModel extends Model
         return $return;
     }
 
+    static public function getTotal()
+    {
+        $return = self::where('subject.is_delete', '=', 0)->count();
+
+
+
+        return $return;
+    }
     static public function single($id)
     {
         $return = self::find($id);
@@ -63,7 +71,19 @@ class SubjectModel extends Model
             ->join('users', 'users.class_id', '=', 'class_subject.class_id')
             ->where('users.id', '=', $student_id)
             ->where('subject.status', '=', 0)
+            ->where('class_subject.is_delete', '=', 0)
             ->where('subject.is_delete', '=', 0);
         return $return->get();
+    }
+    static public function getStudentSubjectCount($student_id)
+    {
+        $return = self::select('subject.*')
+            ->join('class_subject', 'class_subject.subject_id', '=', 'subject.id')
+            ->join('users', 'users.class_id', '=', 'class_subject.class_id')
+            ->where('users.id', '=', $student_id)
+            ->where('subject.status', '=', 0)
+            ->where('subject.is_delete', '=', 0)
+            ->where('class_subject.is_delete', '=', 0);
+        return $return->count();
     }
 }

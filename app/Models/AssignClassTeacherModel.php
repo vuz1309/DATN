@@ -79,7 +79,7 @@ class AssignClassTeacherModel extends Model
 
     static public function getMyClassSubject($teacher_id)
     {
-        $return = self::select('class.name as class_name', 'subject.name as subject_name', 'subject.type as subject_type', 'class.id as class_id', 'subject.id as subject_id')
+        $return1 = self::select('class.name as class_name', 'subject.name as subject_name', 'subject.type as subject_type', 'class.id as class_id', 'subject.id as subject_id')
 
             ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
             ->join('class_subject', 'class_subject.class_id', '=', 'assign_class_teacher.class_id')
@@ -92,6 +92,14 @@ class AssignClassTeacherModel extends Model
             ->where('class_subject.status', '=', 0)
             ->where('assign_class_teacher.teacher_id', '=', $teacher_id);
 
+        $return2 = ClassSubjectModel::select('class.name as class_name', 'subject.name as subject_name', 'subject.type as subject_type', 'class.id as class_id', 'subject.id as subject_id')
+            ->join('class', 'class.id', '=', 'class_subject.class_id')
+            ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
+            ->where('class.is_delete', '=', 0)
+            ->where('subject.is_delete', '=', 0)
+            ->where('class_subject.is_delete', '=', 0)->where('class_subject.teacher_id', '=', $teacher_id);
+
+        $return = $return1->union($return2);
         if (!empty(Request::get('class_name'))) {
             $return = $return->where('class.name', 'LIKE', '%' . Request::get('class_name') . '%');
         }
@@ -99,7 +107,7 @@ class AssignClassTeacherModel extends Model
             $return = $return->where('subject.name', 'LIKE', '%' . Request::get('subject_name') . '%');
         }
 
-        $return = $return->orderBy('assign_class_teacher.id', 'desc')
+        $return = $return->orderBy('class_name', 'desc')
             ->paginate(20);
         foreach ($return as $item) {
             $class_id = $item->class_id;
@@ -109,6 +117,32 @@ class AssignClassTeacherModel extends Model
             $item->timeable = $timeable;
         }
         return $return;
+    }
+
+    static public function getMyClassSubjectCount($teacher_id)
+    {
+        $return1 = self::select('class.name as class_name', 'subject.name as subject_name', 'subject.type as subject_type', 'class.id as class_id', 'subject.id as subject_id')
+
+            ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
+            ->join('class_subject', 'class_subject.class_id', '=', 'assign_class_teacher.class_id')
+            ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
+            ->where('class.is_delete', '=', 0)
+            ->where('subject.is_delete', '=', 0)
+            ->where('class_subject.is_delete', '=', 0)
+            ->where('assign_class_teacher.is_delete', '=', 0)
+            ->where('assign_class_teacher.status', '=', 0)
+            ->where('class_subject.status', '=', 0)
+            ->where('assign_class_teacher.teacher_id', '=', $teacher_id);
+
+        $return2 = ClassSubjectModel::select('class.name as class_name', 'subject.name as subject_name', 'subject.type as subject_type', 'class.id as class_id', 'subject.id as subject_id')
+            ->join('class', 'class.id', '=', 'class_subject.class_id')
+            ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
+            ->where('class.is_delete', '=', 0)
+            ->where('subject.is_delete', '=', 0)
+            ->where('class_subject.is_delete', '=', 0)->where('class_subject.teacher_id', '=', $teacher_id);
+
+        $return = $return1->union($return2);
+        return $return->count();
     }
 
     static public function getMyClassSubjectGroup($teacher_id)

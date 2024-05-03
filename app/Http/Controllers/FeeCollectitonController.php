@@ -11,6 +11,9 @@ use App\Models\User;
 use App\Models\VnPayModel;
 use Illuminate\Http\Request;
 use Auth;
+use Session;
+use Excel;
+use App\Exports\ExportCollectFees;
 
 class FeeCollectitonController extends Controller
 {
@@ -18,9 +21,13 @@ class FeeCollectitonController extends Controller
     {
         $data['getClass'] = ClassModel::getClass();
         $data['header_title'] = 'Học phí';
-        $data['getRecord'] = User::getCollectFeeStudent();
-
-
+        $users = User::getCollectFeeStudent();
+        if (!empty($users)) {
+            foreach ($users as $value) {
+                $value->paid_amount = StudentAddFeesModel::getPaidAmount($value->id, $value->class_id);
+            }
+        }
+        $data['getRecord'] = $users;
         return view('admin.fee.collect_fee', $data);
     }
     public function add_fees($id, Request $request)
@@ -139,5 +146,17 @@ class FeeCollectitonController extends Controller
     {
 
         return redirect('student/fee_collect')->with('error', 'Thanh toán chưa thành công!');
+    }
+    public function fee_collect_report(Request $request)
+    {
+        $data['header_title'] = 'Báo cáo';
+        $data['getRecord'] = StudentAddFeesModel::getRecord();
+        $data['getClass'] = ClassModel::getClass();
+        return view('admin.fee.report', $data);
+    }
+
+    public function ExportFeeCollection(Request $request)
+    {
+        return Excel::download(new ExportCollectFees, 'Bao_cao_hoc_phi_' . date('d-m-Y')  . '.xlsx');
     }
 }

@@ -71,9 +71,9 @@ class ClassSubjectModel extends Model
     {
         $return = self::select('class_subject.*', 'subject.name as subject_name', 'subject.type as subject_type', 'subject.id as subject_id')
             ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
-            ->join('class', 'class.id', '=', 'class_subject.class_id')
+
             ->where('class_subject.class_id', '=', $class_id)
-            ->where('subject.status', '=', 0)
+
             ->where('class_subject.is_delete', '=', 0);
 
 

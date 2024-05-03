@@ -267,6 +267,15 @@
                                      </p>
                                  </a>
                              </li>
+                             <li class="nav-item">
+                                 <a href="{{ url('admin/fee/fee_collect_report') }}"
+                                     class="nav-link @if (Request::segment(3) == 'fee_collect_report') active @endif">
+                                     <i class="far fa-circle nav-icon"></i>
+                                     <p>
+                                         Báo cáo
+                                     </p>
+                                 </a>
+                             </li>
 
                          </ul>
                      </li>

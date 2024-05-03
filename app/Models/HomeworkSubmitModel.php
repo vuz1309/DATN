@@ -16,12 +16,24 @@ class HomeworkSubmitModel extends Model
         $return = self::select('submit_homework.*', 'class.name as class_name', 'subject.name as subject_name')
             ->join('homework', 'homework.id', '=', 'submit_homework.homework_id')
             ->join('class', 'class.id', '=', 'homework.class_id')
-            ->join('subject', 'subject.id', '=', 'submit_homework.subject_id')
+            ->join('subject', 'subject.id', '=', 'homework.subject_id')
             ->where('submit_homework.student_id', '=', $student_id)
             ->orderBy('submit_homework.id');
 
         return $return->paginate(20);
     }
+    public static function getTotal($student_id)
+    {
+        $return = self::select('submit_homework.*', 'class.name as class_name', 'subject.name as subject_name')
+            ->join('homework', 'homework.id', '=', 'submit_homework.homework_id')
+            ->join('class', 'class.id', '=', 'homework.class_id')
+            ->join('subject', 'subject.id', '=', 'homework.subject_id')
+            ->where('submit_homework.student_id', '=', $student_id)
+            ->orderBy('submit_homework.id');
+
+        return $return->count();
+    }
+
     public static function getHomeworkReport()
     {
         $return = self::select('submit_homework.*', 'class.name as class_name', 'subject.name as subject_name', 'users.name as student_name', 'users.last_name as student_last_name')

@@ -91,14 +91,14 @@ class ExaminationsController extends Controller
                 $dataS['subject_type'] = $value->subject_type;
                 $dataS['class_id'] = $value->class_id;
 
-                $ExamSchedule = ExamScheduleModel::getRecordSingle($request->get('class_id'), $request->get('exam_id'), $value->subject_id);
+                $ExamSchedule = ExamScheduleModel::getRecordSingle($request->get('exam_id'), $request->get('class_id'),  $value->subject_id);
 
                 if (!empty($ExamSchedule)) {
                     $dataS['exam_date'] = $ExamSchedule->exam_date;
                     $dataS['start_time'] =  $ExamSchedule->start_time;
                     $dataS['end_time'] = $ExamSchedule->end_time;
                     $dataS['full_marks'] = $ExamSchedule->full_marks;
-                    $dataS['passing_mark'] = $ExamSchedule->passing_mask;
+                    $dataS['passing_mark'] = $ExamSchedule->passing_mark;
                     $dataS['room_number'] = $ExamSchedule->room_number;
                 } else {
                     $dataS['exam_date'] = '';
@@ -115,28 +115,28 @@ class ExaminationsController extends Controller
 
         $data['getRecord'] = $result;
 
+
         $data['header_title'] = 'Lịch thi';
         return view('admin.examinations.exam_schedule', $data);
     }
 
     public function PostAddExamSchedule(Request $request)
     {
-        ExamScheduleModel::deleteRecord($request->exam_id, $request->class_id, $request->subject_id);
+
+
         if (!empty($request->schedule)) {
             foreach ($request->schedule as $schedule) {
 
                 if (
                     !empty($schedule['subject_id'])
                     && !empty($schedule['exam_date'])
-                    && !empty($schedule['start_time'])
-                    && !empty($schedule['end_time'])
-                    && !empty($schedule['room_number'])
                     && !empty($schedule['full_marks'])
-                    && !empty($schedule['passing_mark'])
                 ) {
+
                     $exam = new ExamScheduleModel;
                     $exam->exam_id = $request->exam_id;
                     $exam->class_id = $request->class_id;
+                    ExamScheduleModel::deleteRecord($request->exam_id, $request->class_id, $schedule['subject_id']);
                     $exam->subject_id = $schedule['subject_id'];
                     $exam->exam_date = $schedule['exam_date'];
                     $exam->start_time = $schedule['start_time'];
@@ -145,8 +145,6 @@ class ExaminationsController extends Controller
                     $exam->full_marks = $schedule['full_marks'];
                     $exam->passing_mark = $schedule['passing_mark'];
                     $exam->created_by = Auth::user()->id;
-
-
                     $exam->save();
                 }
             }
@@ -389,6 +387,7 @@ class ExaminationsController extends Controller
         foreach ($getExam as $value) {
             $dataE = array();
             $dataE['exam_name'] = $value->exam_name;
+            $dataE['exam_id'] = $value->exam_id;
             $getExamSubject = MarkRegisterModel::getExamSubject($value->exam_id, Auth::user()->id);
             $dataSubject = array();
             foreach ($getExamSubject as $exam) {
@@ -410,6 +409,36 @@ class ExaminationsController extends Controller
         $data['getRecord'] = $result;
         return view('student.my_exam_result', $data);
     }
+
+    public function my_exam_result_print($id, Request $request)
+    {
+        $exam_id = $id;
+
+        $data['getStudent'] = User::getSingle(Auth::user()->id);
+        $data['getClass'] = ClassModel::single(Auth::user()->class_id);
+
+        $getExamSubject = MarkRegisterModel::getExamSubject($exam_id, Auth::user()->id);
+        $dataSubject = array();
+        foreach ($getExamSubject as $exam) {
+            $dataS = array();
+            $dataS['subject_name'] = $exam['subject_name'];
+            $dataS['class_work'] = $exam['class_work'];
+            $dataS['home_work'] = $exam['home_work'];
+            $dataS['test_work'] = $exam['test_work'];
+            $dataS['exam'] = $exam['exam'];
+            $dataS['full_marks'] = $exam['full_marks'];
+            $dataS['passing_mark'] = $exam['passing_mark'];
+            $dataS['total'] = $exam['class_work'] + $exam['home_work'] + $exam['test_work'] + $exam['exam'];
+            $dataS['grade'] = MarksGradeModel::getGrade($dataS['total'] * 10 / $dataS['full_marks']);
+            $dataSubject[] = $dataS;
+            $data['exam_name'] = $exam['exam_name'];
+        }
+        $data['getExamMark'] = $dataSubject;
+
+
+        return view('exam_result_print', $data);
+    }
+
     public function parent_student_exam_result($student_id)
     {
         $data['getStudent'] = User::getSingle($student_id);
@@ -461,7 +490,7 @@ class ExaminationsController extends Controller
         $mark->percent_to = ($request->percent_to);
         $mark->created_by = Auth::user()->id;
         $mark->save();
-        return redirect()->back()->with('sucess', 'Thêm mới thành công!');
+        return redirect('admin/examinations/marks_grade')->with('sucess', 'Thêm mới thành công!');
     }
     public function marks_grade_edit($id)
     {
@@ -478,7 +507,7 @@ class ExaminationsController extends Controller
             $mark->percent_to = ($request->percent_to);
 
             $mark->save();
-            return redirect()->back()->with('sucess', 'Thêm mới thành công!');
+            return redirect('admin/examinations/marks_grade')->with('sucess', 'Cập nhật thành công!');
         } else {
             abort(404);
         }
