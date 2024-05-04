@@ -177,9 +177,7 @@
 @section('script')
     <script type="text/javascript">
         $(function() {
-            $('input[type="date"]').inputmask('dd/mm/yyyy', {
-                'placeholder': 'dd/mm/yyyy'
-            });
+
             $('.getClass').change(function() {
                 const class_id = $(this).val();
                 $.ajax({

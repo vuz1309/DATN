@@ -1,55 +1,79 @@
-@if(!empty(session('success')))
+@if (!empty(session('success')))
     <div class="alert alert-success" role="alert">
 
-    {{ session('success')}}
+        {{ session('success') }}
     </div>
+    {{-- <script>
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        Toast.fire({
+            icon: 'success',
+            title: session('success')
+        })
+    </script> --}}
 @endif
 
-@if(!empty(session('error')))
+@if (!empty(session('error')))
     <div class="alert alert-danger" role="alert">
 
-    {{ session('error')}}
+        {{ session('error') }}
     </div>
+    {{-- <script>
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        Toast.fire({
+            icon: 'error',
+            title: session('error')
+        })
+    </script> --}}
 @endif
 
-@if(!empty(session('payment-error')))
+@if (!empty(session('payment-error')))
     <div class="alert alert-error" role="alert">
 
-    {{ session('payment-error')}}
+        {{ session('payment-error') }}
     </div>
 @endif
 
-@if(!empty(session('warning')))
+@if (!empty(session('warning')))
     <div class="alert alert-warning" role="alert">
 
-    {{ session('warning')}}
+        {{ session('warning') }}
     </div>
 @endif
 
-@if(!empty(session('info')))
+@if (!empty(session('info')))
     <div class="alert alert-info" role="alert">
 
-    {{ session('info')}}
+        {{ session('info') }}
     </div>
 @endif
 
-@if(!empty(session('secondary')))
+@if (!empty(session('secondary')))
     <div class="alert alert-secondary" role="alert">
 
-    {{ session('secondary')}}
+        {{ session('secondary') }}
     </div>
 @endif
 
-@if(!empty(session('primary')))
+@if (!empty(session('primary')))
     <div class="alert alert-primary" role="alert">
 
-    {{ session('primary')}}
+        {{ session('primary') }}
     </div>
 @endif
 
-@if(!empty(session('light')))
+@if (!empty(session('light')))
     <div class="alert alert-light" role="alert">
 
-    {{ session('light')}}
+        {{ session('light') }}
     </div>
 @endif

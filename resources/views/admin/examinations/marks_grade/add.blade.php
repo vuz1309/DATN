@@ -24,7 +24,7 @@
                           <div class="card card-primary">
 
                               <!-- form start -->
-                              <form method="post" action="">
+                              <form id="form" method="post" action="">
                                   {{ csrf_field() }}
                                   <div class="card-body">
                                       <div class="form-group">
@@ -44,8 +44,9 @@
                                       </div>
                                   </div>
 
-                                  <div class="card-footer">
-                                      <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                  <div style="gap: 20px; display: flex; justify-content: space-between; padding: 16px;">
+                                      <a href="{{ url('admin/examinations/marks_grade') }}" class="btn btn-danger">Hủy</a>
+                                      <button type="submit" class="btn btn-primary">Lưu</button>
                                   </div>
                               </form>
                           </div>
@@ -59,4 +60,78 @@
           </section>
           <!-- /.content -->
       </div>
+  @endsection
+  @section('script')
+      <script type="text/javascript">
+          $(function() {
+
+              $.validator.addMethod("checkPercent", function(value, element) {
+                  var isValid = false;
+
+                  // Gửi request đến server để kiểm tra percent
+                  $.ajax({
+                      type: 'GET',
+                      url: "{{ url('/validate-percent') }}",
+                      data: {
+                          percent: value
+                      },
+                      async: false, // Chờ kết quả trả về trước khi tiếp tục
+                      success: function(response) {
+                          isValid = response !== 'true';
+                      }
+                  });
+
+                  return isValid;
+              });
+
+              $('#form').validate({
+                  rules: {
+                      percent_from: {
+                          required: true,
+                          number: true,
+                          min: 0,
+                          checkPercent: true
+                      },
+                      percent_to: {
+                          required: true,
+                          number: true,
+                          min: 0,
+                          checkPercent: true
+                      },
+                      name: {
+                          required: true,
+                      }
+                  },
+                  messages: {
+                      percent_from: {
+                          required: "Vui lòng nhập điểm từ",
+                          number: "Vui lòng nhập một số",
+                          min: "Điểm từ phải lớn hơn hoặc bằng 0",
+                          checkPercent: 'Điểm từ đang nằm trong khoảng điểm khác, vui lòng thay đổi'
+                      },
+                      percent_to: {
+                          required: "Vui lòng nhập điểm đến",
+                          number: "Vui lòng nhập một số",
+                          min: "Điểm đến phải lớn hơn hoặc bằng 0",
+                          checkPercent: 'Điểm đến đang nằm trong khoảng điểm khác, vui lòng thay đổi'
+                      },
+                      name: {
+                          required: "Vui lòng nhập tên",
+                      }
+                  },
+                  errorElement: 'span',
+                  errorPlacement: function(error, element) {
+                      error.addClass('invalid-feedback');
+                      element.closest('.form-group').append(error);
+                  },
+                  highlight: function(element, errorClass, validClass) {
+                      $(element).addClass('is-invalid');
+                  },
+                  unhighlight: function(element, errorClass, validClass) {
+                      $(element).removeClass('is-invalid');
+                  }
+              });
+
+          })
+      </script>
   @endsection

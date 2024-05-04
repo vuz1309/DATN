@@ -33,9 +33,9 @@
                                   <div class="card-body">
                                       <div class="row">
                                           <div class="form-group col-md-3">
-                                              <label for="exam_id">Kì thi</label>
+                                              <label for="exam_id">Bài thi</label>
                                               <select class="form-control getExam" name="exam_id">
-                                                  <option value="">Chọn kì thi</option>
+                                                  <option value="">Chọn bài thi</option>
                                                   @if (!empty($getExam))
                                                       @foreach ($getExam as $exam)
                                                           <option
@@ -49,7 +49,8 @@
                                           <div class="form-group col-md-3">
                                               <label for="class_id">Lớp học</label>
                                               <select class="form-control getClass" name="class_id">
-                                                  <option value="">Chọn lớp học</option>
+                                                  <option value="">Chọn lớp</option>
+
                                                   @if (!empty($getClass))
                                                       @foreach ($getClass as $class)
                                                           <option
@@ -167,22 +168,22 @@
 
   @endsection
 
-  @section('script')
+  {{-- @section('script')
       <script type="text/javascript">
-          $('.getClass').change(function() {
-              var class_id = $(this).val();
+          $('.getExam').change(function() {
+              var exam_id = $(this).val();
               $.ajax({
-                  url: "{{ url('admin/class_timeable/get_subject') }}",
+                  url: "{{ url('admin/exam/get_class') }}",
                   type: "POST",
                   data: {
                       "_token": "{{ csrf_token() }}",
-                      class_id: class_id,
+                      exam_id: exam_id,
                   },
                   dataType: "json",
                   success: function(response) {
-                      $('.getSubject').html(response.html);
+                      $('.getClass').html(response.html);
                   }
               })
           })
       </script>
-  @endsection
+  @endsection --}}

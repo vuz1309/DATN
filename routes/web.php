@@ -19,8 +19,10 @@ use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\FeeCollectitonController;
 use App\Http\Controllers\HomeworkController;
+use App\Models\ExamModel;
 use App\Models\ExamScheduleModel;
-
+use App\Models\MarksGradeModel;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +46,12 @@ Route::get('reset/{token}', [AuthController::class, 'reset']);
 Route::post('reset/{token}', [AuthController::class, 'PostReset']);
 Route::get('student/paypal/payment_cancel', [FeeCollectitonController::class, 'payment_cancel']);
 
+Route::get('/validate-percent', function (Request $request) {
+    $percent = $request->input('percent');
+    $isValid = MarksGradeModel::validatePercent($percent);
+
+    return $isValid ? 'true' : 'false';
+});
 
 Route::group(['middware' => 'admin'], function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
@@ -54,7 +62,6 @@ Route::group(['middware' => 'admin'], function () {
     Route::get('admin/admin/edit/{id}', [AdminController::class, 'edit']);
     Route::post('admin/admin/edit/{id}', [AdminController::class, 'PostEdit']);
     Route::get('admin/admin/delete/{id}', [AdminController::class, 'delete']);
-
 
     // class
     Route::get('admin/class/list', [ClassController::class, 'list']);
@@ -148,6 +155,8 @@ Route::group(['middware' => 'admin'], function () {
     Route::get('admin/class_timeable/list', [ClassTimeableController::class, 'list']);
     Route::get('admin/class_timeable/add', [ClassTimeableController::class, 'add']);
     Route::post('admin/class_timeable/get_subject', [ClassTimeableController::class, 'getSubject']);
+    // Route::post('admin/exam/get_class', [ExamModel::class, 'exam_get_class']);
+
     Route::post('admin/class_timeable/add', [ClassTimeableController::class, 'PostAdd']);
 
     // exam

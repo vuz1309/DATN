@@ -77,7 +77,7 @@
 
         @include('layouts.header')
         @yield('content')
-
+        @include('_alert_dialog')
         @include('layouts.footer')
     </div>
     <!-- ./wrapper -->
@@ -86,6 +86,13 @@
     <script src="{{ url('public/plugins/jquery/jquery.min.js') }} "></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ url('public/plugins/jquery-ui/jquery-ui.min.js') }} "></script>
+
+
+    <!-- jquery-validation -->
+    <script src="{{ url('public/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ url('public/plugins/jquery-validation/additional-methods.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ url('public/dist/js/adminlte.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
@@ -99,6 +106,7 @@
             });
         });
     </script>
+    <script src="{{ url('resources/js/_alert_dialog.js') }}"></script>
 
     <!-- Bootstrap 4 -->
     <script src=" {{ url('public/plugins/bootstrap/js/bootstrap.bundle.min.js') }} "></script>

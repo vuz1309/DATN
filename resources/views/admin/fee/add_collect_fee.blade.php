@@ -96,7 +96,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
                             class="fas fa-times"></i></button>
                 </div>
-                <form action="" method="post">
+                <form id="form" action="" method="post">
                     <div class="modal-body">
 
                         {{ csrf_field() }}
@@ -150,6 +150,51 @@
         $('#AddFees').click(function() {
             $('#AddFeesModal').modal('show');
 
-        })
+        });
+        $('#form').validate({
+            rules: {
+                amount: {
+                    required: true,
+                    min: 1000
+
+                },
+
+
+
+
+            },
+            messages: {
+
+                amount: {
+                    required: 'Không được để trống',
+                    min: 'Cần đóng ít nhất 1000đ'
+
+
+                },
+                class_id: {
+                    required: 'Không được để trống',
+
+
+                },
+                subject_id: {
+                    required: 'Không được để trống',
+
+                },
+
+
+
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
     </script>
 @endsection

@@ -34,7 +34,7 @@ class StudentAttendanceModel extends Model
             $return = $return->where('subject.id', '=', Request::get('subject_id'));
         }
         if (!empty(Request::get('attendance_type'))) {
-            $return = $return->where('attendance_date.attendance_type', '=', Request::get('attendance_type'));
+            $return = $return->where('student_attendance.attendance_type', '=', Request::get('attendance_type'));
         }
         if (!empty(Request::get('attendance_date'))) {
             $return = $return->where('student_attendance.attendance_date', '=', Request::get('attendance_date'));

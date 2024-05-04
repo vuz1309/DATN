@@ -20,23 +20,28 @@ class ExaminationsController extends Controller
     {
         $data['getRecord'] = ExamModel::getRecord();
         $data['header_title'] = 'Danh sách bài thi';
+
         return view('admin.examinations.exam.list', $data);
     }
 
     public function exam_add()
     {
         $data['header_title'] = 'Thêm mới bài thi';
+        $data['getClass'] = ClassModel::getClass();
         return view('admin.examinations.exam.add', $data);
     }
 
     public function PostExaxmAdd(Request $request)
     {
+
         $exam = new ExamModel();
         $exam->name = trim($request->name);
         $exam->note = trim($request->note);
+        $exam->is_all = $request->allCheckbox === 'on' ? 1 : 0;
+        $exam->class_id = trim($request->class_id);
+        $exam->subject_id = trim($request->subject_id);
         $exam->created_by = Auth::user()->id;
         $exam->save();
-
         return redirect('admin/examinations/exam/list')->with('success', 'Tạo bài thi thành công!');
     }
     public function exam_edit($id)
@@ -57,6 +62,7 @@ class ExaminationsController extends Controller
 
             $exam->name = trim($request->name);
             $exam->note = trim($request->note);
+
             $exam->save();
             return redirect('admin/examinations/exam/list')->with('success', 'Cập nhật bài thi thành công!');
         } else {
@@ -360,11 +366,17 @@ class ExaminationsController extends Controller
                 } else {
                     $save = new MarkRegisterModel;
                     $save->created_by = Auth::user()->id;
+                    $save->exam_id = $request->exam_id;
+                    $save->student_id = $request->student_id;
+                    $save->class_id = $request->class_id;
+                    $save->subject_id = $request->subject_id;
                 }
+
                 $save->class_work = $class_work;
                 $save->home_work = $home_work;
                 $save->test_work = $test_work;
                 $save->exam = $exam;
+
 
                 $save->save();
 
@@ -373,6 +385,9 @@ class ExaminationsController extends Controller
                 $json['message'] = 'Tổng điểm lớn hơn điểm tối đa của môn học!';
             }
 
+            echo json_encode($json);
+        } else {
+            $json['message'] = 'Có lỗi xảy ra, vui lòng thử lại sau!';
             echo json_encode($json);
         }
     }

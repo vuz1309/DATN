@@ -25,6 +25,12 @@ class SubjectController extends Controller
 
     public function PostAdd(Request $request)
     {
+
+        $request->validate([
+            'name' => 'unique:class,name'
+        ], [
+            'name.unique' => 'Lớp học đã tồn tại'
+        ]);
         $save = new SubjectModel;
         $save->name = $request->name;
         $save->status = $request->status;
@@ -49,6 +55,11 @@ class SubjectController extends Controller
 
     public function PostEdit($id, Request $request)
     {
+        $request->validate([
+            'name' => 'unique:class,name,' . $id
+        ], [
+            'name.unique' => 'Lớp học đã tồn tại'
+        ]);
         $record = SubjectModel::single($id);
         if (!empty($record)) {
             $record->name = $request->name;

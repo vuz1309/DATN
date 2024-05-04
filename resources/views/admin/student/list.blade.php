@@ -192,3 +192,11 @@
           <!-- /.content -->
       </div>
   @endsection
+
+  @section('script')
+      <script>
+          $('#datemask').inputmask('dd/mm/yyyy', {
+              'placeholder': 'dd/mm/yyyy'
+          })
+      </script>
+  @endsection

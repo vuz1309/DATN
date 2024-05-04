@@ -52,7 +52,7 @@
                                                 @if (!empty($getClass))
                                                     @foreach ($getClass as $class)
                                                         <option
-                                                            {{ Request::get('class_id') == $class->id ? 'selected' : '' }}
+                                                            {{ Request::get('class_id') == $class->class_id ? 'selected' : '' }}
                                                             value="{{ $class->class_id }}">{{ $class->class_name }}</option>
                                                     @endforeach
                                                 @endif
@@ -139,7 +139,7 @@
                                                                     );
                                                                 @endphp
                                                                 <td>
-                                                                    <div style="margin-bottom: 10px;">
+                                                                    <div style="margin-bottom: 10px; display: none">
                                                                         Điểm trên lớp
                                                                         <input style="width: 200px;" type="hidden"
                                                                             value="{{ $subject->id }}"
@@ -156,7 +156,7 @@
                                                                             name="mark[{{ $id }}][class_work]"
                                                                             class="form-control" />
                                                                     </div>
-                                                                    <div style="margin-bottom: 10px;">
+                                                                    <div style="margin-bottom: 10px; display: none">
                                                                         Điểm về nhà
                                                                         <input
                                                                             id="home_work_{{ $student->id }}{{ $subject->subject_id }}"
@@ -165,7 +165,7 @@
                                                                             name="mark[{{ $id }}][home_work]"
                                                                             class="form-control" />
                                                                     </div>
-                                                                    <div style="margin-bottom: 10px;">
+                                                                    <div style="margin-bottom: 10px;display: none">
                                                                         Điểm kiểm tra
                                                                         <input
                                                                             id="test_work_{{ $student->id }}{{ $subject->subject_id }}"
@@ -173,48 +173,48 @@
                                                                             style="width: 200px;" type="text"
                                                                             name="mark[{{ $id }}][test_work]"
                                                                             class="form-control" />
-                                                                        <div style="margin-bottom: 10px;">
-                                                                            Điểm thi
-                                                                            <input
-                                                                                id="exam_{{ $student->id }}{{ $subject->subject_id }}"
-                                                                                value="{{ !empty($getMark) ? $getMark->exam : '' }}"
-                                                                                style="width: 200px;" type="text"
-                                                                                name="mark[{{ $id }}][exam]"
-                                                                                class="form-control" />
-                                                                        </div>
-                                                                        <div style="margin-bottom: 10px;">
-                                                                            <button
-                                                                                class="btn btn-primary SaveSingleSubject"
-                                                                                id="{{ $student->id }}"
-                                                                                data-schedule="{{ $subject->id }}"
-                                                                                data-val="{{ $subject->subject_id }}"
-                                                                                data-exam="{{ Request::get('exam_id') }}"
-                                                                                data-class="{{ Request::get('class_id') }}">Lưu</button>
+                                                                    </div>
+                                                                    <div style="margin-bottom: 10px;">
+                                                                        Điểm thi
+                                                                        <input
+                                                                            id="exam_{{ $student->id }}{{ $subject->subject_id }}"
+                                                                            value="{{ !empty($getMark) ? $getMark->exam : '' }}"
+                                                                            style="width: 200px;" type="text"
+                                                                            name="mark[{{ $id }}][exam]"
+                                                                            class="form-control" />
+                                                                    </div>
+                                                                    <div style="margin-bottom: 10px;">
+                                                                        <button class="btn btn-primary SaveSingleSubject"
+                                                                            id="{{ $student->id }}"
+                                                                            data-schedule="{{ $subject->id }}"
+                                                                            data-val="{{ $subject->subject_id }}"
+                                                                            data-exam="{{ Request::get('exam_id') }}"
+                                                                            data-class="{{ Request::get('class_id') }}">Lưu</button>
 
-                                                                        </div>
-                                                                        <div style="margin-bottom: 10px;">
-                                                                            <b>Tổng điểm: </b> {{ $totalMark }}
-                                                                            <br />
-                                                                            <b>Điểm đạt: </b>
-                                                                            {{ $subject->passing_mark }}
-                                                                            <br />
-                                                                            @if ($totalMark > 0)
-                                                                                <b>Tổng kết: {{ $getGrade }}
-                                                                                </b>
-                                                                            @endif
-                                                                            <br />
-                                                                            @if ($subject->passing_mark <= $totalMark)
-                                                                                <b style="color: green">Đạt</b>
-                                                                                @php
-                                                                                    $totalPass += 1;
-                                                                                @endphp
-                                                                            @else
-                                                                                <b style="color: red">Trượt</b>
-                                                                                @php
-                                                                                    $totalFail += 1;
-                                                                                @endphp
-                                                                            @endif
-                                                                        </div>
+                                                                    </div>
+                                                                    <div style="margin-bottom: 10px;">
+                                                                        <b>Tổng điểm: </b> {{ $totalMark }}
+                                                                        <br />
+                                                                        <b>Điểm đạt: </b>
+                                                                        {{ $subject->passing_mark }}
+                                                                        <br />
+                                                                        @if ($totalMark > 0)
+                                                                            <b>Tổng kết: {{ $getGrade }}
+                                                                            </b>
+                                                                        @endif
+                                                                        <br />
+                                                                        @if ($subject->passing_mark <= $totalMark)
+                                                                            <b style="color: green">Đạt</b>
+                                                                            @php
+                                                                                $totalPass += 1;
+                                                                            @endphp
+                                                                        @else
+                                                                            <b style="color: red">Trượt</b>
+                                                                            @php
+                                                                                $totalFail += 1;
+                                                                            @endphp
+                                                                        @endif
+                                                                    </div>
                                                                 </td>
                                                                 @php
                                                                     $id++;
@@ -264,8 +264,10 @@
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function(data) {
-                    alert(data.message);
-                    location.reload();
+                    showAlert('Thông báo', data.message, () => {
+                        location.reload();
+                    });
+
                 },
 
             })
@@ -302,9 +304,12 @@
                 },
                 dataType: 'json',
                 success: function(data) {
-                    alert(data.message);
-                    location.reload();
+                    showAlert('Thông báo', data.message, () => {
+                        location.reload();
+                    });
+
                 },
+
 
             })
         });

@@ -15,8 +15,10 @@ class ExamModel extends Model
 
     static public function getRecord()
     {
-        $return = self::select('exam.*', 'users.name as created_by_name')->join('users', 'users.id', '=', 'exam.created_by');
-
+        $return = self::select('exam.*', 'users.name as created_by_name', 'subject.name as subject_name', 'class.name as class_name')
+            ->join('users', 'users.id', '=', 'exam.created_by')
+            ->join('class', 'class.id', '=', 'exam.class_id', 'left')
+            ->join('subject', 'subject.id', '=', 'exam.subject_id', 'left');
 
         if (!empty(Request::get('name'))) {
             $return = $return->where('exam.name', 'LIKE', '%' . Request::get('name') . '%');
@@ -44,6 +46,10 @@ class ExamModel extends Model
 
     static public function getSingle($id)
     {
-        return self::find($id);
+        return self::select('exam.*', 'subject.name as subject_name', 'class.name as class_name')
+            ->join('class', 'exam.class_id', '=', 'class.id', 'left')
+            ->join('subject', 'exam.subject_id', '=', 'subject.id', 'left')
+            ->where('exam.id', '=', $id)
+            ->first();
     }
 }

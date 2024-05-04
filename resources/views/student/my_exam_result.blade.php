@@ -32,10 +32,10 @@
                                               <tr>
 
                                                   <th>Môn học</th>
-                                                  <th>Điểm trên lớp</th>
+                                                  {{-- <th>Điểm trên lớp</th>
                                                   <th>Điểm về nhà</th>
-                                                  <th>Điểm kiểm tra</th>
-                                                  <th>Điểm bài thi</th>
+                                                  <th>Điểm kiểm tra</th> --}}
+                                                  {{-- <th>Điểm bài thi</th> --}}
                                                   <th>Điểm đạt</th>
                                                   <th>Tổng điểm</th>
                                                   <th>Tổng kết</th>
@@ -46,10 +46,10 @@
                                               @foreach ($value['subject'] as $exam)
                                                   <tr>
                                                       <td>{{ $exam['subject_name'] }}</td>
-                                                      <td style="text-align: center;">{{ $exam['class_work'] }}</td>
+                                                      {{-- <td style="text-align: center;">{{ $exam['class_work'] }}</td>
                                                       <td style="text-align: center;">{{ $exam['home_work'] }}</td>
-                                                      <td style="text-align: center;">{{ $exam['test_work'] }}</td>
-                                                      <td style="text-align: center;">{{ $exam['exam'] }}</td>
+                                                      <td style="text-align: center;">{{ $exam['test_work'] }}</td> --}}
+                                                      {{-- <td style="text-align: center;">{{ $exam['exam'] }}</td> --}}
                                                       <td style="text-align: center;">{{ $exam['passing_mark'] }} /
                                                           {{ $exam['full_marks'] }}</td>
                                                       <td style="text-align: center;">{{ $exam['total'] }}</td>
@@ -62,11 +62,11 @@
 
                                   </div>
                                   <div class="card-footer">
-                                      <div class="col-sm-6 right">
-                                          <a target="_" class="btn btn-primary"
-                                              href="{{ url('student/my_exam_result_print/' . $value['exam_id']) }}">In
-                                              kết quả</a>
-                                      </div>
+
+                                      <a target="_" class="btn btn-primary"
+                                          href="{{ url('student/my_exam_result_print/' . $value['exam_id']) }}">In
+                                          kết quả</a>
+
                                   </div>
                                   <!-- /.card-body -->
                               </div>

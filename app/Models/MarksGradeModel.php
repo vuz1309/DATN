@@ -45,4 +45,14 @@ class MarksGradeModel extends Model
             return 'Chưa xác định';
         }
     }
+
+
+    public static function validatePercent($value)
+    {
+        $result = self::where('percent_from', '<', $value)
+            ->where('percent_to', '>', $value)
+            ->exists();
+
+        return $result;
+    }
 }

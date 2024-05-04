@@ -10,8 +10,8 @@
                           <h1>Sửa thông tin học sinh</h1>
                       </div>
                       <!-- <div class="col-sm-6" style="text-align: right;">
-                                 <a href="{{ url('admin/dashboard') }}"></a>
-                               </div> -->
+                                         <a href="{{ url('admin/dashboard') }}"></a>
+                                       </div> -->
                   </div>
               </div><!-- /.container-fluid -->
           </section>
@@ -27,7 +27,7 @@
                           <div class="card card-primary">
 
                               <!-- form start -->
-                              <form method="post" action="" enctype="multipart/form-data">
+                              <form id="form" method="post" action="" enctype="multipart/form-data">
                                   {{ csrf_field() }}
                                   <div class="card-body">
                                       <div class="row">
@@ -179,14 +179,6 @@
       </div>
   @endsection
   @section('script')
-      <script src="{{ url('public/plugins/jquery/jquery.min.js') }}"></script>
-      <!-- Bootstrap 4 -->
-      <script src="{{ url('public/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-      <!-- jquery-validation -->
-      <script src="{{ url('public/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
-      <script src="{{ url('public/plugins/jquery-validation/additional-methods.min.js') }}"></script>
-      <!-- AdminLTE App -->
-      <script src="{{ url('public/dist/js/adminlte.min.js') }}"></script>
       <script type="text/javascript">
           $(function() {
 

@@ -151,6 +151,7 @@ class FeeCollectitonController extends Controller
     {
         $data['header_title'] = 'Báo cáo';
         $data['getRecord'] = StudentAddFeesModel::getRecord();
+
         $data['getClass'] = ClassModel::getClass();
         return view('admin.fee.report', $data);
     }
