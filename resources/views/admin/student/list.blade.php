@@ -97,7 +97,21 @@
 
 
                           <div class="card">
-
+                              <div class="card-header">
+                                  <div>
+                                      <button id="importExcel" class="btn btn-default" data-toggle="modal"
+                                          data-target="#modal-lg">
+                                          <i class="fas fa-file-import"></i>
+                                          Nhập khẩu
+                                      </button>
+                                      <form style="display: inline-block" method="post"
+                                          action="{{ url('admin/student/export') }}">
+                                          {{ csrf_field() }}
+                                          <button class="btn btn-info"> <i class="fas fa-file-export"></i> Xuất khẩu
+                                          </button>
+                                      </form>
+                                  </div>
+                              </div>
                               <!-- /.card-header -->
                               <div class="card-body p-0" style="overflow: auto;">
                                   <table class="table table-striped">
@@ -126,10 +140,10 @@
                                               <tr>
                                                   <td>{{ $value->id }}</td>
                                                   <td>
-                                                      @if (!empty($value->profile_pic))
-                                                          <img style="width: 50px; height: 50px; border-radius: 50%"
-                                                              src="{{ url('upload/profile/' . $value->profile_pic) }}" />
-                                                      @endif
+
+                                                      <img style="width: 50px; height: 50px; border-radius: 50%"
+                                                          src="{{ $value->getProfile() }}" />
+
                                                   </td>
                                                   <td>{{ $value->name }} {{ $value->last_name }}</td>
                                                   <td>{{ $value->email }} </td>
@@ -189,14 +203,194 @@
                   <!-- /.row -->
               </div><!-- /.container-fluid -->
           </section>
+          @include('_alert_dialog')
           <!-- /.content -->
+          <div class="modal fade" id="modalImport">
+
+              <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                      <div class="loading"
+                          style="position: absolute;
+                     height: 100%;
+                     width: 100%;
+                     background-color: rgba(255, 255, 255, 0.6);
+                     z-index: 999999;
+                     display: flex;
+                     align-items: center;
+                     justify-content: center;
+                 ">
+                          <div
+                              style="
+                 width: 50px;
+                 height: 50px;
+                 border: 8px solid #dddddd;
+                 border-top-color: #1975d7;
+                 border-radius: 50%;
+                 animation: loading 0.5s ease infinite;">
+                          </div>
+                      </div>
+                      <div class="modal-header">
+                          <h4 class="modal-title">Nhập khẩu học sinh</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+
+                          <div class="bs-stepper">
+                              <div class="bs-stepper-header" role="tablist">
+                                  <!-- your steps here -->
+                                  <div class="step" data-target="#logins-part">
+                                      <button type="button" class="step-trigger" role="tab"
+                                          aria-controls="logins-part" id="logins-part-trigger">
+                                          <span class="bs-stepper-circle">1</span>
+                                          <span class="bs-stepper-label">Chọn file</span>
+                                      </button>
+                                  </div>
+                                  <div class="line"></div>
+                                  <div class="step" data-target="#information-part">
+                                      <button type="button" class="step-trigger" role="tab"
+                                          aria-controls="information-part" id="information-part-trigger">
+                                          <span class="bs-stepper-circle">2</span>
+                                          <span class="bs-stepper-label">Kết quả nhập khẩu</span>
+                                      </button>
+                                  </div>
+                              </div>
+                              <div class="bs-stepper-content">
+                                  <!-- your steps content here -->
+                                  <div id="logins-part" class="content" role="tabpanel"
+                                      aria-labelledby="logins-part-trigger">
+                                      <div class="custom-file">
+                                          <input value="{{ old('file') }}" name="file" type="file"
+                                              class="form-control custom-file-input" id="fileImport">
+
+                                          <label class="custom-file-label" for="file">Chọn file excel</label>
+                                      </div>
+                                  </div>
+                                  <div id="information-part" class="content" role="tabpanel"
+                                      aria-labelledby="information-part-trigger">
+                                      <div id="errorResult" style="display: none;">
+                                          <p>Nhập khẩu thành công! Các dòng lỗi không thể nhập khẩu, vui lòng kiểm tra lại.
+                                          </p>
+                                          <table style="max-height: 50vh; overflow-y: auto" class="table table-danger">
+                                              <thead>
+                                                  <th>Hàng</th>
+                                                  <th>Thuộc tính</th>
+                                                  <th>Lỗi</th>
+                                                  <th>Giá trị</th>
+                                              </thead>
+                                              <tbody id="errorsImport">
+
+                                              </tbody>
+
+                                          </table>
+                                      </div>
+                                      <div id="successResult">
+                                          <div style="display: flex; height: 50vh">
+                                              <p style=" color: green; font-size: 24px; font-weight: 500; margin: auto">
+                                                  Nhập khẩu thành công!</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                      </div>
+                      <div class="modal-footer justify-content-between">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                          <button id="submitImport" type="button" class="btn btn-primary">Tiếp tục</button>
+
+                      </div>
+                  </div>
+                  <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+          </div>
       </div>
   @endsection
 
   @section('script')
       <script>
-          $('#datemask').inputmask('dd/mm/yyyy', {
-              'placeholder': 'dd/mm/yyyy'
+          $(function() {
+              $(document).ready(function() {
+                  var stepper = new Stepper($('.bs-stepper')[0])
+              })
+              $('#datemask').inputmask('dd/mm/yyyy', {
+                  'placeholder': 'dd/mm/yyyy'
+              });
+              $('#importExcel').click(function() {
+                  $(document).ready(function() {
+                      var stepper = new Stepper($('.bs-stepper')[0])
+                  })
+                  $('#modalImport').modal('show');
+                  $('#submitImport').show();
+                  $('.loading').fadeOut();
+              });
+              bsCustomFileInput.init();
+              $('#importForce').hide();
+
+              $('#submitImport').click(function() {
+                  const file = $('#fileImport')[0].files[0];
+
+                  if (!file) {
+                      showAlert('Lỗi', 'Vui lòng chọn một file để nhập khẩu.');
+                      return;
+                  }
+
+                  // Kiểm tra phần mở rộng của tên file có là .xlsx không
+                  const fileName = file.name;
+                  const fileExtension = fileName.split('.').pop()
+                      .toLowerCase(); // Lấy phần mở rộng và chuyển thành chữ thường
+                  if (fileExtension !== 'xlsx') {
+                      showAlert('Lỗi', 'Vui lòng chọn một file có định dạng xlsx.');
+                      return;
+                  }
+                  var formData = new FormData();
+                  formData.append('file', $('#fileImport')[0].files[0]);
+                  formData.append('_token', '{{ csrf_token() }}');
+                  $.ajax({
+                      url: "{{ url('admin/student/import') }}",
+                      type: "POST",
+                      data: formData,
+
+                      processData: false,
+                      contentType: false,
+                      beforeSend: function() {
+                          // Hiển thị biểu tượng loading trước khi gửi request
+                          $('.loading').fadeIn();
+                      },
+                      dataType: "json",
+                      success: function(response) {
+                          $('.loading').fadeOut();
+                          console.log(response);
+                          if (response.success === false) {
+                              var html = '';
+                              response.errors && response.errors.length && response.errors
+                                  .forEach((item) => {
+                                      html += `<tr><td>${item.row}</td>
+                                        <td>${item.attribute}</td>
+                                        <td>${item.errors[0]}</td>
+                                        <td>${item.values[item.attribute]}</td></tr>
+                                        `
+                                  });
+                              $('#errorsImport').html(html);
+
+                              $('#importForce').show();
+                              $('#submitImport').hide();
+                              $('#errorResult').show();
+
+
+                          } else {
+                              $('#successResult').show();
+                              $('#submitImport').hide();
+                          }
+
+                          var stepper = new Stepper(document.querySelector('.bs-stepper'))
+                          stepper.next()
+                      }
+                  })
+
+              });
           })
       </script>
   @endsection

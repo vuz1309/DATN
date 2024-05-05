@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StudentExport;
+use App\Imports\UsersImport;
 use App\Models\ClassModel;
 use Illuminate\Http\Request;
 use Hash;
 use Auth;
 use Str;
 use App\Models\User;
+use Excel;
 
 class StudentController extends Controller
 {
@@ -24,6 +27,8 @@ class StudentController extends Controller
     {
         $data['header_title'] = 'Thêm mới học sinh';
         $data['getClass'] = ClassModel::getClass();
+        $data['getAdmissionNumber'] = User::getSuggestionCode();
+
         return view("admin.student.add", $data);
     }
 
@@ -199,5 +204,25 @@ class StudentController extends Controller
         $data['getRecord'] = User::getTeacherStudent(Auth::user()->id);
         $data['getClass'] = ClassModel::getClass();
         return view('teacher.my_student', $data);
+    }
+
+    public function import(Request $request)
+    {
+        // try {
+        $import = new UsersImport;
+        $file = $request->file;
+        // $data = Excel::toArray(new UsersImport, , null, \Maatwebsite\Excel\Excel::XLSX);
+
+        $import->import($file, null, \Maatwebsite\Excel\Excel::XLSX);
+
+        if ($import->failures()->isNotEmpty()) {
+            // $res['errors'] = $import->failures();
+            return response()->json(['success' => false, 'message' => 'Đã xảy ra lỗi', 'errors' => $import->failures()]);
+        }
+        return response()->json(['success' => true, 'message' => 'Import thành công']);
+    }
+    public function export()
+    {
+        return Excel::download(new StudentExport, 'Danh_sach_hoc_sinh_' . date('d-m-Y')  . '.xlsx');
     }
 }

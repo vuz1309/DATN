@@ -118,6 +118,8 @@ Route::group(['middware' => 'admin'], function () {
     Route::get('admin/student/edit/{id}', [StudentController::class, 'edit']);
     Route::post('admin/student/edit/{id}', [StudentController::class, 'PostEdit']);
     Route::get('admin/student/delete/{id}', [StudentController::class, 'delete']);
+    Route::post('admin/student/import', [StudentController::class, 'import']);
+    Route::post('admin/student/export', [StudentController::class, 'export']);
 
     // parent
     Route::get('admin/parent/list', [ParentController::class, 'list']);
@@ -216,7 +218,10 @@ Route::group(['middware' => 'admin'], function () {
     Route::get('admin/settings', [UserController::class, 'settings']);
     Route::post('admin/settings', [UserController::class, 'PostSetting']);
     Route::get('admin/fee/fee_collect_report', [FeeCollectitonController::class, 'fee_collect_report']);
-    Route::post('admin/fee/fee_collection_report_export', [FeeCollectitonController::class, 'ExportFeeCollection']);
+
+    Route::post('admin/fee/fee_collection_report_export', [FeeCollectitonController::class, 'ExportFeeCollectionReport']);
+    Route::post('admin/fee/fee_collection_export', [FeeCollectitonController::class, 'ExportFeeCollection']);
+    Route::get('admin/fee/add_fees/delete/{id}', [FeeCollectitonController::class, 'delete_fee_collect']);
 });
 
 Route::group(['middware' => 'teacher'], function () {

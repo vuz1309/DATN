@@ -94,9 +94,17 @@
 
                                           <div class="form-group col-md-6">
                                               <label for="profile_pic">Ảnh</label>
-                                              <input value="{{ old('profile_pic') }}" name="profile_pic" type="file"
-                                                  class="form-control" id="profile_pic" placeholder="">
-                                              <div style="color: red;">{{ $errors->first('profile_pic') }}</div>
+                                              <div class="custom-file">
+                                                  <input value="{{ old('profile_pic') }}" name="profile_pic" type="file"
+                                                      class="form-control custom-file-input" id="profile_pic"
+                                                      accept="image/*" onchange="displayImage(this)">
+
+                                                  <label class="custom-file-label" for="profile_pic">Chọn ảnh</label>
+                                              </div>
+                                              @if (!old('profile_pic'))
+                                                  <img id="profile_pic_preview" src="{{ old('profile_pic') }}"
+                                                      style="width: 50px; height:50px; object-fit: cover; margin-top: 12px; border-radius: 50%;" />
+                                              @endif
 
                                           </div>
 
@@ -151,27 +159,43 @@
                                       </div>
 
 
-
                                       <div class="form-group col-md-12">
                                           <label for="email">Email <span style="color: red;">*</span></label>
-                                          <input value="{{ old('email') }}" name="email" type="email" required
-                                              class="form-control" id="email" placeholder="">
 
+                                          <div class="input-group mb-3">
+                                              <div class="input-group-append">
+                                                  <div class="input-group-text">
+                                                      <span class="fas fa-envelope"></span>
+                                                  </div>
+                                              </div>
+                                              <input value="{{ old('email') }}" name="email" type="email" required
+                                                  class="form-control" id="email" placeholder="">
+
+                                          </div>
                                           <div style="color: red;">{{ $errors->first('email') }}</div>
                                       </div>
 
                                       <div class="form-group col-md-12">
                                           <label for="password">Mật khẩu đăng nhập <span
                                                   style="color: red;">*</span></label>
-                                          <input value="{{ old('password') }}" name="password" type="password" required
-                                              class="form-control" id="password" placeholder="">
-                                      </div>
 
+                                          <div class="input-group mb-3">
+                                              <div class="input-group-append">
+                                                  <div class="input-group-text">
+                                                      <span class="fas fa-lock"></span>
+                                                  </div>
+                                              </div>
+                                              <input value="{{ !empty(old('password')) ? old('password') : '123456' }}"
+                                                  name="password" type="password" required class="form-control"
+                                                  id="password" placeholder="">
+
+                                          </div>
+                                      </div>
 
                                   </div>
 
                                   <div class="card-footer">
-                                      <a href="{{ url('admin/teacher/list') }}" class="btn btn-danger">Hủy</a>
+                                      <a href="{{ url('admin/teacher/list') }}" class="btn btn-danger mr-4">Hủy</a>
                                       <button type="submit" class="btn btn-primary">Thêm mới</button>
                                   </div>
                               </form>
@@ -190,8 +214,20 @@
 
   @section('script')
       <script type="text/javascript">
+          function displayImage(input) {
+              var preview = document.getElementById('profile_pic_preview');
+              if (input.files && input.files[0]) {
+                  var reader = new FileReader();
+                  reader.onload = function(e) {
+                      preview.src = e.target.result;
+                  };
+                  reader.readAsDataURL(input.files[0]);
+              } else {
+                  preview.src = "";
+              }
+          }
           $(function() {
-
+              bsCustomFileInput.init();
               $('#form').validate({
                   rules: {
                       name: {

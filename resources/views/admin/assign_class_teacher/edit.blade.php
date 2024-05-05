@@ -7,11 +7,11 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Thêm giáo viên - lớp học</h1>
+                          <h1>Thêm chủ nhiệm</h1>
                       </div>
                       <!-- <div class="col-sm-6" style="text-align: right;">
-                     <a href="{{ url('admin/dashboard') }}"></a>
-                   </div> -->
+                         <a href="{{ url('admin/dashboard') }}"></a>
+                       </div> -->
                   </div>
               </div><!-- /.container-fluid -->
           </section>

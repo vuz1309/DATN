@@ -10,10 +10,13 @@
                         <h1>Học phí
                         </h1>
                     </div>
-                    <div class="col-sm-6" style="text-align: right;">
-                        <button id="AddFees" class="btn btn-primary">Nộp học phí</button>
 
-                    </div>
+                    @if ($getStudent->amount - $paid_amount > 0)
+                        <div class="col-sm-6" style="text-align: right;">
+                            <button id="AddFees" class="btn btn-primary">Nộp học phí</button>
+
+                        </div>
+                    @endif
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -86,7 +89,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
                             class="fas fa-times"></i></button>
                 </div>
-                <form action="" method="post">
+                <form id="form" action="" method="post">
                     <div class="modal-body">
 
                         {{ csrf_field() }}
@@ -109,7 +112,14 @@
                             <label for="amount" class="col-form-label">Số tiền <span style="color: red">*</span></label>
                             <input value="{{ $getStudent->amount - $paid_amount }}" name='amount' required type="number"
                                 class="form-control" id="amount">
+
                         </div>
+                        <div class="form-group">
+                            <label for="amount" class="col-form-label">Tiền bằng chữ: </label>
+                            <span id="amount_text" style="font-style: italic; margin-left: 4px;"></span>
+
+                        </div>
+
                         <div class=" form-group">
                             <label for="payment_type" class="col-form-label">Hình thức thanh toán <span
                                     style="color: red">*</span></label>
@@ -136,9 +146,76 @@
 
 @section('script')
     <script type="text/javascript">
-        $('#AddFees').click(function() {
-            $('#AddFeesModal').modal('show');
+        $(function() {
 
+
+            $('#AddFees').click(function() {
+
+                $('#AddFeesModal').modal('show');
+
+            });
+            $('#amount').each(function() {
+                const amount = $(this).val();
+
+
+                const words = numberToWords(parseInt(amount));
+
+                $('#amount_text').html(words);
+            });
+            $('#amount').change(function() {
+                const amount = $(this).val();
+
+
+                const words = numberToWords(parseInt(amount));
+
+                $('#amount_text').html(words);
+            });
+            $('#form').validate({
+                rules: {
+                    amount: {
+                        required: true,
+                        min: 1000,
+                        max: {{ $getStudent->amount - $paid_amount }}
+
+                    },
+
+
+
+
+                },
+                messages: {
+
+                    amount: {
+                        required: 'Không được để trống',
+                        min: 'Cần đóng ít nhất 1000đ',
+                        max: 'Đã vượt quá số tiền cần đóng.'
+
+                    },
+                    class_id: {
+                        required: 'Không được để trống',
+
+
+                    },
+                    subject_id: {
+                        required: 'Không được để trống',
+
+                    },
+
+
+
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
         })
     </script>
 @endsection

@@ -14,6 +14,7 @@ use Auth;
 use Session;
 use Excel;
 use App\Exports\ExportCollectFees;
+use App\Exports\ExportTotalCollectFees;
 
 class FeeCollectitonController extends Controller
 {
@@ -156,8 +157,25 @@ class FeeCollectitonController extends Controller
         return view('admin.fee.report', $data);
     }
 
-    public function ExportFeeCollection(Request $request)
+    public function ExportFeeCollectionReport(Request $request)
     {
         return Excel::download(new ExportCollectFees, 'Bao_cao_hoc_phi_' . date('d-m-Y')  . '.xlsx');
+    }
+
+    public function ExportFeeCollection()
+    {
+        return Excel::download(new ExportTotalCollectFees, 'Tong_hoc_phi_' . date('d-m-Y')  . '.xlsx');
+    }
+
+    public function delete_fee_collect($id)
+    {
+        $record = StudentAddFeesModel::getSingle($id);
+        if (!empty($record)) {
+            $record->is_paid = 0;
+            $record->save();
+            return redirect()->back()->with('success', 'Xóa thành công!');
+        } else {
+            abort(404);
+        }
     }
 }

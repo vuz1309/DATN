@@ -99,7 +99,16 @@
 
 
                           <div class="card">
-
+                              <div class="card-header">
+                                  <div style="display: flex; justify-content: space-between; align-items: center">
+                                      <h5>Học phí</h5>
+                                      <form method="post" action="{{ url('admin/fee/fee_collection_export') }}">
+                                          {{ csrf_field() }}
+                                          <button type="submit" class="btn btn-warning">Xuất khẩu
+                                          </button>
+                                      </form>
+                                  </div>
+                              </div>
                               <!-- /.card-header -->
                               <div class="card-body p-0" style="overflow: auto;">
                                   <table class="table table-striped">
@@ -127,7 +136,7 @@
                                                   {{-- <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td> --}}
                                                   <td>
                                                       <a href="{{ url('admin/fee/add_fees/' . $value->id) }}"
-                                                          class="btn btn-success">Nộp học phí</a>
+                                                          class="btn btn-info">Thu học phí</a>
 
                                                   </td>
                                               </tr>

@@ -111,10 +111,8 @@
                                               <tr>
                                                   <td>{{ $value->id }}</td>
                                                   <td>
-                                                      @if (!empty($value->profile_pic))
-                                                          <img style="width: 50px; height: 50px; border-radius: 50%"
-                                                              src="{{ url('upload/profile/' . $value->profile_pic) }}" />
-                                                      @endif
+                                                      <img style="width: 50px; height: 50px; border-radius: 50%"
+                                                          src="{{ $value->getProfile() }}" />
                                                   </td>
                                                   <td>{{ $value->name }} {{ $value->last_name }}</td>
                                                   <td>{{ $value->email }} </td>

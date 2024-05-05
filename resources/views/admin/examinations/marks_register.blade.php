@@ -141,25 +141,25 @@
                                                                           $percent,
                                                                       );
                                                                   @endphp
-                                                                  <td>
-                                                                      <div style="margin-bottom: 10px;">
-                                                                          Điểm trên lớp
-                                                                          <input style="width: 200px;" type="hidden"
-                                                                              value="{{ $subject->id }}"
-                                                                              name="mark[{{ $id }}][id]"
-                                                                              class="form-control" />
-                                                                          <input style="width: 200px;" type="hidden"
-                                                                              value="{{ $subject->subject_id }}"
-                                                                              name="mark[{{ $id }}][subject_id]"
-                                                                              class="form-control" />
-                                                                          <input
+                                                                  <td> <input style="width: 200px;" type="hidden"
+                                                                          value="{{ $subject->id }}"
+                                                                          name="mark[{{ $id }}][id]"
+                                                                          class="form-control" />
+                                                                      <input style="width: 200px;" type="hidden"
+                                                                          value="{{ $subject->subject_id }}"
+                                                                          name="mark[{{ $id }}][subject_id]"
+                                                                          class="form-control" />
+                                                                      {{-- <div style="margin-bottom: 10px;"> --}}
+                                                                      {{-- Điểm trên lớp --}}
+
+                                                                      {{-- <input
                                                                               id="class_work_{{ $student->id }}{{ $subject->subject_id }}"
                                                                               value="{{ !empty($getMark) ? $getMark->class_work : '' }}"
                                                                               style="width: 200px;" type="text"
                                                                               name="mark[{{ $id }}][class_work]"
-                                                                              class="form-control" />
-                                                                      </div>
-                                                                      <div style="margin-bottom: 10px;">
+                                                                              class="form-control" /> --}}
+                                                                      {{-- </div> --}}
+                                                                      {{-- <div style="margin-bottom: 10px;">
                                                                           Điểm về nhà
                                                                           <input
                                                                               id="home_work_{{ $student->id }}{{ $subject->subject_id }}"
@@ -167,8 +167,8 @@
                                                                               style="width: 200px;" type="text"
                                                                               name="mark[{{ $id }}][home_work]"
                                                                               class="form-control" />
-                                                                      </div>
-                                                                      <div style="margin-bottom: 10px;">
+                                                                      </div> --}}
+                                                                      {{-- <div style="margin-bottom: 10px;">
                                                                           Điểm kiểm tra
                                                                           <input
                                                                               id="test_work_{{ $student->id }}{{ $subject->subject_id }}"
@@ -176,53 +176,53 @@
                                                                               style="width: 200px;" type="text"
                                                                               name="mark[{{ $id }}][test_work]"
                                                                               class="form-control" />
-                                                                          <div style="margin-bottom: 10px;">
-                                                                              Điểm thi
-                                                                              <input
-                                                                                  id="exam_{{ $student->id }}{{ $subject->subject_id }}"
-                                                                                  value="{{ !empty($getMark) ? $getMark->exam : '' }}"
-                                                                                  style="width: 200px;" type="text"
-                                                                                  name="mark[{{ $id }}][exam]"
-                                                                                  class="form-control" />
-                                                                          </div>
-                                                                          <div style="margin-bottom: 10px;">
-                                                                              <button
-                                                                                  class="btn btn-primary SaveSingleSubject"
-                                                                                  id="{{ $student->id }}"
-                                                                                  data-schedule="{{ $subject->id }}"
-                                                                                  data-val="{{ $subject->subject_id }}"
-                                                                                  data-exam="{{ Request::get('exam_id') }}"
-                                                                                  data-class="{{ Request::get('class_id') }}">Lưu</button>
+                                                                      </div> --}}
+                                                                      <div style="margin-bottom: 10px;">
+                                                                          Điểm thi
+                                                                          <input
+                                                                              id="exam_{{ $student->id }}{{ $subject->subject_id }}"
+                                                                              value="{{ !empty($getMark) ? $getMark->exam : '' }}"
+                                                                              style="width: 200px;" type="text"
+                                                                              name="mark[{{ $id }}][exam]"
+                                                                              class="form-control" />
+                                                                      </div>
+                                                                      <div style="margin-bottom: 10px;">
+                                                                          <button class="btn btn-primary SaveSingleSubject"
+                                                                              id="{{ $student->id }}"
+                                                                              data-schedule="{{ $subject->id }}"
+                                                                              data-val="{{ $subject->subject_id }}"
+                                                                              data-exam="{{ Request::get('exam_id') }}"
+                                                                              data-class="{{ Request::get('class_id') }}">Lưu</button>
 
-                                                                          </div>
-                                                                          <div style="margin-bottom: 10px;">
-                                                                              <b>Tổng điểm: {{ $totalMark }}</b>
+                                                                      </div>
+                                                                      <div style="margin-bottom: 10px;">
+                                                                          <b>Tổng điểm: {{ $totalMark }}</b>
+                                                                          <br />
+                                                                          <b>Điểm đạt:
+                                                                              {{ $subject->passing_mark }} </b>
+                                                                          <br />
+
+                                                                          @if ($totalMark > 0)
+                                                                              <b>Tổng kết: <span style="color: red">
+                                                                                      {{ $getGrade }}</span>
+                                                                              </b>
                                                                               <br />
-                                                                              <b>Điểm đạt:
-                                                                                  {{ $subject->passing_mark }} </b>
-                                                                              <br />
-
-                                                                              @if ($totalMark > 0)
-                                                                                  <b>Tổng kết: <span style="color: red">
-                                                                                          {{ $getGrade }}</span>
-                                                                                  </b>
-                                                                                  <br />
-                                                                              @endif
+                                                                          @endif
 
 
 
-                                                                              @if ($subject->passing_mark <= $totalMark)
-                                                                                  <b style="color: green">Đạt</b>
-                                                                                  @php
-                                                                                      $totalPass += 1;
-                                                                                  @endphp
-                                                                              @else
-                                                                                  <b style="color: red">Trượt</b>
-                                                                                  @php
-                                                                                      $totalFail += 1;
-                                                                                  @endphp
-                                                                              @endif
-                                                                          </div>
+                                                                          @if ($subject->passing_mark <= $totalMark)
+                                                                              <b style="color: green">Đạt</b>
+                                                                              @php
+                                                                                  $totalPass += 1;
+                                                                              @endphp
+                                                                          @else
+                                                                              <b style="color: red">Trượt</b>
+                                                                              @php
+                                                                                  $totalFail += 1;
+                                                                              @endphp
+                                                                          @endif
+                                                                      </div>
                                                                   </td>
                                                                   @php
                                                                       $id++;
@@ -280,7 +280,7 @@
           });
 
           $('.SaveSingleSubject').click(function(e) {
-              console.log('ntvu log');
+
               e.preventDefault();
               const student_id = $(this).attr('id');
               const subject_id = $(this).attr('data-val');

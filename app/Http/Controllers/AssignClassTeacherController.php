@@ -115,7 +115,7 @@ class AssignClassTeacherController extends Controller
             $data['getRecord'] = $record;
             $data['getClass'] = ClassModel::getClass();
             $data['getTeacher'] = User::getTeacherClass();
-            $data['header_title'] = 'Sửa giáo viên - lớp học';
+            $data['header_title'] = 'Sửa chủ nhiệm';
             return view('admin.assign_class_teacher.edit_signle', $data);
         } else {
             abort(404);

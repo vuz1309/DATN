@@ -10,8 +10,8 @@
                           <h1>Sửa thông tin học sinh</h1>
                       </div>
                       <!-- <div class="col-sm-6" style="text-align: right;">
-                                         <a href="{{ url('admin/dashboard') }}"></a>
-                                       </div> -->
+                                                                                             <a href="{{ url('admin/dashboard') }}"></a>
+                                                                                           </div> -->
                   </div>
               </div><!-- /.container-fluid -->
           </section>
@@ -115,14 +115,17 @@
 
                                           <div class="form-group col-md-6">
                                               <label for="profile_pic">Ảnh học sinh</label>
-                                              <input accept="image/*" name="profile_pic"
-                                                  value="{{ $getRecord->profile_pic }}" type="file" class="form-control"
-                                                  id="profile_pic" placeholder="">
-                                              <div style="color: red;">{{ $errors->first('profile_pic') }}</div>
-                                              @if (!empty($getRecord->profile_pic))
-                                                  <img src="{{ $getRecord->getProfile() }}"
-                                                      style="width: auto; height:50px;" />
-                                              @endif
+                                              <div class="custom-file">
+                                                  <input value="{{ old('profile_pic') }}" name="profile_pic" type="file"
+                                                      class="form-control custom-file-input" id="profile_pic"
+                                                      accept="image/*" onchange="displayImage(this)">
+
+                                                  <label class="custom-file-label" for="profile_pic">Chọn ảnh</label>
+                                              </div>
+
+                                              <img id="profile_pic_preview" src="{{ $getRecord->getProfile() }}"
+                                                  style="width: 50px; height:50px; object-fit: cover; margin-top: 12px; border-radius: 50%;" />
+
 
                                           </div>
 
@@ -162,7 +165,7 @@
                                   </div>
 
                                   <div class="card-footer">
-                                      <a href="{{ url('admin/student/list') }}" class="btn btn-danger">Hủy</a>
+                                      <a href="{{ url('admin/student/list') }}" class="btn btn-danger mr-4">Hủy</a>
                                       <button type="submit" class="btn btn-primary">Cập nhật</button>
                                   </div>
                               </form>
@@ -180,8 +183,23 @@
   @endsection
   @section('script')
       <script type="text/javascript">
+          function displayImage(input) {
+              var preview = document.getElementById('profile_pic_preview');
+              if (input.files && input.files[0]) {
+                  var reader = new FileReader();
+                  reader.onload = function(e) {
+                      preview.src = e.target.result;
+                  };
+                  reader.readAsDataURL(input.files[0]);
+              } else {
+                  preview.src = "";
+              }
+          }
           $(function() {
 
+
+
+              bsCustomFileInput.init();
               $('#form').validate({
                   rules: {
                       name: {

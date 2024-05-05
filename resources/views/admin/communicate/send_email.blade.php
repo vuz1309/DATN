@@ -1,36 +1,5 @@
 @extends('layouts.app')
 @section('style')
-    <link rel="stylesheet" href="{{ url('public/plugins/select2/css/select2.min.css') }}" />
-    <style>
-        .select2-container--default .select2-selection--single,
-        .select2-selection .select2-selection--single {
-            border: 1px solid #d2d6de;
-            border-radius: 0;
-            padding: 6px 12px;
-            height: 34px;
-        }
-
-        .select2-container .select2-selection--single .select2-selection__rendered {
-            padding-right: 10px;
-        }
-
-        .select2-container .select2-selection--single .select2-selection__rendered {
-            padding-left: 0;
-        }
-
-        .select2-container--default .select2-selection--single .select2-selection__arrow b {
-            margin-top: 0;
-        }
-
-        .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: 28px;
-            right: 3px;
-        }
-
-        .select2-results__options {
-            background-color: white
-        }
-    </style>
 @endsection
 @section('content')
     <div class="content-wrapper">
@@ -71,6 +40,7 @@
                                         </select>
 
                                     </div>
+
                                     <div class="form-group">
                                         <label style="display: block">Gửi đến toàn bộ:</label>
                                         <label style="margin-right: 50px">
@@ -103,11 +73,9 @@
 @endsection
 
 @section('script')
-    <script src="{{ url('public/plugins/summernote/summernote-bs4.min.js') }}"></script>
-    <script src="{{ url('public/plugins/select2/js/select2.full.min.js') }}"></script>
     <script type="text/javascript">
         $(function() {
-
+            $('.select2').select2()
             // $('#selectUser').select2({
             //     placeholder: 'Chọn hoặc tìm kiếm...',
             //     ajax: {

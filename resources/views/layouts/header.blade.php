@@ -36,23 +36,7 @@
                      </div>
                      <!-- Message End -->
                  </a>
-                 <div class="dropdown-divider"></div>
-                 <a href="#" class="dropdown-item">
-                     <!-- Message Start -->
-                     <div class="media">
-                         <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                         <div class="media-body">
-                             <h3 class="dropdown-item-title">
-                                 John Pierce
-                                 <span class="float-right text-sm text-muted"><i
-                                         class=" nav-icon fas fa-star"></i></span>
-                             </h3>
-                             <p class="text-sm">I got your message bro</p>
-                             <p class="text-sm text-muted"><i class=" nav-icon far fa-clock mr-1"></i> 4 Hours Ago</p>
-                         </div>
-                     </div>
-                     <!-- Message End -->
-                 </a>
+
                  <div class="dropdown-divider"></div>
                  <a href="#" class="dropdown-item">
                      <!-- Message Start -->
@@ -74,40 +58,7 @@
                  <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
              </div>
          </li>
-         <!-- Notifications Dropdown Menu -->
-         <li class="nav-item dropdown">
-             <a class="nav-link" data-toggle="dropdown" href="#">
-                 <i class=" nav-icon far fa-bell"></i>
-                 <span class="badge badge-warning navbar-badge">15</span>
-             </a>
-             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                 <span class="dropdown-item dropdown-header">15 Notifications</span>
-                 <div class="dropdown-divider"></div>
-                 <a href="#" class="dropdown-item">
-                     <i class=" nav-icon fas fa-envelope mr-2"></i> 4 new messages
-                     <span class="float-right text-muted text-sm">3 mins</span>
-                 </a>
-                 <div class="dropdown-divider"></div>
-                 <a href="#" class="dropdown-item">
-                     <i class=" nav-icon fas fa-users mr-2"></i> 8 friend requests
-                     <span class="float-right text-muted text-sm">12 hours</span>
-                 </a>
-                 <div class="dropdown-divider"></div>
-                 <a href="#" class="dropdown-item">
-                     <i class=" nav-icon fas fa-file mr-2"></i> 3 new reports
-                     <span class="float-right text-muted text-sm">2 days</span>
-                 </a>
-                 <div class="dropdown-divider"></div>
-                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-             </div>
-         </li>
 
-         <li class="nav-item">
-             <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
-                 role="button">
-                 <i class=" nav-icon fas fa-th-large"></i>
-             </a>
-         </li>
      </ul>
  </nav>
  <!-- /.navbar -->
@@ -129,8 +80,7 @@
                      <img src="{{ url('upload/profile/' . auth()->user()->profile_pic) }}"
                          class="img-circle elevation-2" alt="User Image">
                  @else
-                     <img src="{{ url('upload/profile/default.jpg') }}" class="img-circle elevation-2"
-                         alt="User Image">
+                     <img src="{{ url('upload/profile/default.jpg') }}" class="img-circle elevation-2" alt="User Image">
                  @endif
 
              </div>
@@ -191,7 +141,7 @@
                          </a>
                      </li>
 
-                     <li class="nav-item menu-is-opening menu-open">
+                     <li class="nav-item menu-open">
                          <a href="#" class="nav-link @if (Request::segment(2) == 'class' ||
                                  Request::segment(2) == 'subject' ||
                                  Request::segment(2) == 'assign_subject' ||
@@ -207,7 +157,7 @@
                              <li class="nav-item">
                                  <a href="{{ url('admin/class/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'class') active @endif">
-                                     <i class=" nav-icon fas fa-chalkboard-teacher nav-icon"></i>
+                                     <i class=" nav-icon fas fa-chalkboard-teacher"></i>
                                      <p>Lớp học</p>
                                  </a>
                              </li>
@@ -215,7 +165,7 @@
                              <li class="nav-item">
                                  <a href="{{ url('admin/subject/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'subject') active @endif">
-                                     <i class=" nav-icon fas fa-book-open nav-icon"></i>
+                                     <i class=" fas fa-book-open nav-icon"></i>
                                      <p>Môn học</p>
                                  </a>
                              </li>
@@ -223,7 +173,7 @@
                              <li class="nav-item">
                                  <a href="{{ url('admin/assign_subject/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'assign_subject') active @endif">
-                                     <i class=" nav-icon fas fa-school nav-icon"></i>
+                                     <i class="  fas fa-school nav-icon"></i>
                                      <p>Lớp học - Môn học</p>
                                  </a>
                              </li>
@@ -231,24 +181,24 @@
                              <li class="nav-item">
                                  <a href="{{ url('admin/assign_class_teacher/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'assign_class_teacher') active @endif">
-                                     <i class=" nav-icon fas fa-user-graduate nav-icon"></i>
-                                     <p>Giáo viên - Lớp học</p>
+                                     <i class=" fas fa-user-graduate nav-icon"></i>
+                                     <p>Chủ nhiệm</p>
                                  </a>
                              </li>
 
                              <li class="nav-item">
                                  <a href="{{ url('admin/class_timeable/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'class_timeable') active @endif">
-                                     <i class=" nav-icon far fa-calendar-alt nav-icon"></i>
+                                     <i class="far fa-calendar-alt nav-icon"></i>
                                      <p>Thời khóa biểu</p>
                                  </a>
                              </li>
                          </ul>
                      </li>
 
-                     <li class="nav-item menu-is-opening menu-open">
+                     <li class="nav-item  menu-open">
                          <a href="#" class="nav-link @if (Request::segment(2) == 'fee') active @endif">
-                             <i class=" nav-icon nav-icon fas fa-table"></i>
+                             <i class="  nav-icon fas fa-table"></i>
                              <p>
                                  Học phí
                                  <i class=" nav-icon fas fa-angle-left right"></i>
@@ -258,14 +208,14 @@
                              <li class="nav-item">
                                  <a href="{{ url('admin/fee/fee_collect') }}"
                                      class="nav-link @if (Request::segment(3) == 'fee_collect') active @endif">
-                                     <i class=" nav-icon fas fa-hand-holding-usd nav-icon"></i>
+                                     <i class="  fas fa-hand-holding-usd nav-icon"></i>
                                      <p>Nộp học phí</p>
                                  </a>
                              </li>
                              <li class="nav-item">
                                  <a href="{{ url('admin/fee/fee_collect_report') }}"
                                      class="nav-link @if (Request::segment(3) == 'fee_collect_report') active @endif">
-                                     <i class=" nav-icon far fa-file-alt nav-icon"></i>
+                                     <i class=" far fa-file-alt nav-icon"></i>
                                      <p>Báo cáo</p>
                                  </a>
                              </li>
@@ -274,7 +224,7 @@
 
                      <li class="nav-item menu-is-opening menu-open">
                          <a href="#" class="nav-link @if (Request::segment(2) == 'attendance') active @endif">
-                             <i class=" nav-icon nav-icon fas fa-table"></i>
+                             <i class=" nav-icon fas fa-table"></i>
                              <p>
                                  Điểm danh
                                  <i class=" nav-icon fas fa-angle-left right"></i>
@@ -284,14 +234,14 @@
                              <li class="nav-item">
                                  <a href="{{ url('admin/attendance/student') }}"
                                      class="nav-link @if (Request::segment(3) == 'student') active @endif">
-                                     <i class=" nav-icon fas fa-user-check nav-icon"></i>
+                                     <i class="fas fa-user-check nav-icon"></i>
                                      <p>Điểm danh học sinh</p>
                                  </a>
                              </li>
                              <li class="nav-item">
                                  <a href="{{ url('admin/attendance/report') }}"
                                      class="nav-link @if (Request::segment(3) == 'report' && Request::segment(2) == 'attendance') active @endif">
-                                     <i class=" nav-icon fas fa-file-signature nav-icon"></i>
+                                     <i class="fas fa-file-signature nav-icon"></i>
                                      <p>Báo cáo</p>
                                  </a>
                              </li>
@@ -300,7 +250,7 @@
 
                      <li class="nav-item menu-is-opening menu-open">
                          <a href="#" class="nav-link @if (Request::segment(2) == 'examinations') active @endif">
-                             <i class=" nav-icon nav-icon fas fa-table"></i>
+                             <i class="nav-icon fas fa-table"></i>
                              <p>
                                  Học tập
                                  <i class=" nav-icon fas fa-angle-left right"></i>
@@ -324,8 +274,8 @@
                              <!-- Các mục khác -->
                              <li class="nav-item">
                                  <a href="{{ url('admin/examinations/exam/list') }}"
-                                     class="nav-link @if (Request::segment(2) == 'exam') active @endif">
-                                     <i class="far fa-circle nav-icon"></i>
+                                     class="nav-link @if (Request::segment(3) == 'exam') active @endif">
+                                     <i class="far fa-file-alt nav-icon"></i>
                                      <p>
                                          Bài thi
                                      </p>
@@ -334,8 +284,8 @@
 
                              <li class="nav-item">
                                  <a href="{{ url('admin/examinations/exam_schedule') }}"
-                                     class="nav-link @if (Request::segment(2) == 'exam_schedule') active @endif">
-                                     <i class="far fa-circle nav-icon"></i>
+                                     class="nav-link @if (Request::segment(3) == 'exam_schedule') active @endif">
+                                     <i class="far fa-calendar-alt nav-icon"></i>
                                      <p>
                                          Lịch trình
                                      </p>
@@ -344,8 +294,8 @@
 
                              <li class="nav-item">
                                  <a href="{{ url('admin/examinations/marks_register') }}"
-                                     class="nav-link @if (Request::segment(2) == 'marks_register') active @endif">
-                                     <i class="far fa-circle nav-icon"></i>
+                                     class="nav-link @if (Request::segment(3) == 'marks_register') active @endif">
+                                     <i class="far fa-clipboard nav-icon"></i>
                                      <p>
                                          Điểm
                                      </p>
@@ -353,8 +303,8 @@
                              </li>
                              <li class="nav-item">
                                  <a href="{{ url('admin/examinations/marks_grade') }}"
-                                     class="nav-link @if (Request::segment(2) == 'marks_grade') active @endif">
-                                     <i class="far fa-circle nav-icon"></i>
+                                     class="nav-link @if (Request::segment(3) == 'marks_grade') active @endif">
+                                     <i class="far fa-chart-bar nav-icon"></i>
                                      <p>
                                          Thang điểm
                                      </p>
@@ -680,7 +630,7 @@
 
              </ul>
          </nav>
-         <!-- /.sidebar-menu -->
+
      </div>
-     <!-- /.sidebar -->
+
  </aside>

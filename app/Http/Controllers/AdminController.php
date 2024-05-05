@@ -29,6 +29,7 @@ class AdminController extends Controller
         ]);
         $user = new User;
         $user->name = $request->name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->user_type = 1;

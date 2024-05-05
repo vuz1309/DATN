@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'last_name',
+        'class_id',
+        'admission_number'
     ];
 
     /**
@@ -145,7 +148,7 @@ class User extends Authenticatable
 
         return $return;
     }
-    static public function getStudents()
+    static public function getStudents($remove_paging = false)
     {
         $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
             ->join('class', 'class.id', '=', 'users.class_id', 'left')
@@ -175,7 +178,9 @@ class User extends Authenticatable
         if (!empty(Request::get('admission_date'))) {
             $return = $return->where('users.admission_date', '=', Request::get('admission_date'));
         }
-
+        if ($remove_paging == true) {
+            return $return->orderBy('users.id', 'desc')->get();
+        }
         $return = $return->orderBy('users.id', 'desc')->paginate(20);
 
         return $return;
@@ -210,10 +215,10 @@ class User extends Authenticatable
         if (!empty($this->profile_pic) && file_exists('upload/profile/' . $this->profile_pic)) {
             return url('upload/profile/' . $this->profile_pic);
         } else {
-            return "";
+            return url('upload/profile/default.jpg');
         }
     }
-    static public function getSearchStudents()
+    static public function getSearchStudents($remove_paging)
     {
 
         $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
@@ -238,6 +243,8 @@ class User extends Authenticatable
                     ->orWhere('users.last_name', 'like', $name);
             });
         }
+
+
         $return = $return->orderBy('users.id', 'desc')->limit(50)
             ->get();
 
@@ -363,7 +370,7 @@ class User extends Authenticatable
 
         return $return;
     }
-    static public function getCollectFeeStudent()
+    static public function getCollectFeeStudent($remove_paging = false)
     {
         $return = self::select('users.*', 'class.name as class_name', 'class.fee as amount')
             ->join('class', 'class.id', '=', 'users.class_id')
@@ -395,7 +402,38 @@ class User extends Authenticatable
             $return = $return->where('users.admission_date', '=', Request::get('admission_date'));
         }
 
-
+        if ($remove_paging == true) {
+            $return->get();
+        }
         return $return->paginate(20);
+    }
+
+    public static function getSuggestionCode()
+    {
+        $return = self::select('users.admission_number')
+            ->where('users.user_type', '=', 3)
+            ->orderBy("users.id", "desc")
+            ->first();
+
+
+        $admissionNumber = $return->admission_number;
+        $matches = [];
+        preg_match('/([^0-9]*)([0-9]+)/', $admissionNumber, $matches);
+
+        // $matches[1] chứa phần chữ
+        // $matches[2] chứa phần số
+        $text = $matches[1];
+        $number = intval($matches[2]) + 1;
+        $newCode = $text . $number;
+        $lenOrigin =  strlen($admissionNumber);
+        $lenNewCode = strlen($newCode);
+        $other = $lenOrigin - $lenNewCode;
+
+        // Padding số 0 vào $number
+        $numberPadded = str_pad($number, $other, "0", STR_PAD_LEFT);
+
+        $newCode = $text . $numberPadded;
+
+        return $newCode;
     }
 }

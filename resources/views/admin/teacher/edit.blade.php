@@ -94,13 +94,17 @@
 
                                           <div class="form-group col-md-6">
                                               <label for="profile_pic">Ảnh</label>
-                                              <input value="{{ $getRecord->profile_pic }}" name="profile_pic"
-                                                  type="file" class="form-control" id="profile_pic" placeholder="">
-                                              @if (!empty($getRecord->profile_pic))
-                                                  <img src="{{ $getRecord->getProfile() }}"
-                                                      style="width: auto; height:50px;" />
-                                              @endif
-                                              <div style="color: red;">{{ $errors->first('profile_pic') }}</div>
+                                              <div class="custom-file">
+                                                  <input value="{{ old('profile_pic') }}" name="profile_pic" type="file"
+                                                      class="form-control custom-file-input" id="profile_pic"
+                                                      accept="image/*" onchange="displayImage(this)">
+
+                                                  <label class="custom-file-label" for="profile_pic">Chọn ảnh</label>
+                                              </div>
+
+                                              <img id="profile_pic_preview" src="{{ $getRecord->getProfile() }}"
+                                                  style="width: 50px; height:50px; object-fit: cover; margin-top: 12px; border-radius: 50%;" />
+
 
 
                                           </div>
@@ -166,14 +170,14 @@
                                           <label for="password">Mật khẩu đăng nhập </label>
                                           <input name="password" type="password" class="form-control" id="password"
                                               placeholder="">
-                                          <p>Nhập mật khẩu nếu bạn muốn thay đổi mật khẩu của học sinh.</p>
+                                          <p>Nhập mật khẩu nếu bạn muốn thay đổi mật khẩu đăng nhập.</p>
                                       </div>
 
 
                                   </div>
 
                                   <div class="card-footer">
-                                      <a href="{{ url('admin/teacher/list') }}" class="btn btn-danger">Hủy</a>
+                                      <a href="{{ url('admin/teacher/list') }}" class="btn btn-danger mr-4">Hủy</a>
                                       <button type="submit" class="btn btn-primary">Cập nhật</button>
                                   </div>
                               </form>
@@ -191,8 +195,20 @@
   @endsection
   @section('script')
       <script type="text/javascript">
+          function displayImage(input) {
+              var preview = document.getElementById('profile_pic_preview');
+              if (input.files && input.files[0]) {
+                  var reader = new FileReader();
+                  reader.onload = function(e) {
+                      preview.src = e.target.result;
+                  };
+                  reader.readAsDataURL(input.files[0]);
+              } else {
+                  preview.src = "";
+              }
+          }
           $(function() {
-
+              bsCustomFileInput.init();
               $('#form').validate({
                   rules: {
                       name: {

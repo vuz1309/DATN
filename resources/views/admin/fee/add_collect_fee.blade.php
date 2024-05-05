@@ -38,11 +38,11 @@
 
                                             <th>Hình thức</th>
                                             <th>Số tiền nộp</th>
-                                            <th>Còn lại</th>
+                                            {{-- <th>Còn lại</th> --}}
                                             <th>Tổng học phí</th>
                                             <th>Ghi chú</th>
                                             <th>Người tạo</th>
-                                            {{-- <th>Ngày tạo</th> --}}
+                                            <th>Ngày tạo</th>
                                             <th style="min-width: 160px"></th>
                                         </tr>
                                     </thead>
@@ -53,13 +53,14 @@
 
                                                 <td>{{ $value->payment_type == 1 ? 'Tiền mặt' : 'Chuyển khoản' }}</td>
                                                 <td>{{ number_format($value->paid_amount) }} đ</td>
-                                                <td>{{ number_format($value->remaining_amount) }} đ</td>
+                                                {{-- <td>{{ number_format($value->remaining_amount) }} đ</td> --}}
                                                 <td>{{ number_format($value->fee) }} đ</td>
                                                 <td>{{ $value->remark }}</td>
                                                 <td>{{ $value->created_name }}</td>
-                                                {{-- <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td> --}}
+                                                <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td>
                                                 <td>
-                                                    <button class="btn btn-warning">Sửa</button>
+                                                    <a href="{{ url('admin/fee/add_fees/delete/' . $value->id) }}"
+                                                        class="btn btn-danger">Xóa</a>
 
                                                 </td>
                                             </tr>
@@ -119,6 +120,13 @@
                             <label for="amount" class="col-form-label">Số tiền <span style="color: red">*</span></label>
                             <input value="{{ $getStudent->amount - $paid_amount }}" name='amount' required type="number"
                                 class="form-control" id="amount">
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="amount" class="col-form-label">Tiền bằng chữ: </label>
+                            <span id="amount_text" style="font-style: italic; margin-left: 4px;"></span>
+
                         </div>
                         <div class=" form-group">
                             <label for="payment_type" class="col-form-label">Hình thức thanh toán <span
@@ -147,54 +155,75 @@
 
 @section('script')
     <script type="text/javascript">
-        $('#AddFees').click(function() {
-            $('#AddFeesModal').modal('show');
+        $(function() {
+            $('#AddFees').click(function() {
 
-        });
-        $('#form').validate({
-            rules: {
-                amount: {
-                    required: true,
-                    min: 1000
+                $('#AddFeesModal').modal('show');
+
+            });
+
+            $('#amount').each(function() {
+                const amount = $(this).val();
+
+
+                const words = numberToWords(parseInt(amount));
+
+                $('#amount_text').html(words);
+            });
+            $('#amount').change(function() {
+                const amount = $(this).val();
+
+
+                const words = numberToWords(parseInt(amount));
+
+                $('#amount_text').html(words);
+            });
+            $('#form').validate({
+                rules: {
+                    amount: {
+                        required: true,
+                        min: 1000,
+                        max: {{ $getStudent->amount - $paid_amount }}
+
+                    },
+
+
+
 
                 },
+                messages: {
+
+                    amount: {
+                        required: 'Không được để trống',
+                        min: 'Cần đóng ít nhất 1000đ',
+                        max: 'Đã vượt quá số tiền cần đóng.'
+
+                    },
+                    class_id: {
+                        required: 'Không được để trống',
 
 
+                    },
+                    subject_id: {
+                        required: 'Không được để trống',
 
+                    },
 
-            },
-            messages: {
-
-                amount: {
-                    required: 'Không được để trống',
-                    min: 'Cần đóng ít nhất 1000đ'
 
 
                 },
-                class_id: {
-                    required: 'Không được để trống',
-
-
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
                 },
-                subject_id: {
-                    required: 'Không được để trống',
-
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
                 },
-
-
-
-            },
-            errorElement: 'span',
-            errorPlacement: function(error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function(element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
-        });
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        })
     </script>
 @endsection

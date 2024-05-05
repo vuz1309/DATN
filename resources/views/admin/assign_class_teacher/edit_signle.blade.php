@@ -7,7 +7,7 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Sửa giáo viên - lớp học</h1>
+                          <h1>Sửa chủ nhiệm</h1>
                       </div>
 
                   </div>
