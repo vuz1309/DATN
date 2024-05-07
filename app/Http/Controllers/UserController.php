@@ -260,17 +260,35 @@ class UserController extends Controller
     }
     public function PostSetting(Request $request)
     {
-        request()->validate([
-            'paypal_email' => 'required|email|',
-        ]);
+
         $user = SettingModel::getSetting();
         if (!empty($user)) {
 
-            $user->paypal_email = trim($request->paypal_email);
+            $user->school_name = trim($request->school_name);
+
+            if (!empty($request->file('school_logo'))) {
+                $ext = $request->file('school_logo')->getClientOriginalExtension();
+                $file = $request->file('school_logo');
+                $randomStr = date('Ymdhis') . Str::random(20);
+                $filename = strtolower($randomStr) . '.' . $ext;
+                $file->move('upload/settings/', $filename);
+
+                $user->school_logo = $filename;
+            }
+
             $user->save();
         } else {
             $user = new SettingModel;
-            $user->paypal_email = trim($request->paypal_email);
+            if (!empty($request->file('school_logo'))) {
+                $ext = $request->file('school_logo')->getClientOriginalExtension();
+                $file = $request->file('school_logo');
+                $randomStr = date('Ymdhis') . Str::random(20);
+                $filename = strtolower($randomStr) . '.' . $ext;
+                $file->move('upload/settings/', $filename);
+
+                $user->school_logo = $filename;
+            }
+            $user->school_name = trim($request->school_name);
             $user->save();
         }
 

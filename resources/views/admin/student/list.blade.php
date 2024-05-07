@@ -107,7 +107,7 @@
                                       <form style="display: inline-block" method="post"
                                           action="{{ url('admin/student/export') }}">
                                           {{ csrf_field() }}
-                                          <button class="btn btn-info"> <i class="fas fa-file-export"></i> Xuất khẩu
+                                          <button class="btn btn-info"> <i class="fas fa-file-export"></i> Xuất khẩu toàn bộ
                                           </button>
                                       </form>
                                   </div>

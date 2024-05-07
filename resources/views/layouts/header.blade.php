@@ -64,12 +64,20 @@
  <!-- /.navbar -->
 
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-     <!-- Brand Logo -->
-     <a href="{{ url('admin/dashboard') }}" class="brand-link" style="text-align: center;
-">
-         <span class="brand-text font-weight-light" style="font-weight: 700 !important; font-size: 20px;">Trường
-             học</span>
-     </a>
+     @php
+         $logo = config('app.system_settings.school_logo');
+     @endphp
+     <div style="display: flex; align-items: center; justify-content: center; padding: 0 12px;">
+         @if (!empty($logo))
+             <img src="{{ url('upload/settings/' . $logo) }}" style="width: 40px; height: 40px; border-radius: 50%"
+                 alt="LOGO">
+         @endif
+         <a href="#" class="brand-link" style="text-align: center; padding: 12px 0;
+    ">
+             <span class="brand-text font-weight-light"
+                 style="font-weight: 700 !important; font-size: 20px;">{{ config('app.system_settings.school_name') }}</span>
+         </a>
+     </div>
 
      <!-- Sidebar -->
      <div class="sidebar">
@@ -86,7 +94,8 @@
              </div>
              <div class="info">
                  @if (auth()->check())
-                     <a href="#" class="d-block">{{ auth()->user()->name }} {{ auth()->user()->last_name }}</a>
+                     <a href="#" class="d-block">{{ auth()->user()->name }}
+                         {{ auth()->user()->last_name }}</a>
                  @endif
              </div>
          </div>
