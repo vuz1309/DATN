@@ -44,6 +44,15 @@
     <!-- dropzonejs -->
     <link rel="stylesheet" href="{{ url('public/plugins/dropzone/min/dropzone.min.css') }}">
     <!-- Theme style -->
+
+
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ url('public/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}" />
+    <link rel="stylesheet"
+        href="{{ url('public/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}" />
+    <link rel="stylesheet" href="{{ url('public/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}" />
+
     <style>
         .loader {
             position: fixed;
@@ -83,6 +92,10 @@
                 transform: rotate(1turn);
             }
         }
+
+        .dataTables_wrapper .dt-buttons {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -112,8 +125,6 @@
     <script src="{{ url('resources/js/_alert_dialog.js') }}"></script>
     <script src="{{ url('resources/js/tools/currency.js') }}"></script>
 
-    <!-- Bootstrap 4 -->
-    <script src=" {{ url('public/plugins/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
     <!-- ChartJS -->
     <script src=" {{ url('public/plugins/chart.js/Chart.min.js') }} "></script>
     <!-- Sparkline -->
@@ -155,9 +166,21 @@
     <script src="{{ url('public/plugins/dropzone/min/dropzone.min.js') }}"></script>
 
     <script src="{{ url('public/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-    <!-- AdminLTE App -->
 
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+    <!-- DataTables  & Plugins -->
+    <script src="{{ url('public/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url('public/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url('public/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ url('public/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ url('public/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ url('public/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ url('public/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ url('public/plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ url('public/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ url('public/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ url('public/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ url('public/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script>
         $.widget.bridge('uibutton', $.ui.button)
         window.addEventListener("load", () => {
@@ -165,22 +188,60 @@
             if (loader) {
                 loader.classList.add("loader--hidden");
 
-                // loader.addEventListener("transitionend", () => {
-                //     document.body.removeChild(loader);
-                // });
+
             }
 
+
+            $("#tableList").DataTable({
+                    paging: false,
+                    lengthChange: false,
+                    searching: '{{ !empty($useSearch) ? $useSearch : false }}',
+                    ordering: true,
+                    info: false,
+                    autoWidth: false,
+                    responsive: false,
+                    language: {
+                        search: "Tìm kiếm:",
+                        searchPlaceholder: "Nhập từ khóa tìm kiếm...",
+                    },
+                    buttons: [{
+                            extend: 'copy',
+                            text: '<i class="fas fa-copy"></i> Sao chép',
+                            className: 'btn btn-md ml-2 mt-2 mr-2 btn-secondary'
+                        },
+                        {
+                            extend: 'excel',
+
+                            text: '<i class="fas fa-file-excel"></i> Xuất khẩu',
+                            className: 'btn btn-md mr-2 mt-2 btn-info'
+                        },
+                        {
+                            extend: 'pdf',
+
+                            text: '<i class="fas fa-file-pdf"></i> PDF',
+                            className: 'btn btn-md mr-2 mt-2 btn-warning'
+                        },
+                        {
+                            extend: 'print',
+
+                            text: '<i class="fas fa-print"></i> In',
+                            className: 'btn btn-md mr-2 mt-2 btn-success'
+                        },
+                        {
+                            extend: 'colvis',
+                            text: '<i class="fas fa-eye"></i> Ẩn hiện cột',
+                            className: 'btn btn-md mr-2 mt-2 btn-dark'
+                        },
+                    ],
+                }).buttons()
+                .container()
+                .appendTo("#tools");
+            const currentSearchBox = $('#tableList_filter');
+
+            // Chuyển ô tìm kiếm đến target mong muốn
+            $('#searchBox').append(currentSearchBox);
         });
     </script>
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            // Áp dụng mask cho tất cả các input type date
-            $('input[type="date"]').inputmask({
-                "mask": "99/99/9999",
-                "placeholder": 'DD/MM/YYYY'
-            });
-        });
-    </script> --}}
 
     @yield('script')
 

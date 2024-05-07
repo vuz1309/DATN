@@ -86,6 +86,7 @@ class ExaminationsController extends Controller
     {
         $data['getClass'] = ClassModel::getClass();
         $data['getExam'] = ExamModel::getExam();
+        $data['noUseTools'] = true;
 
         $result = array();
         if (!empty($request->get('exam_id')) && !empty($request->get('class_id'))) {
@@ -196,6 +197,7 @@ class ExaminationsController extends Controller
     public function marks_register(Request $request)
     {
         $data['header_title'] = 'Điểm';
+        $data['useSearch'] = true;
         $data['getClass'] = ClassModel::getClass();
         $data['getExam'] = ExamModel::getExam();
 

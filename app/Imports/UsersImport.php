@@ -74,26 +74,25 @@ class UsersImport implements ToModel, WithValidation, SkipsOnError, SkipsEmptyRo
             },],
         ];
     }
-
-    // public function messages()
-    // {
-    //     return [
-    //         '*.email.email' => 'Trường "email" phải là một địa chỉ email.',
-    //         '*.email.required' => 'Trường "email" không được bỏ trống.',
-    //         '*.email.unique' => 'Trường "email" đã tồn tại trong hệ thống.',
-    //         '*.email.string' => 'Trường "email" phải là một chuỗi ký tự.',
-    //         '*.ma_hoc_sinh.required' => 'Trường "mã học sinh" không được bỏ trống.',
-    //         '*.ma_hoc_sinh.unique' => 'Trường "mã học sinh" đã tồn tại trong hệ thống.',
-    //         '*.ma_hoc_sinh.string' => 'Trường "mã học sinh" phải là một chuỗi ký tự.',
-    //         '*.ho.required' => 'Trường "họ" không được bỏ trống.',
-    //         '*.ho.string' => 'Trường "họ" phải là một chuỗi ký tự.',
-    //         '*.ten.required' => 'Trường "tên" không được bỏ trống.',
-    //         '*.ten.string' => 'Trường "tên" phải là một chuỗi ký tự.',
-    //         '*.mat_khau.required' => 'Trường "mật khẩu" không được bỏ trống.',
-    //         '*.mat_khau.string' => 'Trường "mật khẩu" phải là một chuỗi ký tự.',
-    //         '*.lop.required' => 'Trường "lớp" không được bỏ trống.',
-    //         '*.lop.string' => 'Trường "lớp" phải là một chuỗi ký tự.',
-    //         '*.lop.exists' => 'Trường "lớp" không tồn tại.',
-    //     ];
-    // }
+    public function customValidationMessages()
+    {
+        return [
+            'email.email' => 'Trường "email" phải là một địa chỉ email.',
+            'email.required' => 'Trường "email" không được bỏ trống.',
+            'email.unique' => 'Trường "email" đã tồn tại trong hệ thống.',
+            'email.string' => 'Trường "email" phải là một chuỗi ký tự.',
+            'ma_hoc_sinh.required' => 'Trường "mã học sinh" không được bỏ trống.',
+            'ma_hoc_sinh.unique' => 'Trường "mã học sinh" đã tồn tại trong hệ thống.',
+            'ma_hoc_sinh.string' => 'Trường "mã học sinh" phải là một chuỗi ký tự.',
+            'ho.required' => 'Trường "họ" không được bỏ trống.',
+            'ho.string' => 'Trường "họ" phải là một chuỗi ký tự.',
+            'ten.required' => 'Trường "tên" không được bỏ trống.',
+            'ten.string' => 'Trường "tên" phải là một chuỗi ký tự.',
+            'mat_khau.required' => 'Trường "mật khẩu" không được bỏ trống.',
+            'mat_khau.string' => 'Trường "mật khẩu" phải là một chuỗi ký tự.',
+            'lop.required' => 'Trường "lớp" không được bỏ trống.',
+            'lop.string' => 'Trường "lớp" phải là một chuỗi ký tự.',
+            'lop.exists' => 'Trường "lớp" không tồn tại.',
+        ];
+    }
 }

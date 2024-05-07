@@ -64,7 +64,10 @@
                               <div class="card-header">Thang điểm</div>
                               <!-- /.card-header -->
                               <div class="card-body p-0">
-                                  <table class="table table-striped">
+                                  @if (empty($noUseTools))
+                                      <div id="tools"></div>
+                                  @endif
+                                  <table id="tableList" class="table table-striped">
                                       <thead>
                                           <tr>
                                               <th style="width: 10px">#</th>
@@ -73,7 +76,7 @@
                                               <th>Điểm đến</th>
                                               <th>Người tạo</th>
                                               <th>Ngày tạo</th>
-                                              <th></th>
+                                              <th>Hành động</th>
                                           </tr>
                                       </thead>
                                       <tbody>

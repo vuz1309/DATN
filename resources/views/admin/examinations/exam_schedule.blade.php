@@ -85,7 +85,10 @@
                                           <h3>Lịch thi</h3>
                                       </div>
                                       <div style="overflow-x: auto;" class="card-body p-0">
-                                          <table class="table table-striped">
+                                          @if (empty($noUseTools))
+                                              <div id="tools"></div>
+                                          @endif
+                                          <table id="tableList" class="table table-striped">
                                               <thead>
                                                   <tr>
                                                       <th>Môn học</th>

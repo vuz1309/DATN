@@ -11,6 +11,8 @@ use Auth;
 use Str;
 use App\Models\User;
 use Excel;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 class StudentController extends Controller
 {
@@ -224,5 +226,18 @@ class StudentController extends Controller
     public function export()
     {
         return Excel::download(new StudentExport, 'Danh_sach_hoc_sinh_' . date('d-m-Y')  . '.xlsx');
+    }
+
+    public function downloadTemplateImport()
+    {
+        // Đường dẫn đến file Excel của bạn
+        $filePath = 'resources/template/imports/Student_Import_Template.xlsx';
+
+        // Kiểm tra xem file có tồn tại không
+        if (!file_exists($filePath)) {
+            abort(404, 'File not found');
+        }
+
+        return Response::download($filePath);
     }
 }

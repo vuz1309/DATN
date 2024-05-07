@@ -45,6 +45,9 @@ Route::post('forgot-password', [AuthController::class, 'PostForgotpassword']);
 Route::get('reset/{token}', [AuthController::class, 'reset']);
 Route::post('reset/{token}', [AuthController::class, 'PostReset']);
 Route::get('student/paypal/payment_cancel', [FeeCollectitonController::class, 'payment_cancel']);
+Route::get('download/student_template', [StudentController::class, 'downloadTemplateImport']);
+
+
 
 Route::get('/validate-percent', function (Request $request) {
     $percent = $request->input('percent');

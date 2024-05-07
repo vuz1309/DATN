@@ -29,7 +29,10 @@
                               <div class="card-header">Con cái</div>
                               <!-- /.card-header -->
                               <div class="card-body p-0" style="overflow: auto;">
-                                  <table class="table table-striped">
+                                  @if (empty($noUseTools))
+                                      <div id="tools"></div>
+                                  @endif
+                                  <table id="tableList" class="table table-striped">
                                       <thead>
                                           <tr>
                                               <th style="width: 10px">#</th>
@@ -47,9 +50,9 @@
                                               <th>Chiều cao (kg)</th>
                                               <th>Cân nặng (kg)</th>
                                               <th>Trạng thái</th>
-                                              <th></th>
-                                              <th></th>
-                                              <th></th>
+                                              <th>Hành động</th>
+                                              <th>Hành động</th>
+                                              <th>Hành động</th>
 
                                           </tr>
                                       </thead>

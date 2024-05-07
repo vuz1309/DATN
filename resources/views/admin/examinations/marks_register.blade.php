@@ -81,7 +81,11 @@
                                       <h3>Lịch thi</h3>
                                   </div>
                                   <div style="overflow-x: auto;" class="card-body p-0">
-                                      <table class="table table-striped">
+                                      <div id="searchBox" style="padding-left: 16px; padding-top: 8px"></div>
+                                      @if (empty($noUseTools))
+                                          <div id="tools"></div>
+                                      @endif
+                                      <table id="tableList" class="table table-striped">
                                           <thead>
                                               <tr>
                                                   <th>Học sinh</th>
@@ -91,7 +95,7 @@
                                                           {{ $subject->full_marks }})
                                                       </th>
                                                   @endforeach
-                                                  <th></th>
+                                                  <th>Hành động</th>
                                               </tr>
                                           </thead>
                                           <tbody>
@@ -273,7 +277,7 @@
                   data: $(this).serialize(),
                   dataType: 'json',
                   success: function(data) {
-                      alert(data.message);
+                      showAlert('Thông báo', data.message);
                   },
 
               })
@@ -310,7 +314,7 @@
                   },
                   dataType: 'json',
                   success: function(data) {
-                      alert(data.message);
+                      showAlert('Thông báo', data.message);
                       window.location.reload();
                   },
 

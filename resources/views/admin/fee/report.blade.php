@@ -81,7 +81,10 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body p-0" style="overflow: auto;">
-                                <table class="table table-striped">
+                                @if (empty($noUseTools))
+                                    <div id="tools"></div>
+                                @endif
+                                <table id="tableList" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th style="min-width: 10px">#</th>

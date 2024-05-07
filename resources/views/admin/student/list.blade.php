@@ -114,7 +114,11 @@
                               </div>
                               <!-- /.card-header -->
                               <div class="card-body p-0" style="overflow: auto;">
-                                  <table class="table table-striped">
+                                  @if (empty($noUseTools))
+                                      <div id="tools"></div>
+                                  @endif
+
+                                  <table id="tableList" class="table table-striped">
                                       <thead>
                                           <tr>
                                               <th style="width: 10px">#</th>
@@ -132,7 +136,7 @@
                                               <th>Trạng thái</th>
 
                                               <th>Ngày tạo</th>
-                                              <th style="min-width: 160px"></th>
+                                              <th style="min-width: 160px">Hành động</th>
                                           </tr>
                                       </thead>
                                       <tbody>
@@ -266,13 +270,24 @@
 
                                           <label class="custom-file-label" for="file">Chọn file excel</label>
                                       </div>
+
+                                      <div style="margin-top: 24px;">
+                                          <p>Vui lòng <a id="downloadTemplate"
+                                                  href="{{ url('download/student_template') }}">Tải mẫu file nhập khẩu</a>
+                                              về nếu chưa từng nhập
+                                              khẩu.</p>
+                                      </div>
                                   </div>
                                   <div id="information-part" class="content" role="tabpanel"
                                       aria-labelledby="information-part-trigger">
-                                      <div id="errorResult" style="display: none;">
-                                          <p>Nhập khẩu thành công! Các dòng lỗi không thể nhập khẩu, vui lòng kiểm tra lại.
+                                      <div id="errorResult" style="display: none;max-height: 50vh;overflow-y: auto">
+                                          <p
+                                              style="font-size: 18px;
+                                          font-style: italic;
+                                          font-family: auto;">
+                                              Nhập khẩu thành công! Các dòng lỗi không thể nhập khẩu, vui lòng kiểm tra lại.
                                           </p>
-                                          <table style="max-height: 50vh; overflow-y: auto" class="table table-danger">
+                                          <table style="height: 100%;" class="table table-danger">
                                               <thead>
                                                   <th>Hàng</th>
                                                   <th>Thuộc tính</th>
@@ -287,7 +302,14 @@
                                       </div>
                                       <div id="successResult">
                                           <div style="display: flex; height: 50vh">
-                                              <p style=" color: green; font-size: 24px; font-weight: 500; margin: auto">
+                                              <p
+                                                  style="color: green;
+                                              font-size: 38px;
+                                              font-weight: 600;
+                                              margin: auto;
+                                              font-style: italic;
+                                              font-family: 'Font Awesome 5 Free';
+                                          ">
                                                   Nhập khẩu thành công!</p>
                                           </div>
                                       </div>
@@ -311,6 +333,14 @@
 
   @section('script')
       <script>
+          function convertToTitle(str) {
+              if (str === 'ho') return 'Họ';
+              if (str === 'ma_hoc_sinh') return 'Mã học sinh';
+              if (str === 'ten') return 'Tên';
+              if (str === 'mat_khau') return 'Mật khẩu';
+              if (str === 'lop') return 'Lớp';
+              return str;
+          }
           $(function() {
               $(document).ready(function() {
                   var stepper = new Stepper($('.bs-stepper')[0])
@@ -368,18 +398,18 @@
                               response.errors && response.errors.length && response.errors
                                   .forEach((item) => {
                                       html += `<tr><td>${item.row}</td>
-                                        <td>${item.attribute}</td>
-                                        <td>${item.errors[0]}</td>
-                                        <td>${item.values[item.attribute]}</td></tr>
+                                        <td>${convertToTitle(item.attribute)}</td>
+                                        <td>${(item.errors[0]) }</td>
+                                        <td>${item.values[item.attribute] === undefined || item.values[item.attribute] === null ? 'Không có giá trị' : item.values[item.attribute] }</td></tr>
                                         `
                                   });
                               $('#errorsImport').html(html);
 
-                              $('#importForce').show();
+
                               $('#submitImport').hide();
                               $('#errorResult').show();
 
-
+                              $('#successResult').hide();
                           } else {
                               $('#successResult').show();
                               $('#submitImport').hide();

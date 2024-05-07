@@ -27,7 +27,10 @@
                                   <div class="card-header">{{ $value['exam_name'] }}</div>
                                   <!-- /.card-header -->
                                   <div class="card-body p-0">
-                                      <table class="table table-striped">
+                                      @if (empty($noUseTools))
+                                          <div id="tools"></div>
+                                      @endif
+                                      <table id="tableList" class="table table-striped">
                                           <thead>
                                               <tr>
 

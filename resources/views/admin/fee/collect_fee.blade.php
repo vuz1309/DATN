@@ -111,7 +111,10 @@
                               </div>
                               <!-- /.card-header -->
                               <div class="card-body p-0" style="overflow: auto;">
-                                  <table class="table table-striped">
+                                  @if (empty($noUseTools))
+                                      <div id="tools"></div>
+                                  @endif
+                                  <table id="tableList" class="table table-striped">
                                       <thead>
                                           <tr>
                                               <th style="min-width: 10px">#</th>
@@ -121,7 +124,7 @@
                                               <th>Đã nộp</th>
                                               <th>Tổng học phí</th>
                                               {{-- <th>Ngày tạo</th> --}}
-                                              <th style="min-width: 160px"></th>
+                                              <th style="min-width: 160px">Hành động</th>
                                           </tr>
                                       </thead>
                                       <tbody>

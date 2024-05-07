@@ -83,7 +83,10 @@
 
                             <!-- /.card-header -->
                             <div class="card-body p-0" style="overflow: auto;">
-                                <table class="table table-striped">
+                                @if (empty($noUseTools))
+                                    <div id="tools"></div>
+                                @endif
+                                <table id="tableList" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th style="width: 10px">#</th>
@@ -97,7 +100,7 @@
                                             <th>Tài liệu</th>
                                             <th>Mô tả</th>
                                             <th>Thời gian nộp</th>
-                                            <th></th>
+                                            <th>Hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
