@@ -27,10 +27,8 @@
                                   <div class="card-header">{{ $value['exam_name'] }}</div>
                                   <!-- /.card-header -->
                                   <div class="card-body p-0">
-                                      @if (empty($noUseTools))
-                                          <div id="tools"></div>
-                                      @endif
-                                      <table id="tableList" class="table table-striped">
+
+                                      <table class="table table-striped">
                                           <thead>
                                               <tr>
 

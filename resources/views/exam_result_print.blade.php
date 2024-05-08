@@ -52,12 +52,24 @@
     <div id="page">
         <table>
             <tr>
+
                 <td width="5%"></td>
-                <td width="15%"><img style="width: 110px;"
-                        src="https://png.pngtree.com/png-clipart/20211017/original/pngtree-school-logo-png-image_6851480.png"
-                        alt=""></td>
+                <td width="15%">
+                    @php
+                        $logo = config('app.system_settings.school_logo');
+                    @endphp
+                    @if (!empty($logo))
+                        <img src="{{ url('upload/settings/' . $logo) }}"
+                            style="width: 110px; height: 110px; border-radius: 50%" alt="LOGO">
+                    @else
+                        <img style="width: 110px;"
+                            src="https://png.pngtree.com/png-clipart/20211017/original/pngtree-school-logo-png-image_6851480.png"
+                            alt="">
+                    @endif
+
+                </td>
                 <td align="left">
-                    <h1>VSHOOL <br />Quản lý trường học</h1>
+                    <h1>VSHOOL <br />{{ config('app.system_settings.school_name') }}</h1>
                 </td>
                 <td></td>
             </tr>
