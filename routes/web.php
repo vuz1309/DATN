@@ -14,6 +14,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AssignClassTeacherController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClassTimeableController;
 use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\ExaminationsController;
@@ -44,8 +45,16 @@ Route::get('forgot-password', [AuthController::class, 'forgotpassword']);
 Route::post('forgot-password', [AuthController::class, 'PostForgotpassword']);
 Route::get('reset/{token}', [AuthController::class, 'reset']);
 Route::post('reset/{token}', [AuthController::class, 'PostReset']);
-Route::get('student/paypal/payment_cancel', [FeeCollectitonController::class, 'payment_cancel']);
-Route::get('download/student_template', [StudentController::class, 'downloadTemplateImport']);
+Route::get('student/paypal/payment_cancel', [FeeCollectitonController::class, 'paymenft_cancel']);
+
+
+Route::middleware(['common'])->group(function () {
+    Route::get('download/student_template', [StudentController::class, 'downloadTemplateImport']);
+    Route::get('chat', [ChatController::class, 'chat']);
+    Route::post('get_chat_windows', [ChatController::class, 'get_chat_windows']);
+    Route::post('submit_message', [ChatController::class, 'submit_message']);
+    Route::post('get_chat_search_user', [ChatController::class, 'get_chat_search_user']);
+});
 
 
 
@@ -56,7 +65,7 @@ Route::get('/validate-percent', function (Request $request) {
     return $isValid ? 'true' : 'false';
 });
 
-Route::group(['middware' => 'admin'], function () {
+Route::middleware(['admin'])->group(function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
 
     Route::get('admin/admin/list', [AdminController::class, 'list']);
@@ -227,7 +236,7 @@ Route::group(['middware' => 'admin'], function () {
     Route::get('admin/fee/add_fees/delete/{id}', [FeeCollectitonController::class, 'delete_fee_collect']);
 });
 
-Route::group(['middware' => 'teacher'], function () {
+Route::middleware(['teacher'])->group(function () {
     Route::get('teacher/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('teacher/change_password', [UserController::class, 'changePassword']);
     Route::post('teacher/change_password', [UserController::class, 'PostChangePassword']);
@@ -269,7 +278,7 @@ Route::group(['middware' => 'teacher'], function () {
     Route::post('teacher/class_timeable/get_teacher_subject_class', [ClassTimeableController::class, 'getTeacherClassSubject']);
 });
 
-Route::group(['middware' => 'student'], function () {
+Route::middleware(['student'])->group(function () {
     Route::get('student/paypal/payment_success', [FeeCollectitonController::class, 'payment_success']);
     Route::get('student/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('student/change_password', [UserController::class, 'changePassword']);
@@ -297,7 +306,7 @@ Route::group(['middware' => 'student'], function () {
     Route::post('student/fee_collect', [FeeCollectitonController::class, 'PostAddFeeStudent']);
 });
 
-Route::group(['middware' => 'parent'], function () {
+Route::middleware(['parent'])->group(function () {
     Route::get('parent/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('parent/change_password', [UserController::class, 'changePassword']);
     Route::post('parent/change_password', [UserController::class, 'PostChangePassword']);

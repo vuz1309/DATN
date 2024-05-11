@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{ url('public/plugins/summernote/summernote-bs4.min.css') }} ">
     <link rel="stylesheet" href="{{ url('public/plugins/select2/css/select2.min.css') }}" />
     <!-- Google Font: Source Sans Pro -->
-
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ url('public/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
     <!-- Tempusdominus Bootstrap 4 -->
@@ -97,10 +97,12 @@
             width: 100%;
         }
     </style>
+    @yield('style')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
+
 
         <div class="loader"></div>
 
@@ -123,6 +125,7 @@
     <!-- AdminLTE App -->
     <script src="{{ url('public/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ url('resources/js/_alert_dialog.js') }}"></script>
+    <script src="{{ url('resources/js/_loading.js') }}"></script>
     <script src="{{ url('resources/js/tools/currency.js') }}"></script>
 
     <!-- ChartJS -->
@@ -187,11 +190,7 @@
             const loader = document.querySelector(".loader");
             if (loader) {
                 loader.classList.add("loader--hidden");
-
-
             }
-
-
             $("#tableList").DataTable({
                     paging: false,
                     lengthChange: false,
