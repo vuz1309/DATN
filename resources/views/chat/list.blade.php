@@ -280,7 +280,7 @@
 
         <div class="row clearfix">
             <div class="col-lg-12">
-                <div class="card chat-app">
+                <div class="card chat-app" style="position: relative">
                     @include('_loading')
                     <div id="plist" class="people-list">
                         <div class="input-group">
@@ -310,6 +310,29 @@
     <script type="text/javascript">
         var isLoading = false;
 
+        // function genLoadingChat(data) {
+        //     const html = `
+    //                             <li class="clearfix">
+    //     <div class="message-data text-right">
+    //         <span class="message-data-time"><div class="spinner-border" role="status">
+
+    //                                 </div></span>
+    //         <img src="${data.sender_avatar}" alt="avatar">
+    //     </div>
+    //     <div class="message other-message float-right"> ${data.message || ''} 
+    //         ${data.file_path ? `<div><a href="${data.file_path}" download="" target="_blank">Tải xuống</a></div>` : ''}
+
+    //     </div>
+
+    // </li>
+
+    //                             `;
+        //     $('#AppendMessage').append(html);
+        //     setTimeout(() => {
+        //         scrolldown();
+        //     }, 1);
+
+        // }
         $('body').delegate('.getChatWindows', 'click', function(e) {
             e.preventDefault();
             const receiver_id = $(this).attr('id');
@@ -338,7 +361,7 @@
                         $('#message_text').val('');
                         $('#getChatMessageAll').html(data.success);
                         window.history.pushState('', '',
-                            "{{ url('chat?receiver_id=') }}" + data.receiver_id)
+                            "{{ url('chat?receiver_id=') }}" + receiver_id)
                         scrolldown();
                     },
                     error: function(data) {
@@ -357,6 +380,12 @@
                     .val())) {
                 isLoading = true;
                 showLoading(true);
+                // genLoadingChat({
+                //     message: $('#message_text').val(),
+                //     file_path: null,
+                //     sender_avatar: "{{ Auth::user()->getProfile() }}"
+                // });
+
                 $.ajax({
                     type: 'POST',
                     url: "{{ url('submit_message') }}",
@@ -437,6 +466,44 @@
             console.log('file:', filename);
             $('#FileDisplay').html(filename);
             $('#FileDisplay').show();
+        });
+    </script>
+
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('6ca4e425389bb6f26105', {
+            cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('message');
+        channel.bind('chat', function(data) {
+            if ($('#AppendMessage') && data.receiver_id === "{{ Auth::user()->id }}") {
+                const receiverId = "{{ Auth::user()->id }}";
+
+                console.log('getted', data);
+                const newMessageHtml = `<li class="clearfix">
+                                        <div class="message-data"><img src="${data.sender_avatar}" alt="avatar">
+                                            <span class="message-data-time"> ${data.diffForHumans}</span>
+
+                                        </div>
+                                        <div class="message my-message ">  ${data.message || ''} 
+                                           
+                                                ${data.file_path ? `<div>
+                                                                                                                                                                                                                                <a href="${data.file_path}" download="" target="_blank">Tải xuống</a>
+                                                                                                                                                                                                                            </div>` : ''}
+                                          
+
+                                        </div>
+                                    </li>`;
+                $('#AppendMessage').append(newMessageHtml);
+                setTimeout(() => {
+                    scrolldown();
+                }, 1);
+
+            }
         });
     </script>
 @endsection

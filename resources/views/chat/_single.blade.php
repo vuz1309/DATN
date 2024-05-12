@@ -30,5 +30,6 @@
                 @endif
 
             </div>
+        </li>
     @endif
 @endforeach

@@ -6,10 +6,22 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
 use App\Models\ChatModel;
+use App\Providers\MessageService as ProvidersMessageService;
 use Str;
+
+
+
+
+
 
 class ChatController extends Controller
 {
+    protected $messageService;
+
+    public function __construct(ProvidersMessageService $messageService)
+    {
+        $this->messageService = $messageService;
+    }
     public function chat(Request $request)
     {
         $data['header_title'] = 'Trò chuyện';
@@ -47,11 +59,14 @@ class ChatController extends Controller
             $file->move('upload/chat/', $filename);
             $chat->file = $filename;
         }
-
         $chat->save();
 
 
         $getChat = ChatModel::where('id', '=', $chat->id)->get();
+
+        // Gửi sự kiện chat 
+        $this->messageService->sendPusherEventChat($chat);
+
         return response()->json([
             'status' => true,
             'success' => view('chat._single', ['getChat' => $getChat])->render(),
