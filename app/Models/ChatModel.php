@@ -8,6 +8,7 @@ use DB;
 use Request;
 use Auth;
 
+
 class ChatModel extends Model
 {
     use HasFactory;
@@ -56,6 +57,7 @@ class ChatModel extends Model
         $getUserChat = self::select('chat.*', DB::raw('(CASE WHEN chat.sender_id = ' . $sender_id . ' THEN chat.receiver_id ELSE chat.sender_id END) AS connect_user_id'))
             ->join('users as sender', 'sender.id', '=', 'chat.sender_id')
             ->join('users as receiver', 'receiver.id', '=', 'chat.receiver_id');
+
         if (!empty(Request::get('search'))) {
             $search = Request::get('search');
             $getUserChat = $getUserChat->where(function ($query) use ($search) {
@@ -64,6 +66,8 @@ class ChatModel extends Model
                     ->orWhere('receiver.name', 'like', '%' . $search . '%')
                     ->orWhere('receiver.last_name', 'like', '%' . $search . '%');
             });
+
+            $getUserNotChat = User::getUserNotChat($sender_id, $search);
         }
         $getUserChat = $getUserChat->whereIn('chat.id', function ($query) use ($sender_id) {
             $query->selectRaw('max(chat.id)')->from('chat')
@@ -93,6 +97,21 @@ class ChatModel extends Model
             $data['profile_pic'] = $value->getConnectUser->getProfile();
             $data['messagecount'] = $value->CountMessage($value->connect_user_id, $sender_id);
             $result[] = $data;
+        }
+        if (!empty($getUserNotChat)) {
+            foreach ($getUserNotChat as $value) {
+                $dataU = array();
+                $dataU['id'] = $value->id;
+                $dataU['message'] = null;
+                $dataU['created_date'] = $value->updated_at;
+                $dataU['user_id'] = $value->id;
+                $dataU['is_online'] = $value->OnlineUser();
+                $dataU['updated_at'] = $value->updated_at;
+                $dataU['name'] = $value->name . ' ' . $value->last_name;
+                $dataU['profile_pic'] = $value->getProfile();
+                $dataU['messagecount'] = 0;
+                $result[] = $dataU;
+            }
         }
         return $result;
     }

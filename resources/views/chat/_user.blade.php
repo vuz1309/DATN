@@ -5,7 +5,7 @@
         id="{{ $user['user_id'] }}">
 
         {{-- <a class="clearfix active" href="{{ url('chat?receiver_id=' . $user['user_id']) }}"> --}}
-        <img src="{{ $user['profile_pic'] }}" alt="avatar">
+        <img style="height: 45px; " src="{{ $user['profile_pic'] }}" alt="avatar">
         <div class="about">
             <div class="name">{{ $user['name'] }}
                 @if (!empty($user['messagecount']))

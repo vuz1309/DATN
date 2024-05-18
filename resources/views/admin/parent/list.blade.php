@@ -121,6 +121,8 @@
                                                           class="btn btn-danger">Xóa</a>
                                                       <a href="{{ url('admin/parent/my-student/' . $value->id) }}"
                                                           class="btn btn-warning">Học sinh</a>
+                                                      <a href="{{ url('chat?receiver_id=' . $value->id) }}"
+                                                          class="btn btn-info">Trò chuyện</a>
                                                   </td>
                                               </tr>
                                           @endforeach

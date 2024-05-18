@@ -8,8 +8,9 @@
         <form enctype="multipart/form-data" action="" id="submit_message" method="post" class="input-group mb-0">
             {{ csrf_field() }}
             <div id="FileDisplay"
-                style="position: absolute; top: -34px; left: 0; z-index: 999; display: none; text-align: right; width: 100%">
-
+                style="position: absolute; top: -34px; left: 0; z-index: 999; display: none; padding: 8px;  text-align: right; width: 100%">
+                <span id="FileDisplayContent"></span>
+                <span id="FileDisplayRemove" style="color: red; cursor: pointer"> <i class="fas fa-times"></i></span>
             </div>
             <input type="hidden" name="receiver_id" value="{{ $getReceiver->id }}" />
             <div id="send_message_btn" class="input-group-prepend">

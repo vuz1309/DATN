@@ -442,4 +442,22 @@ class User extends Authenticatable
 
         return $newCode;
     }
+
+    public static function getUserNotChat($sender_id, $search)
+    {
+        $usersWithoutChat = User::whereNotIn('id', function ($query) use ($sender_id) {
+            $query->select('sender_id')
+                ->from('chat')
+                ->where(function ($subQuery) use ($sender_id) {
+                    $subQuery->where('sender_id', $sender_id)
+                        ->orWhere('receiver_id', $sender_id);
+                });
+        })
+            ->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('last_name', 'like', '%' . $search . '%');
+            })
+            ->get();
+        return $usersWithoutChat;
+    }
 }

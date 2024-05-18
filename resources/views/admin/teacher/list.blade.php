@@ -156,6 +156,8 @@
                                                           class="btn btn-primary">Sửa</a>
                                                       <a href="{{ url('admin/teacher/delete/' . $value->id) }}"
                                                           class="btn btn-danger">Xóa</a>
+                                                      <a href="{{ url('chat?receiver_id=' . $value->id) }}"
+                                                          class="btn btn-info">Trò chuyện</a>
                                                   </td>
 
 

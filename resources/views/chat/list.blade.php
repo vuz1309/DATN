@@ -398,7 +398,7 @@
                         $('#AppendMessage').append(data.success);
                         $('#message_text').val('');
                         $('#file_name').val('');
-                        $('#FileDisplay').html('');
+                        $('#FileDisplayContent').html('');
                         $('#FileDisplay').hide();
                         scrolldown();
                         showLoading(false);
@@ -462,10 +462,20 @@
             $('#file_name').trigger('click');
         });
         $('body').delegate('#file_name', 'change', function(e) {
-            const filename = this.files[0].name;
-            console.log('file:', filename);
-            $('#FileDisplay').html(filename);
-            $('#FileDisplay').show();
+            if (this.files && this.files.length) {
+                const filename = this.files[0].name;
+                console.log('file:', filename);
+                $('#FileDisplayContent').html(filename);
+                $('#FileDisplay').show();
+            } else {
+                $('#FileDisplay').hide();
+            }
+
+        });
+        $('#FileDisplayRemove').click(function(e) {
+            $('#file_name').val(null);
+            $('#FileDisplay').hide();
+            console.log($('#file_name').val())
         });
     </script>
 
@@ -492,8 +502,8 @@
                                         <div class="message my-message ">  ${data.message || ''} 
                                            
                                                 ${data.file_path ? `<div>
-                                                                                                                                                                                                                                <a href="${data.file_path}" download="" target="_blank">Tải xuống</a>
-                                                                                                                                                                                                                            </div>` : ''}
+                                                                                                                                                                                                                                                                    <a href="${data.file_path}" download="" target="_blank">Tải xuống</a>
+                                                                                                                                                                                                                                                                </div>` : ''}
                                           
 
                                         </div>

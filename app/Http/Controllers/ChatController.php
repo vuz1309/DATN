@@ -28,9 +28,7 @@ class ChatController extends Controller
         $sender_id = Auth::user()->id;
         if (!empty($request->receiver_id)) {
             $receiver_id = $request->receiver_id;
-            // if($receiver_id == $sender_id){
-            //     return redirect()->back()->with('error', 'Nhắn tin với người khác.');
-            // }
+
             ChatModel::updateCount(Auth::user()->id, $request->receiver_id);
             $data['getReceiver'] = User::getSingle($request->receiver_id);
             $data['getChat'] = ChatModel::getMessage($request->receiver_id, $sender_id, $request->page);
