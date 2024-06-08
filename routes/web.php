@@ -46,7 +46,7 @@ Route::post('forgot-password', [AuthController::class, 'PostForgotpassword']);
 Route::get('reset/{token}', [AuthController::class, 'reset']);
 Route::post('reset/{token}', [AuthController::class, 'PostReset']);
 Route::get('student/paypal/payment_cancel', [FeeCollectitonController::class, 'paymenft_cancel']);
-
+Route::post('admin/class_timeable/get_subject', [ClassTimeableController::class, 'getSubject']);
 
 Route::middleware(['common'])->group(function () {
     Route::get('download/student_template', [StudentController::class, 'downloadTemplateImport']);
@@ -168,7 +168,6 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('admin/class_timeable/list', [ClassTimeableController::class, 'list']);
     Route::get('admin/class_timeable/add', [ClassTimeableController::class, 'add']);
-    Route::post('admin/class_timeable/get_subject', [ClassTimeableController::class, 'getSubject']);
     // Route::post('admin/exam/get_class', [ExamModel::class, 'exam_get_class']);
 
     Route::post('admin/class_timeable/add', [ClassTimeableController::class, 'PostAdd']);
@@ -263,7 +262,6 @@ Route::middleware(['teacher'])->group(function () {
     Route::post('teacher/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
     Route::get('teacher/attendance/report', [AttendanceController::class, 'teacher_attendance_report']);
 
-    Route::post('admin/class_timeable/get_subject', [ClassTimeableController::class, 'getSubject']);
     Route::post('admin/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
 
     Route::get('teacher/homework/homework', [HomeworkController::class, 'list_teacher']);
