@@ -10,8 +10,8 @@
                           <h1>Sửa thông tin học sinh</h1>
                       </div>
                       <!-- <div class="col-sm-6" style="text-align: right;">
-                                                                                             <a href="{{ url('admin/dashboard') }}"></a>
-                                                                                           </div> -->
+                                                                                                 <a href="{{ url('admin/dashboard') }}"></a>
+                                                                                               </div> -->
                   </div>
               </div><!-- /.container-fluid -->
           </section>
@@ -59,7 +59,7 @@
 
 
 
-                                          <div class="form-group col-md-6">
+                                          {{-- <div class="form-group col-md-6">
                                               <label for="class_id">Lớp <span style="color:red;">*</span></label>
                                               <select class="form-control" required name="class_id">
                                                   <option value="">Chọn lớp học</option>
@@ -68,7 +68,7 @@
                                                           value="{{ $class->id }}">{{ $class->name }}</option>
                                                   @endforeach
                                               </select>
-                                          </div>
+                                          </div> --}}
 
                                           <div class="form-group col-md-6">
                                               <label for="gender">Giới tính</label>

@@ -7,11 +7,11 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Thêm mới lớp học</h1>
+                          <h1>Thêm lớp học</h1>
                       </div>
                       <!-- <div class="col-sm-6" style="text-align: right;">
-                                                                        <a href="{{ url('admin/dashboard') }}"></a>
-                                                                      </div> -->
+                                                                                                                                                                                                            <a href="{{ url('admin/dashboard') }}"></a>
+                                                                                                                                                                                                          </div> -->
                   </div>
               </div><!-- /.container-fluid -->
           </section>
@@ -35,6 +35,19 @@
                                           <input name="name" type="text" required class="form-control" id="name"
                                               placeholder="">
                                           <div style="color: red;">{{ $errors->first('email') }}</div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="name">Ngày bắt đầu (Khai giảng) <span
+                                                  style="color:red;">*</span></label>
+                                          <input name="start_date" type="date" required class="form-control"
+                                              id="start_date" placeholder="">
+                                          <div style="color: red;">{{ $errors->first('start_date') }}</div>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="name">Ngày kết thúc <span style="color:red;">*</span></label>
+                                          <input name="end_date" type="text" required class="form-control" id="end_date"
+                                              placeholder="">
+                                          <div style="color: red;">{{ $errors->first('end_date') }}</div>
                                       </div>
                                       <div class="form-group">
                                           <label for="fee">Học phí <span style="color:red;">*</span></label>
@@ -73,29 +86,51 @@
   @section('script')
       <script type="text/javascript">
           $(function() {
+              // Thêm phương thức kiểm tra end_date lớn hơn start_date
+              $.validator.addMethod("checkEndDate", function(value, element) {
+                  var startDate = $('#start_date').val(); // Lấy giá trị start_date
+                  var endDate = value; // Giá trị end_date
+
+                  // Chuyển đổi định dạng ngày thành đối tượng Date
+                  var start = new Date(startDate);
+                  var end = new Date(endDate);
+
+                  // Kiểm tra end_date lớn hơn start_date
+                  return end > start;
+              }, 'Ngày kết thúc phải lớn hơn ngày bắt đầu.');
 
               $('#form').validate({
                   rules: {
                       name: {
                           required: true,
-
                       },
                       fee: {
                           required: true,
-
+                          min: 0
                       },
+                      end_date: {
+                          required: true,
+                          checkEndDate: true // Thêm kiểm tra checkEndDate cho end_date
+                      },
+                      start_date: {
+                          required: true
+                      }
                   },
                   messages: {
                       name: {
                           required: 'Không được để trống',
-
-
                       },
                       fee: {
                           required: 'Không được để trống',
-
-
+                          min: 'Học phí phải lớn hơn 0'
                       },
+                      end_date: {
+                          required: 'Không được để trống',
+                          checkEndDate: 'Ngày kết thúc phải lớn hơn ngày bắt đầu.'
+                      },
+                      start_date: {
+                          required: 'Không được để trống',
+                      }
                   },
                   errorElement: 'span',
                   errorPlacement: function(error, element) {

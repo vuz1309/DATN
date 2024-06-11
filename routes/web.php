@@ -20,8 +20,6 @@ use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\FeeCollectitonController;
 use App\Http\Controllers\HomeworkController;
-use App\Models\ExamModel;
-use App\Models\ExamScheduleModel;
 use App\Models\MarksGradeModel;
 use Illuminate\Http\Request;
 /*
@@ -56,7 +54,7 @@ Route::middleware(['common'])->group(function () {
     Route::post('get_chat_search_user', [ChatController::class, 'get_chat_search_user']);
 });
 
-
+Route::post('admin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
 
 Route::get('/validate-percent', function (Request $request) {
     $percent = $request->input('percent');
@@ -202,7 +200,7 @@ Route::middleware(['admin'])->group(function () {
 
     Route::get('admin/examinations/marks_register', [ExaminationsController::class, 'marks_register']);
     Route::post('admin/examinations/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
-    Route::post('admin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
+
 
 
     Route::get('admin/attendance/student', [AttendanceController::class, 'attendance_student']);
@@ -256,7 +254,7 @@ Route::middleware(['teacher'])->group(function () {
 
     Route::get('teacher/marks_register', [ExaminationsController::class, 'marks_register_teacher']);
     Route::post('admin/examinations/submit_marks_register', [ExaminationsController::class, 'submit_marks_register']);
-    Route::post('admin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
+    // Route::post('admin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
 
     Route::get('teacher/attendance/student', [AttendanceController::class, 'teacher_attendance_student']);
     Route::post('teacher/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);

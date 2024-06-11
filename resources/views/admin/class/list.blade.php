@@ -74,6 +74,9 @@
                                           <tr>
                                               <th style="width: 10px">#</th>
                                               <th>Lớp</th>
+                                              <th>Ngày bắt đầu</th>
+                                              <th>Ngày kết thúc</th>
+                                              <th>Số học viên</th>
                                               <th>Học phí</th>
                                               <th>Trạng thái</th>
                                               <th>Tạo bởi</th>
@@ -86,6 +89,8 @@
                                               <tr>
                                                   <td>{{ $value->id }}</td>
                                                   <td>{{ $value->name }}</td>
+                                                  <td>{{ $value->start_date }}</td>
+                                                  <td>{{ $value->end_date }}</td>
                                                   <td>{{ number_format($value->fee) }} đ</td>
                                                   <td>
                                                       @if ($value->status == 0)
@@ -102,6 +107,8 @@
                                                           class="btn btn-primary">Sửa</a>
                                                       <a href="{{ url('admin/class/delete/' . $value->id) }}"
                                                           class="btn btn-danger">Xóa</a>
+                                                      <a href="{{ url('admin/class/addStudent/' . $value->id) }}"
+                                                          class="btn btn-info">Tuyển sinh</a>
                                                   </td>
                                               </tr>
                                           @endforeach
