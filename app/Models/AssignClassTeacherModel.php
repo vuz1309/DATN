@@ -190,7 +190,7 @@ class AssignClassTeacherModel extends Model
         return $result;
     }
 
-    // Lấy ra lịch của môn học trong ngày hiện tại
+    // Lấy ra lịch của Khóa học trong ngày hiện tại
     public function getClassSubjectTimeable($class_id, $subject_id)
     {
         // Id ngày hiện tại trong tuần

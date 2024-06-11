@@ -7,11 +7,8 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Thêm mới lớp học</h1>
+                          <h1>Sửa lớp học</h1>
                       </div>
-                      <!-- <div class="col-sm-6" style="text-align: right;">
-                                                                                    <a href="{{ url('admin/dashboard') }}"></a>
-                                                                                  </div> -->
                   </div>
               </div><!-- /.container-fluid -->
           </section>
@@ -39,14 +36,16 @@
                                       <div class="form-group">
                                           <label for="name">Ngày bắt đầu (Khai giảng) <span
                                                   style="color:red;">*</span></label>
-                                          <input value="{{ $getRecord->start_date }}" name="start_date" type="date"
-                                              required class="form-control" id="start_date" placeholder="">
+                                          <input value="{{ Carbon\Carbon::parse($getRecord->start_date)->format('Y-m-d') }}"
+                                              name="start_date" type="date" required class="form-control" id="start_date"
+                                              placeholder="">
                                           <div style="color: red;">{{ $errors->first('start_date') }}</div>
                                       </div>
                                       <div class="form-group">
                                           <label for="name">Ngày kết thúc <span style="color:red;">*</span></label>
-                                          <input value="{{ $getRecord->end_date }}" name="end_date" type="text" required
-                                              class="form-control" id="end_date" placeholder="">
+                                          <input value="{{ Carbon\Carbon::parse($getRecord->end_date)->format('Y-m-d') }}"
+                                              name="end_date" type="date" required class="form-control" id="end_date"
+                                              placeholder="">
                                           <div style="color: red;">{{ $errors->first('end_date') }}</div>
                                       </div>
                                       <div class="form-group">

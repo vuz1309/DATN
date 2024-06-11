@@ -7,7 +7,7 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Lớp học - môn học (Tổng: {{ $getRecord->total() }})</h1>
+                          <h1>Lớp học - Khóa học (Tổng: {{ $getRecord->total() }})</h1>
                       </div>
                   </div>
               </div><!-- /.container-fluid -->
@@ -31,7 +31,7 @@
                                   <div class="card-body">
                                       <div class="row">
                                           <div class="form-group col-md-3">
-                                              <label for="subject_name">Tên môn học</label>
+                                              <label for="subject_name">Tên Khóa học</label>
                                               <input name="subject_name" value="{{ Request::get('subject_name') }}"
                                                   type="text" class="form-control" id="subject_name" placeholder="">
                                           </div>
@@ -56,7 +56,7 @@
 
 
                           <div class="card">
-                              <div class="card-header">Lớp học - môn học</div>
+                              <div class="card-header">Lớp học - Khóa học</div>
                               <!-- /.card-header -->
                               <div class="card-body p-0">
                                   @if (empty($noUseTools))
@@ -66,7 +66,7 @@
                                       <thead>
                                           <tr>
                                               <th>Lớp học</th>
-                                              <th>Môn học</th>
+                                              <th>Khóa học</th>
                                               <th>Lịch hôm nay</th>
                                               <th>Thể loại</th>
                                               <th>Hành động</th>

@@ -36,7 +36,7 @@
                                           <label style="font-weight:700;">
                                               <input disabled {{ $getRecord->is_all ? 'checked' : '' }} class="allCheckbox"
                                                   id="allCheckbox" name="allCheckbox" type="checkbox">Cho tất cả các lớp +
-                                              môn học</input>
+                                              Khóa học</input>
                                           </label>
                                       </div>
                                       <div id="optionClassSubject">
@@ -46,7 +46,7 @@
                                                   value="{{ $getRecord->class_name }}">
                                           </div>
                                           <div class="form-group ">
-                                              <label for="subject_id">Môn học<span style="color: red;">*</span></label>
+                                              <label for="subject_id">Khóa học<span style="color: red;">*</span></label>
                                               <input type="text" readonly class="form-control"
                                                   value="{{ $getRecord->subject_name }}">
                                           </div>

@@ -10,8 +10,8 @@
                           <h1>Thêm lớp học</h1>
                       </div>
                       <!-- <div class="col-sm-6" style="text-align: right;">
-                                                                                                                                                                                                            <a href="{{ url('admin/dashboard') }}"></a>
-                                                                                                                                                                                                          </div> -->
+                                                                                                                                                                                                                        <a href="{{ url('admin/dashboard') }}"></a>
+                                                                                                                                                                                                                      </div> -->
                   </div>
               </div><!-- /.container-fluid -->
           </section>
@@ -45,7 +45,7 @@
                                       </div>
                                       <div class="form-group">
                                           <label for="name">Ngày kết thúc <span style="color:red;">*</span></label>
-                                          <input name="end_date" type="text" required class="form-control" id="end_date"
+                                          <input name="end_date" type="date" required class="form-control" id="end_date"
                                               placeholder="">
                                           <div style="color: red;">{{ $errors->first('end_date') }}</div>
                                       </div>

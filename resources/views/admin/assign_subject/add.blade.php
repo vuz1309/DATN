@@ -7,7 +7,7 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Gán môn học cho lớp</h1>
+                          <h1>Gán Khóa học cho lớp</h1>
                       </div>
 
                   </div>
@@ -38,7 +38,7 @@
                                       </div>
 
                                       <div class="form-group">
-                                          <label>Môn học</label>
+                                          <label>Khóa học</label>
 
                                           @foreach ($getSubject as $index => $subject)
                                               <div

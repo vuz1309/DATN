@@ -260,7 +260,7 @@ class ExaminationsController extends Controller
             }
         }
 
-        $json['message'] = $validation == 0 ? 'Điểm đã được cập nhật thành công!' : 'Lưu thành công, nhưng tồn tại môn học có tổng điểm lớn hơn điểm tối đa!';
+        $json['message'] = $validation == 0 ? 'Điểm đã được cập nhật thành công!' : 'Lưu thành công, nhưng tồn tại Khóa học có tổng điểm lớn hơn điểm tối đa!';
         echo json_encode($json);
     }
 
@@ -384,7 +384,7 @@ class ExaminationsController extends Controller
 
                 $json['message'] = 'Điểm đã được cập nhật thành công!';
             } else {
-                $json['message'] = 'Tổng điểm lớn hơn điểm tối đa của môn học!';
+                $json['message'] = 'Tổng điểm lớn hơn điểm tối đa của Khóa học!';
             }
 
             echo json_encode($json);

@@ -65,7 +65,7 @@
                             <div class="inner">
                                 <h3>{{ $TotalSubject }}</h3>
 
-                                <p>Môn học</p>
+                                <p>Khóa học</p>
                             </div>
                             <div class="icon">
                                 <i class="nav-icon fas fa-table"></i>

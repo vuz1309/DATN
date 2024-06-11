@@ -7,7 +7,7 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Danh sách môn học các lớp (Tổng: {{ $getRecord->total() }})</h1>
+                          <h1>Danh sách Khóa học các lớp (Tổng: {{ $getRecord->total() }})</h1>
                       </div>
                       <div class="col-sm-6" style="text-align: right;">
                           <a class="btn btn-primary" href="{{ url('admin/assign_subject/add') }}">Thêm mới</a>
@@ -34,7 +34,7 @@
                                   <div class="card-body">
                                       <div class="row">
                                           <div class="form-group col-md-3">
-                                              <label for="subject_name">Tên môn học</label>
+                                              <label for="subject_name">Tên Khóa học</label>
                                               <input name="subject_name" value="{{ Request::get('subject_name') }}"
                                                   type="text" class="form-control" id="subject_name" placeholder="">
                                           </div>
@@ -83,7 +83,7 @@
                                           <tr>
                                               <th style="width: 10px">#</th>
                                               <th>Lớp học</th>
-                                              <th>Môn học</th>
+                                              <th>Khóa học</th>
                                               <th>Giáo viên dạy</th>
                                               <th>Trạng thái</th>
                                               <th>Tạo bởi</th>

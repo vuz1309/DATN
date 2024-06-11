@@ -32,7 +32,7 @@
                                           <thead>
                                               <tr>
 
-                                                  <th>Môn học</th>
+                                                  <th>Khóa học</th>
                                                   {{-- <th>Điểm trên lớp</th>
                                                   <th>Điểm về nhà</th>
                                                   <th>Điểm kiểm tra</th> --}}

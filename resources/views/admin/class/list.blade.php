@@ -89,8 +89,9 @@
                                               <tr>
                                                   <td>{{ $value->id }}</td>
                                                   <td>{{ $value->name }}</td>
-                                                  <td>{{ $value->start_date }}</td>
-                                                  <td>{{ $value->end_date }}</td>
+                                                  <td>{{ date('d-m-Y', strtotime($value->start_date)) }}</td>
+                                                  <td>{{ date('d-m-Y', strtotime($value->end_date)) }}</td>
+                                                  <td>{{ $value->total_enrollments }}</td>
                                                   <td>{{ number_format($value->fee) }} đ</td>
                                                   <td>
                                                       @if ($value->status == 0)

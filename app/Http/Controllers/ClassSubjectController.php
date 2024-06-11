@@ -14,7 +14,7 @@ class ClassSubjectController extends Controller
 {
     public function list()
     {
-        $data['header_title'] = 'Lớp-môn học';
+        $data['header_title'] = 'Lớp-Khóa học';
         $data['getRecord'] = ClassSubjectModel::getRecord();
         return view("admin.assign_subject.list", $data);
     }
@@ -50,7 +50,7 @@ class ClassSubjectController extends Controller
             }
             return redirect("admin/assign_subject/list")->with('success', 'Thêm mới thành công');
         } else {
-            return redirect()->back()->with('error', 'Môn học cho lớp không được rỗng!');
+            return redirect()->back()->with('error', 'Khóa học cho lớp không được rỗng!');
         }
     }
 

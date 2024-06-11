@@ -34,7 +34,7 @@
                                       <table id="tableList" class="table table-striped">
                                           <thead>
                                               <tr>
-                                                  <th>Môn học</th>
+                                                  <th>Khóa học</th>
                                                   <th>Ngày thi</th>
                                                   <th>Bắt đầu</th>
                                                   <th>Kết thúc</th>

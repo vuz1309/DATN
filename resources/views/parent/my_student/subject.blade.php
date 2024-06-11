@@ -7,7 +7,7 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Danh sách môn học của <span style="font-weight: bold;" class="blue">{{ $student->name }}
+                          <h1>Danh sách Khóa học của <span style="font-weight: bold;" class="blue">{{ $student->name }}
                                   {{ $student->last_name }}</span></h1>
                       </div>
 
@@ -33,7 +33,7 @@
                                   <div class="card-body">
                                       <div class="row">
                                           <div class="form-group col-md-3">
-                                              <label for="name">Tên môn học</label>
+                                              <label for="name">Tên Khóa học</label>
                                               <input name="name" value="{{ Request::get('name') }}" type="text"
                                                   class="form-control" id="name" placeholder="">
                                           </div>
@@ -78,7 +78,7 @@
                                       <thead>
                                           <tr>
                                               <th style="width: 10px">#</th>
-                                              <th>Môn học</th>
+                                              <th>Khóa học</th>
                                               <th>Thể loại</th>
                                               <th>Hành động</th>
                                           </tr>

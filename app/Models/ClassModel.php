@@ -22,8 +22,11 @@ class ClassModel extends Model
     static public function getRecord()
     {
         $return = self::select('class.*', 'users.name as created_by_name')
-            ->leftJoin('users', 'users.id', 'class.created_by')
-            ->where('class.is_delete', '=', 0);
+            ->selectRaw('COUNT(er.id) as total_enrollments')
+            ->leftJoin('users', 'users.id', '=', 'class.created_by')
+            ->leftJoin('enrollments as er', 'er.class_id', '=', 'class.id')
+            ->where('class.is_delete', '=', 0)
+            ->groupBy('class.id', 'users.name');
 
         if (!empty(Request::get('name'))) {
             $return = $return->where('name', 'LIKE', '%' . Request::get('name') . '%');
@@ -56,5 +59,15 @@ class ClassModel extends Model
         $return = $return->orderBy('class.id', 'desc')
             ->get();
         return $return;
+    }
+
+    public function getCountStudent()
+    {
+        $class_id = $this->id;
+        $return = self::select('enrollments*')
+            ->where('class.is_delete', '=', 0)
+            ->where('class.status', '=', 0);
+
+        return $class_id;
     }
 }

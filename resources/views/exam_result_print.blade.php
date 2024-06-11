@@ -125,10 +125,9 @@
                 <thead>
                     <tr>
 
-                        <th>Môn học</th>
+                        <th>Khóa học</th>
                         <th>Tổng điểm</th>
                         <th>Điểm đạt</th>
-
                         <th>Tổng kết</th>
 
                     </tr>

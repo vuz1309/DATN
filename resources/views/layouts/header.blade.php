@@ -141,7 +141,7 @@
                                  <a href="{{ url('admin/subject/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'subject') active @endif">
                                      <i class=" fas fa-book-open nav-icon"></i>
-                                     <p>Môn học</p>
+                                     <p>Khóa học</p>
                                  </a>
                              </li>
 
@@ -149,7 +149,7 @@
                                  <a href="{{ url('admin/assign_subject/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'assign_subject') active @endif">
                                      <i class="  fas fa-school nav-icon"></i>
-                                     <p>Lớp học - Môn học</p>
+                                     <p>Lớp học - Khóa học</p>
                                  </a>
                              </li>
 
@@ -397,7 +397,7 @@
                              class="nav-link @if (Request::segment(2) == 'my_class_subject') active @endif">
                              <i class=" nav-icon fas fa-tachometer-alt"></i>
                              <p>
-                                 Môn học - lớp
+                                 Khóa học - lớp
                              </p>
                          </a>
                      </li>
@@ -510,7 +510,7 @@
                              class="nav-link @if (Request::segment(2) == 'my_subject') active @endif">
                              <i class=" nav-icon fa fa-book-open"></i>
                              <p>
-                                 Môn học
+                                 Khóa học
                              </p>
                          </a>
                      </li>

@@ -39,7 +39,7 @@
 
                                           </div>
                                           <div class="form-group col-md-3">
-                                              <label for="subject_name">Môn học</label>
+                                              <label for="subject_name">Khóa học</label>
                                               <input value="{{ Request::get('subject_name') }}" type="text"
                                                   class="form-control" name='subject_name' />
 
@@ -91,7 +91,7 @@
                                           <tr>
                                               <th style="width: 10px">#</th>
                                               <th>Lớp</th>
-                                              <th>Môn học</th>
+                                              <th>Khóa học</th>
                                               <th>Bắt đầu</th>
                                               <th>Hạn cuối</th>
                                               <th>Tài liệu</th>

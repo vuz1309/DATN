@@ -33,6 +33,8 @@ class ClassController extends Controller
         $save->name = $request->name;
         $save->fee = $request->fee;
         $save->status = $request->status;
+        $save->start_date = $request->start_date;
+        $save->end_date = $request->end_date;
         $save->created_by = Auth::user()->id;
         $save->save();
 
@@ -45,6 +47,7 @@ class ClassController extends Controller
         if (!empty($record)) {
             $data['getRecord'] = $record;
             $data['header_title'] = 'Sửa lớp học';
+
             return view('admin.class.edit', $data);
         } else {
             abort(404);
@@ -64,6 +67,8 @@ class ClassController extends Controller
             $record->name = $request->name;
             $record->fee = $request->fee;
             $record->status = $request->status;
+            $record->start_date = $request->start_date;
+            $record->end_date = $request->end_date;
             $record->save();
             return redirect('admin/class/list')->with('success', 'Sửa thông tin lớp học thành công');
         } else {

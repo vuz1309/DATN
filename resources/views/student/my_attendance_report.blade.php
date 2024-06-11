@@ -57,7 +57,7 @@
 
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="subject_id">Môn học</label>
+                                            <label for="subject_id">Khóa học</label>
                                             <select id="getSubject" class="form-control getSubject" name="subject_id">
                                                 <option value="">----Chọn----</option>
                                                 @if (!empty($getSubject))
@@ -122,7 +122,7 @@
                                             <th>#</th>
                                             <th>Học sinh</th>
                                             <th>Lớp</th>
-                                            <th>Môn học</th>
+                                            <th>Khóa học</th>
                                             <th>Điểm danh</th>
                                             <th>Ngày điểm danh</th>
                                             <th>Người tạo</th>

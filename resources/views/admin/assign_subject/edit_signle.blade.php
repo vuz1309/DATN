@@ -7,11 +7,11 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Sửa gán môn học cho lớp</h1>
+                          <h1>Sửa gán Khóa học cho lớp</h1>
                       </div>
                       <!-- <div class="col-sm-6" style="text-align: right;">
-                                <a href="{{ url('admin/dashboard') }}"></a>
-                              </div> -->
+                                    <a href="{{ url('admin/dashboard') }}"></a>
+                                  </div> -->
                   </div>
               </div><!-- /.container-fluid -->
           </section>
@@ -41,7 +41,7 @@
                                       </div>
 
                                       <div class="form-group">
-                                          <label>Môn học</label>
+                                          <label>Khóa học</label>
 
                                           <select name="subject_id" class="form-control">
                                               @foreach ($getSubject as $subject)

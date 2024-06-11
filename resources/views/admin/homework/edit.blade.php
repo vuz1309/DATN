@@ -34,7 +34,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Môn học<span style="color: red">*</span></label>
+                                        <label for="">Khóa học<span style="color: red">*</span></label>
                                         <select required style="width: 100%;" name="subject_id"
                                             class="form-control getSubject">
                                             @foreach ($getSubject as $subject)

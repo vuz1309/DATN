@@ -17,6 +17,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClassTimeableController;
 use App\Http\Controllers\CommunicateController;
+use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\ExaminationsController;
 use App\Http\Controllers\FeeCollectitonController;
 use App\Http\Controllers\HomeworkController;
@@ -231,6 +232,8 @@ Route::middleware(['admin'])->group(function () {
     Route::post('admin/fee/fee_collection_report_export', [FeeCollectitonController::class, 'ExportFeeCollectionReport']);
     Route::post('admin/fee/fee_collection_export', [FeeCollectitonController::class, 'ExportFeeCollection']);
     Route::get('admin/fee/add_fees/delete/{id}', [FeeCollectitonController::class, 'delete_fee_collect']);
+    Route::get('admin/class/addStudent/{id}', [EnrollmentController::class, 'listEnrollments']);
+    Route::get('admin/enrollments/addStudent/{student_id}/{class_id}', [EnrollmentController::class, 'addStudentEnroll']);
 });
 
 Route::middleware(['teacher'])->group(function () {

@@ -12,14 +12,14 @@ class SubjectController extends Controller
 {
     public function list()
     {
-        $data['header_title'] = 'Môn học';
+        $data['header_title'] = 'Khóa học';
         $data['getRecord'] = SubjectModel::getRecord();
         return view("admin.subject.list", $data);
     }
 
     public function add()
     {
-        $data['header_title'] = 'Thêm mới môn học';
+        $data['header_title'] = 'Thêm mới Khóa học';
         return view("admin.subject.add", $data);
     }
 
@@ -38,7 +38,7 @@ class SubjectController extends Controller
         $save->created_by = Auth::user()->id;
         $save->save();
 
-        return redirect("admin/subject/list")->with('success', 'Thêm mới môn học thành công');
+        return redirect("admin/subject/list")->with('success', 'Thêm mới Khóa học thành công');
     }
 
     public function edit($id)
@@ -46,7 +46,7 @@ class SubjectController extends Controller
         $record = SubjectModel::single($id);
         if (!empty($record)) {
             $data['getRecord'] = $record;
-            $data['header_title'] = 'Sửa môn học';
+            $data['header_title'] = 'Sửa Khóa học';
             return view('admin.subject.edit', $data);
         } else {
             abort(404);
@@ -89,7 +89,7 @@ class SubjectController extends Controller
     public function myStudentSubject()
     {
         $class_id = Auth::user()->class_id;
-        $data['header_title'] = 'Môn học';
+        $data['header_title'] = 'Khóa học';
         if (!empty($class_id)) {
             $data['getRecord'] = ClassSubjectModel::mySubject($class_id);
 
@@ -101,7 +101,7 @@ class SubjectController extends Controller
 
     public function parentStudentSubject($student_id)
     {
-        $data['header_title'] = 'Môn học';
+        $data['header_title'] = 'Khóa học';
         $std = User::getSingle($student_id);
 
         if (!empty($std) && !empty($std->class_id)) {

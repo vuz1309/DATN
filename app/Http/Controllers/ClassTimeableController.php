@@ -49,9 +49,9 @@ class ClassTimeableController extends Controller
     {
         $getSubject = ClassSubjectModel::mySubject($request->class_id);
         if ($getSubject->count() < 1) {
-            $html = "<option value = ''>Không có môn học</option>";
+            $html = "<option value = ''>Không có Khóa học</option>";
         } else {
-            $html = "<option value = ''>Chọn môn học</option>";
+            $html = "<option value = ''>Chọn Khóa học</option>";
             foreach ($getSubject as $subject) {
                 $html .= "<option value = '" . $subject->subject_id . "'>" . $subject->subject_name . "</option>";
             }
@@ -66,9 +66,9 @@ class ClassTimeableController extends Controller
     {
         $getSubject = ClassSubjectModel::teacherClassSubject($request->class_id, Auth::user()->id);
         if ($getSubject->count() < 1) {
-            $html = "<option value = ''>Không có môn học</option>";
+            $html = "<option value = ''>Không có Khóa học</option>";
         } else {
-            $html = "<option value = ''>Chọn môn học</option>";
+            $html = "<option value = ''>Chọn Khóa học</option>";
             foreach ($getSubject as $subject) {
                 $html .= "<option value = '" . $subject->subject_id . "'>" . $subject->subject_name . "</option>";
             }
@@ -173,7 +173,7 @@ class ClassTimeableController extends Controller
 
     public function parentClassSubjectTimeable($subject_id, $class_id, $student_id)
     {
-        $data['header_title'] = 'Thời khóa biểu môn học';
+        $data['header_title'] = 'Thời khóa biểu Khóa học';
         $data['getSubject'] = SubjectModel::single($subject_id);
         $data['getClass'] = ClassModel::single($class_id);
         $data['getStudent'] = User::getSingle($student_id);

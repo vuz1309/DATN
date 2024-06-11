@@ -21,7 +21,7 @@ class AssignClassTeacherController extends Controller
     public function add()
     {
         $data['getClass'] = ClassModel::getClass();
-        $data['getTeacher'] = User::getTeacherClass();
+        $data['getTeacher'] = User::getAllTeacher();
         $data['header_title'] = 'Thêm giáo viên - Lớp';
         return view('admin.assign_class_teacher.add', $data);
     }
@@ -58,7 +58,7 @@ class AssignClassTeacherController extends Controller
             $data['getRecord'] = $record;
             $data['getClass'] = ClassModel::getClass();
             $data['getAssignTeacherID'] = AssignClassTeacherModel::getByClass($record->class_id);
-            $data['getTeachers'] = User::getTeacherClass();
+            $data['getTeachers'] = User::getAllTeacher();
             $data['header_title'] = 'Sửa giáo viên - Lớp';
             return view('admin.assign_class_teacher.edit', $data);
         } else {
@@ -114,7 +114,7 @@ class AssignClassTeacherController extends Controller
         if (!empty($record)) {
             $data['getRecord'] = $record;
             $data['getClass'] = ClassModel::getClass();
-            $data['getTeacher'] = User::getTeacherClass();
+            $data['getTeacher'] = User::getAllTeacher();
             $data['header_title'] = 'Sửa chủ nhiệm';
             return view('admin.assign_class_teacher.edit_signle', $data);
         } else {
@@ -142,7 +142,7 @@ class AssignClassTeacherController extends Controller
 
     public function myClassSubject()
     {
-        $data['header_title']  = 'Môn học - lớp';
+        $data['header_title']  = 'Khóa học - lớp';
         $data['getRecord'] = AssignClassTeacherModel::getMyClassSubject(Auth::user()->id);
         return view('teacher.my_class_subject', $data);
     }

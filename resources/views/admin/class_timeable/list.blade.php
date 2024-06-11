@@ -47,7 +47,7 @@
                                           </div>
 
                                           <div class="form-group col-md-3">
-                                              <label for="subject_id">Môn học</label>
+                                              <label for="subject_id">Khóa học</label>
                                               <select class="form-control getSubject" required name="subject_id">
                                                   <option value="">Chọn lớp học</option>
                                                   @if (!empty($getSubject))

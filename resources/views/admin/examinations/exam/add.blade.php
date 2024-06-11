@@ -35,7 +35,7 @@
                                       <div class="form-group">
                                           <label style="font-weight:700;">
                                               <input class="allCheckbox" id="allCheckbox" name="allCheckbox"
-                                                  type="checkbox">Cho tất cả các lớp + môn học</input>
+                                                  type="checkbox">Cho tất cả các lớp + Khóa học</input>
                                           </label>
                                       </div>
                                       <div id="optionClassSubject">
@@ -49,7 +49,7 @@
                                               </select>
                                           </div>
                                           <div class="form-group ">
-                                              <label for="subject_id">Môn học<span style="color: red;">*</span></label>
+                                              <label for="subject_id">Khóa học<span style="color: red;">*</span></label>
                                               <select required id="getSubject" class="form-control getSubject"
                                                   name="subject_id">
                                                   <option value="">Chọn lớp trước</option>

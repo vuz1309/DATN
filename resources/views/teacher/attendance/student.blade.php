@@ -49,7 +49,7 @@
 
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="subject_id">Môn học</label>
+                                            <label for="subject_id">Khóa học</label>
                                             <select id="getSubject" class="form-control getSubject" name="subject_id">
                                                 <option value="">----Chọn----</option>
                                                 @if (!empty($getSubject))
@@ -159,7 +159,7 @@
                                         @else
                                             <tr>
                                                 <td rowspan="10">Không có học sinh <br /> <span
-                                                        style="font-style: italic">(Vui lòng chọn đầy đủ lớp, môn học, ngày
+                                                        style="font-style: italic">(Vui lòng chọn đầy đủ lớp, Khóa học, ngày
                                                         điểm danh)</span> </td>
                                                 <td>
 

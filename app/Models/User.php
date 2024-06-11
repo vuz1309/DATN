@@ -105,7 +105,7 @@ class User extends Authenticatable
             ->count();
     }
 
-    static public function getTeacherClass()
+    static public function getAllTeacher()
     {
         $return = self::select('users.*')
             ->where('users.user_type', '=', 2)
@@ -134,9 +134,6 @@ class User extends Authenticatable
                     ->orWhere('users.last_name', 'like', $name);
             });
         }
-        if (!empty(Request::get('class_id'))) {
-            $return = $return->where('users.class_id', '=',  Request::get('class_id'));
-        }
         if (!empty(Request::get('mobile_number'))) {
             $return = $return->where('users.mobile_number', '=',  Request::get('mobile_number'));
         }
@@ -151,8 +148,7 @@ class User extends Authenticatable
     }
     static public function getStudents($remove_paging = false)
     {
-        $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
-            ->join('class', 'class.id', '=', 'users.class_id', 'left')
+        $return = self::select('users.*',  'parent.name as parent_name', 'parent.last_name as parent_last_name')
             ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
             ->where('users.user_type', '=', 3)->where('users.is_delete', '=', 0);
 
@@ -167,9 +163,7 @@ class User extends Authenticatable
                     ->orWhere('users.last_name', 'like', $name);
             });
         }
-        if (!empty(Request::get('class_id'))) {
-            $return = $return->where('users.class_id', '=',  Request::get('class_id'));
-        }
+
         if (!empty(Request::get('caste'))) {
             $return = $return->where('users.caste', '=',  Request::get('caste'));
         }
@@ -182,7 +176,7 @@ class User extends Authenticatable
         if ($remove_paging == true) {
             return $return->orderBy('users.id', 'desc')->get();
         }
-        $return = $return->orderBy('users.id', 'desc')->paginate(20);
+        $return = $return->orderBy('users.id', 'desc')->paginate(10);
 
         return $return;
     }
@@ -190,8 +184,8 @@ class User extends Authenticatable
     static public function getStudentClass($class_id)
     {
         $return = self::select('users.*')
-            ->where('users.user_type', '=', 3)
-            ->where('users.class_id', '=', $class_id)
+            ->join('enrollments as er', 'er.student_id', '=', 'users.id')
+            ->where('er.class_id', '=', $class_id)
             ->where('users.is_delete', '=', 0)
             ->orderBy('users.id', 'desc')
             ->get();
@@ -207,7 +201,8 @@ class User extends Authenticatable
     static public function getSingleClass($id)
     {
         return self::select('users.*', 'class.fee as amount')
-            ->join('class', 'class.id', 'users.class_id')
+            ->join('enrollments as er', 'er.student_id', '=', 'users.id')
+            ->join('class', 'class.id', 'er.class_id')
             ->where('users.id', '=', $id)
             ->first();
     }
@@ -227,8 +222,7 @@ class User extends Authenticatable
     static public function getSearchStudents($remove_paging)
     {
 
-        $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
-            ->join('class', 'class.id', '=', 'users.class_id', 'left')
+        $return = self::select('users.*', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
             ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
             ->where('users.user_type', '=', 3)
             ->whereNull('users.parent_id')
@@ -260,8 +254,7 @@ class User extends Authenticatable
     static public function getMyStudent($parent_id)
     {
 
-        $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name')
-            ->join('class', 'class.id', '=', 'users.class_id', 'left')
+        $return = self::select('users.*', 'parent.name as parent_name')
             ->join('users as parent', 'parent.id', '=', 'users.parent_id')
             ->where('users.user_type', '=', 3)
             ->where('users.parent_id', '=', $parent_id)
@@ -278,10 +271,10 @@ class User extends Authenticatable
     static public function getTeacherStudent($teacher_id)
     {
 
-        $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
-            ->join('class', 'class.id', '=', 'users.class_id', 'left')
+        $return = self::select('users.*', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
             ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
-            ->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'users.class_id')
+            ->join('enrollments as er', 'er.student_id', '=', 'users.id')
+            ->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'er.class_id')
             ->where('users.user_type', '=', 3)
             ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
             ->where('assign_class_teacher.status', '=', '0')
@@ -291,9 +284,6 @@ class User extends Authenticatable
 
         if (!empty(Request::get('email'))) {
             $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
-        }
-        if (!empty(Request::get('class_id'))) {
-            $return = $return->where('users.class_id', '=', Request::get('class_id'));
         }
 
         if (!empty(Request::get('roll_number'))) {
@@ -322,9 +312,9 @@ class User extends Authenticatable
     {
 
         $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
-            ->join('class', 'class.id', '=', 'users.class_id', 'left')
+            ->join('enrollments as er', 'er.student_id', '=', 'users.id')
+            ->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'er.class_id')
             ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
-            ->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'users.class_id')
             ->where('users.user_type', '=', 3)
             ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
             ->where('assign_class_teacher.status', '=', '0')
@@ -378,10 +368,19 @@ class User extends Authenticatable
     }
     static public function getCollectFeeStudent($remove_paging = false)
     {
-        $return = self::select('users.*', 'class.name as class_name', 'class.fee as amount')
-            ->join('class', 'class.id', '=', 'users.class_id')
+        // $return = self::select('users.*', 'class.fee as amount')
+        //     ->join('class', 'class.id', '=', 'er.class_id')
+        //     ->join('enrollments as er', 'er.student_id', '=', 'users.id')
+        //     ->where('users.user_type', '=', 3)
+        //     ->where('users.is_delete', '=', 0)
+        //     ->orderBy('users.name', 'desc');
+        $return = self::select('users.*')
+            ->selectRaw('SUM(class.fee) as amount')
+            ->join('enrollments as er', 'er.student_id', '=', 'users.id')
+            ->join('class', 'class.id', '=', 'er.class_id')
             ->where('users.user_type', '=', 3)
             ->where('users.is_delete', '=', 0)
+            ->groupBy('users.id')
             ->orderBy('users.name', 'desc');
 
         if (!empty(Request::get('email'))) {
@@ -395,12 +394,7 @@ class User extends Authenticatable
                     ->orWhere('users.last_name', 'like', $name);
             });
         }
-        if (!empty(Request::get('class_id'))) {
-            $return = $return->where('users.class_id', '=',  Request::get('class_id'));
-        }
-        if (!empty(Request::get('caste'))) {
-            $return = $return->where('users.caste', '=',  Request::get('caste'));
-        }
+
         if (!empty(Request::get('gender'))) {
             $return = $return->where('users.gender', '=',  Request::get('gender'));
         }
@@ -411,7 +405,7 @@ class User extends Authenticatable
         if ($remove_paging == true) {
             $return->get();
         }
-        return $return->paginate(20);
+        return $return->paginate(10);
     }
 
     public static function getSuggestionCode()
@@ -459,5 +453,48 @@ class User extends Authenticatable
             })
             ->get();
         return $usersWithoutChat;
+    }
+
+    public function isInClass($class_id)
+    {
+        return EnrollmentModel::where('student_id', $this->id)
+            ->where('class_id', $class_id)
+            ->exists();
+    }
+
+    static public function getStudentNeedEnroll($class_id)
+    {
+        $return = self::select('users.*', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
+            ->selectRaw('IF(er.id IS NOT NULL, 1, 0) as isRegisted')
+            ->leftJoin('users as parent', 'parent.id', '=', 'users.parent_id')
+            ->leftJoin('enrollments as er', function ($join) use ($class_id) {
+                $join->on('er.student_id', '=', 'users.id')
+                    ->where('er.class_id', '=', $class_id);
+            })
+            ->where('users.user_type', '=', 3)
+            ->where('users.is_delete', '=', 0)
+            ->orderBy('users.id');
+
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
+        }
+
+        if (!empty(Request::get('name'))) {
+            $name = '%' . Request::get('name') . '%';
+            $return = $return->where(function ($query) use ($name) {
+                $query->where('users.name', 'like', $name)
+                    ->orWhere('users.last_name', 'like', $name);
+            });
+        }
+        if (!empty(Request::get('gender'))) {
+            $return = $return->where('users.gender', '=',  Request::get('gender'));
+        }
+        if (!empty(Request::get('admission_date'))) {
+            $return = $return->where('users.admission_date', '=', Request::get('admission_date'));
+        }
+
+        $return = $return->orderBy('users.id', 'desc')->paginate(15);
+
+        return $return;
     }
 }

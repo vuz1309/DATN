@@ -78,7 +78,6 @@
                               <div class="card">
 
                                   <div class="card-header">
-                                      <h3>Lịch thi</h3>
                                   </div>
                                   <div style="overflow-x: auto;" class="card-body p-0">
                                       <div id="searchBox" style="padding-left: 16px; padding-top: 8px"></div>
@@ -95,7 +94,7 @@
                                                           {{ $subject->full_marks }})
                                                       </th>
                                                   @endforeach
-                                                  <th>Hành động</th>
+                                                  <th></th>
                                               </tr>
                                           </thead>
                                           <tbody>
@@ -233,7 +232,7 @@
                                                                   @endphp
                                                               @endforeach
                                                               <td>
-                                                                  <button class="btn btn-success">Lưu</button>
+                                                                  {{-- <button class="btn btn-success">Lưu</button> --}}
                                                                   <div>
                                                                       <b style="color: green">Đạt: </b>
                                                                       {{ $totalPass }}
