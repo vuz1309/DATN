@@ -27,7 +27,11 @@ class VnPayModel extends PaymentMoel
         $vnp_TmnCode = config('vnPay.vnp_TmnCode');
         $vnp_HashSecret = config('vnPay.vnp_HashSecret');
         $vnp_Url = config('vnPay.vnp_Url');
-        $vnp_Returnurl = config('vnPay.vnp_Returnurl');
+        if (!empty($params['ReturnURL'])) {
+            $vnp_Returnurl = $params['ReturnURL'];
+        } else {
+            $vnp_Returnurl = config('vnPay.vnp_Returnurl');
+        }
         $vnp_apiUrl = config('vnPay.vnp_apiUrl');
         $apiUrl = config('vnPay.apiUrl');
 

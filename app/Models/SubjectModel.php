@@ -79,11 +79,10 @@ class SubjectModel extends Model
     static public function getStudentSubjectCount($student_id)
     {
         $return = self::select('subject.*')
-            ->join('class', 'class.id', '=', 'class_subject.class_id')
             ->join('class_subject', 'class_subject.subject_id', '=', 'subject.id')
+
             ->join('enrollments as er', 'er.class_id', '=', 'class_subject.class_id')
             ->where('er.student_id', '=', $student_id)
-            ->where('users.id', '=', $student_id)
             ->where('subject.status', '=', 0)
             ->where('subject.is_delete', '=', 0)
             ->where('class_subject.is_delete', '=', 0);

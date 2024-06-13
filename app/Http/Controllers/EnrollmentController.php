@@ -36,4 +36,19 @@ class EnrollmentController extends Controller
             return redirect()->back()->with('error', 'Có lỗi xảy ra, vui lòng thử lại sau!');
         }
     }
+
+    public function removeStudent($student_id, $class_id)
+    {
+        if (!empty($student_id) && !empty($class_id)) {
+            $exists = EnrollmentModel::getByStudentAndClass($student_id, $class_id);
+
+            if (!empty($exists)) {
+                $exists->delete();
+                return redirect("admin/class/addStudent/" . $class_id)->with('success', 'Xóa thành công!');
+            }
+            return redirect()->back()->with('error', 'Có lỗi xảy ra, vui lòng thử lại sau!');
+        } else {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra, vui lòng thử lại sau!');
+        }
+    }
 }

@@ -85,6 +85,13 @@
                          </a>
                      </li>
                      <li class="nav-item">
+                         <a href="{{ url('admin/class_transfers/admin_list') }}"
+                             class="nav-link @if (Request::segment(2) == 'class_transfers') active @endif">
+                             <i class=" nav-icon fas fa-cogs"></i>
+                             <p>Yêu cầu chuyển lớp</p>
+                         </a>
+                     </li>
+                     <li class="nav-item">
                          <a href="{{ url('admin/admin/list') }}"
                              class="nav-link @if (Request::segment(2) == 'admin') active @endif">
                              <i class=" nav-icon fas fa-cogs"></i>
@@ -520,6 +527,15 @@
                              <i class=" nav-icon far fa-money-bill-alt"></i>
                              <p>
                                  Nộp học phí
+                             </p>
+                         </a>
+                     </li>
+                     <li class="nav-item">
+                         <a href="{{ url('student/move') }}"
+                             class="nav-link @if (Request::segment(2) == 'move') active @endif">
+                             <i class=" nav-icon far fa-money-bill-alt"></i>
+                             <p>
+                                 Chuyển lớp
                              </p>
                          </a>
                      </li>

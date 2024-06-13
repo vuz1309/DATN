@@ -148,9 +148,9 @@
                                                 <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td>
                                                 <td>
                                                     @if ($value->isRegisted == '1')
-                                                        <a href="{{ url('admin/student/edit/' . $value->id) }}"
+                                                        <a href="{{ url('admin/enrollments/moveStudent/' . $value->id . '/' . $getClass->id) }}"
                                                             class="btn btn-info">Chuyển lớp</a>
-                                                        <a href="{{ url('admin/student/edit/' . $value->id) }}"
+                                                        <a href="{{ url('admin/enrollments/removeStudent/' . $value->id . '/' . $getClass->id) }}"
                                                             class="btn btn-danger">Xóa khỏi lớp</a>
                                                     @else
                                                         <a href="{{ url('admin/enrollments/addStudent/' . $value->id . '/' . $getClass->id) }}"

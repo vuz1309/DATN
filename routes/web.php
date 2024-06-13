@@ -16,6 +16,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ClassTimeableController;
+use App\Http\Controllers\ClassTransferController;
 use App\Http\Controllers\CommunicateController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\ExaminationsController;
@@ -46,6 +47,9 @@ Route::get('reset/{token}', [AuthController::class, 'reset']);
 Route::post('reset/{token}', [AuthController::class, 'PostReset']);
 Route::get('student/paypal/payment_cancel', [FeeCollectitonController::class, 'paymenft_cancel']);
 Route::post('admin/class_timeable/get_subject', [ClassTimeableController::class, 'getSubject']);
+Route::get('student/paypal/payment_success', [FeeCollectitonController::class, 'payment_success']);
+Route::get('student/payTransferFee', [ClassTransferController::class, 'payment_success']);
+
 
 Route::middleware(['common'])->group(function () {
     Route::get('download/student_template', [StudentController::class, 'downloadTemplateImport']);
@@ -53,6 +57,8 @@ Route::middleware(['common'])->group(function () {
     Route::post('get_chat_windows', [ChatController::class, 'get_chat_windows']);
     Route::post('submit_message', [ChatController::class, 'submit_message']);
     Route::post('get_chat_search_user', [ChatController::class, 'get_chat_search_user']);
+    Route::post('admin/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
+    Route::post('student/transfer/cancel/{request_id}', [ClassTransferController::class, 'cancelRequest']);
 });
 
 Route::post('admin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
@@ -205,7 +211,6 @@ Route::middleware(['admin'])->group(function () {
 
 
     Route::get('admin/attendance/student', [AttendanceController::class, 'attendance_student']);
-    Route::post('admin/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
     Route::get('admin/attendance/report', [AttendanceController::class, 'attendance_report']);
 
     Route::get('admin/comunicate/send_email', [CommunicateController::class, 'send_email']);
@@ -234,6 +239,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/fee/add_fees/delete/{id}', [FeeCollectitonController::class, 'delete_fee_collect']);
     Route::get('admin/class/addStudent/{id}', [EnrollmentController::class, 'listEnrollments']);
     Route::get('admin/enrollments/addStudent/{student_id}/{class_id}', [EnrollmentController::class, 'addStudentEnroll']);
+    Route::get('admin/enrollments/removeStudent/{student_id}/{class_id}', [EnrollmentController::class, 'removeStudent']);
+    Route::get('admin/class_transfers/admin_list', [ClassTransferController::class, 'admin_list']);
+    Route::get('admin/class_transfers/accept/{request_id}', [ClassTransferController::class, 'acceptRequest']);
+    Route::post('admin/class_transfers/accept/{request_id}', [ClassTransferController::class, 'PostAcceptRequest']);
 });
 
 Route::middleware(['teacher'])->group(function () {
@@ -263,7 +272,6 @@ Route::middleware(['teacher'])->group(function () {
     Route::post('teacher/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
     Route::get('teacher/attendance/report', [AttendanceController::class, 'teacher_attendance_report']);
 
-    Route::post('admin/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
 
     Route::get('teacher/homework/homework', [HomeworkController::class, 'list_teacher']);
     Route::get('teacher/homework/homework/add', [HomeworkController::class, 'add_teacher']);
@@ -278,7 +286,7 @@ Route::middleware(['teacher'])->group(function () {
 });
 
 Route::middleware(['student'])->group(function () {
-    Route::get('student/paypal/payment_success', [FeeCollectitonController::class, 'payment_success']);
+
     Route::get('student/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('student/change_password', [UserController::class, 'changePassword']);
     Route::post('student/change_password', [UserController::class, 'PostChangePassword']);
@@ -303,6 +311,13 @@ Route::middleware(['student'])->group(function () {
     Route::post('student/homework_submit/edit/{id}', [HomeworkController::class, 'PostEditSubmitHomework']);
     Route::get('student/fee_collect', [FeeCollectitonController::class, 'student_fee_collection']);
     Route::post('student/fee_collect', [FeeCollectitonController::class, 'PostAddFeeStudent']);
+    Route::get('student/move', [ClassTransferController::class, 'student_list']);
+    Route::get('student/move/add', [ClassTransferController::class, 'addTransfer']);
+    Route::get('student/transfer/remove/{request_id}', [ClassTransferController::class, 'removeRequest']);
+    Route::get('student/transfer/payFee/{request_id}', [ClassTransferController::class, 'payFee']);
+
+
+    Route::post('student/move/add', [ClassTransferController::class, 'PostAddTransfer']);
 });
 
 Route::middleware(['parent'])->group(function () {
