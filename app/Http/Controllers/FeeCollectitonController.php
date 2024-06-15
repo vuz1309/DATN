@@ -25,7 +25,7 @@ class FeeCollectitonController extends Controller
         $users = User::getCollectFeeStudent();
         if (!empty($users)) {
             foreach ($users as $value) {
-                $value->paid_amount = StudentAddFeesModel::getPaidAmount($value->id, $value->class_id);
+                $value->paid_amount = StudentAddFeesModel::getPaidAmount($value->id);
             }
         }
         $data['getRecord'] = $users;

@@ -115,13 +115,13 @@
 
                                                 <td>
                                                     @if ($value->status == 1)
-                                                        <b style="color: blue;">Chờ xử lý</b>
+                                                        <span class="badge bg-info">Chờ xử lý</span>
                                                     @elseif($value->status == 2)
-                                                        <b style="color: yellow;">Đang xử lý</b>
+                                                        <span class="badge bg-warning">Đang xử lý</span>
                                                     @elseif($value->status == 3)
-                                                        <b style="color: green;">Đã duyệt</b>
+                                                        <span class="badge bg-success">Đã duyệt</span>
                                                     @elseif($value->status == 4)
-                                                        <b style="color: red;">Đã hủy</b>
+                                                        <span class="badge bg-danger">Đã hủy</span>
                                                     @endif
                                                 </td>
 

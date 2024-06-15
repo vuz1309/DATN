@@ -41,7 +41,7 @@
                  alt="LOGO">
          @endif
          <a href="#" class="brand-link" style="text-align: center; padding: 12px 0;
-    ">
+   ">
              <span class="brand-text font-weight-light"
                  style="font-weight: 700 !important; font-size: 20px;">{{ config('app.system_settings.school_name') }}</span>
          </a>
@@ -104,6 +104,14 @@
                              class="nav-link @if (Request::segment(2) == 'student') active @endif">
                              <i class=" nav-icon fas fa-user-graduate"></i>
                              <p>Học sinh</p>
+                         </a>
+                     </li>
+
+                     <li class="nav-item">
+                         <a href="{{ url('admin/suspension/list') }}"
+                             class="nav-link @if (Request::segment(2) == 'suspension') active @endif">
+                             <i class=" nav-icon fas fa-user-slash"></i>
+                             <p>Học sinh bảo lưu</p>
                          </a>
                      </li>
 
@@ -539,6 +547,16 @@
                              </p>
                          </a>
                      </li>
+                     <li class="nav-item">
+                         <a href="{{ url('student/suspension/list') }}"
+                             class="nav-link @if (Request::segment(2) == 'suspension') active @endif">
+                             <i class=" nav-icon far fa-money-bill-alt"></i>
+                             <p>
+                                 Bảo lưu
+                             </p>
+                         </a>
+                     </li>
+
                      <li class="nav-item">
                          <a href="{{ url('student/account') }}"
                              class="nav-link @if (Request::segment(2) == 'account') active @endif">

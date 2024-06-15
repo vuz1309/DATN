@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Yêu cầu điều chuyển (Tổng: {{ $listTransfer->total() }})</h1>
+                        <h1>Yêu cầu chuyển lớp (Tổng: {{ $listTransfer->total() }})</h1>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
                         <a class="btn btn-primary" href="{{ url('student/move/add') }}">Thêm yêu cầu</a>
@@ -113,13 +113,13 @@
 
                                                 <td>
                                                     @if ($value->status == 1)
-                                                        <span style="color: blue;">Chờ xử lý</span>
+                                                        <span class="badge bg-info">Chờ xử lý</span>
                                                     @elseif($value->status == 2)
-                                                        <span style="color: yellow;">Đang xử lý</span>
+                                                        <span class="badge bg-warning">Đang xử lý</span>
                                                     @elseif($value->status == 3)
-                                                        <span style="color: green;">Đã duyệt</span>
+                                                        <span class="badge bg-success">Đã duyệt</span>
                                                     @elseif($value->status == 4)
-                                                        <span style="color: red;">Đã hủy</span>
+                                                        <span class="badge bg-danger">Đã hủy</span>
                                                     @endif
                                                 </td>
 

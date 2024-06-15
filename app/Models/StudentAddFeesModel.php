@@ -50,10 +50,9 @@ class StudentAddFeesModel extends Model
             return $return->paginate(20);
     }
 
-    public static function getPaidAmount($student_id, $class_id)
+    public static function getPaidAmount($student_id)
     {
         return self::where('student_add_fees.student_id', '=', $student_id)
-            ->where('student_add_fees.class_id', '=', $class_id)
             ->where('student_add_fees.is_paid', '=', 1)
             ->sum('student_add_fees.paid_amount');
     }

@@ -10,6 +10,7 @@ use App\Http\Controllers\ClassSubjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ParentController;
+use App\Http\Controllers\SuspensionController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AssignClassTeacherController;
 use App\Http\Controllers\AttendanceController;
@@ -59,6 +60,7 @@ Route::middleware(['common'])->group(function () {
     Route::post('get_chat_search_user', [ChatController::class, 'get_chat_search_user']);
     Route::post('admin/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
     Route::post('student/transfer/cancel/{request_id}', [ClassTransferController::class, 'cancelRequest']);
+    Route::post('admin/suspension/cancel/{request_id}', [SuspensionController::class, 'cancelRequest']);
 });
 
 Route::post('admin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
@@ -243,6 +245,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/class_transfers/admin_list', [ClassTransferController::class, 'admin_list']);
     Route::get('admin/class_transfers/accept/{request_id}', [ClassTransferController::class, 'acceptRequest']);
     Route::post('admin/class_transfers/accept/{request_id}', [ClassTransferController::class, 'PostAcceptRequest']);
+
+    //suspension
+    Route::get('/admin/suspension/list', [SuspensionController::class, 'list']);
+    Route::get('admin/suspension/accept/{request_id}', [SuspensionController::class, 'acceptRequest']);
+    Route::post('admin/suspension/accept/{request_id}', [SuspensionController::class, 'PostAcceptRequest']);
+    Route::get('admin/suspension/comeback/{request_id}', [SuspensionController::class, 'comeback']);
+    Route::post('admin/suspension/comeback/{request_id}', [SuspensionController::class, 'PostComeback']);
 });
 
 Route::middleware(['teacher'])->group(function () {
@@ -315,9 +324,10 @@ Route::middleware(['student'])->group(function () {
     Route::get('student/move/add', [ClassTransferController::class, 'addTransfer']);
     Route::get('student/transfer/remove/{request_id}', [ClassTransferController::class, 'removeRequest']);
     Route::get('student/transfer/payFee/{request_id}', [ClassTransferController::class, 'payFee']);
-
-
     Route::post('student/move/add', [ClassTransferController::class, 'PostAddTransfer']);
+    Route::get('student/suspension/list', [SuspensionController::class, 'student_list']);
+    Route::get('student/suspension/add', [SuspensionController::class, 'student_add']);
+    Route::post('student/suspension/add', [SuspensionController::class, 'PostStudentAdd']);
 });
 
 Route::middleware(['parent'])->group(function () {

@@ -36,22 +36,6 @@
                                                 class="form-control" id="name" placeholder="">
                                         </div>
 
-
-
-
-                                        <div class="form-group col-md-3">
-                                            <label for="class_id">Lớp</label>
-                                            <select class="form-control" name="class_id">
-                                                <option value="">Chọn lớp học</option>
-                                                @foreach ($getClass as $class)
-                                                    <option {{ Request::get('class_id') == $class->id ? 'selected' : '' }}
-                                                        value="{{ $class->id }}">{{ $class->name }}</option>
-                                                @endforeach
-                                            </select>
-
-                                        </div>
-
-
                                         <div class="form-group col-md-3">
                                             <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                 kiếm</button>
@@ -90,7 +74,6 @@
                                             <th style="min-width: 10px">#</th>
                                             <th>Mã học sinh</th>
                                             <th>Học sinh</th>
-                                            <th>Lớp</th>
                                             <th>Hình thức</th>
                                             <th>Số tiền nộp</th>
                                             <th>Còn lại</th>
@@ -107,7 +90,6 @@
                                                 <td>{{ $value->id }}</td>
                                                 <td>{{ $value->code }}</td>
                                                 <td>{{ $value->student_name }} {{ $value->student_last_name }}</td>
-                                                <td>{{ $value->class_name }}</td>
 
                                                 <td>{{ $value->payment_type == 1 ? 'Tiền mặt' : 'Chuyển khoản' }}</td>
                                                 <td>{{ number_format($value->paid_amount) }} đ</td>

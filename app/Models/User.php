@@ -368,12 +368,7 @@ class User extends Authenticatable
     }
     static public function getCollectFeeStudent($remove_paging = false)
     {
-        // $return = self::select('users.*', 'class.fee as amount')
-        //     ->join('class', 'class.id', '=', 'er.class_id')
-        //     ->join('enrollments as er', 'er.student_id', '=', 'users.id')
-        //     ->where('users.user_type', '=', 3)
-        //     ->where('users.is_delete', '=', 0)
-        //     ->orderBy('users.name', 'desc');
+
         $return = self::select('users.*')
             ->selectRaw('SUM(class.fee) as amount')
             ->join('enrollments as er', 'er.student_id', '=', 'users.id')
