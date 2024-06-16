@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Request;
 
 class EnrollmentModel extends Model
 {
@@ -30,6 +31,19 @@ class EnrollmentModel extends Model
             ->where('enrollments.student_id', '=', $student_id)
             ->where('class.end_date', '>', Carbon::today())
             ->get();
+    }
+    static public function getAllMyClass($student_id)
+    {
+        $return =  self::select('class.*')
+            ->selectRaw('COUNT(enrollments.id) as total_enrollments')
+            ->join('class', 'class.id', '=', 'enrollments.class_id')
+            ->where('enrollments.student_id', '=', $student_id)
+            ->orderBy('class.id', 'desc');
+
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('name', 'LIKE', '%' . Request::get('name') . '%');
+        }
+        return $return->get();
     }
 
     static public function getNotMyClass($student_id)

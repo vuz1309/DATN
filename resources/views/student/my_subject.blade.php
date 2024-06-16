@@ -7,7 +7,7 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Danh sách Khóa học</h1>
+                          <h1>Lớp của tôi</h1>
                       </div>
 
                   </div>
@@ -32,28 +32,15 @@
                                   <div class="card-body">
                                       <div class="row">
                                           <div class="form-group col-md-3">
-                                              <label for="name">Tên Khóa học</label>
+                                              <label for="name">Tên lớp</label>
                                               <input name="name" value="{{ Request::get('name') }}" type="text"
                                                   class="form-control" id="name" placeholder="">
                                           </div>
 
                                           <div class="form-group col-md-3">
-                                              <label>Thể loại</label>
-                                              <select name="type" class="form-control">
-                                                  <option {{ Request::get('type') == '' ? 'selected' : '' }} value="">
-                                                      Tất cả</option>
-                                                  <option {{ Request::get('type') == 'Lý thuyết' ? 'selected' : '' }}
-                                                      value="Lý thuyết">Lý thuyết</option>
-                                                  <option {{ Request::get('type') == 'Thực hành' ? 'selected' : '' }}
-                                                      value="Thực hành">Thực hành</option>
-                                              </select>
-
-                                          </div>
-
-                                          <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('student/my_subject') }}" class="btn btn-success"
+                                              <a href="{{ url('student/my_class') }}" class="btn btn-success"
                                                   style="margin-top:30px;">Làm mới</a>
                                           </div>
 
@@ -77,18 +64,31 @@
                                       <thead>
                                           <tr>
                                               <th style="width: 10px">#</th>
-                                              <th>Khóa học</th>
-                                              <th>Thể loại</th>
+                                              <th>Tên lớp</th>
+                                              <th>Ngày bắt đầu</th>
+                                              <th>Ngày kết thúc</th>
+                                              <th>Học phí</th>
+                                              <th>Số học sinh</th>
+                                              <th></th>
 
                                           </tr>
                                       </thead>
                                       <tbody>
-                                          @if (!empty($getRecord))
-                                              @foreach ($getRecord as $value)
+                                          @if (!empty($getMyClass))
+                                              @foreach ($getMyClass as $value)
                                                   <tr>
                                                       <td>{{ $value->id }}</td>
-                                                      <td>{{ $value->subject_name }}</td>
-                                                      <td>{{ $value->subject_type }}</td>
+                                                      <td>{{ $value->name }}</td>
+
+                                                      <td>{{ date('d-m-Y', strtotime($value->start_date)) }}</td>
+                                                      <td>{{ date('d-m-Y', strtotime($value->end_date)) }}</td>
+                                                      <td>{{ number_format($value->fee) }} đ</td>
+                                                      <td>{{ $value->total_enrollments }}</td>
+                                                      <td><a class="btn btn-info"
+                                                              href="{{ url('student/class_subject') . '/' . $value->id }} ">Xem
+                                                              môn học</a>
+                                                      </td>
+
                                                   </tr>
                                               @endforeach
                                           @endif

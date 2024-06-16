@@ -304,7 +304,7 @@ Route::middleware(['student'])->group(function () {
 
     Route::post('student/account', [UserController::class, 'UpdateMyAccountStudent']);
 
-    Route::get('student/my_subject', [SubjectController::class, 'myStudentSubject']);
+    Route::get('student/my_class', [EnrollmentController::class, 'myStudentSubject']);
     Route::get('student/my_timeable', [ClassTimeableController::class, 'studentTimeable']);
 
     Route::get('student/my_exam_schedule', [ExaminationsController::class, 'student_exam_schedule']);
@@ -328,6 +328,7 @@ Route::middleware(['student'])->group(function () {
     Route::get('student/suspension/list', [SuspensionController::class, 'student_list']);
     Route::get('student/suspension/add', [SuspensionController::class, 'student_add']);
     Route::post('student/suspension/add', [SuspensionController::class, 'PostStudentAdd']);
+    Route::get('student/class_subject/{id}', [SubjectController::class, 'listStudent']);
 });
 
 Route::middleware(['parent'])->group(function () {

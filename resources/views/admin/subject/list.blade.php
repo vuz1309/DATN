@@ -109,10 +109,13 @@
                                                   <td>{{ $value->created_by_name }}</td>
                                                   <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td>
                                                   <td>
-                                                      <a href="{{ url('admin/subject/edit/' . $value->id) }}"
-                                                          class="btn btn-primary">Sửa</a>
-                                                      <a href="{{ url('admin/subject/delete/' . $value->id) }}"
-                                                          class="btn btn-danger">Xóa</a>
+                                                      @if (empty($isView) || !$isView)
+                                                          <a href="{{ url('admin/subject/edit/' . $value->id) }}"
+                                                              class="btn btn-primary">Sửa</a>
+                                                          <a href="{{ url('admin/subject/delete/' . $value->id) }}"
+                                                              class="btn btn-danger">Xóa</a>
+                                                      @endif
+
                                                   </td>
                                               </tr>
                                           @endforeach

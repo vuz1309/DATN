@@ -521,11 +521,11 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('student/my_subject') }}"
+                         <a href="{{ url('student/my_class') }}"
                              class="nav-link @if (Request::segment(2) == 'my_subject') active @endif">
                              <i class=" nav-icon fa fa-book-open"></i>
                              <p>
-                                 Khóa học
+                                 Lớp học của tôi
                              </p>
                          </a>
                      </li>

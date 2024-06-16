@@ -6,6 +6,7 @@ use App\Models\ClassModel;
 use App\Models\EnrollmentModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EnrollmentController extends Controller
 {
@@ -50,5 +51,14 @@ class EnrollmentController extends Controller
         } else {
             return redirect()->back()->with('error', 'Có lỗi xảy ra, vui lòng thử lại sau!');
         }
+    }
+
+    public function myStudentSubject()
+    {
+        $id = Auth::user()->id;
+        $myClass = EnrollmentModel::getAllMyClass($id);
+        $data['header_title'] = 'Lớp của tôi';
+        $data['getMyClass'] = $myClass;
+        return view('student.my_subject', $data);
     }
 }

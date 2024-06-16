@@ -16,7 +16,13 @@ class SubjectController extends Controller
         $data['getRecord'] = SubjectModel::getRecord();
         return view("admin.subject.list", $data);
     }
-
+    public function listStudent($id)
+    {
+        $data['header_title'] = 'Khóa học';
+        $data['getRecord'] = SubjectModel::getSubjectByClass($id);
+        $data['isView'] = true;
+        return view("admin.subject.list", $data);
+    }
     public function add()
     {
         $data['header_title'] = 'Thêm mới Khóa học';
