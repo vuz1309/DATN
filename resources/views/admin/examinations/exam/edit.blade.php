@@ -64,7 +64,8 @@
 
                                   <div class="card-footer">
                                       <div>
-                                          <a href="{{ url('admin/examinations/exam/list') }}" class="btn btn-danger">Hủy</a>
+                                          <a href="{{ url('vAdmin/examinations/exam/list') }}"
+                                              class="btn btn-danger">Hủy</a>
                                           <button type="submit" class="btn btn-primary">Cập nhật</button>
                                       </div>
                                   </div>

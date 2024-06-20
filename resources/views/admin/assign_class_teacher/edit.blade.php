@@ -10,8 +10,8 @@
                           <h1>Thêm chủ nhiệm</h1>
                       </div>
                       <!-- <div class="col-sm-6" style="text-align: right;">
-                         <a href="{{ url('admin/dashboard') }}"></a>
-                       </div> -->
+                                 <a href="{{ url('vAdmin/dashboard') }}"></a>
+                               </div> -->
                   </div>
               </div><!-- /.container-fluid -->
           </section>
@@ -78,7 +78,8 @@
                                       </div>
                                   </div>
                                   <div class="card-footer">
-                                      <a href="{{ url('admin/assign_class_teacher/list') }}" class="btn btn-danger">Hủy</a>
+                                      <a href="{{ url('vAdmin/assign_class_vTeacher/list') }}"
+                                          class="btn btn-danger">Hủy</a>
                                       <button type="submit" class="btn btn-primary">Cập nhật</button>
                                   </div>
                               </form>

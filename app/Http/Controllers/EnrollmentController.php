@@ -30,7 +30,7 @@ class EnrollmentController extends Controller
                 $new->class_id = $class_id;
                 $new->enrollment_date = now();
                 $new->save();
-                return redirect("admin/class/addStudent/" . $class_id)->with('success', 'Đăng ký học thành công!');
+                return redirect("vAdmin/class/addvStudent/" . $class_id)->with('success', 'Đăng ký học thành công!');
             }
             return redirect()->back()->with('error', 'Có lỗi xảy ra, vui lòng thử lại sau!');
         } else {
@@ -45,7 +45,7 @@ class EnrollmentController extends Controller
 
             if (!empty($exists)) {
                 $exists->delete();
-                return redirect("admin/class/addStudent/" . $class_id)->with('success', 'Xóa thành công!');
+                return redirect("vAdmin/class/addvStudent/" . $class_id)->with('success', 'Xóa thành công!');
             }
             return redirect()->back()->with('error', 'Có lỗi xảy ra, vui lòng thử lại sau!');
         } else {

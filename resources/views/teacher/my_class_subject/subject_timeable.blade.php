@@ -100,7 +100,7 @@
           $('.getClass').change(function() {
               var class_id = $(this).val();
               $.ajax({
-                  url: "{{ url('admin/class_timeable/get_subject') }}",
+                  url: "{{ url('vAdmin/class_timeable/get_subject') }}",
                   type: "POST",
                   data: {
                       "_token": "{{ csrf_token() }}",

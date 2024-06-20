@@ -11,7 +11,7 @@
                       </div>
                   </div>
                   {{-- <div class="col-sm-6" style="text-align: right;">
-        <a class="btn btn-primary" href="{{ url('admin/class_timeable/add') }}">Thêm mới</a>
+        <a class="btn btn-primary" href="{{ url('vAdmin/class_timeable/add') }}">Thêm mới</a>
       </div> --}}
               </div><!-- /.container-fluid -->
           </section>
@@ -66,7 +66,7 @@
                                           <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('admin/student/list') }}" class="btn btn-success"
+                                              <a href="{{ url('vAdmin/vStudent/list') }}" class="btn btn-success"
                                                   style="margin-top:30px;">Làm mới</a>
                                           </div>
 
@@ -75,7 +75,7 @@
                               </form>
                           </div>
                           @if (!empty(Request::get('class_id')) && !empty(Request::get('subject_id')))
-                              <form action="{{ url('admin/class_timeable/add') }}" method="POST">
+                              <form action="{{ url('vAdmin/class_timeable/add') }}" method="POST">
                                   {{ csrf_field() }}
                                   <input hidden type="text" name="subject_id" value="{{ Request::get('subject_id') }}" />
                                   <input hidden type="text" name="class_id" value="{{ Request::get('class_id') }}" />
@@ -164,7 +164,7 @@
           $('.getClass').change(function() {
               var class_id = $(this).val();
               $.ajax({
-                  url: "{{ url('admin/class_timeable/get_subject') }}",
+                  url: "{{ url('vAdmin/class_timeable/get_subject') }}",
                   type: "POST",
                   data: {
                       "_token": "{{ csrf_token() }}",

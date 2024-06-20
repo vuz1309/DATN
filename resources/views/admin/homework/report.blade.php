@@ -10,7 +10,7 @@
                         <h1>Báo cáo</h1>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                        <a class="btn btn-primary" href="{{ url('admin/homework/homework/add') }}">Thêm mới</a>
+                        <a class="btn btn-primary" href="{{ url('vAdmin/homework/homework/add') }}">Thêm mới</a>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -54,7 +54,7 @@
                                         <div class="form-group col-md-3">
                                             <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                 kiếm</button>
-                                            <a href="{{ url('admin/homework/homework') }}" class="btn btn-success"
+                                            <a href="{{ url('vAdmin/homework/homework') }}" class="btn btn-success"
                                                 style="margin-top:30px;">Làm mới</a>
                                         </div>
 
@@ -135,7 +135,7 @@
                                                 <td>
 
                                                     <a class="btn btn-info"
-                                                        href="{{ url('admin/homework/view_submit/' . $value->id) }}">Chi
+                                                        href="{{ url('vAdmin/homework/view_submit/' . $value->id) }}">Chi
                                                         tiết</a>
                                                 </td>
                                             </tr>

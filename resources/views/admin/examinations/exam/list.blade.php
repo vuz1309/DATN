@@ -10,7 +10,7 @@
                           <h1>Danh sách bài thi (Tổng: {{ $getRecord->total() }})</h1>
                       </div>
                       <div class="col-sm-6" style="text-align: right;">
-                          <a class="btn btn-primary" href="{{ url('admin/examinations/exam/add') }}">Thêm mới</a>
+                          <a class="btn btn-primary" href="{{ url('vAdmin/examinations/exam/add') }}">Thêm mới</a>
                       </div>
                   </div>
               </div><!-- /.container-fluid -->
@@ -48,7 +48,7 @@
                                           <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('admin/examinations/exam/list') }}" class="btn btn-success"
+                                              <a href="{{ url('vAdmin/examinations/exam/list') }}" class="btn btn-success"
                                                   style="margin-top:30px;">Làm mới</a>
                                           </div>
 
@@ -95,9 +95,9 @@
                                                   <td>{{ $value->created_by_name }}</td>
 
                                                   <td>
-                                                      <a href="{{ url('admin/examinations/exam/edit/' . $value->id) }}"
+                                                      <a href="{{ url('vAdmin/examinations/exam/edit/' . $value->id) }}"
                                                           class="btn btn-primary">Sửa</a>
-                                                      <a href="{{ url('admin/examinations/exam/delete/' . $value->id) }}"
+                                                      <a href="{{ url('vAdmin/examinations/exam/delete/' . $value->id) }}"
                                                           class="btn btn-danger">Xóa</a>
                                                   </td>
                                               </tr>

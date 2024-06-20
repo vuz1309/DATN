@@ -107,7 +107,7 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <a href="{{ url('admin/class_transfers/admin_list') }}"
+                                    <a href="{{ url('vAdmin/class_transfers/admin_list') }}"
                                         class="btn btn-default mr-4">Quay lại</a>
                                     <button id="cancelRequest" class="btn btn-danger">Từ chối</button>
                                     <button style="width: 160px; margin-left: 16px;" type="submit"
@@ -139,7 +139,7 @@
                 showLoading(true);
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('student/transfer/cancel') }}/" + id,
+                    url: "{{ url('vStudent/transfer/cancel') }}/" + id,
                     data: {
                         '_token': "{{ csrf_token() }}",
                         description
@@ -150,7 +150,7 @@
                         showLoading(false);
                         if (data.success) {
                             window.location.href =
-                                "{{ url('admin/class_transfers/admin_list') }}";
+                                "{{ url('vAdmin/class_transfers/admin_list') }}";
                         } else {
                             showAlert('Lỗi', 'Vui lòng thử lại sau!');
                         }

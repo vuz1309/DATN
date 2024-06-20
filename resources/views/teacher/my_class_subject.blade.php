@@ -45,7 +45,7 @@
                                           <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('teacher/my_class_subject') }}" class="btn btn-success"
+                                              <a href="{{ url('vTeacher/my_class_subject') }}" class="btn btn-success"
                                                   style="margin-top:30px;">Làm mới</a>
                                           </div>
                                       </div>
@@ -90,7 +90,7 @@
                                                   <td>{{ $value->subject_type }}</td>
                                                   <td>
                                                       <a class="btn btn-primary"
-                                                          href="{{ url('teacher/my_class_subject/timeable/' . $value->subject_id . '/' . $value->class_id) }}">Thời
+                                                          href="{{ url('vTeacher/my_class_subject/timeable/' . $value->subject_id . '/' . $value->class_id) }}">Thời
                                                           khóa biểu</a>
                                                   </td>
                                               </tr>

@@ -96,7 +96,7 @@
                                         <div class="form-group col-md-3">
                                             <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                 kiếm</button>
-                                            <a href="{{ url('admin/attendance/report') }}" class="btn btn-success"
+                                            <a href="{{ url('vAdmin/attendance/report') }}" class="btn btn-success"
                                                 style="margin-top:30px;">Làm mới</a>
                                         </div>
 

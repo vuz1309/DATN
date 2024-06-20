@@ -65,7 +65,7 @@
                                   <div class="card-footer">
 
                                       <a target="_" class="btn btn-primary"
-                                          href="{{ url('student/my_exam_result_print/' . $value['exam_id']) }}">In
+                                          href="{{ url('vStudent/my_exam_result_print/' . $value['exam_id']) }}">In
                                           kết quả</a>
 
                                   </div>

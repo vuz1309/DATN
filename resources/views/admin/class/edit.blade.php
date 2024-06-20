@@ -67,7 +67,7 @@
                                   </div>
 
                                   <div class="card-footer">
-                                      <a href="{{ url('admin/class/list') }}" class="btn btn-danger">Hủy</a>
+                                      <a href="{{ url('vAdmin/class/list') }}" class="btn btn-danger">Hủy</a>
                                       <button type="submit" class="btn btn-primary">Cập nhật</button>
                                   </div>
                               </form>

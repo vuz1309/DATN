@@ -38,7 +38,7 @@ class ClassController extends Controller
         $save->created_by = Auth::user()->id;
         $save->save();
 
-        return redirect("admin/class/list")->with('success', 'Thêm mới lớp học thành công');
+        return redirect("vAdmin/class/list")->with('success', 'Thêm mới lớp học thành công');
     }
 
     public function edit($id)
@@ -70,7 +70,7 @@ class ClassController extends Controller
             $record->start_date = $request->start_date;
             $record->end_date = $request->end_date;
             $record->save();
-            return redirect('admin/class/list')->with('success', 'Sửa thông tin lớp học thành công');
+            return redirect('vAdmin/class/list')->with('success', 'Sửa thông tin lớp học thành công');
         } else {
             abort(404);
         }
@@ -82,7 +82,7 @@ class ClassController extends Controller
         if (!empty($record)) {
             $record->is_delete = 1;
             $record->save();
-            return redirect('admin/class/list')->with('success', 'Xóa lớp học thành công');
+            return redirect('vAdmin/class/list')->with('success', 'Xóa lớp học thành công');
         } else {
             abort(404);
         }

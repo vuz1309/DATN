@@ -51,7 +51,7 @@
                                         <div class="form-group col-md-3">
                                             <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                 kiếm</button>
-                                            <a href="{{ url('admin/homework/homework') }}" class="btn btn-success"
+                                            <a href="{{ url('vAdmin/homework/homework') }}" class="btn btn-success"
                                                 style="margin-top:30px;">Làm mới</a>
                                         </div>
 
@@ -129,7 +129,7 @@
                                                 <td>{{ date('H:i d/m/Y', strtotime($value->created_at)) }}</td>
                                                 <td>
                                                     <a class="btn btn-primary"
-                                                        href="{{ url('student/homework_submit/edit/' . $value->id) }}">Sửa</a>
+                                                        href="{{ url('vStudent/homework_submit/edit/' . $value->id) }}">Sửa</a>
 
                                                 </td>
                                             </tr>

@@ -16,7 +16,7 @@ class AuthController extends Controller
     {
 
         if (!empty(Auth::check())) {
-            return redirect('admin/dashboard');
+            return redirect('vAdmin/dashboard');
         }
         return view('auth.login');
     }
@@ -27,16 +27,13 @@ class AuthController extends Controller
         $remember = !empty($request->remember) ? true : false;
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
             if (Auth::user()->user_type == 1) {
-                return redirect('admin/dashboard');
-
+                return redirect('vAdmin/dashboard');
             } else if (Auth::user()->user_type == 2) {
-                return redirect('teacher/dashboard');
-
+                return redirect('vTeacher/dashboard');
             } else if (Auth::user()->user_type == 3) {
-                return redirect('student/dashboard');
-
+                return redirect('vStudent/dashboard');
             } else if (Auth::user()->user_type == 4) {
-                return redirect('parent/dashboard');
+                return redirect('vParent/dashboard');
             }
         } else {
             return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác!');
@@ -58,7 +55,6 @@ class AuthController extends Controller
             Mail::to($user->email)->send(new ForgotPasswordMail($user));
 
             return redirect()->back()->with('success', 'Kiểm tra email của bạn và làm mới lại mật khẩu.');
-
         } else {
             return redirect()->back()->with('error', 'Email chưa được đăng ký tài khoản!');
         }

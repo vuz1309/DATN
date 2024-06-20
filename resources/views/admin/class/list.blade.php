@@ -10,7 +10,7 @@
                           <h1>Danh sách lớp học (Tổng: {{ $getRecord->total() }})</h1>
                       </div>
                       <div class="col-sm-6" style="text-align: right;">
-                          <a href="{{ url('admin/class/add') }}">Thêm mới</a>
+                          <a href="{{ url('vAdmin/class/add') }}">Thêm mới</a>
                       </div>
                   </div>
               </div><!-- /.container-fluid -->
@@ -49,7 +49,7 @@
                                           <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('admin/admin/list') }}" class="btn btn-success"
+                                              <a href="{{ url('vAdmin/vAdmin/list') }}" class="btn btn-success"
                                                   style="margin-top:30px;">Làm mới</a>
                                           </div>
 
@@ -104,11 +104,11 @@
                                                   <td>{{ $value->created_by_name }}</td>
                                                   <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td>
                                                   <td>
-                                                      <a href="{{ url('admin/class/edit/' . $value->id) }}"
+                                                      <a href="{{ url('vAdmin/class/edit/' . $value->id) }}"
                                                           class="btn btn-primary">Sửa</a>
-                                                      <a href="{{ url('admin/class/delete/' . $value->id) }}"
+                                                      <a href="{{ url('vAdmin/class/delete/' . $value->id) }}"
                                                           class="btn btn-danger">Xóa</a>
-                                                      <a href="{{ url('admin/class/addStudent/' . $value->id) }}"
+                                                      <a href="{{ url('vAdmin/class/addvStudent/' . $value->id) }}"
                                                           class="btn btn-info">Tuyển sinh</a>
                                                   </td>
                                               </tr>

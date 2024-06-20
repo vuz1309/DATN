@@ -36,7 +36,7 @@
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="{{ url('teacher/my_student') }}" class="small-box-footer">Xem thêm <i
+                            <a href="{{ url('vTeacher/my_student') }}" class="small-box-footer">Xem thêm <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
 
@@ -54,7 +54,7 @@
                             <div class="icon">
                                 <i class="ion ion-grid"></i>
                             </div>
-                            <a href="{{ url('teacher/class/list') }}" class="small-box-footer">Xem thêm <i
+                            <a href="{{ url('vTeacher/class/list') }}" class="small-box-footer">Xem thêm <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
 
@@ -70,7 +70,7 @@
                             <div class="icon">
                                 <i class="nav-icon fas fa-table"></i>
                             </div>
-                            <a href="{{ url('teacher/my_class_subject') }}" class="small-box-footer">Xem thêm <i
+                            <a href="{{ url('vTeacher/my_class_subject') }}" class="small-box-footer">Xem thêm <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
 

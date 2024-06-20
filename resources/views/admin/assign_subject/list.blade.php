@@ -10,7 +10,7 @@
                           <h1>Danh sách Khóa học các lớp (Tổng: {{ $getRecord->total() }})</h1>
                       </div>
                       <div class="col-sm-6" style="text-align: right;">
-                          <a class="btn btn-primary" href="{{ url('admin/assign_subject/add') }}">Thêm mới</a>
+                          <a class="btn btn-primary" href="{{ url('vAdmin/assign_subject/add') }}">Thêm mới</a>
                       </div>
                   </div>
               </div><!-- /.container-fluid -->
@@ -58,7 +58,7 @@
                                           <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('admin/assign_subject/list') }}" class="btn btn-success"
+                                              <a href="{{ url('vAdmin/assign_subject/list') }}" class="btn btn-success"
                                                   style="margin-top:30px;">Làm mới</a>
                                           </div>
 
@@ -109,11 +109,11 @@
                                                   <td>{{ $value->created_by_name }}</td>
                                                   <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td>
                                                   <td>
-                                                      <a href="{{ url('admin/assign_subject/edit_single/' . $value->id) }}"
+                                                      <a href="{{ url('vAdmin/assign_subject/edit_single/' . $value->id) }}"
                                                           class="btn btn-primary">Sửa 1</a>
-                                                      <a href="{{ url('admin/assign_subject/edit/' . $value->id) }}"
+                                                      <a href="{{ url('vAdmin/assign_subject/edit/' . $value->id) }}"
                                                           class="btn btn-primary">Sửa nhiều</a>
-                                                      <a href="{{ url('admin/assign_subject/delete/' . $value->id) }}"
+                                                      <a href="{{ url('vAdmin/assign_subject/delete/' . $value->id) }}"
                                                           class="btn btn-danger">Xóa</a>
                                                   </td>
                                               </tr>

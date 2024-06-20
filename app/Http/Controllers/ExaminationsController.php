@@ -42,7 +42,7 @@ class ExaminationsController extends Controller
         $exam->subject_id = trim($request->subject_id);
         $exam->created_by = Auth::user()->id;
         $exam->save();
-        return redirect('admin/examinations/exam/list')->with('success', 'Tạo bài thi thành công!');
+        return redirect('vAdmin/examinations/exam/list')->with('success', 'Tạo bài thi thành công!');
     }
     public function exam_edit($id)
     {
@@ -64,7 +64,7 @@ class ExaminationsController extends Controller
             $exam->note = trim($request->note);
 
             $exam->save();
-            return redirect('admin/examinations/exam/list')->with('success', 'Cập nhật bài thi thành công!');
+            return redirect('vAdmin/examinations/exam/list')->with('success', 'Cập nhật bài thi thành công!');
         } else {
             abort(404);
         }
@@ -76,7 +76,7 @@ class ExaminationsController extends Controller
         if (!empty($exam)) {
             $exam->is_delete = 1;
             $exam->save();
-            return redirect('admin/examinations/exam/list')->with('success', 'Xóa bài thi thành công!');
+            return redirect('vAdmin/examinations/exam/list')->with('success', 'Xóa bài thi thành công!');
         } else {
             abort(404);
         }
@@ -507,7 +507,7 @@ class ExaminationsController extends Controller
         $mark->percent_to = ($request->percent_to);
         $mark->created_by = Auth::user()->id;
         $mark->save();
-        return redirect('admin/examinations/marks_grade')->with('sucess', 'Thêm mới thành công!');
+        return redirect('vAdmin/examinations/marks_grade')->with('sucess', 'Thêm mới thành công!');
     }
     public function marks_grade_edit($id)
     {
@@ -524,7 +524,7 @@ class ExaminationsController extends Controller
             $mark->percent_to = ($request->percent_to);
 
             $mark->save();
-            return redirect('admin/examinations/marks_grade')->with('sucess', 'Cập nhật thành công!');
+            return redirect('vAdmin/examinations/marks_grade')->with('sucess', 'Cập nhật thành công!');
         } else {
             abort(404);
         }

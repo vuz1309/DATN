@@ -64,8 +64,8 @@
                                         <div class="form-group col-md-3">
                                             <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                 kiếm</button>
-                                            <a href="{{ url('admin/examinations/marks_register') }}" class="btn btn-success"
-                                                style="margin-top:30px;">Làm mới</a>
+                                            <a href="{{ url('vAdmin/examinations/marks_register') }}"
+                                                class="btn btn-success" style="margin-top:30px;">Làm mới</a>
                                         </div>
 
                                     </div>
@@ -263,7 +263,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{ url('admin/examinations/submit_marks_register') }}",
+                url: "{{ url('vAdmin/examinations/submit_marks_register') }}",
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function(data) {
@@ -292,7 +292,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{ url('admin/examinations/single_submit_marks_register') }}",
+                url: "{{ url('vAdmin/examinations/single_submit_marks_register') }}",
                 data: {
                     '_token': "{{ csrf_token() }}",
                     student_id,

@@ -62,7 +62,7 @@
                                                 <td>{{ $value->created_name }}</td>
                                                 <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td>
                                                 <td>
-                                                    <a href="{{ url('admin/fee/add_fees/delete/' . $value->id) }}"
+                                                    <a href="{{ url('vAdmin/fee/add_fees/delete/' . $value->id) }}"
                                                         class="btn btn-danger">Xóa</a>
 
                                                 </td>

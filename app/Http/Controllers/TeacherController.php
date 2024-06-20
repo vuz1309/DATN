@@ -85,7 +85,7 @@ class TeacherController extends Controller
 
         $save->save();
 
-        return redirect("admin/teacher/list")->with('success', 'Thêm mới thành công');
+        return redirect("vAdmin/vTeacher/list")->with('success', 'Thêm mới thành công');
     }
 
     public function edit($id)
@@ -167,7 +167,7 @@ class TeacherController extends Controller
 
             $save->save();
 
-            return redirect('admin/teacher/list')->with('success', 'Sửa thông tin thành công!');
+            return redirect('vAdmin/vTeacher/list')->with('success', 'Sửa thông tin thành công!');
         } else {
             abort(404);
         }
@@ -179,7 +179,7 @@ class TeacherController extends Controller
         if (!empty($record)) {
             $record->is_delete = 1;
             $record->save();
-            return redirect('admin/teacher/list')->with('success', 'Xóa thành công!');
+            return redirect('vAdmin/vTeacher/list')->with('success', 'Xóa thành công!');
         } else {
             abort(404);
         }

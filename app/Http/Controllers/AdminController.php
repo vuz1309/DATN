@@ -34,7 +34,7 @@ class AdminController extends Controller
         $user->password = Hash::make($request->password);
         $user->user_type = 1;
         $user->save();
-        return redirect(url('admin/admin/list'))->with("success", "Thêm mới quản lý thành công!");
+        return redirect(url('vAdmin/vAdmin/list'))->with("success", "Thêm mới quản lý thành công!");
     }
 
     public function edit($id)
@@ -57,7 +57,7 @@ class AdminController extends Controller
         $user->email = trim($request->email);
 
         $user->save();
-        return redirect(url('admin/admin/list'))->with('success', 'Cập nhật thông tin thành công');
+        return redirect(url('vAdmin/vAdmin/list'))->with('success', 'Cập nhật thông tin thành công');
     }
 
     public function delete($id)
@@ -65,6 +65,6 @@ class AdminController extends Controller
         $user = User::getSingle($id);
         $user->is_delete = 1;
         $user->save();
-        return redirect(url('admin/admin/list'))->with('success', 'Xóa thành công!');
+        return redirect(url('vAdmin/vAdmin/list'))->with('success', 'Xóa thành công!');
     }
 }

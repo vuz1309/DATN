@@ -45,7 +45,7 @@
                                   </div>
 
                                   <div style="gap: 20px; display: flex; justify-content: space-between; padding: 16px;">
-                                      <a href="{{ url('admin/examinations/marks_grade') }}" class="btn btn-danger">Hủy</a>
+                                      <a href="{{ url('vAdmin/examinations/marks_grade') }}" class="btn btn-danger">Hủy</a>
                                       <button type="submit" class="btn btn-primary">Lưu</button>
                                   </div>
                               </form>

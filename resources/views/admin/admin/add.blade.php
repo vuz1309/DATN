@@ -10,8 +10,8 @@
                           <h1>Thêm mới quản lý</h1>
                       </div>
                       <!-- <div class="col-sm-6" style="text-align: right;">
-                                                <a href="{{ url('admin/dashboard') }}"></a>
-                                              </div> -->
+                                                    <a href="{{ url('vAdmin/dashboard') }}"></a>
+                                                  </div> -->
                   </div>
               </div><!-- /.container-fluid -->
           </section>
@@ -82,7 +82,7 @@
                                   </div>
 
                                   <div class="card-footer">
-                                      <a href="{{ url('admin/admin/list') }}" class="btn btn-danger">Hủy</a>
+                                      <a href="{{ url('vAdmin/vAdmin/list') }}" class="btn btn-danger">Hủy</a>
                                       <button type="submit" class="btn btn-primary">Thêm mới</button>
                                   </div>
                               </form>

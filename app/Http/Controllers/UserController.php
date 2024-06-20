@@ -108,7 +108,7 @@ class UserController extends Controller
 
             $save->save();
 
-            return redirect('teacher/account')->with('success', 'Sửa thông tin thành công!');
+            return redirect('vTeacher/account')->with('success', 'Sửa thông tin thành công!');
         } else {
             abort(404);
         }
@@ -173,7 +173,7 @@ class UserController extends Controller
 
             $save->save();
 
-            return redirect('student/account')->with('success', 'Sửa thông tin thành công!');
+            return redirect('vStudent/account')->with('success', 'Sửa thông tin thành công!');
         } else {
             abort(404);
         }
@@ -228,7 +228,7 @@ class UserController extends Controller
 
             $save->save();
 
-            return redirect('parent/account')->with('success', 'Sửa thông tin thành công!');
+            return redirect('vParent/account')->with('success', 'Sửa thông tin thành công!');
         } else {
             abort(404);
         }
@@ -249,7 +249,7 @@ class UserController extends Controller
         $user->email = trim($request->email);
 
         $user->save();
-        return redirect(url('admin/account'))->with('success', 'Cập nhật thông tin thành công');
+        return redirect(url('vAdmin/account'))->with('success', 'Cập nhật thông tin thành công');
     }
 
     public function settings()
@@ -292,6 +292,6 @@ class UserController extends Controller
             $user->save();
         }
 
-        return redirect('admin/settings')->with('success', 'Cập nhật thông tin thành công');
+        return redirect('vAdmin/settings')->with('success', 'Cập nhật thông tin thành công');
     }
 }

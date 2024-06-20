@@ -137,16 +137,16 @@ class FeeCollectitonController extends Controller
             $fee->save();
 
 
-            return redirect('student/fee_collect')->with('success', 'Thanh toán thành công!');
+            return redirect('vStudent/fee_collect')->with('success', 'Thanh toán thành công!');
         } else {
-            return redirect('student/fee_collect')->with('error', 'Thanh toán chưa thành công!');
+            return redirect('vStudent/fee_collect')->with('error', 'Thanh toán chưa thành công!');
         }
     }
 
     public function payment_cancel(Request $request)
     {
 
-        return redirect('student/fee_collect')->with('error', 'Thanh toán chưa thành công!');
+        return redirect('vStudent/fee_collect')->with('error', 'Thanh toán chưa thành công!');
     }
     public function fee_collect_report(Request $request)
     {

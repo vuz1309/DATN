@@ -96,7 +96,7 @@
                                         <div class="form-group col-md-3">
                                             <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                 kiếm</button>
-                                            <a href="{{ url('admin/attendance/report') }}" class="btn btn-success"
+                                            <a href="{{ url('vAdmin/attendance/report') }}" class="btn btn-success"
                                                 style="margin-top:30px;">Làm mới</a>
                                         </div>
 
@@ -182,7 +182,7 @@
         $('.getClass').change(function() {
             const class_id = $(this).val();
             $.ajax({
-                url: "{{ url('teacher/class_timeable/get_teacher_subject_class') }}",
+                url: "{{ url('vTeacher/class_timeable/get_teacher_subject_class') }}",
                 type: "POST",
                 data: {
                     "_token": "{{ csrf_token() }}",
@@ -202,7 +202,7 @@
             const student_id = $(this).attr('id');
             const attendance_type = $(this).val();
             $.ajax({
-                url: "{{ url('admin/attendance/student') }}",
+                url: "{{ url('vAdmin/attendance/student') }}",
                 type: "POST",
                 data: {
                     "_token": "{{ csrf_token() }}",

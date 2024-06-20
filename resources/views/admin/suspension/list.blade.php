@@ -43,7 +43,7 @@
                                         <div class="form-group col-md-3">
                                             <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                 kiếm</button>
-                                            <a href="{{ url('admin/suspension/list') }}" class="btn btn-success"
+                                            <a href="{{ url('vAdmin/suspension/list') }}" class="btn btn-success"
                                                 style="margin-top:30px;">Làm mới</a>
                                         </div>
                                     </div>
@@ -101,14 +101,14 @@
                                             </td>
                                             <td>
                                                 @if ($value->status == 1)
-                                                    <a href="{{ url('admin/suspension/accept/' . $value->id) }}"
+                                                    <a href="{{ url('vAdmin/suspension/accept/' . $value->id) }}"
                                                         class="btn btn-info">Chi tiết</a>
                                                     <button id="cancelRequest" data-id="{{ $value->id }}" href="#"
                                                         class="btn btn-danger">
                                                         Hủy yêu cầu
                                                     </button>
                                                 @elseif($value->status == 2)
-                                                    <a href="{{ url('admin/suspension/comeback/' . $value->id) }}"
+                                                    <a href="{{ url('vAdmin/suspension/comeback/' . $value->id) }}"
                                                         class="btn btn-info">Quay lại học tập</a>
                                                 @endif
                                             </td>
@@ -134,7 +134,7 @@
                 showLoading(true);
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('admin/suspension/cancel') }}/" + id,
+                    url: "{{ url('vAdmin/suspension/cancel') }}/" + id,
                     data: {
                         '_token': "{{ csrf_token() }}",
                     },

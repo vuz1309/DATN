@@ -101,22 +101,22 @@
                                                   </td>
                                                   <td>
                                                       <a class="btn btn-primary"
-                                                          href="{{ url('parent/my_student/subject/' . $value->id) }}">Môn
+                                                          href="{{ url('vParent/my_vStudent/subject/' . $value->id) }}">Môn
                                                           học</a>
                                                   </td>
                                                   <td>
                                                       <a class="btn btn-warning"
-                                                          href="{{ url('parent/my_student/exam_schedule/' . $value->id) }}">Lịch
+                                                          href="{{ url('vParent/my_vStudent/exam_schedule/' . $value->id) }}">Lịch
                                                           thi</a>
                                                   </td>
                                                   <td>
                                                       <a class="btn btn-success"
-                                                          href="{{ url('parent/my_student/calendar/' . $value->id) }}">Lịch
+                                                          href="{{ url('vParent/my_vStudent/calendar/' . $value->id) }}">Lịch
                                                           học</a>
                                                   </td>
                                                   <td>
                                                       <a class="btn btn-success"
-                                                          href="{{ url('parent/my_student/exam_result/' . $value->id) }}">Điểm</a>
+                                                          href="{{ url('vParent/my_vStudent/exam_result/' . $value->id) }}">Điểm</a>
                                                   </td>
                                               </tr>
                                           @endforeach

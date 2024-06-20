@@ -92,7 +92,7 @@ class HomeworkController extends Controller
 
         $homework->save();
 
-        return redirect('admin/homework/homework')->with('success', 'Thêm mới thành công!');
+        return redirect('vAdmin/homework/homework')->with('success', 'Thêm mới thành công!');
     }
     public function PostEdit($id, Request $request)
     {
@@ -118,7 +118,7 @@ class HomeworkController extends Controller
 
             $homework->save();
 
-            return redirect('admin/homework/homework')->with('success', 'Cập nhật thành công!');
+            return redirect('vAdmin/homework/homework')->with('success', 'Cập nhật thành công!');
         } else {
             abort(404);
         }
@@ -130,7 +130,7 @@ class HomeworkController extends Controller
         if (!empty($homework)) {
             $homework->is_delete = 1;
             $homework->save();
-            return redirect('admin/homework/homework')->with('success', 'Xóa thành công!');
+            return redirect('vAdmin/homework/homework')->with('success', 'Xóa thành công!');
         } else {
             abort(404);
         }
@@ -185,7 +185,7 @@ class HomeworkController extends Controller
 
         $submit->save();
 
-        return redirect('student/homework')->with('success', 'Nộp bài tập thành công!');
+        return redirect('vStudent/homework')->with('success', 'Nộp bài tập thành công!');
     }
 
     public function edit_homework_submitted($id)
@@ -214,7 +214,7 @@ class HomeworkController extends Controller
         $submit->description = $request->description;
         $submit->save();
 
-        return redirect('student/homework/submitted')->with('success', 'Sửa thành công!');
+        return redirect('vStudent/homework/submitted')->with('success', 'Sửa thành công!');
     }
     public function student_my_submited_homework()
     {

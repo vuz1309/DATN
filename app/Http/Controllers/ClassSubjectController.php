@@ -48,7 +48,7 @@ class ClassSubjectController extends Controller
                     $save->save();
                 }
             }
-            return redirect("admin/assign_subject/list")->with('success', 'Thêm mới thành công');
+            return redirect("vAdmin/assign_subject/list")->with('success', 'Thêm mới thành công');
         } else {
             return redirect()->back()->with('error', 'Khóa học cho lớp không được rỗng!');
         }
@@ -95,7 +95,7 @@ class ClassSubjectController extends Controller
                 }
             }
 
-            return redirect('admin/assign_subject/list')->with('success', 'Sửa thông tin lớp học thành công');
+            return redirect('vAdmin/assign_subject/list')->with('success', 'Sửa thông tin lớp học thành công');
         } else {
             abort(404);
         }
@@ -107,7 +107,7 @@ class ClassSubjectController extends Controller
         if (!empty($record)) {
             $record->is_delete = 1;
             $record->save();
-            return redirect('admin/assign_subject/list')->with('success', 'Xóa lớp học thành công');
+            return redirect('vAdmin/assign_subject/list')->with('success', 'Xóa lớp học thành công');
         } else {
             abort(404);
         }
@@ -145,6 +145,6 @@ class ClassSubjectController extends Controller
             $save->save();
         }
 
-        return redirect('admin/assign_subject/list')->with('success', 'Cập nhật thành công!');
+        return redirect('vAdmin/assign_subject/list')->with('success', 'Cập nhật thành công!');
     }
 }

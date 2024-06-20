@@ -72,7 +72,8 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ url('student/suspension/list') }}" class="btn btn-default mr-4">Quay lại</a>
+                                    <a href="{{ url('vStudent/suspension/list') }}" class="btn btn-default mr-4">Quay
+                                        lại</a>
 
                                     <button style="width: 160px; margin-left: 16px;" type="submit"
                                         class="btn btn-success">Gửi yêu cầu</button>
@@ -170,7 +171,7 @@
                 showLoading(true);
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('admin/suspension/cancel') }}/" + id,
+                    url: "{{ url('vAdmin/suspension/cancel') }}/" + id,
                     data: {
                         '_token': "{{ csrf_token() }}",
                     },
@@ -180,7 +181,7 @@
                         showLoading(false);
                         if (data.success) {
                             window.location.href =
-                                "{{ url('admin/suspension/list') }}";
+                                "{{ url('vAdmin/suspension/list') }}";
                         } else {
                             showAlert('Lỗi', 'Vui lòng thử lại sau!');
                         }

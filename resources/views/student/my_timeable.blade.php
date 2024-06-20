@@ -109,7 +109,7 @@
               var class_id = $(this).val();
               console.log('ntvu log', class_id);
               $.ajax({
-                  url: "{{ url('admin/class_timeable/get_subject') }}",
+                  url: "{{ url('vAdmin/class_timeable/get_subject') }}",
                   type: "POST",
                   data: {
                       "_token": "{{ csrf_token() }}",

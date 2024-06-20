@@ -10,7 +10,7 @@
                         <h1>Lớp <b>{{ $getClass->name }}</b> </h1>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                        <a class="btn btn-primary" href="{{ url('admin/student/add') }}">Thêm mới học sinh</a>
+                        <a class="btn btn-primary" href="{{ url('vAdmin/vStudent/add') }}">Thêm mới học sinh</a>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -69,7 +69,7 @@
                                         <div class="form-group col-md-3">
                                             <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                 kiếm</button>
-                                            <a href="{{ url('admin/student/list') }}" class="btn btn-success"
+                                            <a href="{{ url('vAdmin/vStudent/list') }}" class="btn btn-success"
                                                 style="margin-top:30px;">Làm mới</a>
                                         </div>
 
@@ -148,12 +148,12 @@
                                                 <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td>
                                                 <td>
                                                     @if ($value->isRegisted == '1')
-                                                        <a href="{{ url('admin/enrollments/moveStudent/' . $value->id . '/' . $getClass->id) }}"
+                                                        <a href="{{ url('vAdmin/enrollments/movevStudent/' . $value->id . '/' . $getClass->id) }}"
                                                             class="btn btn-info">Chuyển lớp</a>
-                                                        <a href="{{ url('admin/enrollments/removeStudent/' . $value->id . '/' . $getClass->id) }}"
+                                                        <a href="{{ url('vAdmin/enrollments/removevStudent/' . $value->id . '/' . $getClass->id) }}"
                                                             class="btn btn-danger">Xóa khỏi lớp</a>
                                                     @else
-                                                        <a href="{{ url('admin/enrollments/addStudent/' . $value->id . '/' . $getClass->id) }}"
+                                                        <a href="{{ url('vAdmin/enrollments/addvStudent/' . $value->id . '/' . $getClass->id) }}"
                                                             class="btn btn-primary">Thêm vào lớp</a>
                                                     @endif
 

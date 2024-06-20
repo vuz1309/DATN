@@ -36,7 +36,7 @@
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
                             </div>
-                            <a href="{{ url('student/fee_collect') }}" class="small-box-footer">Chi tiết <i
+                            <a href="{{ url('vStudent/fee_collect') }}" class="small-box-footer">Chi tiết <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
 
@@ -52,7 +52,7 @@
                             <div class="icon">
                                 <i class="nav-icon fas fa-table"></i>
                             </div>
-                            <a href="{{ url('student/my_homework') }}" class="small-box-footer">Xem thêm <i
+                            <a href="{{ url('vStudent/my_homework') }}" class="small-box-footer">Xem thêm <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
 
@@ -68,7 +68,7 @@
                             <div class="icon">
                                 <i class="nav-icon fas fa-table"></i>
                             </div>
-                            <a href="{{ url('student/homework/submitted') }}" class="small-box-footer">Xem thêm <i
+                            <a href="{{ url('vStudent/homework/submitted') }}" class="small-box-footer">Xem thêm <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
 
@@ -85,7 +85,7 @@
                             <div class="icon">
                                 <i class="nav-icon fas fa-table"></i>
                             </div>
-                            <a href="{{ url('student/my_subject') }}" class="small-box-footer">Xem thêm <i
+                            <a href="{{ url('vStudent/my_subject') }}" class="small-box-footer">Xem thêm <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
 

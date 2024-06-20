@@ -35,7 +35,7 @@
                               <div class="icon">
                                   <i class="ion ion-bag"></i>
                               </div>
-                              <a href="{{ url('admin/fee/fee_collect') }}" class="small-box-footer">Chi tiết <i
+                              <a href="{{ url('vAdmin/fee/fee_collect') }}" class="small-box-footer">Chi tiết <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
 
@@ -51,7 +51,7 @@
                               <div class="icon">
                                   <i class="ion ion-bag"></i>
                               </div>
-                              <a href="{{ url('admin/fee/fee_collect') }}" class="small-box-footer">Chi tiết <i
+                              <a href="{{ url('vAdmin/fee/fee_collect') }}" class="small-box-footer">Chi tiết <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
 
@@ -67,7 +67,7 @@
                               <div class="icon">
                                   <i class="ion ion-person-add"></i>
                               </div>
-                              <a href="{{ url('admin/student/list') }}" class="small-box-footer">Xem thêm <i
+                              <a href="{{ url('vAdmin/vStudent/list') }}" class="small-box-footer">Xem thêm <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
 
@@ -84,7 +84,7 @@
                               <div class="icon">
                                   <i class="ion ion-person-add"></i>
                               </div>
-                              <a href="{{ url('admin/teacher/list') }}" class="small-box-footer">Xem thêm <i
+                              <a href="{{ url('vAdmin/vTeacher/list') }}" class="small-box-footer">Xem thêm <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
 
@@ -100,7 +100,7 @@
                               <div class="icon">
                                   <i class="ion ion-person-add"></i>
                               </div>
-                              <a href="{{ url('admin/parent/list') }}" class="small-box-footer">Xem thêm <i
+                              <a href="{{ url('vAdmin/vParent/list') }}" class="small-box-footer">Xem thêm <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
 
@@ -116,7 +116,7 @@
                               <div class="icon">
                                   <i class="ion ion-person-add"></i>
                               </div>
-                              <a href="{{ url('admin/admin/list') }}" class="small-box-footer">Xem thêm <i
+                              <a href="{{ url('vAdmin/vAdmin/list') }}" class="small-box-footer">Xem thêm <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
 
@@ -132,7 +132,7 @@
                               <div class="icon">
                                   <i class="ion ion-grid"></i>
                               </div>
-                              <a href="{{ url('admin/class/list') }}" class="small-box-footer">Xem thêm <i
+                              <a href="{{ url('vAdmin/class/list') }}" class="small-box-footer">Xem thêm <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
 
@@ -148,7 +148,7 @@
                               <div class="icon">
                                   <i class="nav-icon fas fa-table"></i>
                               </div>
-                              <a href="{{ url('admin/subject/list') }}" class="small-box-footer">Xem thêm <i
+                              <a href="{{ url('vAdmin/subject/list') }}" class="small-box-footer">Xem thêm <i
                                       class="fas fa-arrow-circle-right"></i></a>
                           </div>
 

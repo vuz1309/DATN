@@ -66,7 +66,7 @@
                                           <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('admin/examinations/exam_schedule') }}"
+                                              <a href="{{ url('vAdmin/examinations/exam_schedule') }}"
                                                   class="btn btn-success" style="margin-top:30px;">Làm mới</a>
                                           </div>
 
@@ -75,7 +75,7 @@
                               </form>
                           </div>
                           @if (!empty(Request::get('exam_id')) && !empty(Request::get('class_id')))
-                              <form action="{{ url('admin/examinaions/schedule/add') }}" method="POST">
+                              <form action="{{ url('vAdmin/examinaions/schedule/add') }}" method="POST">
                                   {{ csrf_field() }}
                                   <input hidden type="text" name="class_id" value="{{ Request::get('class_id') }}" />
                                   <input hidden type="text" name="exam_id" value="{{ Request::get('exam_id') }}" />
@@ -176,7 +176,7 @@
           $('.getExam').change(function() {
               var exam_id = $(this).val();
               $.ajax({
-                  url: "{{ url('admin/exam/get_class') }}",
+                  url: "{{ url('vAdmin/exam/get_class') }}",
                   type: "POST",
                   data: {
                       "_token": "{{ csrf_token() }}",

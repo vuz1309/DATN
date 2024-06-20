@@ -58,13 +58,22 @@
                                         <div class="form-group col-md-12">
                                             <label for="amount">Số tiền còn lại trước bảo lưu: <span
                                                     style="color:red;">*</span></label>
-                                            <span class="form-control">{{ number_format($getSuspension->amount) }}
+                                            <span class="form-control disabled">{{ number_format($getSuspension->amount) }}
                                             </span>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="need_amount">Số tiền cần đóng học cho lớp này: <span
+                                                    style="color:red;">*</span></label>
+                                            <input id="need_amount" name="need_amount"
+                                                type="
+                                            number"
+                                                class="form-control">
+                                            </input>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ url('admin/suspension/list') }}" class="btn btn-default mr-4">Quay lại</a>
+                                    <a href="{{ url('vAdmin/suspension/list') }}" class="btn btn-default mr-4">Quay lại</a>
 
                                     <button style="width: 160px; margin-left: 16px;" type="submit"
                                         class="btn btn-success">Xác nhận quay lại sau bảo lưu</button>
@@ -97,9 +106,17 @@
                     },
                     end_date: {
                         required: true
+                    },
+                    need_amount: {
+                        required: true,
+                        min: 0
                     }
                 },
                 messages: {
+                    need_amount: {
+                        required: 'Không được để trống.',
+                        min: 'Ít nhất là 1.000đ'
+                    },
                     class_id: {
                         required: 'Không được để trống.'
                     },
@@ -143,6 +160,7 @@
                     $('#' + prefix + '-class-start-date').text(new Date(selectedClass.start_date)
                         .toLocaleDateString());
                     $('#' + prefix + '-class-end-date').text(new Date(selectedClass.end_date).toLocaleDateString());
+                    $('#need_amount').val(selectedClass.fee);
                 } else {
                     $('#' + prefix + '-class-name').text('');
                     $('#' + prefix + '-class-fee').text('');

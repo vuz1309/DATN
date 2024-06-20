@@ -71,7 +71,7 @@ class ClassTransferController extends Controller
                 $getTransfer->status = 2; // Chờ thanh toán
             }
             $getTransfer->save();
-            return redirect('admin/class_transfers/admin_list')->with('success', 'Xác nhận yêu cầu chuyển lớp thành công!');
+            return redirect('vAdmin/class_transfers/admin_list')->with('success', 'Xác nhận yêu cầu chuyển lớp thành công!');
         } else {
             abort(404);
         }
@@ -90,7 +90,7 @@ class ClassTransferController extends Controller
 
         if (!empty($getTransfer)) {
             $getTransfer->delete();
-            return redirect('student/move')->with('success', 'Xóa yêu cầu thành công!');
+            return redirect('vStudent/move')->with('success', 'Xóa yêu cầu thành công!');
         } else {
             abort(404);
         }
@@ -113,7 +113,7 @@ class ClassTransferController extends Controller
             $params['amount'] = $getTransfer->amount;
             $params['id'] = $getTransfer->id;
             $params['bankCode'] = '';
-            $params['ReturnURL'] = url('student/payTransferFee');
+            $params['ReturnURL'] = url('vStudent/payTransferFee');
             $query_string = $paypalService->buildQuery($params);
 
             header('Location: ' . $query_string);
@@ -146,7 +146,7 @@ class ClassTransferController extends Controller
         $newRequest->status = 1;
         $newRequest->save();
 
-        return redirect('student/move')->with('success', 'Yêu cầu chuyển lớp đã được gửi đi.');
+        return redirect('vStudent/move')->with('success', 'Yêu cầu chuyển lớp đã được gửi đi.');
     }
 
     public function payment_success(Request $request)
@@ -176,9 +176,9 @@ class ClassTransferController extends Controller
             }
 
 
-            return redirect('student/move')->with('success', 'Thanh toán thành công, Bạn đã được chuyển sang lớp mới!');
+            return redirect('vStudent/move')->with('success', 'Thanh toán thành công, Bạn đã được chuyển sang lớp mới!');
         } else {
-            return redirect('student/move')->with('error', 'Thanh toán chưa thành công!');
+            return redirect('vStudent/move')->with('error', 'Thanh toán chưa thành công!');
         }
     }
 }

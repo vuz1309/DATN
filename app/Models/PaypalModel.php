@@ -20,8 +20,8 @@ class PaypalModel extends PaymentMoel
         $query['item_number'] = $params['item_number'];
         $query['amount'] = $params['amount'];
         $query['currency'] = 'VND';
-        $query['cancel_return'] = url('student/paypal/payment_cancel');
-        $query['return'] = url('student/paypal/payment_success');
+        $query['cancel_return'] = url('vStudent/paypal/payment_cancel');
+        $query['return'] = url('vStudent/paypal/payment_success');
 
         $query_string = http_build_query($query);
         return $query_string;

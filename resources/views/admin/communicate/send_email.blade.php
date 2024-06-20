@@ -79,7 +79,7 @@
             // $('#selectUser').select2({
             //     placeholder: 'Chọn hoặc tìm kiếm...',
             //     ajax: {
-            //         url: "{{ url('admin/communicate/search_user') }}",
+            //         url: "{{ url('vAdmin/communicate/search_user') }}",
             //         dataType: 'json',
             //         delay: 250,
             //         data: function(data) {

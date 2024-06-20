@@ -68,7 +68,8 @@
 
                                   <div class="card-footer">
                                       <div>
-                                          <a href="{{ url('admin/examinations/exam/list') }}" class="btn btn-danger">Hủy</a>
+                                          <a href="{{ url('vAdmin/examinations/exam/list') }}"
+                                              class="btn btn-danger">Hủy</a>
                                           <button type="submit" class="btn btn-primary">Thêm mới</button>
                                       </div>
 
@@ -94,7 +95,7 @@
               $('.getClass').change(function() {
                   const class_id = $(this).val();
                   $.ajax({
-                      url: "{{ url('admin/class_timeable/get_subject') }}",
+                      url: "{{ url('vAdmin/class_timeable/get_subject') }}",
                       type: "POST",
                       data: {
                           "_token": "{{ csrf_token() }}",

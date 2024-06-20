@@ -125,7 +125,7 @@
                                   </div>
 
                                   <div class="card-footer">
-                                      <a href="{{ url('admin/parent/list') }}" class="btn btn-danger">Hủy</a>
+                                      <a href="{{ url('vAdmin/vParent/list') }}" class="btn btn-danger">Hủy</a>
                                       <button type="submit" class="btn btn-primary">Thêm mới</button>
                                   </div>
                               </form>

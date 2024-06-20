@@ -9,7 +9,7 @@
                         <h1>Yêu cầu bảo lưu của tôi (Tổng: {{ $getRecord->total() }})</h1>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                        <a class="btn btn-primary" href="{{ url('student/suspension/add') }}">Thêm yêu cầu</a>
+                        <a class="btn btn-primary" href="{{ url('vStudent/suspension/add') }}">Thêm yêu cầu</a>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                                         <div class="form-group col-md-3">
                                             <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                 kiếm</button>
-                                            <a href="{{ url('admin/suspension/list') }}" class="btn btn-success"
+                                            <a href="{{ url('vAdmin/suspension/list') }}" class="btn btn-success"
                                                 style="margin-top:30px;">Làm mới</a>
                                         </div>
                                     </div>
@@ -132,7 +132,7 @@
                 showLoading(true);
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('admin/suspension/cancel') }}/" + id,
+                    url: "{{ url('vAdmin/suspension/cancel') }}/" + id,
                     data: {
                         '_token': "{{ csrf_token() }}",
                     },

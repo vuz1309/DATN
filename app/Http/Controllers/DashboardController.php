@@ -27,12 +27,12 @@ class DashboardController extends Controller
             $data['getTotalFees'] = StudentAddFeesModel::getTotalFees();
             $data['TotalClass'] = ClassModel::getTotal();
             $data['TotalSubject'] = SubjectModel::getTotal();
-            return view('admin/dashboard', $data);
+            return view('vAdmin/dashboard', $data);
         } else if (Auth::user()->user_type == 2) {
             $data['TotalStudent'] = User::getTeacherStudentCount(Auth::user()->id);
             // $data['TotalClass'] = AssignClassTeacherModel::getMyClassAsignCount(Auth::user()->id);
             $data['TotalSubject'] = AssignClassTeacherModel::getMyClassSubjectCount(Auth::user()->id);
-            return view('teacher/dashboard', $data);
+            return view('vTeacher/dashboard', $data);
         } else if (Auth::user()->user_type == 3) {
 
 
@@ -41,9 +41,9 @@ class DashboardController extends Controller
             $data['TotalHomeworkSubmitted'] = HomeworkSubmitModel::getTotal(Auth::user()->id);
 
             $data['TotalSubject'] = SubjectModel::getStudentSubjectCount(Auth::user()->id);
-            return view('student/dashboard', $data);
+            return view('vStudent/dashboard', $data);
         } else if (Auth::user()->user_type == 4) {
-            return view('parent/dashboard', $data);
+            return view('vParent/dashboard', $data);
         }
     }
 }

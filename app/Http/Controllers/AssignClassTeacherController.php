@@ -45,7 +45,7 @@ class AssignClassTeacherController extends Controller
                 }
             }
 
-            return redirect('admin/assign_class_teacher/list')->with('success', 'Thêm mới thành công');
+            return redirect('vAdmin/assign_class_vTeacher/list')->with('success', 'Thêm mới thành công');
         } else {
             abort(404);
         }
@@ -89,7 +89,7 @@ class AssignClassTeacherController extends Controller
                 }
             }
 
-            return redirect('admin/assign_class_teacher/list')->with('success', 'Sửa thông tin thành công');
+            return redirect('vAdmin/assign_class_vTeacher/list')->with('success', 'Sửa thông tin thành công');
         } else {
             abort(404);
         }
@@ -102,7 +102,7 @@ class AssignClassTeacherController extends Controller
         if (!empty($record)) {
             $record->is_delete = 1;
             $record->save();
-            return redirect('admin/assign_class_teacher/list')->with('success', 'Xóa thành công');
+            return redirect('vAdmin/assign_class_vTeacher/list')->with('success', 'Xóa thành công');
         } else {
             abort(404);
         }
@@ -137,7 +137,7 @@ class AssignClassTeacherController extends Controller
             $save->save();
         }
 
-        return redirect('admin/assign_class_teacher/list')->with('success', 'Cập nhật thành công!');
+        return redirect('vAdmin/assign_class_vTeacher/list')->with('success', 'Cập nhật thành công!');
     }
 
     public function myClassSubject()

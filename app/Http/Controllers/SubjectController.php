@@ -44,7 +44,7 @@ class SubjectController extends Controller
         $save->created_by = Auth::user()->id;
         $save->save();
 
-        return redirect("admin/subject/list")->with('success', 'Thêm mới Khóa học thành công');
+        return redirect("vAdmin/subject/list")->with('success', 'Thêm mới Khóa học thành công');
     }
 
     public function edit($id)
@@ -72,7 +72,7 @@ class SubjectController extends Controller
             $record->status = $request->status;
             $record->type = $request->type;
             $record->save();
-            return redirect('admin/subject/list')->with('success', 'Sửa thông tin lớp học thành công');
+            return redirect('vAdmin/subject/list')->with('success', 'Sửa thông tin lớp học thành công');
         } else {
             abort(404);
         }
@@ -84,7 +84,7 @@ class SubjectController extends Controller
         if (!empty($record)) {
             $record->is_delete = 1;
             $record->save();
-            return redirect('admin/subject/list')->with('success', 'Xóa lớp học thành công');
+            return redirect('vAdmin/subject/list')->with('success', 'Xóa lớp học thành công');
         } else {
             abort(404);
         }

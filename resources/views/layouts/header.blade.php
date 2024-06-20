@@ -75,7 +75,7 @@
 
                  @if (Auth::user()->user_type == 1)
                      <li class="nav-item">
-                         <a href=" {{ url('admin/dashboard') }} "
+                         <a href=" {{ url('vAdmin/dashboard') }} "
                              class="nav-link @if (Request::segment(2) == 'dashboard') active @endif">
                              <i class=" nav-icon nav-icon fas fa-tachometer-alt"></i>
                              <p>
@@ -85,14 +85,14 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('admin/class_transfers/admin_list') }}"
+                         <a href="{{ url('vAdmin/class_transfers/admin_list') }}"
                              class="nav-link @if (Request::segment(2) == 'class_transfers') active @endif">
                              <i class=" nav-icon fas fa-cogs"></i>
                              <p>Yêu cầu chuyển lớp</p>
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('admin/admin/list') }}"
+                         <a href="{{ url('vAdmin/vAdmin/list') }}"
                              class="nav-link @if (Request::segment(2) == 'admin') active @endif">
                              <i class=" nav-icon fas fa-cogs"></i>
                              <p>Danh sách quản lý</p>
@@ -100,7 +100,7 @@
                      </li>
 
                      <li class="nav-item">
-                         <a href="{{ url('admin/student/list') }}"
+                         <a href="{{ url('vAdmin/vStudent/list') }}"
                              class="nav-link @if (Request::segment(2) == 'student') active @endif">
                              <i class=" nav-icon fas fa-user-graduate"></i>
                              <p>Học sinh</p>
@@ -108,7 +108,7 @@
                      </li>
 
                      <li class="nav-item">
-                         <a href="{{ url('admin/suspension/list') }}"
+                         <a href="{{ url('vAdmin/suspension/list') }}"
                              class="nav-link @if (Request::segment(2) == 'suspension') active @endif">
                              <i class=" nav-icon fas fa-user-slash"></i>
                              <p>Học sinh bảo lưu</p>
@@ -116,7 +116,7 @@
                      </li>
 
                      <li class="nav-item">
-                         <a href="{{ url('admin/teacher/list') }}"
+                         <a href="{{ url('vAdmin/vTeacher/list') }}"
                              class="nav-link @if (Request::segment(2) == 'teacher') active @endif">
                              <i class=" nav-icon fas fa-chalkboard-teacher"></i>
                              <p>Giáo viên</p>
@@ -124,7 +124,7 @@
                      </li>
 
                      <li class="nav-item">
-                         <a href="{{ url('admin/parent/list') }}"
+                         <a href="{{ url('vAdmin/vParent/list') }}"
                              class="nav-link @if (Request::segment(2) == 'parent') active @endif">
                              <i class=" nav-icon fas fa-user-friends"></i>
                              <p>Phụ huynh</p>
@@ -145,7 +145,7 @@
                          </a>
                          <ul class="nav nav-treeview" style="display: block;">
                              <li class="nav-item">
-                                 <a href="{{ url('admin/class/list') }}"
+                                 <a href="{{ url('vAdmin/class/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'class') active @endif">
                                      <i class=" nav-icon fas fa-chalkboard-teacher"></i>
                                      <p>Lớp học</p>
@@ -153,7 +153,7 @@
                              </li>
 
                              <li class="nav-item">
-                                 <a href="{{ url('admin/subject/list') }}"
+                                 <a href="{{ url('vAdmin/subject/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'subject') active @endif">
                                      <i class=" fas fa-book-open nav-icon"></i>
                                      <p>Khóa học</p>
@@ -161,7 +161,7 @@
                              </li>
 
                              <li class="nav-item">
-                                 <a href="{{ url('admin/assign_subject/list') }}"
+                                 <a href="{{ url('vAdmin/assign_subject/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'assign_subject') active @endif">
                                      <i class="  fas fa-school nav-icon"></i>
                                      <p>Lớp học - Khóa học</p>
@@ -169,7 +169,7 @@
                              </li>
 
                              <li class="nav-item">
-                                 <a href="{{ url('admin/assign_class_teacher/list') }}"
+                                 <a href="{{ url('vAdmin/assign_class_vTeacher/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'assign_class_teacher') active @endif">
                                      <i class=" fas fa-user-graduate nav-icon"></i>
                                      <p>Chủ nhiệm</p>
@@ -177,7 +177,7 @@
                              </li>
 
                              <li class="nav-item">
-                                 <a href="{{ url('admin/class_timeable/list') }}"
+                                 <a href="{{ url('vAdmin/class_timeable/list') }}"
                                      class="nav-link @if (Request::segment(2) == 'class_timeable') active @endif">
                                      <i class="far fa-calendar-alt nav-icon"></i>
                                      <p>Thời khóa biểu</p>
@@ -196,14 +196,14 @@
                          </a>
                          <ul class="nav nav-treeview" style="display: block;">
                              <li class="nav-item">
-                                 <a href="{{ url('admin/fee/fee_collect') }}"
+                                 <a href="{{ url('vAdmin/fee/fee_collect') }}"
                                      class="nav-link @if (Request::segment(3) == 'fee_collect') active @endif">
                                      <i class="  fas fa-hand-holding-usd nav-icon"></i>
                                      <p>Nộp học phí</p>
                                  </a>
                              </li>
                              <li class="nav-item">
-                                 <a href="{{ url('admin/fee/fee_collect_report') }}"
+                                 <a href="{{ url('vAdmin/fee/fee_collect_report') }}"
                                      class="nav-link @if (Request::segment(3) == 'fee_collect_report') active @endif">
                                      <i class=" far fa-file-alt nav-icon"></i>
                                      <p>Báo cáo</p>
@@ -222,14 +222,14 @@
                          </a>
                          <ul class="nav nav-treeview" style="display: block;">
                              <li class="nav-item">
-                                 <a href="{{ url('admin/attendance/student') }}"
+                                 <a href="{{ url('vAdmin/attendance/student') }}"
                                      class="nav-link @if (Request::segment(3) == 'student') active @endif">
                                      <i class="fas fa-user-check nav-icon"></i>
                                      <p>Điểm danh học sinh</p>
                                  </a>
                              </li>
                              <li class="nav-item">
-                                 <a href="{{ url('admin/attendance/report') }}"
+                                 <a href="{{ url('vAdmin/attendance/report') }}"
                                      class="nav-link @if (Request::segment(3) == 'report' && Request::segment(2) == 'attendance') active @endif">
                                      <i class="fas fa-file-signature nav-icon"></i>
                                      <p>Báo cáo</p>
@@ -248,14 +248,14 @@
                          </a>
                          <ul class="nav nav-treeview" style="display: block;">
                              <li class="nav-item">
-                                 <a href="{{ url('admin/homework/homework') }}"
+                                 <a href="{{ url('vAdmin/homework/homework') }}"
                                      class="nav-link @if (Request::segment(3) == 'homework') active @endif">
                                      <i class=" nav-icon fas fa-book nav-icon"></i>
                                      <p>Bài tập</p>
                                  </a>
                              </li>
                              <li class="nav-item">
-                                 <a href="{{ url('admin/homework/report') }}"
+                                 <a href="{{ url('vAdmin/homework/report') }}"
                                      class="nav-link @if (Request::segment(3) == 'report' && Request::segment(2) == 'homework') active @endif">
                                      <i class=" nav-icon fas fa-clipboard-list nav-icon"></i>
                                      <p>Báo cáo bài tập</p>
@@ -263,7 +263,7 @@
                              </li>
                              <!-- Các mục khác -->
                              <li class="nav-item">
-                                 <a href="{{ url('admin/examinations/exam/list') }}"
+                                 <a href="{{ url('vAdmin/examinations/exam/list') }}"
                                      class="nav-link @if (Request::segment(3) == 'exam') active @endif">
                                      <i class="far fa-file-alt nav-icon"></i>
                                      <p>
@@ -273,7 +273,7 @@
                              </li>
 
                              <li class="nav-item">
-                                 <a href="{{ url('admin/examinations/exam_schedule') }}"
+                                 <a href="{{ url('vAdmin/examinations/exam_schedule') }}"
                                      class="nav-link @if (Request::segment(3) == 'exam_schedule') active @endif">
                                      <i class="far fa-calendar-alt nav-icon"></i>
                                      <p>
@@ -283,7 +283,7 @@
                              </li>
 
                              <li class="nav-item">
-                                 <a href="{{ url('admin/examinations/marks_register') }}"
+                                 <a href="{{ url('vAdmin/examinations/marks_register') }}"
                                      class="nav-link @if (Request::segment(3) == 'marks_register') active @endif">
                                      <i class=" far fa-edit nav-icon"></i>
                                      <p>
@@ -292,7 +292,7 @@
                                  </a>
                              </li>
                              <li class="nav-item">
-                                 <a href="{{ url('admin/examinations/marks_grade') }}"
+                                 <a href="{{ url('vAdmin/examinations/marks_grade') }}"
                                      class="nav-link @if (Request::segment(3) == 'marks_grade') active @endif">
                                      <i class="far fa-chart-bar nav-icon"></i>
                                      <p>
@@ -304,28 +304,28 @@
                      </li>
 
                      <li class="nav-item">
-                         <a href="{{ url('admin/comunicate/send_email') }}"
+                         <a href="{{ url('vAdmin/comunicate/send_email') }}"
                              class="nav-link @if (Request::segment(3) == 'send_email') active @endif">
                              <i class=" nav-icon nav-icon fas fa-envelope"></i>
                              <p>Gửi thông báo</p>
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('admin/account') }}"
+                         <a href="{{ url('vAdmin/account') }}"
                              class="nav-link @if (Request::segment(2) == 'account') active @endif">
                              <i class=" nav-icon nav-icon far fa-user"></i>
                              <p>Tài khoản</p>
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('admin/change_password') }}"
+                         <a href="{{ url('vAdmin/change_password') }}"
                              class="nav-link @if (Request::segment(2) == 'change_password') active @endif">
                              <i class=" nav-icon nav-icon fas fa-key"></i>
                              <p>Đổi mật khẩu</p>
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('admin/settings') }}"
+                         <a href="{{ url('vAdmin/settings') }}"
                              class="nav-link @if (Request::segment(2) == 'settings') active @endif">
                              <i class=" nav-icon nav-icon fas fa-cog"></i>
                              <p>Cài đặt</p>
@@ -333,7 +333,7 @@
                      </li>
                  @elseif(Auth::user()->user_type == 2)
                      <li class="nav-item">
-                         <a href=" {{ url('teacher/dashboard') }} "
+                         <a href=" {{ url('vTeacher/dashboard') }} "
                              class="nav-link @if (Request::segment(2) == 'dashboard') active @endif">
                              <i class=" nav-icon nav-icon fas fa-tachometer-alt"></i>
                              <p>
@@ -343,7 +343,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('teacher/my_exam_schedule') }}"
+                         <a href="{{ url('vTeacher/my_exam_schedule') }}"
                              class="nav-link @if (Request::segment(2) == 'my_exam_schedule') active @endif">
                              <i class=" nav-icon far fa-calendar-alt"></i>
                              <p>
@@ -352,7 +352,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('teacher/calendar') }}"
+                         <a href="{{ url('vTeacher/calendar') }}"
                              class="nav-link @if (Request::segment(2) == 'calendar') active @endif">
                              <i class=" nav-icon far fa-calendar-alt"></i>
                              <p>
@@ -361,7 +361,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('teacher/homework/homework') }}"
+                         <a href="{{ url('vTeacher/homework/homework') }}"
                              class="nav-link @if (Request::segment(2) == 'homework') active @endif">
                              <i class=" nav-icon far fa-clipboard"></i>
                              <p>
@@ -370,7 +370,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('teacher/marks_register') }}"
+                         <a href="{{ url('vTeacher/marks_register') }}"
                              class="nav-link @if (Request::segment(2) == 'marks_register') active @endif">
                              <i class=" nav-icon far fa-edit"></i>
                              <p>
@@ -388,7 +388,7 @@
                          </a>
                          <ul class="nav nav-treeview" style="display: block;">
                              <li class="nav-item">
-                                 <a href="{{ url('teacher/attendance/student') }}"
+                                 <a href="{{ url('vTeacher/attendance/student') }}"
                                      class="nav-link @if (Request::segment(3) == 'student') active @endif">
                                      <i class=" nav-icon far fa-circle"></i>
                                      <p>
@@ -397,7 +397,7 @@
                                  </a>
                              </li>
                              <li class="nav-item">
-                                 <a href="{{ url('teacher/attendance/report') }}"
+                                 <a href="{{ url('vTeacher/attendance/report') }}"
                                      class="nav-link @if (Request::segment(3) == 'report') active @endif">
                                      <i class=" nav-icon far fa-circle"></i>
                                      <p>
@@ -408,7 +408,7 @@
                          </ul>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('teacher/my_class_subject') }}"
+                         <a href="{{ url('vTeacher/my_class_subject') }}"
                              class="nav-link @if (Request::segment(2) == 'my_class_subject') active @endif">
                              <i class=" nav-icon fas fa-tachometer-alt"></i>
                              <p>
@@ -417,7 +417,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('teacher/my_student') }}"
+                         <a href="{{ url('vTeacher/my_student') }}"
                              class="nav-link @if (Request::segment(2) == 'my_student') active @endif">
                              <i class=" nav-icon fas fa-user-graduate"></i>
                              <p>
@@ -426,7 +426,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('teacher/account') }}"
+                         <a href="{{ url('vTeacher/account') }}"
                              class="nav-link @if (Request::segment(2) == 'account') active @endif">
                              <i class=" nav-icon  far fa-user"></i>
                              <p>
@@ -436,7 +436,7 @@
                      </li>
 
                      <li class="nav-item">
-                         <a href="{{ url('teacher/change_password') }}"
+                         <a href="{{ url('vTeacher/change_password') }}"
                              class="nav-link @if (Request::segment(2) == 'change_password') active @endif">
                              <i class=" nav-icon fas fa-lock"></i>
                              <p>
@@ -446,7 +446,7 @@
                      </li>
                  @elseif(Auth::user()->user_type == 3)
                      <li class="nav-item">
-                         <a href=" {{ url('student/dashboard') }} "
+                         <a href=" {{ url('vStudent/dashboard') }} "
                              class="nav-link @if (Request::segment(2) == 'dashboard') active @endif">
                              <i class=" nav-icon nav-icon fas fa-tachometer-alt"></i>
                              <p>
@@ -456,7 +456,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('student/my_timeable') }}"
+                         <a href="{{ url('vStudent/my_timeable') }}"
                              class="nav-link @if (Request::segment(2) == 'my_timeable') active @endif">
                              <i class=" nav-icon far fa-calendar-alt"></i>
                              <p>
@@ -465,7 +465,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('student/my_homework') }}"
+                         <a href="{{ url('vStudent/my_homework') }}"
                              class="nav-link @if (Request::segment(2) == 'my_homework') active @endif">
                              <i class=" nav-icon far fa-clipboard"></i>
                              <p>
@@ -474,7 +474,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('student/homework/submitted') }}"
+                         <a href="{{ url('vStudent/homework/submitted') }}"
                              class="nav-link @if (Request::segment(3) == 'submitted') active @endif">
                              <i class=" nav-icon far fa-check-circle"></i>
                              <p>
@@ -484,7 +484,7 @@
                      </li>
 
                      <li class="nav-item">
-                         <a href="{{ url('student/my_exam_schedule') }}"
+                         <a href="{{ url('vStudent/my_exam_schedule') }}"
                              class="nav-link @if (Request::segment(2) == 'my_exam_schedule') active @endif">
                              <i class=" nav-icon far fa-calendar-check"></i>
                              <p>
@@ -493,7 +493,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('student/my_attendance_report') }}"
+                         <a href="{{ url('vStudent/my_attendance_report') }}"
                              class="nav-link @if (Request::segment(2) == 'my_attendance_report') active @endif">
                              <i class=" nav-icon far fa-address-book"></i>
                              <p>
@@ -503,7 +503,7 @@
                      </li>
 
                      <li class="nav-item">
-                         <a href="{{ url('student/my_calendar') }}"
+                         <a href="{{ url('vStudent/my_calendar') }}"
                              class="nav-link @if (Request::segment(2) == 'my_calendar') active @endif">
                              <i class=" nav-icon far fa-calendar"></i>
                              <p>
@@ -512,7 +512,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('student/my_exam_result') }}"
+                         <a href="{{ url('vStudent/my_exam_result') }}"
                              class="nav-link @if (Request::segment(2) == 'my_exam_result') active @endif">
                              <i class=" nav-icon far fa-edit"></i>
                              <p>
@@ -521,7 +521,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('student/my_class') }}"
+                         <a href="{{ url('vStudent/my_class') }}"
                              class="nav-link @if (Request::segment(2) == 'my_subject') active @endif">
                              <i class=" nav-icon fa fa-book-open"></i>
                              <p>
@@ -530,7 +530,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('student/fee_collect') }}"
+                         <a href="{{ url('vStudent/fee_collect') }}"
                              class="nav-link @if (Request::segment(2) == 'fee_collect') active @endif">
                              <i class=" nav-icon far fa-money-bill-alt"></i>
                              <p>
@@ -539,7 +539,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('student/move') }}"
+                         <a href="{{ url('vStudent/move') }}"
                              class="nav-link @if (Request::segment(2) == 'move') active @endif">
                              <i class=" nav-icon far fa-money-bill-alt"></i>
                              <p>
@@ -548,7 +548,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('student/suspension/list') }}"
+                         <a href="{{ url('vStudent/suspension/list') }}"
                              class="nav-link @if (Request::segment(2) == 'suspension') active @endif">
                              <i class=" nav-icon far fa-money-bill-alt"></i>
                              <p>
@@ -558,7 +558,7 @@
                      </li>
 
                      <li class="nav-item">
-                         <a href="{{ url('student/account') }}"
+                         <a href="{{ url('vStudent/account') }}"
                              class="nav-link @if (Request::segment(2) == 'account') active @endif">
                              <i class=" nav-icon far fa-user"></i>
                              <p>
@@ -567,7 +567,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('student/change_password') }}"
+                         <a href="{{ url('vStudent/change_password') }}"
                              class="nav-link @if (Request::segment(2) == 'change_password') active @endif">
                              <i class=" nav-icon fas fa-lock"></i>
                              <p>
@@ -577,7 +577,7 @@
                      </li>
                  @elseif(Auth::user()->user_type == 4)
                      <li class="nav-item">
-                         <a href=" {{ url('parent/dashboard') }} "
+                         <a href=" {{ url('vParent/dashboard') }} "
                              class="nav-link @if (Request::segment(2) == 'dashboard') active @endif">
                              <i class=" nav-icon nav-icon fas fa-tachometer-alt"></i>
                              <p>
@@ -587,7 +587,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('parent/my_student') }}"
+                         <a href="{{ url('vParent/my_student') }}"
                              class="nav-link @if (Request::segment(2) == 'my_student') active @endif">
                              <i class=" nav-icon nav-icon fas fa-child"></i>
                              <p>
@@ -596,7 +596,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('parent/my_attendance_report') }}"
+                         <a href="{{ url('vParent/my_attendance_report') }}"
                              class="nav-link @if (Request::segment(2) == 'my_attendance_report') active @endif">
                              <i class=" nav-icon nav-icon far fa-calendar-check"></i>
                              <p>
@@ -606,7 +606,7 @@
                      </li>
 
                      <li class="nav-item">
-                         <a href="{{ url('parent/account') }}"
+                         <a href="{{ url('vParent/account') }}"
                              class="nav-link @if (Request::segment(2) == 'account') active @endif">
                              <i class=" nav-icon far fa-user"></i>
                              <p>
@@ -615,7 +615,7 @@
                          </a>
                      </li>
                      <li class="nav-item">
-                         <a href="{{ url('parent/change_password') }}"
+                         <a href="{{ url('vParent/change_password') }}"
                              class="nav-link @if (Request::segment(2) == 'change_password') active @endif">
                              <i class=" nav-icon nav-icon fas fa-lock"></i>
                              <p>

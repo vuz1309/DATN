@@ -77,7 +77,7 @@ class ParentController extends Controller
 
         $save->save();
 
-        return redirect("admin/parent/list")->with('success', 'Thêm mới thành công');
+        return redirect("vAdmin/vParent/list")->with('success', 'Thêm mới thành công');
     }
 
     public function edit($id)
@@ -151,7 +151,7 @@ class ParentController extends Controller
 
             $save->save();
 
-            return redirect('admin/parent/list')->with('success', 'Sửa thông tin thành công!');
+            return redirect('vAdmin/vParent/list')->with('success', 'Sửa thông tin thành công!');
         } else {
             abort(404);
         }
@@ -163,7 +163,7 @@ class ParentController extends Controller
         if (!empty($record)) {
             $record->is_delete = 1;
             $record->save();
-            return redirect('admin/parent/list')->with('success', 'Xóa thành công!');
+            return redirect('vAdmin/vParent/list')->with('success', 'Xóa thành công!');
         } else {
             abort(404);
         }

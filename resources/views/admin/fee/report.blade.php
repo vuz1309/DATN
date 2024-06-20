@@ -39,7 +39,7 @@
                                         <div class="form-group col-md-3">
                                             <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                 kiếm</button>
-                                            <a href="{{ url('admin/fee/fee_collect_report') }}" class="btn btn-success"
+                                            <a href="{{ url('vAdmin/fee/fee_collect_report') }}" class="btn btn-success"
                                                 style="margin-top:30px;">Làm mới</a>
                                         </div>
 
@@ -56,7 +56,7 @@
                             <div class="card-header">
                                 <div style="display: flex; justify-content: space-between; align-items: center">
                                     <h5>Danh sách học phí</h5>
-                                    <form method="post" action="{{ url('admin/fee/fee_collection_report_export') }}">
+                                    <form method="post" action="{{ url('vAdmin/fee/fee_collection_report_export') }}">
                                         {{ csrf_field() }}
                                         <button type="submit" class="btn btn-warning">Xuất khẩu
                                         </button>
@@ -133,7 +133,7 @@
         $('#Export').click(() => {
             $.ajax({
                 type: "POST",
-                url: "{{ url('admin/fee/fee_collection_report_export') }}",
+                url: "{{ url('vAdmin/fee/fee_collection_report_export') }}",
                 data: {
                     '_token': "{{ csrf_token() }}",
                 },

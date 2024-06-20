@@ -111,7 +111,7 @@
                                 </div>
 
                                 <div class="card-footer Vbetween">
-                                    <a href="{{ url('student/move') }}" class="btn btn-danger mr-4">Hủy</a>
+                                    <a href="{{ url('vStudent/move') }}" class="btn btn-danger mr-4">Hủy</a>
                                     <button type="submit" class="btn btn-primary">Thêm mới</button>
                                 </div>
                             </form>

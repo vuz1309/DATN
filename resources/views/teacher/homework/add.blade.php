@@ -60,7 +60,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ url('teacher/homework/homework') }}" class="btn btn-danger">Hủy</a>
+                                    <a href="{{ url('vTeacher/homework/homework') }}" class="btn btn-danger">Hủy</a>
                                     <button type="submit" class="btn btn-primary">Lưu</button>
                                 </div>
                             </form>
@@ -82,7 +82,7 @@
             $('.getClass').change(function() {
                 const class_id = $(this).val();
                 $.ajax({
-                    url: "{{ url('teacher/class_timeable/get_teacher_subject_class') }}",
+                    url: "{{ url('vTeacher/class_timeable/get_teacher_subject_class') }}",
                     type: "POST",
                     data: {
                         "_token": "{{ csrf_token() }}",

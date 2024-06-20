@@ -10,7 +10,7 @@
                           <h1>Bài tập</h1>
                       </div>
                       <div class="col-sm-6" style="text-align: right;">
-                          <a class="btn btn-primary" href="{{ url('admin/homework/homework/add') }}">Thêm mới</a>
+                          <a class="btn btn-primary" href="{{ url('vAdmin/homework/homework/add') }}">Thêm mới</a>
                       </div>
                   </div>
               </div><!-- /.container-fluid -->
@@ -54,7 +54,7 @@
                                           <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('admin/homework/homework') }}" class="btn btn-success"
+                                              <a href="{{ url('vAdmin/homework/homework') }}" class="btn btn-success"
                                                   style="margin-top:30px;">Làm mới</a>
                                           </div>
 
@@ -120,11 +120,11 @@
                                                   <td>{{ date('H:i d/m/Y', strtotime($value->created_at)) }}</td>
                                                   <td>
                                                       <a class="btn btn-warning"
-                                                          href="{{ url('admin/homework/homework/edit/' . $value->id) }}">Sửa</a>
+                                                          href="{{ url('vAdmin/homework/homework/edit/' . $value->id) }}">Sửa</a>
                                                       <a class="btn btn-danger"
-                                                          href="{{ url('admin/homework/homework/delete/' . $value->id) }}">Xóa</a>
+                                                          href="{{ url('vAdmin/homework/homework/delete/' . $value->id) }}">Xóa</a>
                                                       <a class="btn btn-success"
-                                                          href="{{ url('admin/homework/submitted/' . $value->id) }}">Đã
+                                                          href="{{ url('vAdmin/homework/submitted/' . $value->id) }}">Đã
                                                           nộp</a>
                                                   </td>
                                               </tr>

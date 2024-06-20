@@ -10,7 +10,7 @@
                           <h1>Danh sách phụ huynh (Tổng: {{ $getRecord->total() }})</h1>
                       </div>
                       <div class="col-sm-6" style="text-align: right;">
-                          <a class="btn btn-primary" href="{{ url('admin/parent/add') }}">Thêm mới</a>
+                          <a class="btn btn-primary" href="{{ url('vAdmin/vParent/add') }}">Thêm mới</a>
                       </div>
                   </div>
               </div><!-- /.container-fluid -->
@@ -49,7 +49,7 @@
                                           <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('admin/admin/list') }}" class="btn btn-success"
+                                              <a href="{{ url('vAdmin/vAdmin/list') }}" class="btn btn-success"
                                                   style="margin-top:30px;">Làm mới</a>
                                           </div>
 
@@ -115,11 +115,11 @@
                                                   </td>
                                                   <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td>
                                                   <td>
-                                                      <a href="{{ url('admin/parent/edit/' . $value->id) }}"
+                                                      <a href="{{ url('vAdmin/vParent/edit/' . $value->id) }}"
                                                           class="btn btn-primary">Sửa</a>
-                                                      <a href="{{ url('admin/parent/delete/' . $value->id) }}"
+                                                      <a href="{{ url('vAdmin/vParent/delete/' . $value->id) }}"
                                                           class="btn btn-danger">Xóa</a>
-                                                      <a href="{{ url('admin/parent/my-student/' . $value->id) }}"
+                                                      <a href="{{ url('vAdmin/vParent/my-vStudent/' . $value->id) }}"
                                                           class="btn btn-warning">Học sinh</a>
                                                       <a href="{{ url('chat?receiver_id=' . $value->id) }}"
                                                           class="btn btn-info">Trò chuyện</a>

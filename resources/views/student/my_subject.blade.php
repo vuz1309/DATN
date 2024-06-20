@@ -40,7 +40,7 @@
                                           <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('student/my_class') }}" class="btn btn-success"
+                                              <a href="{{ url('vStudent/my_class') }}" class="btn btn-success"
                                                   style="margin-top:30px;">Làm mới</a>
                                           </div>
 
@@ -85,7 +85,7 @@
                                                       <td>{{ number_format($value->fee) }} đ</td>
                                                       <td>{{ $value->total_enrollments }}</td>
                                                       <td><a class="btn btn-info"
-                                                              href="{{ url('student/class_subject') . '/' . $value->id }} ">Xem
+                                                              href="{{ url('vStudent/class_subject') . '/' . $value->id }} ">Xem
                                                               môn học</a>
                                                       </td>
 

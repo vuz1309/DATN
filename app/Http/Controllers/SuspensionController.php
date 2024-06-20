@@ -48,7 +48,7 @@ class SuspensionController extends Controller
         $newRequest->status = 1;
         $newRequest->save();
 
-        return redirect('student/suspension/list')->with('success', 'Yêu cầu bảo lưu đã được gửi đi.');
+        return redirect('vStudent/suspension/list')->with('success', 'Yêu cầu bảo lưu đã được gửi đi.');
     }
 
     public function cancelRequest($request_id, Request $request)
@@ -116,7 +116,7 @@ class SuspensionController extends Controller
                 $payment->is_paid = 1;
                 $payment->save();
             }
-            return redirect('admin/suspension/list')->with('success', 'Chuyển học sinh sang lớp mới thành công!');
+            return redirect('vAdmin/suspension/list')->with('success', 'Chuyển học sinh sang lớp mới thành công!');
         } else {
             abort(404);
         }
@@ -136,7 +136,7 @@ class SuspensionController extends Controller
             if (!empty($enroll)) {
                 $enroll->delete();
             }
-            return redirect('admin/suspension/list')->with('success', 'Xác nhận yêu cầu bảo lưu thành công!');
+            return redirect('vAdmin/suspension/list')->with('success', 'Xác nhận yêu cầu bảo lưu thành công!');
         } else {
             abort(404);
         }

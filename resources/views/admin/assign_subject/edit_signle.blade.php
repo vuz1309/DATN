@@ -10,8 +10,8 @@
                           <h1>Sửa gán Khóa học cho lớp</h1>
                       </div>
                       <!-- <div class="col-sm-6" style="text-align: right;">
-                                    <a href="{{ url('admin/dashboard') }}"></a>
-                                  </div> -->
+                                        <a href="{{ url('vAdmin/dashboard') }}"></a>
+                                      </div> -->
                   </div>
               </div><!-- /.container-fluid -->
           </section>
@@ -74,7 +74,7 @@
                                       </div>
                                   </div>
                                   <div class="card-footer">
-                                      <a href="{{ url('admin/assign_subject/list') }}" class="btn btn-danger">Hủy</a>
+                                      <a href="{{ url('vAdmin/assign_subject/list') }}" class="btn btn-danger">Hủy</a>
                                       <button type="submit" class="btn btn-primary">Cập nhật</button>
                                   </div>
 

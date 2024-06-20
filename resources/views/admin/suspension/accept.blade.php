@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ url('admin/suspension/list') }}" class="btn btn-default mr-4">Quay lại</a>
+                                    <a href="{{ url('vAdmin/suspension/list') }}" class="btn btn-default mr-4">Quay lại</a>
                                     <button id="cancelRequest" class="btn btn-danger"
                                         data-id="{{ $data['getSuspension']->id }}">Từ chối</button>
                                     <button style="width: 160px; margin-left: 16px;" type="submit"
@@ -129,7 +129,7 @@
                 showLoading(true);
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('admin/suspension/cancel') }}/" + id,
+                    url: "{{ url('vAdmin/suspension/cancel') }}/" + id,
                     data: {
                         '_token': "{{ csrf_token() }}",
                     },
@@ -139,7 +139,7 @@
                         showLoading(false);
                         if (data.success) {
                             window.location.href =
-                                "{{ url('admin/suspension/list') }}";
+                                "{{ url('vAdmin/suspension/list') }}";
                         } else {
                             showAlert('Lỗi', 'Vui lòng thử lại sau!');
                         }

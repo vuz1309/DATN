@@ -54,7 +54,7 @@
                                           <div class="form-group col-md-3">
                                               <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                   kiếm</button>
-                                              <a href="{{ url('parent/my_student/subject' . $student->id) }}"
+                                              <a href="{{ url('vParent/my_vStudent/subject' . $student->id) }}"
                                                   class="btn btn-success" style="margin-top:30px;">Làm mới</a>
                                           </div>
 
@@ -92,7 +92,7 @@
                                                       <td>{{ $value->subject_type }}</td>
                                                       <td>
                                                           <a class="btn btn-primary"
-                                                              href="{{ url('parent/my_student/class_subject_timeable/' . $value->subject_id . '/' . $student->class_id . '/' . $student->id) }}">Thời
+                                                              href="{{ url('vParent/my_vStudent/class_subject_timeable/' . $value->subject_id . '/' . $student->class_id . '/' . $student->id) }}">Thời
                                                               khóa biểu</a>
                                                       </td>
                                                   </tr>

@@ -71,7 +71,7 @@
                                         <textarea id="compose-textarea" name="description" class="form-control" style="height: 300px">{{ $getRecord->description }}</textarea>
                                     </div>
                                 </div>
-                                <div class="card-footer"><a href="{{ url('admin/homework/homework') }}"
+                                <div class="card-footer"><a href="{{ url('vAdmin/homework/homework') }}"
                                         class="btn btn-danger">Hủy</a>
                                     <button type="submit" class="btn btn-primary">Lưu</button>
                                 </div>
@@ -94,7 +94,7 @@
             $('.getClass').change(function() {
                 const class_id = $(this).val();
                 $.ajax({
-                    url: "{{ url('admin/class_timeable/get_subject') }}",
+                    url: "{{ url('vAdmin/class_timeable/get_subject') }}",
                     type: "POST",
                     data: {
                         "_token": "{{ csrf_token() }}",

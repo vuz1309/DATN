@@ -10,7 +10,7 @@
                         <h1>Yêu cầu điều chuyển (Tổng: {{ $listTransfer->total() }})</h1>
                     </div>
                     <div class="col-sm-6" style="text-align: right;">
-                        <a class="btn btn-primary" href="{{ url('student/move/add') }}">Thêm yêu cầu</a>
+                        <a class="btn btn-primary" href="{{ url('vStudent/move/add') }}">Thêm yêu cầu</a>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -67,7 +67,7 @@
                                         <div class="form-group col-md-3">
                                             <button type="submit" class="btn btn-primary" style="margin-top:30px;">Tìm
                                                 kiếm</button>
-                                            <a href="{{ url('admin/class_transfers/admin_list') }}" class="btn btn-success"
+                                            <a href="{{ url('vAdmin/class_transfers/admin_list') }}" class="btn btn-success"
                                                 style="margin-top:30px;">Làm mới</a>
                                         </div>
 
@@ -141,12 +141,12 @@
                                                 <td>
 
                                                     @if ($value->status == 1)
-                                                        <a href="{{ url('admin/class_transfers/accept/' . $value->id) }}"
+                                                        <a href="{{ url('vAdmin/class_transfers/accept/' . $value->id) }}"
                                                             class="btn btn-info">Chi tiết</a>
                                                         <button id="cancelRequest" data-id="{{ $value->id }}"
                                                             href="#" class="btn btn-danger">Hủy yêu cầu</button>
                                                     @elseif($value->status == 2)
-                                                        <a href="{{ url('admin/class_transfers/accept/' . $value->id) }}"
+                                                        <a href="{{ url('vAdmin/class_transfers/accept/' . $value->id) }}"
                                                             class="btn btn-info">Chi tiết</a>
                                                         <button id="cancelRequest" data-id="{{ $value->id }}"
                                                             href="#" class="btn btn-danger">Hủy yêu cầu</button>
@@ -192,7 +192,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('student/transfer/cancel') }}/" + id,
+                    url: "{{ url('vStudent/transfer/cancel') }}/" + id,
                     data: {
                         '_token': "{{ csrf_token() }}",
                     },
