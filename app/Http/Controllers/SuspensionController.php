@@ -87,9 +87,9 @@ class SuspensionController extends Controller
     public function PostComeback($request_id, Request $request)
     {
         $getRequest = SuspensionModel::getSingle($request_id);
+        $need_amount = $request->need_amount;
         if (!empty($getRequest)) {
-            $getRequest->status =  4; // Đã quay lại sau bảo lưu
-            $getRequest->save();
+
             $class_id = $request->class_id;
             $enroll = EnrollmentModel::getByStudentAndClass($getRequest->student_id, $getRequest->class_id);
             if (empty($enroll)) {
@@ -100,21 +100,25 @@ class SuspensionController extends Controller
                 $new->enrollment_date = now();
                 $new->save();
             }
-            if ($getRequest->amount > 0) {
+            $getClass = ClassModel::single($class_id);
+            $amountFee = $getRequest->amount + ($getClass->fee - $need_amount);
+            if ($amountFee > 0) {
                 $paid_amount = StudentAddFeesModel::getPaidAmount($getRequest->student_id, $class_id);
                 $getStudent = ClassModel::single($class_id);
                 $remaing = $getStudent->amount - $paid_amount;
                 $payment = new StudentAddFeesModel;
                 $payment->student_id = $getRequest->student_id;
                 $payment->class_id = $class_id;
-                $payment->paid_amount = $getRequest->amount;
-                $payment->remaining_amount = $remaing - $getRequest->amount;
+                $payment->paid_amount = $amountFee;
+                $payment->remaining_amount = $remaing - $amountFee;
                 $payment->total_amount = $remaing;
                 $payment->payment_type = 1;
                 $payment->remark = 'Đóng bởi tiền bảo lưu còn lại trước khi bảo lưu';
                 $payment->created_by = Auth::user()->id;
                 $payment->is_paid = 1;
                 $payment->save();
+                $getRequest->status =  4; // Đã quay lại sau bảo lưu
+                $getRequest->save();
             }
             return redirect('vAdmin/suspension/list')->with('success', 'Chuyển học sinh sang lớp mới thành công!');
         } else {

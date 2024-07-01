@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\ClassModel;
+use App\Models\ExamModel;
+use App\Models\ExamScheduleModel;
 
 class ClassController extends Controller
 {
@@ -24,11 +26,11 @@ class ClassController extends Controller
     public function PostAdd(Request $request)
     {
 
-        $request->validate([
-            'name' => 'unique:class,name'
-        ], [
-            'name.unique' => 'Lớp học đã tồn tại'
-        ]);
+        // $request->validate([
+        //     'name' => 'unique:class,name'
+        // ], [
+        //     'name.unique' => 'Lớp học đã tồn tại'
+        // ]);
         $save = new ClassModel;
         $save->name = $request->name;
         $save->fee = $request->fee;
