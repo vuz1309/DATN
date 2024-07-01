@@ -98,37 +98,40 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($getRecord as $value)
-                                            <tr>
-                                                <td>{{ $value->id }}</td>
-                                                <td>{{ $value->class_name }}</td>
-                                                <td>{{ $value->subject_name }}</td>
-                                                <td>{{ date('H:i d/m/Y', strtotime($value->homework_date)) }}</td>
-                                                <td>{{ date('H:i d/m/Y', strtotime($value->submission_date)) }}</td>
+                                        @if (!empty($getRecord))
+                                            @forelse ($getRecord as $value)
+                                                <tr>
+                                                    <td>{{ $value->id }}</td>
+                                                    <td>{{ $value->class_name }}</td>
+                                                    <td>{{ $value->subject_name }}</td>
+                                                    <td>{{ date('H:i d/m/Y', strtotime($value->homework_date)) }}</td>
+                                                    <td>{{ date('H:i d/m/Y', strtotime($value->submission_date)) }}</td>
 
-                                                <td>
-                                                    @if (!empty($value->getDocument()))
-                                                        <a download="" href="{{ $value->getDocument() }}"
-                                                            class="btn btn-primary">Tải
-                                                            xuống</a>
-                                                    @endif
-                                                </td>
-                                                <td>{!! $value->description !!}</td>
-                                                <td>{{ date('H:i d/m/Y', strtotime($value->created_at)) }}</td>
-                                                <td>
-                                                    <a class="btn btn-primary"
-                                                        href="{{ url('vStudent/homework/submit/' . $value->id) }}">Nộp
-                                                        bài</a>
+                                                    <td>
+                                                        @if (!empty($value->getDocument()))
+                                                            <a download="" href="{{ $value->getDocument() }}"
+                                                                class="btn btn-primary">Tải
+                                                                xuống</a>
+                                                        @endif
+                                                    </td>
+                                                    <td>{!! $value->description !!}</td>
+                                                    <td>{{ date('H:i d/m/Y', strtotime($value->created_at)) }}</td>
+                                                    <td>
+                                                        <a class="btn btn-primary"
+                                                            href="{{ url('vStudent/homework/submit/' . $value->id) }}">Nộp
+                                                            bài</a>
 
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <td colspan="9">Không có bài tập nào</td>
-                                        @endforelse
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <td colspan="9">Không có bài tập nào</td>
+                                            @endforelse
+                                        @endif
                                     </tbody>
                                 </table>
-
-                                <div style="padding: 10px; float: right;">{!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}</div>
+                                @if (!empty($getRecord))
+                                    <div style="padding: 10px; float: right;">{!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}</div>
+                                @endif
                             </div>
                             <!-- /.card-body -->
                         </div>

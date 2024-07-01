@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Request;
 use Cache;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -200,11 +201,13 @@ class User extends Authenticatable
     }
     static public function getSingleClass($id)
     {
-        return self::select('users.*', 'class.fee as amount')
-            ->join('enrollments as er', 'er.student_id', '=', 'users.id')
-            ->join('class', 'class.id', 'er.class_id')
-            ->where('users.id', '=', $id)
+
+        $return =  EnrollmentModel::select(DB::raw('SUM(class.fee) as amount'))
+            ->join('class', 'class.id', '=', 'enrollments.class_id')
+            ->where('enrollments.student_id', '=', $id)
+            ->groupBy('enrollments.student_id')
             ->first();
+        return $return;
     }
 
     public function OnlineUser()

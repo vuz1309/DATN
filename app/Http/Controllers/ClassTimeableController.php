@@ -114,7 +114,7 @@ class ClassTimeableController extends Controller
                 $subjectWeekTimeable = array();
                 foreach ($getWeek as $week) {
 
-                    $studentSubjectTimeable = ClassSubjectTimeableModel::getStudentSubjectTimeable(Auth::user()->class_id, $subject->id, $week->id);
+                    $studentSubjectTimeable = ClassSubjectTimeableModel::getStudentSubjectTimeable($subject->class_id, $subject->id, $week->id);
                     $dataW = [];
                     $dataW['week_id'] = $week->id;
                     $dataW['week_name'] = $week->name;

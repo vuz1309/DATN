@@ -96,14 +96,14 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="margin-bottom" style="width: 100%">
+                    {{-- <table class="margin-bottom" style="width: 100%">
                         <tbody>
                             <tr>
                                 <td width="27%">Lớp: </td>
                                 <td style="border-bottom: 1px solid #000; width: 100%">{{ $getClass->name }} </td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> --}}
                     <table class="margin-bottom" style="width: 100%">
                         <tbody>
                             <tr>

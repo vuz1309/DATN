@@ -32,11 +32,12 @@ class ExamScheduleModel extends Model
         ])->delete();
     }
 
-    static public function getExam($class_id)
+    static public function getExam($student_id)
     {
         $return =  self::select('exam_schedule.*', 'exam.name as exam_name')
             ->join('exam', 'exam.id', '=', 'exam_schedule.exam_id')
-            ->where('exam_schedule.class_id', '=', $class_id)
+            ->join('enrollments', 'enrollments.class_id', '=', 'exam_schedule.class_id')
+            ->where('enrollments.student_id', '=', $student_id)
             ->groupBy('exam_schedule.exam_id')
             ->orderBy('exam_schedule.exam_id', 'desc')
             ->get();

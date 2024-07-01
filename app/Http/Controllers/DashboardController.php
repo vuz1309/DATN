@@ -27,23 +27,23 @@ class DashboardController extends Controller
             $data['getTotalFees'] = StudentAddFeesModel::getTotalFees();
             $data['TotalClass'] = ClassModel::getTotal();
             $data['TotalSubject'] = SubjectModel::getTotal();
-            return view('vAdmin/dashboard', $data);
+            return view('Admin/dashboard', $data);
         } else if (Auth::user()->user_type == 2) {
             $data['TotalStudent'] = User::getTeacherStudentCount(Auth::user()->id);
             // $data['TotalClass'] = AssignClassTeacherModel::getMyClassAsignCount(Auth::user()->id);
             $data['TotalSubject'] = AssignClassTeacherModel::getMyClassSubjectCount(Auth::user()->id);
-            return view('vTeacher/dashboard', $data);
+            return view('Teacher/dashboard', $data);
         } else if (Auth::user()->user_type == 3) {
 
 
             $data['getTotalFees'] = StudentAddFeesModel::getStudentFees(Auth::user()->id);
-            $data['TotalHomework'] = HomeworkModel::getTotal(Auth::user()->class_id, Auth::user()->id);
+            $data['TotalHomework'] = HomeworkModel::getTotal(Auth::user()->id);
             $data['TotalHomeworkSubmitted'] = HomeworkSubmitModel::getTotal(Auth::user()->id);
 
             $data['TotalSubject'] = SubjectModel::getStudentSubjectCount(Auth::user()->id);
-            return view('vStudent/dashboard', $data);
+            return view('Student/dashboard', $data);
         } else if (Auth::user()->user_type == 4) {
-            return view('vParent/dashboard', $data);
+            return view('Parent/dashboard', $data);
         }
     }
 }

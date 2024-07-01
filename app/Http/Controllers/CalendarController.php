@@ -16,10 +16,10 @@ class CalendarController extends Controller
 {
     public function student_my_calendar()
     {
-        $class_id = Auth::user()->class_id;
+        // $class_id = Auth::user()->class_id;
 
-        $data['getMyTimeable'] = $this->getTimeable($class_id);
-        $data['getExamTimeable'] = $this->getExamTimeable($class_id);
+        $data['getMyTimeable'] = $this->getTimeable(Auth::user()->id);
+        $data['getExamTimeable'] = $this->getExamTimeable(Auth::user()->id);
 
         $data['header_title'] = 'Lịch học';
         return view('student.my_calendar', $data);
@@ -84,9 +84,9 @@ class CalendarController extends Controller
         return $result;
     }
 
-    private function getTimeable($class_id)
+    private function getTimeable($student_id)
     {
-        $mySubject = ClassSubjectModel::mySubject($class_id);
+        $mySubject = ClassSubjectModel::studentSubject($student_id);
         $result = array();
         foreach ($mySubject as $subject) {
             $dataS['name'] = $subject->subject_name;
@@ -99,7 +99,7 @@ class CalendarController extends Controller
                 $dataW['week_name'] = $value->name;
                 $dataW['fullcalendar_day'] = $value->fullcalendar_day;
 
-                $class_subject_timeable = ClassSubjectTimeableModel::getClassSujectTimable($class_id, $subject->subject_id, $value->id);
+                $class_subject_timeable = ClassSubjectTimeableModel::getClassSujectTimable($subject->class_id, $subject->subject_id, $value->id);
 
                 if (!empty($class_subject_timeable)) {
                     $dataW['start_time'] = $class_subject_timeable->start_time;

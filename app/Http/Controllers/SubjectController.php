@@ -94,7 +94,7 @@ class SubjectController extends Controller
     // TODO navigate 404 page
     public function myStudentSubject()
     {
-        $class_id = Auth::user()->class_id;
+        // $class_id = Auth::user()->class_id;
         $data['header_title'] = 'Khóa học';
         if (!empty($class_id)) {
             $data['getRecord'] = ClassSubjectModel::mySubject($class_id);

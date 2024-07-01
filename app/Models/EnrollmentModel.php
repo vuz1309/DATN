@@ -56,4 +56,11 @@ class EnrollmentModel extends Model
             ->where('class.end_date', '>', Carbon::today())
             ->get();
     }
+
+    static public function getAmount($student_id)
+    {
+        return self::select('class.fee')
+            ->join('class', 'class.id', '=', 'enrollments.class_id')
+            ->where('enrollments.student_id', '=', $student_id)->get();
+    }
 }

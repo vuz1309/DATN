@@ -18,8 +18,8 @@ class StudentAddFeesModel extends Model
     }
     public static function getFees($id)
     {
-        return self::select('student_add_fees.*', 'class.fee', 'users.name as created_name')
-            ->join('class', 'class.id', '=', 'student_add_fees.class_id')
+        return self::select('student_add_fees.*',  'users.name as created_name')
+
             ->join('users', 'users.id', '=', 'student_add_fees.created_by', 'left')
             ->where('student_add_fees.student_id', '=', $id)
             ->where('student_add_fees.is_paid', '=', 1)
@@ -28,8 +28,7 @@ class StudentAddFeesModel extends Model
     }
     public static function getRecord($remove_paging = false)
     {
-        $return =  self::select('student_add_fees.*', 'class.fee', 'users.name as created_name', 'class.name as class_name', 'student.name as student_name', 'student.last_name as student_last_name', 'student.admission_number as code')
-            ->join('class', 'class.id', '=', 'student_add_fees.class_id')
+        $return =  self::select('student_add_fees.*', 'users.name as created_name', 'class.name as class_name', 'student.name as student_name', 'student.last_name as student_last_name', 'student.admission_number as code')
             ->join('users', 'users.id', '=', 'student_add_fees.created_by', 'left')
             ->join('users as student', 'student.id', '=', 'student_add_fees.student_id')
             ->where('student_add_fees.is_paid', '=', 1)
@@ -41,9 +40,7 @@ class StudentAddFeesModel extends Model
                     ->orWhere('student.last_name', 'like', Request::get('name'));
             });
         }
-        if (!empty(Request::get('class_id'))) {
-            $return = $return->where('class.id', '=', Request::get('class_id'));
-        }
+
         if ($remove_paging === true) {
             return $return->get();
         } else

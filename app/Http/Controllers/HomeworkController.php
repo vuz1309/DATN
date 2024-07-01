@@ -159,9 +159,9 @@ class HomeworkController extends Controller
     }
     public function student_my_homework()
     {
-        $class_id = Auth::user()->class_id;
+        $class_id = Auth::user()->id;
         if (!empty($class_id)) {
-            $data['getRecord'] = HomeworkModel::getStudentHomework($class_id, Auth::user()->id);
+            $data['getRecord'] = HomeworkModel::getStudentHomework(Auth::user()->id);
         }
         $data['header_title'] = 'Bài tập';
         return view('student.homework.list', $data);

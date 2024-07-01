@@ -162,14 +162,14 @@ class ExaminationsController extends Controller
 
     public function student_exam_schedule(Request $request)
     {
-        $class_id = Auth::user()->class_id;
+        $class_id = Auth::user()->id;
 
         $getExam  = ExamScheduleModel::getExam($class_id);
         $result = array();
         foreach ($getExam as $value) {
             $E = array();
             $E['name'] = $value->exam_name;
-            $getExamSchedule = ExamScheduleModel::getExamSchedule($value->exam_id, $class_id);
+            $getExamSchedule = ExamScheduleModel::getExamSchedule($value->exam_id, $value->class_id);
             $resultS = [];
             foreach ($getExamSchedule as $valueS) {
                 $dataS = array();
@@ -432,7 +432,6 @@ class ExaminationsController extends Controller
         $exam_id = $id;
 
         $data['getStudent'] = User::getSingle(Auth::user()->id);
-        $data['getClass'] = ClassModel::single(Auth::user()->class_id);
 
         $getExamSubject = MarkRegisterModel::getExamSubject($exam_id, Auth::user()->id);
         $dataSubject = array();

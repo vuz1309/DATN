@@ -15,6 +15,8 @@ use Session;
 use Excel;
 use App\Exports\ExportCollectFees;
 use App\Exports\ExportTotalCollectFees;
+use App\Models\EnrollmentModel;
+use Illuminate\Foundation\Auth\User as AuthUser;
 
 class FeeCollectitonController extends Controller
 {
@@ -73,8 +75,12 @@ class FeeCollectitonController extends Controller
         $student_id = Auth::user()->id;
         $data['header_title'] = 'Học phí';
         $data['getStudent'] = User::getSingleClass($student_id);
+        if (empty($data['getStudent'])) {
+            $data['getStudent'] = new User();
+            $data['getStudent']->amount = 0;
+        }
         $data['getRecord'] = StudentAddFeesModel::getFees($student_id);
-        $data['paid_amount'] = StudentAddFeesModel::getPaidAmount($student_id, Auth::user()->class_id);
+        $data['paid_amount'] = StudentAddFeesModel::getPaidAmount($student_id);
 
         return view('student.fee.add_collect_fee', $data);
     }
@@ -82,7 +88,7 @@ class FeeCollectitonController extends Controller
     {
         $id = Auth::user()->id;
         $getStudent = User::getSingleClass($id);
-        $paid_amount = StudentAddFeesModel::getPaidAmount($id, $getStudent->class_id);
+        $paid_amount = StudentAddFeesModel::getPaidAmount($id);
         $remaing = $getStudent->amount - $paid_amount;
 
 
@@ -90,7 +96,7 @@ class FeeCollectitonController extends Controller
 
             $payment = new StudentAddFeesModel;
             $payment->student_id = $id;
-            $payment->class_id = $getStudent->class_id;
+            // $payment->class_id = $getStudent->class_id;
             $payment->paid_amount = $request->amount;
             $payment->remaining_amount = $remaing - $request->amount;
             $payment->total_amount = $remaing;

@@ -75,13 +75,14 @@ class HomeworkModel extends Model
     {
         return self::find($id);
     }
-    public static function getStudentHomework($id, $student_id)
+    public static function getStudentHomework($student_id)
     {
         $return =  self::select('homework.*', 'class.name as class_name', 'subject.name as subject_name')
             ->join('class', 'class.id', '=', 'homework.class_id')
+            ->join('enrollments', 'class.id', '=', 'enrollments.class_id')
             ->join('subject', 'subject.id', '=', 'homework.subject_id')
             ->where('homework.is_delete', '=', '0')
-            ->where('homework.class_id', '=', $id)
+            ->where('enrollments.student_id', '=', $student_id)
             ->whereNotIn('homework.id', function ($query) use ($student_id) {
                 $query->select('submit_homework.homework_id')
                     ->from('submit_homework')
@@ -100,13 +101,14 @@ class HomeworkModel extends Model
         }
         return $return->paginate(20);
     }
-    public static function getTotal($id, $student_id)
+    public static function getTotal($student_id)
     {
         $return =  self::select('homework.*', 'class.name as class_name', 'subject.name as subject_name')
             ->join('class', 'class.id', '=', 'homework.class_id')
+            ->join('enrollments', 'enrollments.class_id', '=', 'class.id')
             ->join('subject', 'subject.id', '=', 'homework.subject_id')
             ->where('homework.is_delete', '=', '0')
-            ->where('homework.class_id', '=', $id)
+            ->where('enrollments.student_id', '=', $student_id)
             ->whereNotIn('homework.id', function ($query) use ($student_id) {
                 $query->select('submit_homework.homework_id')
                     ->from('submit_homework')
