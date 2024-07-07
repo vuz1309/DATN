@@ -149,7 +149,7 @@ class ExaminationsController extends Controller
                     $exam->start_time = $schedule['start_time'];
                     $exam->end_time = $schedule['end_time'];
                     $exam->room_number = $schedule['room_number'];
-                    $exam->full_marks = $schedule['full_marks'];
+                    $exam->full_marks = 10;
                     $exam->passing_mark = $schedule['passing_mark'];
                     $exam->created_by = Auth::user()->id;
                     $exam->save();

@@ -142,7 +142,7 @@
                                                                     );
                                                                 @endphp
                                                                 <td>
-                                                                    <div style="margin-bottom: 10px; display: none">
+                                                                    {{-- <div style="margin-bottom: 10px; display: none">
                                                                         Điểm trên lớp
                                                                         <input style="width: 200px;" type="hidden"
                                                                             value="{{ $subject->id }}"
@@ -167,8 +167,8 @@
                                                                             style="width: 200px;" type="text"
                                                                             name="mark[{{ $id }}][home_work]"
                                                                             class="form-control" />
-                                                                    </div>
-                                                                    <div style="margin-bottom: 10px;display: none">
+                                                                    </div> --}}
+                                                                    {{-- <div style="margin-bottom: 10px;display: none">
                                                                         Điểm kiểm tra
                                                                         <input
                                                                             id="test_work_{{ $student->id }}{{ $subject->subject_id }}"
@@ -176,7 +176,7 @@
                                                                             style="width: 200px;" type="text"
                                                                             name="mark[{{ $id }}][test_work]"
                                                                             class="form-control" />
-                                                                    </div>
+                                                                    </div> --}}
                                                                     <div style="margin-bottom: 10px;">
                                                                         Điểm thi
                                                                         <input
@@ -285,9 +285,9 @@
             const class_id = $(this).attr('data-class');
             const exam_schedule_id = $(this).attr('data-schedule');
 
-            const class_work = $('#class_work_' + student_id + subject_id).val();
-            const home_work = $('#home_work_' + student_id + subject_id).val();
-            const test_work = $('#test_work_' + student_id + subject_id).val();
+            const class_work = 0;
+            const home_work = 0;
+            const test_work = 0;
             const exam = $('#exam_' + student_id + subject_id).val();
 
             $.ajax({
