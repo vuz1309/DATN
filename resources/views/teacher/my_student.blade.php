@@ -114,15 +114,15 @@
                                               <th>Họ và tên</th>
                                               <th>Email</th>
                                               <th>Phụ huynh</th>
-                                              <th>Admission number</th>
-                                              <th>Roll number</th>
+                                              {{-- <th>Admission number</th> --}}
+                                              {{-- <th>Roll number</th> --}}
                                               <th>Lớp</th>
                                               <th>Ngày sinh</th>
                                               <th>Giới tính</th>
-                                              <th>Khối</th>
-                                              <th>Tôn giáo</th>
-                                              <th>Chiều cao (kg)</th>
-                                              <th>Cân nặng (kg)</th>
+                                              {{-- <th>Khối</th> --}}
+                                              {{-- <th>Tôn giáo</th> --}}
+                                              {{-- <th>Chiều cao (kg)</th> --}}
+                                              {{-- <th>Cân nặng (kg)</th> --}}
                                               <th>Trạng thái</th>
 
                                           </tr>
@@ -141,8 +141,8 @@
                                                   <td>{{ $value->name }} {{ $value->last_name }}</td>
                                                   <td>{{ $value->email }} </td>
                                                   <td>{{ $value->parent_name }} {{ $value->parent_last_name }}</td>
-                                                  <td>{{ $value->admission_number }} </td>
-                                                  <td>{{ $value->roll_number }} </td>
+                                                  {{-- <td>{{ $value->admission_number }} </td> --}}
+                                                  {{-- <td>{{ $value->roll_number }} </td> --}}
                                                   <td>{{ $value->class_name }} </td>
                                                   <td>
                                                       @if (!@empty($value->date_of_birth))
@@ -159,10 +159,10 @@
                                                           Khác
                                                       @endif
                                                   </td>
-                                                  <td>{{ $value->caste }} </td>
-                                                  <td>{{ $value->religion }} </td>
-                                                  <td>{{ $value->height }} </td>
-                                                  <td>{{ $value->weight }} </td>
+                                                  {{-- <td>{{ $value->caste }} </td> --}}
+                                                  {{-- <td>{{ $value->religion }} </td> --}}
+                                                  {{-- <td>{{ $value->height }} </td> --}}
+                                                  {{-- <td>{{ $value->weight }} </td> --}}
 
                                                   <td>
                                                       @if ($value->status == 0)

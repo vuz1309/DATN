@@ -351,7 +351,7 @@
                              </p>
                          </a>
                      </li>
-                     <li class="nav-item">
+                     {{-- <li class="nav-item">
                          <a href="{{ url('vTeacher/calendar') }}"
                              class="nav-link @if (Request::segment(2) == 'calendar') active @endif">
                              <i class=" nav-icon far fa-calendar-alt"></i>
@@ -359,7 +359,7 @@
                                  Lịch dạy
                              </p>
                          </a>
-                     </li>
+                     </li> --}}
                      <li class="nav-item">
                          <a href="{{ url('vTeacher/homework/homework') }}"
                              class="nav-link @if (Request::segment(2) == 'homework') active @endif">

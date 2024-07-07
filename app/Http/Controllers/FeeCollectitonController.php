@@ -47,14 +47,14 @@ class FeeCollectitonController extends Controller
     {
 
         $getStudent = User::getSingleClass($id);
-        $paid_amount = StudentAddFeesModel::getPaidAmount($id, $getStudent->class_id);
+        $paid_amount = StudentAddFeesModel::getPaidAmount($id);
         $remaing = $getStudent->amount - $paid_amount;
 
 
         if ($remaing >= $request->amount) {
             $payment = new StudentAddFeesModel;
             $payment->student_id = $id;
-            $payment->class_id = $getStudent->class_id;
+            // $payment->class_id = $getStudent->class_id;
             $payment->paid_amount = $request->amount;
             $payment->remaining_amount = $remaing - $request->amount;
             $payment->total_amount = $remaing;

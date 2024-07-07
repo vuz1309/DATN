@@ -104,7 +104,7 @@ class ExaminationsController extends Controller
                     $dataS['exam_date'] = $ExamSchedule->exam_date;
                     $dataS['start_time'] =  $ExamSchedule->start_time;
                     $dataS['end_time'] = $ExamSchedule->end_time;
-                    $dataS['full_marks'] = $ExamSchedule->full_marks;
+                    $dataS['full_marks'] = 10;
                     $dataS['passing_mark'] = $ExamSchedule->passing_mark;
                     $dataS['room_number'] = $ExamSchedule->room_number;
                 } else {
@@ -357,10 +357,10 @@ class ExaminationsController extends Controller
             $home_work =  !empty($request->home_work) ? $request->home_work : 0;
             $test_work = !empty($request->test_work) ? $request->test_work : 0;
             $exam = !empty($request->exam) ? $request->exam : 0;
-            $full_marks = $getExamSchedule->full_marks;
+            $full_marks = 10;
 
             $total_mark = $class_work + $home_work + $test_work + $exam;
-
+            // dd($full_marks, $total_mark);
             if ($full_marks >= $total_mark) {
                 $getMark = MarkRegisterModel::getSingleByWork($request->student_id, $request->exam_id, $request->class_id, $request->subject_id);
                 if (!empty($getMark)) {

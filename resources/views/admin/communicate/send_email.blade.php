@@ -141,11 +141,11 @@
                     event.preventDefault();
                     return;
                 }
-                if ($('[name="user_id[]"]').val().length === 0) {
-                    showAlert('Lỗi', 'Tin nhắn không được để trống');
-                    event.preventDefault();
-                    return;
-                }
+                // if ($('[name="user_id[]"]').val().length === 0) {
+                //     showAlert('Lỗi', 'Tin nhắn không được để trống');
+                //     event.preventDefault();
+                //     return;
+                // }
             });
             $('#compose-textarea').summernote({
                 height: 200

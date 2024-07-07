@@ -41,8 +41,8 @@
 
                                             <th>Hình thức</th>
                                             <th>Số tiền nộp</th>
-                                            {{-- <th>Còn lại</th> --}}
-                                            <th>Tổng học phí</th>
+                                            <th>Còn lại</th>
+                                            {{-- <th>Tổng học phí</th> --}}
                                             <th>Ghi chú</th>
                                             <th>Người tạo</th>
                                             <th>Ngày tạo</th>
@@ -56,8 +56,8 @@
 
                                                 <td>{{ $value->payment_type == 1 ? 'Tiền mặt' : 'Chuyển khoản' }}</td>
                                                 <td>{{ number_format($value->paid_amount) }} đ</td>
-                                                {{-- <td>{{ number_format($value->remaining_amount) }} đ</td> --}}
-                                                <td>{{ number_format($value->fee) }} đ</td>
+                                                <td>{{ number_format($value->remaining_amount) }} đ</td>
+                                                {{-- <td>{{ number_format($value->fee) }} đ</td> --}}
                                                 <td>{{ $value->remark }}</td>
                                                 <td>{{ $value->created_name }}</td>
                                                 <td>{{ date('d-m-Y H:m', strtotime($value->created_at)) }}</td>

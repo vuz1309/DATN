@@ -128,7 +128,7 @@
                                               <th>Phụ huynh</th>
                                               <th>Mã học sinh</th>
 
-                                              <th>Lớp</th>
+                                              {{-- <th>Lớp</th> --}}
                                               <th>Ngày sinh</th>
                                               <th>Giới tính</th>
 
@@ -154,7 +154,7 @@
                                                   <td>{{ $value->parent_name }} {{ $value->parent_last_name }}</td>
                                                   <td>{{ $value->admission_number }} </td>
 
-                                                  <td>{{ $value->class_name }} </td>
+                                                  {{-- <td>{{ $value->class_name }} </td> --}}
                                                   <td>
                                                       @if (!@empty($value->date_of_birth))
                                                           {{ date('d-m-Y', strtotime($value->date_of_birth)) }}

@@ -291,9 +291,9 @@
               const class_id = $(this).attr('data-class');
               const exam_schedule_id = $(this).attr('data-schedule');
 
-              const class_work = $('#class_work_' + student_id + subject_id).val();
-              const home_work = $('#home_work_' + student_id + subject_id).val();
-              const test_work = $('#test_work_' + student_id + subject_id).val();
+              const class_work = 0;
+              const home_work = 0;
+              const test_work = 0;
               const exam = $('#exam_' + student_id + subject_id).val();
 
               $.ajax({

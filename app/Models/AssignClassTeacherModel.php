@@ -160,7 +160,15 @@ class AssignClassTeacherModel extends Model
             ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
             ->groupBy('assign_class_teacher.class_id');
 
-        return $return->get();
+        $return2 = ClassSubjectModel::select('class.name as class_name', 'class.id as class_id')
+            ->join('class', 'class.id', '=', 'class_subject.class_id')
+            ->where('class.is_delete', '=', 0)
+            ->where('class_subject.status', '=', 0)
+            ->where('class.status', '=', 0)
+            ->where('class_subject.teacher_id', '=', $teacher_id);
+
+
+        return $return->union($return2)->get();
     }
 
     static public function getClassOfTeacher($teacher_id)

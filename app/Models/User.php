@@ -277,11 +277,16 @@ class User extends Authenticatable
         $return = self::select('users.*', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
             ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
             ->join('enrollments as er', 'er.student_id', '=', 'users.id')
-            ->join('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'er.class_id')
+            ->leftJoin('assign_class_teacher', 'assign_class_teacher.class_id', '=', 'er.class_id')
+            ->leftJoin('class_subject', 'class_subject.class_id', '=', 'er.class_id')
             ->where('users.user_type', '=', 3)
-            ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
-            ->where('assign_class_teacher.status', '=', '0')
-            ->where('assign_class_teacher.is_delete', '=', '0')
+
+            ->where(function ($query) use ($teacher_id) {
+                $query->where('assign_class_teacher.teacher_id', '=', $teacher_id)
+                    ->orWhere('class_subject.teacher_id', '=', $teacher_id);
+            })
+            // ->where('assign_class_teacher.status', '=', '0')
+            // ->where('assign_class_teacher.is_delete', '=', '0')
             ->where('users.is_delete', '=', 0);
 
 

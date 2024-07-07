@@ -96,7 +96,7 @@
                                                       <th>Bắt đầu</th>
                                                       <th>Kết thúc</th>
                                                       <th>Phòng</th>
-                                                      <th>Điểm tối đa</th>
+                                                      {{-- <th>Điểm tối đa</th> --}}
                                                       <th>Điểm đạt</th>
                                                   </tr>
                                               </thead>
@@ -132,11 +132,11 @@
                                                                   name="schedule[{{ $i }}][room_number]"
                                                                   type="text" class="form-control">
                                                           </td>
-                                                          <td>
+                                                          {{-- <td>
                                                               <input value="{{ $schedule['full_marks'] }}"
                                                                   name="schedule[{{ $i }}][full_marks]"
                                                                   type="text" class="form-control">
-                                                          </td>
+                                                          </td> --}}
                                                           <td>
                                                               <input value="{{ $schedule['passing_mark'] }}"
                                                                   name="schedule[{{ $i }}][passing_mark]"

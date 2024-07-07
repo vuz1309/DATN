@@ -61,6 +61,7 @@ Route::middleware(['common'])->group(function () {
     Route::post('vAdmin/attendance/student', [AttendanceController::class, 'PostAttendaceStudent']);
     Route::post('vStudent/transfer/cancel/{request_id}', [ClassTransferController::class, 'cancelRequest']);
     Route::post('vAdmin/suspension/cancel/{request_id}', [SuspensionController::class, 'cancelRequest']);
+    Route::get('vAdmin/homework/submitted/{id}', [HomeworkController::class, 'submitted']);
 });
 
 Route::post('vAdmin/examinations/single_submit_marks_register', [ExaminationsController::class, 'single_submit_marks_register']);
@@ -226,7 +227,6 @@ Route::middleware(['admin'])->group(function () {
 
     Route::post('vAdmin/homework/homework/edit/{id}', [HomeworkController::class, 'PostEdit']);
     Route::get('vAdmin/homework/homework/delete/{id}', [HomeworkController::class, 'delete']);
-    Route::get('vAdmin/homework/submitted/{id}', [HomeworkController::class, 'submitted']);
     Route::get('vAdmin/homework/view_submit/{id}', [HomeworkController::class, 'view_submitted']);
     Route::get('vAdmin/homework/report', [HomeworkController::class, 'homework_report']);
     Route::get('vAdmin/fee/fee_collect', [FeeCollectitonController::class, 'collect_fees']);
