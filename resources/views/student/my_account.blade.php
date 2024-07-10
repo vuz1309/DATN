@@ -57,7 +57,7 @@
 
 
 
-                                          <div class="form-group col-md-6">
+                                          {{-- <div class="form-group col-md-6">
                                               <label for="class_id">Lớp <span style="color:red;">*</span></label>
                                               <select disabled reaonly class="form-control" required name="class_id">
                                                   <option value="">Chọn lớp học</option>
@@ -66,7 +66,7 @@
                                                           value="{{ $class->id }}">{{ $class->name }}</option>
                                                   @endforeach
                                               </select>
-                                          </div>
+                                          </div> --}}
 
                                           <div class="form-group col-md-6">
                                               <label for="gender">Giới tính</label>
@@ -103,7 +103,7 @@
                                               <div style="color: red;">{{ $errors->first('mobile_number') }}</div>
 
                                           </div>
-
+                                          {{-- 
                                           <div class="form-group col-md-6">
                                               <label for="admission_date">Ngày nhập học</label>
                                               <input readonly name="admission_date"
@@ -111,7 +111,7 @@
                                                   class="form-control" id="admission_date" placeholder="">
                                               <div style="color: red;">{{ $errors->first('admission_date') }}</div>
 
-                                          </div>
+                                          </div> --}}
 
                                           <div class="form-group col-md-6">
                                               <label for="profile_pic">Ảnh học sinh</label>
@@ -132,10 +132,10 @@
                                               <label for="status">Trạng thái <span style="color: red;">*</span></label>
                                               <select disabled reaonly class="form-control" name="status">
 
-                                                  <option {{ $getRecord->status == '0' ? 'selected' : '' }}
-                                                      value="0">Đang học</option>
-                                                  <option {{ $getRecord->status == '1' ? 'selected' : '' }}
-                                                      value="1">Ngưng học tập</option>
+                                                  <option {{ $getRecord->status == '0' ? 'selected' : '' }} value="0">
+                                                      Đang học</option>
+                                                  <option {{ $getRecord->status == '1' ? 'selected' : '' }} value="1">
+                                                      Ngưng học tập</option>
 
                                               </select>
                                           </div>

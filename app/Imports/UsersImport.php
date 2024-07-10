@@ -29,20 +29,20 @@ class UsersImport implements ToModel, WithValidation, SkipsOnError, SkipsEmptyRo
     {
 
         // Lấy ID của lớp học từ tên lớp
-        $class = ClassModel::where('name', $row['lop'])->first();
+        // $class = ClassModel::where('name', $row['lop'])->first();
 
-        if ($class) {
-            // Tạo một bản ghi User mới với thông tin đã được trích xuất từ tệp Excel
-            return new User([
-                'name'     => $row['ho'],
-                'last_name' => $row['ten'],
-                'email'    => $row['email'],
-                'password' => Hash::make($row['mat_khau']),
-                'admission_number' => $row['ma_hoc_sinh'],
-                'class_id' => $class->id, // Sử dụng ID của lớp học tương ứng
-                'user_type' => 3
-            ]);
-        }
+        // if ($class) {
+        // Tạo một bản ghi User mới với thông tin đã được trích xuất từ tệp Excel
+        return new User([
+            'name'     => $row['ho'],
+            'last_name' => $row['ten'],
+            'email'    => $row['email'],
+            'password' => Hash::make($row['mat_khau']),
+            'admission_number' => $row['ma_hoc_sinh'],
+            // 'class_id' => $class->id, // Sử dụng ID của lớp học tương ứng
+            'user_type' => 3
+        ]);
+        // }
 
         // Nếu không tìm thấy lớp học, có thể xử lý tùy ý, ví dụ như bỏ qua hoặc ghi log lỗi.
         // Trong trường hợp này, tôi sẽ trả về null để bỏ qua việc tạo bản ghi User này.
@@ -66,12 +66,12 @@ class UsersImport implements ToModel, WithValidation, SkipsOnError, SkipsEmptyRo
             '*.ho' => ['required'],
             '*.ten' => ['required'],
             '*.mat_khau' => ['required'],
-            '*.lop' => ['required',  function ($attribute, $value, $fail) {
+            // '*.lop' => ['required',  function ($attribute, $value, $fail) {
 
-                if (!ClassModel::where('name', trim($value))->exists()) {
-                    $fail('Lớp ' . $value . ' không tồn tại.');
-                }
-            },],
+            //     if (!ClassModel::where('name', trim($value))->exists()) {
+            //         $fail('Lớp ' . $value . ' không tồn tại.');
+            //     }
+            // },],
         ];
     }
     public function customValidationMessages()
@@ -92,7 +92,7 @@ class UsersImport implements ToModel, WithValidation, SkipsOnError, SkipsEmptyRo
             'mat_khau.string' => 'Trường "mật khẩu" phải là một chuỗi ký tự.',
             'lop.required' => 'Trường "lớp" không được bỏ trống.',
             'lop.string' => 'Trường "lớp" phải là một chuỗi ký tự.',
-            'lop.exists' => 'Trường "lớp" không tồn tại.',
+            // 'lop.exists' => 'Trường "lớp" không tồn tại.',
         ];
     }
 }

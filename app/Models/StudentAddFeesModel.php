@@ -28,7 +28,7 @@ class StudentAddFeesModel extends Model
     }
     public static function getRecord($remove_paging = false)
     {
-        $return =  self::select('student_add_fees.*', 'users.name as created_name', 'class.name as class_name', 'student.name as student_name', 'student.last_name as student_last_name', 'student.admission_number as code')
+        $return =  self::select('student_add_fees.*', 'users.name as created_name', 'student.name as student_name', 'student.last_name as student_last_name', 'student.admission_number as code')
             ->join('users', 'users.id', '=', 'student_add_fees.created_by', 'left')
             ->join('users as student', 'student.id', '=', 'student_add_fees.student_id')
             ->where('student_add_fees.is_paid', '=', 1)

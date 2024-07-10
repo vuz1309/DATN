@@ -84,16 +84,10 @@
                              </p>
                          </a>
                      </li>
-                     <li class="nav-item">
-                         <a href="{{ url('vAdmin/class_transfers/admin_list') }}"
-                             class="nav-link @if (Request::segment(2) == 'class_transfers') active @endif">
-                             <i class=" nav-icon fas fa-cogs"></i>
-                             <p>Yêu cầu chuyển lớp</p>
-                         </a>
-                     </li>
+
                      <li class="nav-item">
                          <a href="{{ url('vAdmin/vAdmin/list') }}"
-                             class="nav-link @if (Request::segment(2) == 'admin') active @endif">
+                             class="nav-link @if (Request::segment(2) == 'vAdmin') active @endif">
                              <i class=" nav-icon fas fa-cogs"></i>
                              <p>Danh sách quản lý</p>
                          </a>
@@ -101,23 +95,16 @@
 
                      <li class="nav-item">
                          <a href="{{ url('vAdmin/vStudent/list') }}"
-                             class="nav-link @if (Request::segment(2) == 'student') active @endif">
+                             class="nav-link @if (Request::segment(2) == 'vStudent') active @endif">
                              <i class=" nav-icon fas fa-user-graduate"></i>
                              <p>Học sinh</p>
                          </a>
                      </li>
 
-                     <li class="nav-item">
-                         <a href="{{ url('vAdmin/suspension/list') }}"
-                             class="nav-link @if (Request::segment(2) == 'suspension') active @endif">
-                             <i class=" nav-icon fas fa-user-slash"></i>
-                             <p>Học sinh bảo lưu</p>
-                         </a>
-                     </li>
 
                      <li class="nav-item">
                          <a href="{{ url('vAdmin/vTeacher/list') }}"
-                             class="nav-link @if (Request::segment(2) == 'teacher') active @endif">
+                             class="nav-link @if (Request::segment(2) == 'vTeacher') active @endif">
                              <i class=" nav-icon fas fa-chalkboard-teacher"></i>
                              <p>Giáo viên</p>
                          </a>
@@ -125,12 +112,25 @@
 
                      <li class="nav-item">
                          <a href="{{ url('vAdmin/vParent/list') }}"
-                             class="nav-link @if (Request::segment(2) == 'parent') active @endif">
+                             class="nav-link @if (Request::segment(2) == 'vParent') active @endif">
                              <i class=" nav-icon fas fa-user-friends"></i>
                              <p>Phụ huynh</p>
                          </a>
                      </li>
-
+                     <li class="nav-item">
+                         <a href="{{ url('vAdmin/class_transfers/admin_list') }}"
+                             class="nav-link @if (Request::segment(2) == 'class_transfers') active @endif">
+                             <i class=" nav-icon fas fa-exchange-alt"></i>
+                             <p>Yêu cầu chuyển lớp</p>
+                         </a>
+                     </li>
+                     <li class="nav-item">
+                         <a href="{{ url('vAdmin/suspension/list') }}"
+                             class="nav-link @if (Request::segment(2) == 'suspension') active @endif">
+                             <i class=" nav-icon fas fa-user-slash"></i>
+                             <p>Học sinh bảo lưu</p>
+                         </a>
+                     </li>
                      <li class="nav-item menu-open">
                          <a href="#" class="nav-link @if (Request::segment(2) == 'class' ||
                                  Request::segment(2) == 'subject' ||
@@ -170,7 +170,7 @@
 
                              <li class="nav-item">
                                  <a href="{{ url('vAdmin/assign_class_vTeacher/list') }}"
-                                     class="nav-link @if (Request::segment(2) == 'assign_class_teacher') active @endif">
+                                     class="nav-link @if (Request::segment(2) == 'assign_class_vTeacher') active @endif">
                                      <i class=" fas fa-user-graduate nav-icon"></i>
                                      <p>Chủ nhiệm</p>
                                  </a>
@@ -363,7 +363,7 @@
                      <li class="nav-item">
                          <a href="{{ url('vTeacher/homework/homework') }}"
                              class="nav-link @if (Request::segment(2) == 'homework') active @endif">
-                             <i class=" nav-icon far fa-clipboard"></i>
+                             <i class=" nav-icon fas fa-book"></i>
                              <p>
                                  Bài tập
                              </p>
@@ -467,7 +467,7 @@
                      <li class="nav-item">
                          <a href="{{ url('vStudent/my_homework') }}"
                              class="nav-link @if (Request::segment(2) == 'my_homework') active @endif">
-                             <i class=" nav-icon far fa-clipboard"></i>
+                             <i class=" nav-icon fas fa-book"></i>
                              <p>
                                  Bài tập
                              </p>
@@ -523,7 +523,7 @@
                      <li class="nav-item">
                          <a href="{{ url('vStudent/my_class') }}"
                              class="nav-link @if (Request::segment(2) == 'my_subject') active @endif">
-                             <i class=" nav-icon fa fa-book-open"></i>
+                             <i class=" nav-icon fas fa-chalkboard-teacher"></i>
                              <p>
                                  Lớp học của tôi
                              </p>
@@ -541,7 +541,7 @@
                      <li class="nav-item">
                          <a href="{{ url('vStudent/move') }}"
                              class="nav-link @if (Request::segment(2) == 'move') active @endif">
-                             <i class=" nav-icon far fa-money-bill-alt"></i>
+                             <i class=" nav-icon fas fa-exchange-alt"></i>
                              <p>
                                  Chuyển lớp
                              </p>
@@ -550,7 +550,7 @@
                      <li class="nav-item">
                          <a href="{{ url('vStudent/suspension/list') }}"
                              class="nav-link @if (Request::segment(2) == 'suspension') active @endif">
-                             <i class=" nav-icon far fa-money-bill-alt"></i>
+                             <i class=" nav-icon fas fa-pause-circle"></i>
                              <p>
                                  Bảo lưu
                              </p>

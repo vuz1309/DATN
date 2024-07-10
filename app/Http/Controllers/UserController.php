@@ -41,7 +41,7 @@ class UserController extends Controller
         if (Auth::user()->user_type == 2) {
             return view("teacher.my_account", $data);
         } else if (Auth::user()->user_type == 3) {
-            $data['getClass'] = ClassModel::getClass();
+            // $data['getClass'] = ClassModel::getClass();
             return view("student.my_account", $data);
         } else if (Auth::user()->user_type == 4) {
             return view("parent.my_account", $data);

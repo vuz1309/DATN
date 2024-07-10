@@ -104,13 +104,17 @@ class CalendarController extends Controller
                 if (!empty($class_subject_timeable)) {
                     $dataW['start_time'] = $class_subject_timeable->start_time;
                     $dataW['end_time'] = $class_subject_timeable->end_time;
+                    $dataW['start_date'] = date('m-d-Y', strtotime($class_subject_timeable->class_start_date));
+                    $dataW['end_date'] = date('m-d-Y', strtotime($class_subject_timeable->class_end_date));
                     $dataW['room_number'] = $class_subject_timeable->room_number;
                     $week[] = $dataW;
                 }
             }
+
             $dataS['week'] = $week;
             $result[] = $dataS;
         }
+        // dd($result);
         return $result;
     }
 }

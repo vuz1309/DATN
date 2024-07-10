@@ -56,7 +56,7 @@ class EnrollmentController extends Controller
     public function myStudentSubject()
     {
         $id = Auth::user()->id;
-        $myClass = EnrollmentModel::getAllMyClass($id);
+        $myClass = EnrollmentModel::getMyClass($id);
         $data['header_title'] = 'Lớp của tôi';
         $data['getMyClass'] = $myClass;
         return view('student.my_subject', $data);

@@ -130,14 +130,12 @@ class ExaminationsController extends Controller
     public function PostAddExamSchedule(Request $request)
     {
 
-
         if (!empty($request->schedule)) {
             foreach ($request->schedule as $schedule) {
 
                 if (
                     !empty($schedule['subject_id'])
                     && !empty($schedule['exam_date'])
-                    && !empty($schedule['full_marks'])
                 ) {
 
                     $exam = new ExamScheduleModel;

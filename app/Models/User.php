@@ -222,7 +222,7 @@ class User extends Authenticatable
             return url('upload/profile/default.jpg');
         }
     }
-    static public function getSearchStudents($remove_paging)
+    static public function getSearchStudents($remove_paging = null)
     {
 
         $return = self::select('users.*', 'parent.name as parent_name', 'parent.last_name as parent_last_name')

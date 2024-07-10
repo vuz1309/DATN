@@ -132,11 +132,11 @@
                                                                   name="schedule[{{ $i }}][room_number]"
                                                                   type="text" class="form-control">
                                                           </td>
-                                                          {{-- <td>
-                                                              <input value="{{ $schedule['full_marks'] }}"
-                                                                  name="schedule[{{ $i }}][full_marks]"
-                                                                  type="text" class="form-control">
-                                                          </td> --}}
+                                                          {{-- <td> --}}
+                                                          <input value="{{ $schedule['full_marks'] }}"
+                                                              name="schedule[{{ $i }}][full_marks]"
+                                                              type="hidden" class="form-control">
+                                                          {{-- </td> --}}
                                                           <td>
                                                               <input value="{{ $schedule['passing_mark'] }}"
                                                                   name="schedule[{{ $i }}][passing_mark]"

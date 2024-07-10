@@ -185,7 +185,7 @@ class HomeworkController extends Controller
 
         $submit->save();
 
-        return redirect('vStudent/homework')->with('success', 'Nộp bài tập thành công!');
+        return redirect('vStudent/my_homework')->with('success', 'Nộp bài tập thành công!');
     }
 
     public function edit_homework_submitted($id)
